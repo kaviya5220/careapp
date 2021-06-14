@@ -37,9 +37,6 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
             let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black]
             navigationController?.navigationBar.titleTextAttributes = textAttributes
         }
-        
-       
-        
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return items.count
         }

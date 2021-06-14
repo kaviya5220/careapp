@@ -15,8 +15,6 @@ class TabViewController: UITabBarController,UITabBarControllerDelegate {
             
         }
     @objc func didTapAdd(_ sender: UIButton) {
-        
-       // self.navigationController?.pushViewController(AddItemViewController(), animated: true)
         let vc = AddItemViewController()
         vc.modalPresentationStyle = .automatic //or .overFullScreen for transparency
         self.present(vc, animated: true, completion: nil)
@@ -32,9 +30,6 @@ class TabViewController: UITabBarController,UITabBarControllerDelegate {
             let tabOneBarItem = UITabBarItem(title: "HOME", image: UIImage(systemName: "house"), selectedImage: UIImage(named: "house"))
             tabOne.tabBarItem = tabOneBarItem
             
-//            let tabTwo = AddItemViewController()
-//            let tabTwoBarItem = UITabBarItem(title: "ADD ITEM", image: UIImage(systemName: "plus.square"), selectedImage: UIImage(named: "plus.square"))
-//            tabTwo.tabBarItem = tabTwoBarItem
             
             let tabTwo = ProfileViewController()
             let tabTwoBarItem = UITabBarItem(title: "PROFILE", image: UIImage(systemName: "person"), selectedImage: UIImage(named: "person"))

@@ -22,7 +22,7 @@ class CustomField: UIView {
     private let stackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
-        stack.distribution = .fillProportionally
+        stack.distribution = .fillEqually
         stack.spacing = 0
         stack.alignment = .fill
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -51,7 +51,7 @@ class CustomField: UIView {
         stackView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         stackView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
         stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        textField.heightAnchor.constraint(equalToConstant: 40).isActive = true
+       // textField.heightAnchor.constraint(equalToConstant: 40).isActive = true
         errorLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
    

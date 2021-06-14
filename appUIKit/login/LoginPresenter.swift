@@ -11,9 +11,6 @@ protocol LoginPresenterDelegate : AnyObject {
 }
 class LoginPresenter {
     weak var delegate: LoginPresenterDelegate?
-//     init(view:PresenterView){
-//            self.presenterView = view
-//        }
     func showAlert(){
         print("Show alert")
         delegate?.showAlert()

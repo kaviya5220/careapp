@@ -24,20 +24,15 @@ class LoginViewController: UIViewController {
             let stack = UIStackView()
             stack.axis = .vertical
             stack.alignment = .fill
-            stack.distribution = .fillProportionally
-            stack.spacing = 10
+            stack.distribution = .fillEqually
+            stack.spacing = 20
             stack.translatesAutoresizingMaskIntoConstraints = false
             return stack
-        }()
-        let createlabel:UILabel = {
-            let label = CustomLabel(labelType: .primary)
-            label.text = "Create a new account"
-            label.font = UIFont.italicSystemFont(ofSize: 20)
-            return label
         }()
         let loginlabel:UILabel = {
             let label = CustomLabel(labelType: .title)
             label.text = "LOGIN"
+            label.textAlignment = .center
             return label
         }()
         let email:UITextField = {
@@ -65,58 +60,45 @@ class LoginViewController: UIViewController {
         let presenter = LoginPresenter()
         override func viewDidLoad() {
             super.viewDidLoad()
+            setupConstraints()
+            view.addSubview(stackView)
+            stackView.addArrangedSubview(loginlabel)
+            stackView.addArrangedSubview(email)
+            stackView.addArrangedSubview(password)
+            stackView.addArrangedSubview(loginbutton)
+            stackView.addArrangedSubview(signupbutton)
+            layoutTraitConstraintsUpdate(traitCollection: self.traitCollection,
+                                         sharedConstraints: sharedConstraints,
+                                         compactConstraints: compactConstraints,
+                                         regularConstraints: regularConstraints)
+            
             self.title = "Login"
             view.backgroundColor = .white
-            view.addSubview(loginlabel)
-            view.addSubview(stackView)
-            stackView.addArrangedSubview(email)
-            stackView.setCustomSpacing(20, after: email)
-            stackView.addArrangedSubview(password)
-            stackView.setCustomSpacing(20, after: password)
-            view.addSubview(loginbutton)
-            view.addSubview(createlabel)
-            view.addSubview(signupbutton)
-            
-            loginlabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor,constant: 30).isActive = true
-            loginlabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-            
-            stackView.topAnchor.constraint(equalTo: self.loginlabel.bottomAnchor,constant: 45).isActive = true
-            stackView.leadingAnchor.constraint(equalTo:self.view.leadingAnchor, constant:10).isActive = true
-            stackView.trailingAnchor.constraint(equalTo:self.view.trailingAnchor, constant:-10).isActive = true
-            
-            loginbutton.topAnchor.constraint(equalTo: self.stackView.bottomAnchor,constant: 25).isActive = true
-            loginbutton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-            
-            createlabel.topAnchor.constraint(equalTo: self.loginbutton.bottomAnchor,constant: 30).isActive = true
-            createlabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-            
-            signupbutton.topAnchor.constraint(equalTo: self.createlabel.bottomAnchor,constant: 15).isActive = true
-            signupbutton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-            
             navigationItem.title = .none
-            
             presenter.delegate = self
             
         }
-        
-        @objc func insertUser(_ sender: UIButton) {
-            if sender == loginbutton{
-               let isvalid = loginInteractor.Valid(email: email.text!, password: password.text!)
-                if(isvalid){
-                    userid = db.getuserid(email: email.text!)
-                    setsessionvariable(userid: userid)
-                    self.showToast(message: "Login Successfull", font: .systemFont(ofSize: 12.0))
-                    self.navigationController?.pushViewController(TabViewController(), animated: true)
-                }
-                else{
-                    presenter.showAlert()
-                    }
-                }
-            if sender == signupbutton{
-                let vc = SignupViewController()
-                vc.modalPresentationStyle = .automatic //or .overFullScreen for transparency
-                self.present(vc, animated: true, completion: nil)
+    
+    private var sharedConstraints = [NSLayoutConstraint]()
+    private var compactConstraints = [NSLayoutConstraint]()
+    private var regularConstraints = [NSLayoutConstraint]()
+   
+    @objc func insertUser(_ sender: UIButton) {
+        if sender == loginbutton{
+           let isvalid = loginInteractor.Valid(email: email.text!, password: password.text!)
+            if(isvalid){
+                userid = db.getuserid(email: email.text!)
+                setsessionvariable(userid: userid)
+                self.showToast(message: "Login Successfull", font: .systemFont(ofSize: 12.0))
+                self.navigationController?.pushViewController(TabViewController(), animated: true)
             }
+            else{
+                presenter.showAlert()
+                }
+            }
+        if sender == signupbutton{
+            self.navigationController?.pushViewController(SignupViewController(), animated: true)
+        }
 
     }
     func setsessionvariable(userid : Int){
@@ -126,9 +108,44 @@ class LoginViewController: UIViewController {
     }
 
 }
-extension LoginViewController : LoginPresenterDelegate{
-    func showAlert() {
-        print("Hiii")
-        self.present(alert, animated: true, completion: nil)
+extension LoginViewController {
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        layoutTraitConstraintsUpdate(traitCollection: self.traitCollection,
+                                     sharedConstraints:sharedConstraints,
+                                     compactConstraints: compactConstraints,
+                                     regularConstraints: regularConstraints)
+    }
+    
+    private func setupConstraints() {
+        
+        sharedConstraints.append(contentsOf: [
+            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+        
+        compactConstraints.append(contentsOf: [
+            loginlabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            loginbutton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5),
+            loginbutton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            signupbutton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5),
+            signupbutton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+        ])
+        
+        regularConstraints.append(contentsOf: [
+            loginlabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            stackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
+            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loginbutton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.25),
+            loginbutton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            signupbutton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.25),
+            signupbutton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+        ])
     }
 }
+extension LoginViewController : LoginPresenterDelegate{
+    func showAlert() {
+        self.present(alert, animated: true, completion: nil)
+        }
+}
+

@@ -30,7 +30,6 @@ class HomeViewController: UIViewController {
         addbutton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         addbutton.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
 
-        // Do any additional setup after loading the view.
     }
     @objc func insertUser(_ sender: UIButton) {
         self.showToast(message: "Your Toast Message", font: .systemFont(ofSize: 12.0))

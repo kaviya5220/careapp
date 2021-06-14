@@ -7,7 +7,6 @@
 
 import Foundation
 class LoginInteractor{
-   // weak var delegate: PresenterView?
     let presenter = LoginPresenter()
     var db = DBHelper()
     func Valid(email : String , password: String) -> Bool{

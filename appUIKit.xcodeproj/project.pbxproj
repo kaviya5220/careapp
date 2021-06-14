@@ -15,6 +15,7 @@
 		1B7EBFA726748EA300F2AED1 /* CustomField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7EBFA626748EA300F2AED1 /* CustomField.swift */; };
 		1B7EBFA92674945700F2AED1 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7EBFA82674945700F2AED1 /* LoginInteractor.swift */; };
 		1B7EBFAB2674946F00F2AED1 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7EBFAA2674946F00F2AED1 /* LoginPresenter.swift */; };
+		1B83CADA267735D70041C6A2 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B83CAD9267735D70041C6A2 /* Extension.swift */; };
 		1B906ECA2670A08C0032FA81 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B906EC92670A08C0032FA81 /* AppDelegate.swift */; };
 		1B906ECC2670A08C0032FA81 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B906ECB2670A08C0032FA81 /* SceneDelegate.swift */; };
 		1B906ECE2670A08C0032FA81 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B906ECD2670A08C0032FA81 /* ViewController.swift */; };
@@ -61,6 +62,7 @@
 		1B7EBFA626748EA300F2AED1 /* CustomField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomField.swift; sourceTree = "<group>"; };
 		1B7EBFA82674945700F2AED1 /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
 		1B7EBFAA2674946F00F2AED1 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
+		1B83CAD9267735D70041C6A2 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		1B906EC62670A08C0032FA81 /* appUIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = appUIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B906EC92670A08C0032FA81 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1B906ECB2670A08C0032FA81 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -123,6 +125,14 @@
 			path = "Custom ";
 			sourceTree = "<group>";
 		};
+		1B83CAD8267735BA0041C6A2 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				1B83CAD9267735D70041C6A2 /* Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		1B906EBD2670A08C0032FA81 = {
 			isa = PBXGroup;
 			children = (
@@ -146,6 +156,7 @@
 		1B906EC82670A08C0032FA81 /* appUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				1B83CAD8267735BA0041C6A2 /* Extension */,
 				1B7EBF9D267479F900F2AED1 /* Custom  */,
 				1B9B8F4B2672656900C5497C /* Receiver */,
 				1B906F0B2670FC420032FA81 /* Model */,
@@ -375,6 +386,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B83CADA267735D70041C6A2 /* Extension.swift in Sources */,
 				1B906EFB2670A0F50032FA81 /* LoginViewController.swift in Sources */,
 				1B906F0D2670FC660032FA81 /* Item.swift in Sources */,
 				1B7EBFA92674945700F2AED1 /* LoginInteractor.swift in Sources */,

@@ -37,39 +37,23 @@ class ReceiverTableViewCell: UITableViewCell {
             return img
         }()
     
-        let donarid:UILabel = {
-            let label = UILabel()
-            label.font = UIFont.boldSystemFont(ofSize: 20)
-            label.textColor = .black
-            label.translatesAutoresizingMaskIntoConstraints = false
+        let donarid:CustomLabel = {
+            let label = CustomLabel(labelType: .secondary)
             return label
         }()
         
-        let itemname:UILabel = {
-            let label = UILabel()
-            label.font = UIFont.boldSystemFont(ofSize: 20)
-            label.textColor = .black
-            label.translatesAutoresizingMaskIntoConstraints = false
+        let itemname:CustomLabel = {
+            let label = CustomLabel(labelType: .secondary)
             return label
         }()
         
-        let itemdescription:UILabel = {
-            let label = UILabel()
-            label.font = UIFont.boldSystemFont(ofSize: 14)
-            label.textColor =  .black
-            label.layer.cornerRadius = 5
-            label.clipsToBounds = true
-            label.translatesAutoresizingMaskIntoConstraints = false
+        let itemdescription:CustomLabel = {
+            let label = CustomLabel(labelType: .secondary)
             return label
         }()
     
-    let itemquantity:UILabel = {
-        let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 14)
-        label.textColor =  .black
-        label.layer.cornerRadius = 5
-        label.clipsToBounds = true
-        label.translatesAutoresizingMaskIntoConstraints = false
+    let itemquantity:CustomLabel = {
+        let label = CustomLabel(labelType: .secondary)
         return label
     }()
         
@@ -81,7 +65,7 @@ class ReceiverTableViewCell: UITableViewCell {
             containerView.addSubview(itemname)
             containerView.addSubview(itemdescription)
             containerView.addSubview(itemquantity)
-           // containerView.addSubview(donarid)
+            containerView.addSubview(donarid)
 
             
             self.contentView.addSubview(containerView)
@@ -106,8 +90,8 @@ class ReceiverTableViewCell: UITableViewCell {
             itemquantity.topAnchor.constraint(equalTo:self.itemdescription.bottomAnchor,constant: 5).isActive = true
             itemquantity.leadingAnchor.constraint(equalTo:self.containerView.leadingAnchor).isActive = true
             
-           // donarid.topAnchor.constraint(equalTo:self.itemquantity.bottomAnchor,constant: 5).isActive = true
-           // donarid.leadingAnchor.constraint(equalTo:self.containerView.leadingAnchor).isActive = true
+            donarid.topAnchor.constraint(equalTo:self.itemquantity.bottomAnchor,constant: 5).isActive = true
+            donarid.leadingAnchor.constraint(equalTo:self.containerView.leadingAnchor).isActive = true
           
         }
         
