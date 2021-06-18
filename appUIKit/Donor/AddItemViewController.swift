@@ -6,10 +6,15 @@
 //
 
 import UIKit
-
-class AddItemViewController: UIViewController {
+protocol canReceive{
+    func passData()
+}
+class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDelegate, UINavigationControllerDelegate {
+    
     var db = DBHelper()
-
+    var delegate:canReceive?
+    
+   
     let stackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
@@ -60,6 +65,15 @@ class AddItemViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.delegate = self
+        
+        let upload = UIBarButtonItem(title: "Upload", style: .plain, target: self, action: #selector(insertUser(_:)))
+        self.navigationItem.rightBarButtonItem = upload
+        let cancel = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancel(_:)))
+        self.navigationItem.leftBarButtonItem = cancel
+        
+        presentationController?.delegate = self
+      //  self.isModalInPresentation = true
         self.title = "Add Item"
         view.backgroundColor = .white
         setupConstraints()
@@ -70,31 +84,72 @@ class AddItemViewController: UIViewController {
         stackView.addArrangedSubview(itemDescription)
         stackView.addArrangedSubview(itemQuantity)
         stackView.addArrangedSubview(address)
-        stackView.addArrangedSubview(addbutton)
+       // stackView.addArrangedSubview(addbutton)
         layoutTraitConstraintsUpdate(traitCollection: self.traitCollection,
                                      sharedConstraints: sharedConstraints,
                                      compactConstraints: compactConstraints,
                                      regularConstraints: regularConstraints)
     }
     
+    @objc func cancel(_ sender: UIButton) {
+        self.dismiss(animated: true)
+    }
     @objc func insertUser(_ sender: UIButton) {
         let userdefaults = UserDefaults.standard
         let userid = userdefaults.integer(forKey: "userid")
         print(userid)
         let item: Item = Item(item_id: 0, item_name: itemname.text!, item_description: itemDescription.text!, item_quantity: itemQuantity.text!, address: address.text!, Donar_ID: userid)
-        var flag = db.insertItem(itemarg: item)
+        var flag = false
+        flag = DBHelper.insertItem(itemarg: item)
         if(flag == true){
             self.showToast(message: "Uploaded Successfully", font: .systemFont(ofSize: 12.0))
-            navigationController?.popViewController(animated: true)
-
+            // navigationController?.popViewController(animated: true)
+            // dismiss(animated: true, completion: nil)
+            delegate?.passData()
+            print("dismissing")
+          //  self.navigationController?.pushViewController(ReceiverViewController(), animated: true)
             dismiss(animated: true, completion: nil)
-                self.navigationController?.pushViewController(ReceiverViewController(), animated: true)
+            self.navigationController?.popViewController(animated: true)
+               
+                   
+//            }
+            
+            
+          //  self.navigationController?.pushViewController(ReceiverViewController(), animated: true)
+             
         }
         
         }
     private var sharedConstraints = [NSLayoutConstraint]()
     private var compactConstraints = [NSLayoutConstraint]()
     private var regularConstraints = [NSLayoutConstraint]()
+    
+    func presentationControllerShouldDismiss(_ presentationController: UIPresentationController) -> Bool {
+            print("dismiss")
+            return false
+        }
+
+        func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
+            present(actionSheet, animated: true)
+        }
+
+        private var actionSheet: UIAlertController {
+            let actionSheet = UIAlertController(
+                title: "",
+                message: "Discard Changes?",
+                preferredStyle: .actionSheet
+            )
+            actionSheet.addAction(.init(
+                title: "Yes",
+                style: .destructive,
+                handler: { _ in self.dismiss(animated: true) }
+            ))
+            actionSheet.addAction(.init(
+                title: "No",
+                style: .default
+            ))
+            return actionSheet
+        }
 
 }
 extension AddItemViewController {
@@ -119,8 +174,8 @@ extension AddItemViewController {
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
             stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
             stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-            addbutton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5),
-            addbutton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+           // addbutton.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+            //addbutton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
         ])
         
         regularConstraints.append(contentsOf: [
@@ -133,8 +188,8 @@ extension AddItemViewController {
             scrollView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
             
-            addbutton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.25),
-            addbutton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+         //   addbutton.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+          //  addbutton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
         ])
     }
 }

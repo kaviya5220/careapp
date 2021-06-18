@@ -8,6 +8,7 @@
 import UIKit
 
 class ReceiverTableViewCell: UITableViewCell {
+    
     var item: Item? {
         didSet {
             guard let Item = item else {return}

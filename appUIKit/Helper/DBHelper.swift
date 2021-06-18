@@ -8,17 +8,17 @@
 import Foundation
 import SQLite3
 class DBHelper{
-    var db : OpaquePointer?
-    var flag : Bool = false
-    var path : String = "AppDataBase.sqlite"
+    static var db : OpaquePointer?
+    static var flag : Bool = false
+    static var path : String = "AppDataBase.sqlite"
     init() {
-        self.db = createDB()
-        self.createTable()
-        self.createItemTable()
+        DBHelper.db =  DBHelper.createDB()
+        DBHelper.createTable()
+        DBHelper.createItemTable()
     }
     
-    func createDB() -> OpaquePointer? {
-        let filePath = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathExtension(path)
+    static func createDB() -> OpaquePointer? {
+         let filePath = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathExtension(path)
         
         var db : OpaquePointer? = nil
         
@@ -31,7 +31,7 @@ class DBHelper{
         }
     }
     
-    func createTable() {
+    static func createTable() {
         let createTableString = """
         CREATE TABLE IF NOT EXISTS UserDetails(
         ID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -50,7 +50,7 @@ class DBHelper{
       }
       sqlite3_finalize(createTableStatement)
     }
-    func insertuser(user : User){
+    static func insertuser(user : User){
     let insertStatementString = "INSERT INTO UserDetails (Name,Phone,Address,Email,Password) VALUES (?, ?, ?, ?, ?);"
       var insertStatement: OpaquePointer?
       if sqlite3_prepare_v2(db, insertStatementString, -1, &insertStatement, nil) ==
@@ -76,7 +76,7 @@ class DBHelper{
       }
       sqlite3_finalize(insertStatement)
     }
-    func validate(email : String , enteredpassword : String) -> Bool {
+    static func validate(email : String , enteredpassword : String) -> Bool {
         let queryStatementString = "SELECT Password FROM UserDetails WHERE Email = ?;"
         var valid : Bool = false
         var queryStatement: OpaquePointer?
@@ -107,7 +107,7 @@ class DBHelper{
         print("DB_Helper \(valid) \(password) \(enteredpassword)")
         return valid
         }
-    func createItemTable() {
+    static func createItemTable() {
         let createTableString = """
         CREATE TABLE IF NOT EXISTS ItemDetails(
         Item_ID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -126,7 +126,7 @@ class DBHelper{
       }
       sqlite3_finalize(createTableStatement)
     }
-    func insertItem(itemarg : Item) -> Bool{
+    static func insertItem(itemarg : Item) -> Bool{
 //        print(Donarid)
 //        print(itemname)
 //        print(itemquantity)
@@ -166,7 +166,7 @@ class DBHelper{
                     }
         return flag
     }
-    func getuserid(email : String ) -> Int {
+    static func getuserid(email : String ) -> Int {
         print(email)
         let queryStatementString = "SELECT ID FROM UserDetails WHERE Email = ?;"
         var userid : Int = 0
@@ -194,7 +194,7 @@ class DBHelper{
         }
         return userid
         }
-    func getitems() -> [Item] {
+    static func getitems() -> [Item] {
         let queryStatementString = "SELECT * FROM ItemDetails;"
         var itemlist : [Item] = []
         var queryStatement: OpaquePointer?

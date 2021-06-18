@@ -7,8 +7,8 @@
 
 import Foundation
 class SignupInteractor{
-    var db = DBHelper()
+    //var db = DBHelper()
     func insertUser(user: User){
-        db.insertuser(user: user)
+        DBHelper.insertuser(user: user)
     }
 }

@@ -8,9 +8,9 @@
 import Foundation
 class LoginInteractor{
     let presenter = LoginPresenter()
-    var db = DBHelper()
+    //var db = DBHelper()
     func Valid(email : String , password: String) -> Bool{
-      return  db.validate(email: email, enteredpassword: password)
+        return  DBHelper.validate(email: email, enteredpassword: password)
         
     }
 }

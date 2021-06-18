@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B14791B2679F89C003DEC63 /* DetailItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B14791A2679F89C003DEC63 /* DetailItemViewController.swift */; };
 		1B7EBF9C267479F000F2AED1 /* SignupPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7EBF9B267479F000F2AED1 /* SignupPresenter.swift */; };
 		1B7EBF9F26747A4700F2AED1 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7EBF9E26747A4700F2AED1 /* CustomButton.swift */; };
 		1B7EBFA126747A9200F2AED1 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7EBFA026747A9200F2AED1 /* CustomTextField.swift */; };
@@ -54,6 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1B14791A2679F89C003DEC63 /* DetailItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailItemViewController.swift; sourceTree = "<group>"; };
 		1B7EBF9B267479F000F2AED1 /* SignupPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPresenter.swift; sourceTree = "<group>"; };
 		1B7EBF9E26747A4700F2AED1 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		1B7EBFA026747A9200F2AED1 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 			children = (
 				1B9B8F432671DFC000C5497C /* ReceiverTableViewCell.swift */,
 				1B9B8F492672655D00C5497C /* ReceiverViewController.swift */,
+				1B14791A2679F89C003DEC63 /* DetailItemViewController.swift */,
 			);
 			path = Receiver;
 			sourceTree = "<group>";
@@ -388,6 +391,7 @@
 			files = (
 				1B83CADA267735D70041C6A2 /* Extension.swift in Sources */,
 				1B906EFB2670A0F50032FA81 /* LoginViewController.swift in Sources */,
+				1B14791B2679F89C003DEC63 /* DetailItemViewController.swift in Sources */,
 				1B906F0D2670FC660032FA81 /* Item.swift in Sources */,
 				1B7EBFA92674945700F2AED1 /* LoginInteractor.swift in Sources */,
 				1B7EBFA32674805B00F2AED1 /* CustomLabel.swift in Sources */,

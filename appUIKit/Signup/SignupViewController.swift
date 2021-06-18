@@ -8,6 +8,7 @@
 
 
 import UIKit
+import CryptoKit
 
 class SignupViewController: UIViewController{
     var flag : Bool = true
@@ -50,11 +51,13 @@ class SignupViewController: UIViewController{
     let emailField:CustomField = {
         let field = CustomField()
         field.textField.placeholder = "Enter email"
+        field.textField.keyboardType = UIKeyboardType.emailAddress
         return field
     }()
     let password:UITextField = {
         let password = CustomTextField()
         password.placeholder = "Enter password"
+        password.isSecureTextEntry = true
         return password
     }()
     
@@ -112,6 +115,13 @@ class SignupViewController: UIViewController{
         
         }
     }
+//    func encrypt(text: String) -> String?  {
+//        let decrypted = try AES(key: "secret", iv: "initialize").decrypt("")
+//           let encrypted = try? aes.encrypt(Array(text.utf8)) {
+//            return encrypted.toHexString()
+//        }
+//        return nil
+//    }
 }
 extension SignupViewController {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -135,8 +145,8 @@ extension SignupViewController {
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
             stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
             stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-            submitbutton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5),
-            submitbutton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+           // submitbutton.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+            //submitbutton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
         ])
         
         regularConstraints.append(contentsOf: [
@@ -147,11 +157,11 @@ extension SignupViewController {
             signuplabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            scrollView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
+            scrollView.widthAnchor.constraint(equalTo: view.widthAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
             
-            submitbutton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.25),
-            submitbutton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+           // submitbutton.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+            //submitbutton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
         ])
     }
 }

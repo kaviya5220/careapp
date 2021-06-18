@@ -16,6 +16,7 @@ class LoginViewController: UIViewController {
             let alert1 = UIAlertController(title: "Sign in Failed", message: "Your Email or Password is incorrect", preferredStyle: .alert)
         let okAction = UIAlertAction (title: "OK", style: UIAlertAction.Style.cancel, handler: nil)
         alert1.addAction(okAction)
+           
         return alert1
         
     }()
@@ -29,24 +30,26 @@ class LoginViewController: UIViewController {
             stack.translatesAutoresizingMaskIntoConstraints = false
             return stack
         }()
-        let loginlabel:UILabel = {
+        let loginlabel:CustomLabel = {
             let label = CustomLabel(labelType: .title)
             label.text = "LOGIN"
             label.textAlignment = .center
             return label
         }()
-        let email:UITextField = {
+        let email:CustomTextField = {
             let emailfield = CustomTextField()
+            emailfield.keyboardType = UIKeyboardType.emailAddress
             emailfield.placeholder = "Enter email"
             return emailfield
         }()
-        let password:UITextField = {
+        let password:CustomTextField = {
             let password = CustomTextField()
+            password.isSecureTextEntry = true
             password.placeholder = "Enter password"
             return password
         }()
         
-        let loginbutton:UIButton = {
+        let loginbutton:CustomButton = {
             let button = CustomButton(title: "LOGIN", bgColor: .systemBlue)
             button.addTarget(self, action: #selector(insertUser(_:)), for: .touchUpInside)
             return button
@@ -87,10 +90,14 @@ class LoginViewController: UIViewController {
         if sender == loginbutton{
            let isvalid = loginInteractor.Valid(email: email.text!, password: password.text!)
             if(isvalid){
-                userid = db.getuserid(email: email.text!)
+                userid = DBHelper.getuserid(email: email.text!)
                 setsessionvariable(userid: userid)
                 self.showToast(message: "Login Successfull", font: .systemFont(ofSize: 12.0))
-                self.navigationController?.pushViewController(TabViewController(), animated: true)
+                let newVc = TabViewController()
+                var vcArray = self.navigationController?.viewControllers
+                vcArray!.removeLast()
+                vcArray!.append(newVc)
+                self.navigationController?.setViewControllers(vcArray!, animated: false)
             }
             else{
                 presenter.showAlert()
@@ -123,23 +130,16 @@ extension LoginViewController {
         ])
         
         compactConstraints.append(contentsOf: [
-            loginlabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-            loginbutton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5),
-            loginbutton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            signupbutton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5),
-            signupbutton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+            loginbutton.widthAnchor.constraint(equalTo: self.stackView.widthAnchor),
+           // loginbutton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
         ])
         
         regularConstraints.append(contentsOf: [
             loginlabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             stackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loginbutton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.25),
-            loginbutton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            signupbutton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.25),
-            signupbutton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
         ])
     }
 }
