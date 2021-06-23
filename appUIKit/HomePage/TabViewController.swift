@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TabViewController: UITabBarController,UITabBarControllerDelegate, canReceive {
+class TabViewController: UITabBarController,UITabBarControllerDelegate, canReceive, UINavigationControllerDelegate {
     func passData() {
         tabOne.reload()
     }
@@ -27,17 +27,17 @@ class TabViewController: UITabBarController,UITabBarControllerDelegate, canRecei
     }
     
     @objc func didTapAdd(_ sender: UIButton) {
-      //  let vc = AddItemViewController()
+       // let vc = AddItemViewController()
        // let rootViewController = UITabBarController()
         let vc = UINavigationController(rootViewController: AddItemViewController())
         vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
         //vc.isModalInPresentation = true
-       // vc.delegate = self
-        //self.present(vc, animated: true, completion: nil)
-        self.present(vc, animated: true)
+        vc.delegate = self
+        self.present(vc, animated: true, completion: nil)
+       // self.present(vc, animated: true)
         print("Hello")
         
-      //  self.navigationController?.pushViewController(vc, animated: true)
+        //self.navigationController?.pushViewController(vc, animated: true)
         
         
         

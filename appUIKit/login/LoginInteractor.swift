@@ -13,4 +13,5 @@ class LoginInteractor{
         return  DBHelper.validate(email: email, enteredpassword: password)
         
     }
+//
 }

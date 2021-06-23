@@ -92,7 +92,9 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
     }
     
     @objc func cancel(_ sender: UIButton) {
-        self.dismiss(animated: true)
+       
+        dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     @objc func insertUser(_ sender: UIButton) {
         let userdefaults = UserDefaults.standard

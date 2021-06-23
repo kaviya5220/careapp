@@ -24,11 +24,11 @@ class CustomLabel: UILabel {
         switch labelType {
         
         case .title:
-            self.font = UIFont.systemFont(ofSize: 30, weight: .bold)
+            self.font = UIFont.systemFont(ofSize: 24, weight: .bold)// 24 30
         case .primary:
-            self.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+            self.font = UIFont.systemFont(ofSize: 16, weight: .semibold)//16 17
         case .secondary:
-            self.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+            self.font = UIFont.systemFont(ofSize: 14, weight: .regular)//12 or 14
         }
     }
     

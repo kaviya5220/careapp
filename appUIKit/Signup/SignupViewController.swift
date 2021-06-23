@@ -8,9 +8,11 @@
 
 
 import UIKit
-import CryptoKit
+import CryptoSwift
 
 class SignupViewController: UIViewController{
+    var endata : String = ""
+    var dcdata : String = ""
     var flag : Bool = true
     let signupInteractor = SignupInteractor()
     let stackView: UIStackView = {
@@ -101,12 +103,18 @@ class SignupViewController: UIViewController{
         flag = true
         if(signUpPresenter.validateEmailId(emailId: emailField.getFiledText())==false){
             flag = false
+            
+//           dcdata = try! aesDecrypt()
+//            print(dcdata)
+            
         }
         if(signUpPresenter.validateMobile(mobile: phone.getFiledText())==false){
             flag = false
         }
         if(flag){
-            let user: User = User(user_name: name.text!, user_phone: phone.getFiledText()!, user_address: address.text!, user_email: emailField.getFiledText()!, user_password: password.text!)
+            endata = try! aesEncrypt(password: password.text!)
+            print(endata)
+            let user: User = User(user_name: name.text!, user_phone: phone.getFiledText()!, user_address: address.text!, user_email: emailField.getFiledText()!, user_password: endata)
         signupInteractor.insertUser(user: user)
         self.showToast(message: "Submitted Successfully", font: .systemFont(ofSize: 12.0))
         navigationController?.popViewController(animated: true)
@@ -115,13 +123,14 @@ class SignupViewController: UIViewController{
         
         }
     }
-//    func encrypt(text: String) -> String?  {
-//        let decrypted = try AES(key: "secret", iv: "initialize").decrypt("")
-//           let encrypted = try? aes.encrypt(Array(text.utf8)) {
-//            return encrypted.toHexString()
-//        }
-//        return nil
-//    }
+    func aesEncrypt(password:String) throws -> String {
+        let key: String  = "secret0key000000"
+        let iv:  String  = "0000000000000000"
+        let data : [UInt8] = Array(password.utf8)
+        let encrypted = try AES(key: key, iv: iv, padding: .pkcs7).encrypt(data)
+        return Data(encrypted).base64EncodedString()
+    }
+    
 }
 extension SignupViewController {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

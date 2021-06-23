@@ -7,6 +7,7 @@
 
 import Foundation
 import SQLite3
+import CryptoSwift
 class DBHelper{
     static var db : OpaquePointer?
     static var flag : Bool = false
@@ -16,6 +17,14 @@ class DBHelper{
         DBHelper.createTable()
         DBHelper.createItemTable()
     }
+    static func aesDecrypt(endata : String) throws -> String {
+            let key: String  = "secret0key000000"
+            let iv:  String  = "0000000000000000"
+           // let data : [UInt8] = Array(endata.utf8)
+            guard let data = Data(base64Encoded: endata) else { return "" }
+            let decrypted = try AES(key: key, iv: iv, padding: .pkcs7).decrypt([UInt8] (data))
+            return String(bytes: decrypted, encoding: .utf8) ?? ""
+        }
     
     static func createDB() -> OpaquePointer? {
          let filePath = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathExtension(path)
@@ -93,7 +102,9 @@ class DBHelper{
               password = String(cString: queryResultCol1)
               print("\nQuery Result:")
               print(" \(password) ")
-                if(password.elementsEqual(enteredpassword)){
+                let decryptdata = try! aesDecrypt(endata : password)
+                print(decryptdata)
+                if(decryptdata.elementsEqual(enteredpassword)){
                     valid = true
                 }
           } else {
@@ -227,4 +238,71 @@ class DBHelper{
         }
         return itemlist
         }
+    static func getitemsbyID(ID : Int) -> Item {
+        let queryStatementString = "SELECT * FROM ItemDetails  WHERE Item_ID = ?;"
+        var item : Item = Item(item_id: 0, item_name: "", item_description: "", item_quantity: "", address: "", Donar_ID: 0)
+        var queryStatement: OpaquePointer?
+          if sqlite3_prepare_v2(db, queryStatementString, -1, &queryStatement, nil) ==
+              SQLITE_OK {
+            sqlite3_bind_int(queryStatement, 1, Int32(ID))
+            if sqlite3_step(queryStatement) == SQLITE_ROW {
+    
+             let queryResultCol0 = sqlite3_column_int(queryStatement, 0)
+             let queryResultCol1 = sqlite3_column_text(queryStatement, 1)
+             let queryResultCol2 = sqlite3_column_text(queryStatement, 2)
+             let queryResultCol3 = sqlite3_column_text(queryStatement, 3)
+             let queryResultCol4 = sqlite3_column_text(queryStatement, 4)
+             let queryResultCol5 = sqlite3_column_int(queryStatement, 5)
+                
+                item = Item(item_id: Int(queryResultCol0), item_name: String(cString: queryResultCol1!), item_description: String(cString: queryResultCol2!), item_quantity: String(cString: queryResultCol3!), address: String(cString: queryResultCol4!), Donar_ID: Int(queryResultCol5))
+               
+              
+                //return userid
+            }
+            print("\nQuery Result:")
+              print(item)
+          } else {
+            let errorMessage = String(cString: sqlite3_errmsg(db))
+            print("\nQuery is not prepared \(errorMessage)")
+          }
+          sqlite3_finalize(queryStatement)
+        if sqlite3_close(db) == SQLITE_OK {
+            print("closing database")
+        }
+        return item
+        }
+    static func getdonardetails(ID : Int) -> User {
+        let queryStatementString = "SELECT * FROM UserDetails  WHERE ID = ?;"
+        var user : User = User(user_name: "", user_phone: "", user_address: "", user_email: "", user_password: "")
+        var queryStatement: OpaquePointer?
+          if sqlite3_prepare_v2(db, queryStatementString, -1, &queryStatement, nil) ==
+              SQLITE_OK {
+            sqlite3_bind_int(queryStatement, 1, Int32(ID))
+            if sqlite3_step(queryStatement) == SQLITE_ROW {
+    
+             let queryResultCol0 = sqlite3_column_int(queryStatement, 0)
+             let queryResultCol1 = sqlite3_column_text(queryStatement, 1)
+             let queryResultCol2 = sqlite3_column_text(queryStatement, 2)
+             let queryResultCol3 = sqlite3_column_text(queryStatement, 3)
+             let queryResultCol4 = sqlite3_column_text(queryStatement, 4)
+             let queryResultCol5 = sqlite3_column_text(queryStatement, 5)
+                
+                user = User(user_name:String(cString: queryResultCol1!), user_phone: String(cString: queryResultCol2!), user_address: String(cString: queryResultCol3!), user_email: String(cString: queryResultCol4!), user_password: String(cString: queryResultCol5!))
+               
+              
+                //return userid
+            }
+            print("\nQuery Result:")
+              print(user)
+          } else {
+            let errorMessage = String(cString: sqlite3_errmsg(db))
+            print("\nQuery is not prepared \(errorMessage)")
+          }
+          sqlite3_finalize(queryStatement)
+        if sqlite3_close(db) == SQLITE_OK {
+            print("closing database")
+        }
+        return user
+        }
+
 }
