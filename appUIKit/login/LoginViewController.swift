@@ -10,17 +10,16 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
-        var db = DBHelper()
+       // var db = DBHelper()
         let loginInteractor = LoginInteractor()
         var userid : Int = 0
+    
         let alert : UIAlertController = {
-            let alert1 = UIAlertController(title: "Sign in Failed", message: "Your Email or Password is incorrect", preferredStyle: .alert)
+        let alert1 = UIAlertController(title: "Sign in Failed", message: "Your Email or Password is incorrect", preferredStyle: .alert)
         let okAction = UIAlertAction (title: "OK", style: UIAlertAction.Style.cancel, handler: nil)
         alert1.addAction(okAction)
-           
         return alert1
-        
-    }()
+        }()
     
         let stackView: UIStackView = {
             let stack = UIStackView()
@@ -51,12 +50,13 @@ class LoginViewController: UIViewController {
         }()
         
         let loginbutton:CustomButton = {
-            let button = CustomButton(title: "LOGIN", bgColor: .systemBlue)
+            let button = CustomButton(title: "LOGIN", bgColor: #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1))
             button.addTarget(self, action: #selector(insertUser(_:)), for: .touchUpInside)
+            button.layer.cornerRadius = 10
             return button
         }()
         let signupbutton:UIButton = {
-            let button = CustomButton(title: "SIGNUP", bgColor: .systemGreen)
+            let button = CustomButton(title: "SIGNUP", bgColor: #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1))
             button.addTarget(self, action: #selector(insertUser(_:)), for: .touchUpInside)
             return button
         }()
@@ -95,10 +95,9 @@ class LoginViewController: UIViewController {
                 setsessionvariable(userid: userid)
                 self.showToast(message: "Login Successfull", font: .systemFont(ofSize: 12.0))
                 let newVc = TabViewController()
-                var vcArray = self.navigationController?.viewControllers
-                vcArray!.removeLast()
-                vcArray!.append(newVc)
-                self.navigationController?.setViewControllers(vcArray!, animated: false)
+                let nav = UINavigationController(rootViewController: newVc)
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(nav)
+             
             }
             else{
                 presenter.showAlert()

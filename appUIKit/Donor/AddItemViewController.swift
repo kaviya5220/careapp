@@ -1,29 +1,50 @@
-//
-//  AddItemControllerViewController.swift
-//  appUIKit
-//
-//  Created by sysadmin on 09/06/21.
-//
 
 import UIKit
 protocol canReceive{
     func passData()
 }
 class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDelegate, UINavigationControllerDelegate {
-    
+
     var db = DBHelper()
     var delegate:canReceive?
+    let alert : UIAlertController = {
+    let alert1 = UIAlertController(title: "Success", message: "Item Posted Successfully", preferredStyle: .alert)
+    return alert1
+    }()
     
-   
+    private var actionSheet: UIAlertController {
+        let actionSheet = UIAlertController(
+            title: "",
+            message: "Discard Changes?",
+            preferredStyle: .actionSheet
+        )
+        actionSheet.addAction(.init(
+            title: "Yes",
+            style: .destructive,
+            handler: { _ in self.dismiss(animated: true) }
+        ))
+        actionSheet.addAction(.init(
+            title: "No",
+            style: .default
+        ))
+        return actionSheet
+    }
+
     let stackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.alignment = .fill
         stack.distribution = .fillEqually
-        stack.spacing = 20
+        stack.spacing = 10
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
+    let scrollView : UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.translatesAutoresizingMaskIntoConstraints = false
+        return scroll
+    }()
+   
     let itemlabel:CustomLabel = {
         let label = CustomLabel(labelType: .title)
         label.text = "ITEM DETAILS "
@@ -45,35 +66,28 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
         quantity.placeholder = "Enter Item Quantity"
         return quantity
     }()
-    let address:CustomTextField = {
-        let address = CustomTextField()
-        address.placeholder = "Enter Address"
-        return address
+    let address:UITextField = {
+        let addressfield = CustomTextField()
+        addressfield.placeholder = "Enter address"
+        return addressfield
     }()
     let addbutton:CustomButton = {
-        let button = CustomButton(title: "UPLOAD ITEM", bgColor: .systemBlue)
+        let button = CustomButton(title: "UPLOAD ITEM", bgColor: .white)
         button.addTarget(self, action: #selector(insertUser(_:)), for: .touchUpInside)
         button.contentEdgeInsets = UIEdgeInsets(top: 10,left: 10,bottom: 10,right: 10)
         return button
     }()
-    let scrollView : UIScrollView = {
-        let scroll = UIScrollView()
-        scroll.translatesAutoresizingMaskIntoConstraints = false
-        return scroll
-    }()
     
+    let presenter = AddItemPresenter()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.delegate = self
-        
+
         let upload = UIBarButtonItem(title: "Upload", style: .plain, target: self, action: #selector(insertUser(_:)))
         self.navigationItem.rightBarButtonItem = upload
         let cancel = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancel(_:)))
         self.navigationItem.leftBarButtonItem = cancel
-        
-        presentationController?.delegate = self
-      //  self.isModalInPresentation = true
+
         self.title = "Add Item"
         view.backgroundColor = .white
         setupConstraints()
@@ -84,17 +98,16 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
         stackView.addArrangedSubview(itemDescription)
         stackView.addArrangedSubview(itemQuantity)
         stackView.addArrangedSubview(address)
-       // stackView.addArrangedSubview(addbutton)
+        stackView.addArrangedSubview(addbutton)
         layoutTraitConstraintsUpdate(traitCollection: self.traitCollection,
                                      sharedConstraints: sharedConstraints,
                                      compactConstraints: compactConstraints,
                                      regularConstraints: regularConstraints)
+        presenter.delegate = self
     }
-    
+
     @objc func cancel(_ sender: UIButton) {
-       
-        dismiss(animated: true, completion: nil)
-        self.navigationController?.popViewController(animated: true)
+        self.present(actionSheet,animated: true)
     }
     @objc func insertUser(_ sender: UIButton) {
         let userdefaults = UserDefaults.standard
@@ -104,28 +117,24 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
         var flag = false
         flag = DBHelper.insertItem(itemarg: item)
         if(flag == true){
-            self.showToast(message: "Uploaded Successfully", font: .systemFont(ofSize: 12.0))
-            // navigationController?.popViewController(animated: true)
-            // dismiss(animated: true, completion: nil)
+            presenter.showSuccessAlert()
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in self.dismissinsertView()
+               
+            }))
             delegate?.passData()
             print("dismissing")
-          //  self.navigationController?.pushViewController(ReceiverViewController(), animated: true)
-            dismiss(animated: true, completion: nil)
-            self.navigationController?.popViewController(animated: true)
-               
-                   
-//            }
-            
-            
-          //  self.navigationController?.pushViewController(ReceiverViewController(), animated: true)
-             
         }
-        
         }
+    func dismissinsertView(){
+        dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
+
+
+    }
     private var sharedConstraints = [NSLayoutConstraint]()
     private var compactConstraints = [NSLayoutConstraint]()
     private var regularConstraints = [NSLayoutConstraint]()
-    
+
     func presentationControllerShouldDismiss(_ presentationController: UIPresentationController) -> Bool {
             print("dismiss")
             return false
@@ -133,24 +142,6 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
 
         func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
             present(actionSheet, animated: true)
-        }
-
-        private var actionSheet: UIAlertController {
-            let actionSheet = UIAlertController(
-                title: "",
-                message: "Discard Changes?",
-                preferredStyle: .actionSheet
-            )
-            actionSheet.addAction(.init(
-                title: "Yes",
-                style: .destructive,
-                handler: { _ in self.dismiss(animated: true) }
-            ))
-            actionSheet.addAction(.init(
-                title: "No",
-                style: .default
-            ))
-            return actionSheet
         }
 
 }
@@ -162,12 +153,13 @@ extension AddItemViewController {
                                      regularConstraints: regularConstraints)
     }
     private func setupConstraints() {
-        
+
         sharedConstraints.append(contentsOf: [
             stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
-        
-        
+
+
+
         compactConstraints.append(contentsOf: [
             itemlabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -179,7 +171,7 @@ extension AddItemViewController {
            // addbutton.widthAnchor.constraint(equalTo: self.view.widthAnchor),
             //addbutton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
         ])
-        
+
         regularConstraints.append(contentsOf: [
             stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -189,10 +181,15 @@ extension AddItemViewController {
             scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             scrollView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
-            
-         //   addbutton.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-          //  addbutton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
         ])
     }
 }
+extension AddItemViewController : AddItemPresenterDelegate{
+    func showSuccessAlert() {
+        self.present(alert, animated: true, completion: nil)
+        }
+}
 
+
+
+    

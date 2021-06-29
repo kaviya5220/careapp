@@ -90,7 +90,6 @@ class ReceiverTableViewCell: UITableViewCell {
             containerView.addSubview(itemdescription)
             containerView.addSubview(itemquantitylabel)
             containerView.addSubview(itemquantity)
-         //   containerView.addSubview(donarid)
 
             
             self.customContentView.addSubview(containerView)

@@ -190,8 +190,5 @@ extension SignupViewController : SignUpPresenterDelegate{
     func showMobileError(errorMessage: String?) {
         phone.setError(errorMessage: "Mobile Format Wrong")
     }
-    
-   
-    
 }
 

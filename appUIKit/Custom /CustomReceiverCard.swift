@@ -20,7 +20,9 @@ class CustomReceiverCard: UIView {
             
             layer.cornerRadius = cornerRadius
             let shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius)
-            
+            layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+            layer.borderWidth = 4
+            layer.cornerRadius = 10
             layer.masksToBounds = false
             layer.shadowColor = shadowColor?.cgColor
             layer.shadowOffset = CGSize(width: shadowOffsetWidth, height: shadowOffsetHeight)

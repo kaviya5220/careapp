@@ -13,7 +13,7 @@ class DBHelper{
     static var flag : Bool = false
     static var path : String = "AppDataBase.sqlite"
     init() {
-        DBHelper.db =  DBHelper.createDB()
+        DBHelper.db =  DBHelper.openDB()
         DBHelper.createTable()
         DBHelper.createItemTable()
     }
@@ -25,8 +25,7 @@ class DBHelper{
             let decrypted = try AES(key: key, iv: iv, padding: .pkcs7).decrypt([UInt8] (data))
             return String(bytes: decrypted, encoding: .utf8) ?? ""
         }
-    
-    static func createDB() -> OpaquePointer? {
+    static func openDB() -> OpaquePointer? {
          let filePath = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathExtension(path)
         
         var db : OpaquePointer? = nil
@@ -122,7 +121,8 @@ class DBHelper{
         let createTableString = """
         CREATE TABLE IF NOT EXISTS ItemDetails(
         Item_ID INTEGER PRIMARY KEY AUTOINCREMENT,
-        Item_Name CHAR(255),Item_Description CHAR(255),Item_Quantity CHAR(255),Address CHAR(255),Donar_ID INTEGER);
+        Item_Name CHAR(255),Item_Description CHAR(255),Item_Quantity CHAR(255),Address CHAR(255),Donar_ID INTEGER,
+        Visited_count INTEGER DEFAULT 0);
         """
       var createTableStatement: OpaquePointer?
       if sqlite3_prepare_v2(db, createTableString, -1, &createTableStatement, nil) ==
@@ -304,5 +304,20 @@ class DBHelper{
         }
         return user
         }
-
+    static func update(itemid : Int) {
+      var updateStatement: OpaquePointer?
+        let updateStatementString = "UPDATE ItemDetails SET Visited_count = Visited_count+1 WHERE Item_ID = ?;"
+        if sqlite3_prepare_v2(db, updateStatementString, -1, &updateStatement, nil) ==
+          SQLITE_OK {
+            sqlite3_bind_int(updateStatement, 1, Int32(itemid))
+        if sqlite3_step(updateStatement) == SQLITE_DONE {
+          print("\nSuccessfully updated row.")
+        } else {
+          print("\nCould not update row.")
+        }
+      } else {
+        print("\nUPDATE statement is not prepared")
+      }
+      sqlite3_finalize(updateStatement)
+    }
 }

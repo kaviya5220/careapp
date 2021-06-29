@@ -11,6 +11,8 @@
 		1B160856268076AD002570F2 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B160855268076AD002570F2 /* PageViewController.swift */; };
 		1B52A86F267DB2A700B489AA /* CustomReceiverCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B52A86E267DB2A700B489AA /* CustomReceiverCard.swift */; };
 		1B52A871267DC74500B489AA /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B52A870267DC74500B489AA /* Data.swift */; };
+		1B6FF24C268369010093956C /* ReceiverInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6FF24B268369010093956C /* ReceiverInteractor.swift */; };
+		1B6FF2532685DD9B0093956C /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6FF2522685DD9B0093956C /* MapViewController.swift */; };
 		1B7EBF9C267479F000F2AED1 /* SignupPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7EBF9B267479F000F2AED1 /* SignupPresenter.swift */; };
 		1B7EBF9F26747A4700F2AED1 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7EBF9E26747A4700F2AED1 /* CustomButton.swift */; };
 		1B7EBFA126747A9200F2AED1 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7EBFA026747A9200F2AED1 /* CustomTextField.swift */; };
@@ -38,6 +40,8 @@
 		1B9B8F4626724E6F00C5497C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9B8F4526724E6F00C5497C /* User.swift */; };
 		1B9B8F48267256EC00C5497C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9B8F47267256EC00C5497C /* ProfileViewController.swift */; };
 		1B9B8F4A2672655D00C5497C /* ReceiverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9B8F492672655D00C5497C /* ReceiverViewController.swift */; };
+		1BC38B6026899A13002501E0 /* AddItemInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC38B5F26899A13002501E0 /* AddItemInteractor.swift */; };
+		1BC38B6226899AF9002501E0 /* AddItemPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC38B6126899AF9002501E0 /* AddItemPresenter.swift */; };
 		1E44A0637DE0090F2D371972 /* Pods_appUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6932C242F3ED69BDA171762B /* Pods_appUIKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +67,8 @@
 		1B160855268076AD002570F2 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		1B52A86E267DB2A700B489AA /* CustomReceiverCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomReceiverCard.swift; sourceTree = "<group>"; };
 		1B52A870267DC74500B489AA /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		1B6FF24B268369010093956C /* ReceiverInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverInteractor.swift; sourceTree = "<group>"; };
+		1B6FF2522685DD9B0093956C /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		1B7EBF9B267479F000F2AED1 /* SignupPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPresenter.swift; sourceTree = "<group>"; };
 		1B7EBF9E26747A4700F2AED1 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		1B7EBFA026747A9200F2AED1 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
@@ -96,6 +102,8 @@
 		1B9B8F4526724E6F00C5497C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1B9B8F47267256EC00C5497C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		1B9B8F492672655D00C5497C /* ReceiverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverViewController.swift; sourceTree = "<group>"; };
+		1BC38B5F26899A13002501E0 /* AddItemInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemInteractor.swift; sourceTree = "<group>"; };
+		1BC38B6126899AF9002501E0 /* AddItemPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemPresenter.swift; sourceTree = "<group>"; };
 		40433AEAEDF8E26DCBCB7E50 /* Pods-appUIKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-appUIKit.release.xcconfig"; path = "Target Support Files/Pods-appUIKit/Pods-appUIKit.release.xcconfig"; sourceTree = "<group>"; };
 		6932C242F3ED69BDA171762B /* Pods_appUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_appUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9FE740E0977A69452118B8F /* Pods-appUIKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-appUIKit.debug.xcconfig"; path = "Target Support Files/Pods-appUIKit/Pods-appUIKit.debug.xcconfig"; sourceTree = "<group>"; };
@@ -127,6 +135,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B6FF2512685DD6F0093956C /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				1B6FF2522685DD9B0093956C /* MapViewController.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
 		1B7EBF9D267479F900F2AED1 /* Custom  */ = {
 			isa = PBXGroup;
 			children = (
@@ -150,6 +166,7 @@
 		1B906EBD2670A08C0032FA81 = {
 			isa = PBXGroup;
 			children = (
+				1B6FF2512685DD6F0093956C /* Map */,
 				1B906EC82670A08C0032FA81 /* appUIKit */,
 				1B906EDF2670A08E0032FA81 /* appUIKitTests */,
 				1B906EEA2670A08E0032FA81 /* appUIKitUITests */,
@@ -252,6 +269,8 @@
 			isa = PBXGroup;
 			children = (
 				1B906F092670FC260032FA81 /* AddItemViewController.swift */,
+				1BC38B5F26899A13002501E0 /* AddItemInteractor.swift */,
+				1BC38B6126899AF9002501E0 /* AddItemPresenter.swift */,
 			);
 			path = Donor;
 			sourceTree = "<group>";
@@ -272,6 +291,7 @@
 				1B9B8F492672655D00C5497C /* ReceiverViewController.swift */,
 				1B14791A2679F89C003DEC63 /* DetailItemViewController.swift */,
 				1B160855268076AD002570F2 /* PageViewController.swift */,
+				1B6FF24B268369010093956C /* ReceiverInteractor.swift */,
 			);
 			path = Receiver;
 			sourceTree = "<group>";
@@ -467,8 +487,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B83CADA267735D70041C6A2 /* Extension.swift in Sources */,
+				1BC38B6226899AF9002501E0 /* AddItemPresenter.swift in Sources */,
 				1B906EFB2670A0F50032FA81 /* LoginViewController.swift in Sources */,
 				1B14791B2679F89C003DEC63 /* DetailItemViewController.swift in Sources */,
+				1B6FF24C268369010093956C /* ReceiverInteractor.swift in Sources */,
 				1B906F0D2670FC660032FA81 /* Item.swift in Sources */,
 				1B7EBFA92674945700F2AED1 /* LoginInteractor.swift in Sources */,
 				1B52A86F267DB2A700B489AA /* CustomReceiverCard.swift in Sources */,
@@ -482,6 +504,7 @@
 				1B906F0F26711B020032FA81 /* HomeViewController.swift in Sources */,
 				1B9B8F442671DFC000C5497C /* ReceiverTableViewCell.swift in Sources */,
 				1B7EBFA52674884200F2AED1 /* SignupInteractor.swift in Sources */,
+				1BC38B6026899A13002501E0 /* AddItemInteractor.swift in Sources */,
 				1B7EBFA126747A9200F2AED1 /* CustomTextField.swift in Sources */,
 				1B906F002670A9260032FA81 /* DBHelper.swift in Sources */,
 				1B9B8F4626724E6F00C5497C /* User.swift in Sources */,
@@ -492,6 +515,7 @@
 				1B7EBF9F26747A4700F2AED1 /* CustomButton.swift in Sources */,
 				1B906F052670F6080032FA81 /* TabViewController.swift in Sources */,
 				1B7EBF9C267479F000F2AED1 /* SignupPresenter.swift in Sources */,
+				1B6FF2532685DD9B0093956C /* MapViewController.swift in Sources */,
 				1B906ECC2670A08C0032FA81 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

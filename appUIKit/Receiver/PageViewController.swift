@@ -17,7 +17,9 @@
 
         override func viewDidLoad() {
             super.viewDidLoad()
-            print(itemid)
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
+            let request = UIBarButtonItem(title: "Request", style: .plain, target: self, action: #selector(insertUser(_:)))
+            navigationItem.rightBarButtonItem = request
             pageController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
             pageController.dataSource = self
             pageController.delegate = self
@@ -30,14 +32,14 @@
             view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[pageController]|", options: [], metrics: nil, views: views))
             let count=0...itemid.count-1
             for i in count {
+                print("for loop")
                 let vc = DetailItemViewController()
                  vc.itemid = itemid[i]
         
                 
-                vc.view.backgroundColor = .white
+                vc.view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
                 controllers.append(vc)
             }
-
             pageController.setViewControllers([controllers[current]], direction: .forward, animated: false)
         }
         func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
@@ -63,12 +65,7 @@
 
                 return nil
             }
-
-//            func randomCGFloat() -> CGFloat {
-//                return CGFloat(arc4random()) / CGFloat(UInt32.max)
-//            }
-//
-//            func randomColor() -> UIColor {
-//                return UIColor(red: randomCGFloat(), green: randomCGFloat(), blue: randomCGFloat(), alpha: 1)
-//            }
+        @objc func insertUser(_ sender: UIButton) {
+            print("REquest clicked")
+        }
 }

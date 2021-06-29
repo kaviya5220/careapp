@@ -12,73 +12,29 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
     public var itemid : [Int] = []
     public var items : [Item] = []
     public var filteredItems : [Item] = []
-    var filteredArray :[String] = []
-    var data : [String] = []
-    var filteredData : [String]!
-    var text:String = ""
+    let receiverInteractor = ReceiverInteractor()
     let receiverTableView = UITableView()
-    var db = DBHelper()
     var searchController : UISearchController!
         func updateSearchResults(for searchController: UISearchController) {
             let searchString = searchController.searchBar.text
-                filteredArray = data.filter({ (itemname) -> Bool in
-                    let itemText: NSString = itemname as NSString
-                    return (itemText.range(of: searchString!, options: NSString.CompareOptions.caseInsensitive).location) != NSNotFound
-                }
-                )
-            let count  = 0...items.count-1
-            if(filteredArray.count != 0){
-                filteredItems = []
-                for i in count {
-                    if(filteredArray.contains(items[i].item_name)){
-                        filteredItems.append(items[i])
-                    }
-                }
-                receiverTableView.reloadData()
-            }
-            
-            else if(filteredArray.count == 0 && searchString == ""){
+            if(searchString == ""){
                 filteredItems = items
-                receiverTableView.reloadData()
+            }
+            else{
+            filteredItems = items.filter({$0.item_name.contains(searchString!)})
             }
 
-            else if(filteredArray.count == 0 && searchString != ""){
-                filteredItems = []
-                receiverTableView.reloadData()
-            }
+            receiverTableView.reloadData()
+            
         }
-    
-
-    func reload(){
-        print("reload")
-        db = DBHelper()
-        items = DBHelper.getitems()
-        print(items)
-        let count=0...items.count-1
-        for i in count {
-            print(items[i].item_name)
-            data.append(items[i].item_name)
-        }
-        filteredItems = items
-        print(items.count)
-        receiverTableView.reloadData()
-    }
     override func viewWillAppear(_ Animated : Bool) {
         super.viewWillAppear(Animated)
-        
-        
             print("view will appear")
-            db = DBHelper()
-        items = DBHelper.getitems()
-        if(items.isEmpty == false){
-        let count=0...items.count-1
-        for i in count {
-            print(items[i].item_name)
-            data.append(items[i].item_name)
-        }
-        }
+        
+        items = receiverInteractor.getitemdetails()
+        print(items)
         filteredItems = items
-            receiverTableView.reloadData()
+           receiverTableView.reloadData()
             view.backgroundColor = .white
             view.addSubview(receiverTableView)
             receiverTableView.translatesAutoresizingMaskIntoConstraints = false
@@ -104,27 +60,22 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
             navigationController?.navigationBar.titleTextAttributes = textAttributes
         
         }
+   
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       // let vc = DetailItemViewController()
-        //vc.itemid = items[indexPath.row].item_id
         print("Row\(indexPath.row)")
         let vc = PageViewController()
-        let count=0...items.count-1
-        itemid = []
-        for i in count {
-            if(filteredItems[indexPath.row].item_id == items[i].item_id){
-                vc.current = i
-            }
-            print(items[i].item_name)
-            itemid.append(items[i].item_id)
-        }
-        vc.itemid = itemid
-        print("itemid\(itemid)")
-       // vc.current = indexPath.row
-        print(" Current\(vc.current)")
-        print(items)
-        self.navigationController?.pushViewController(vc, animated: true)
+        itemid = items.map{$0.item_id}
         
+        if let index = items.firstIndex(where: { $0 === filteredItems[indexPath.row] }){
+            vc.current = index
+            vc.itemid = itemid
+            print("itemid\(itemid)")
+            print(" Current\(vc.current)")
+            print(items)
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+            
     }
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             print("ITEMCOUNT\(items.count)")
@@ -136,7 +87,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
             let cell = tableView.dequeueReusableCell(withIdentifier: "itemcell", for: indexPath) as! ReceiverTableViewCell
             print("index patH \(indexPath)")
             cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
-            cell.item = Item(item_id: filteredItems[indexPath.row].item_id, item_name: filteredItems[indexPath.row].item_name, item_description: filteredItems[indexPath.row].item_description, item_quantity: filteredItems[indexPath.row].item_quantity, address:filteredItems[indexPath.row].address, Donar_ID: filteredItems[indexPath.row].Donar_ID)
+            cell.item = filteredItems[indexPath.row]
             return cell
         }
         

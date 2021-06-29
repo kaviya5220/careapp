@@ -17,6 +17,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
             let window = UIWindow(windowScene: windowScene)
             let navController = UINavigationController()
+            if let loggedUsername = UserDefaults.standard.string(forKey: "userid") {
+                let viewController = TabViewController()
+                navController.viewControllers = [viewController]
+                navController.navigationBar.backgroundColor = .clear
+                let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+                navController.navigationBar.titleTextAttributes = textAttributes
+                window.rootViewController = navController
+                self.window = window
+                window.makeKeyAndVisible()
+            }else{
             let viewController = LoginViewController()
             navController.viewControllers = [viewController]
             navController.navigationBar.backgroundColor = .clear
@@ -25,10 +35,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.rootViewController = navController
             self.window = window
             window.makeKeyAndVisible()
+            }
         }
     }
-
+    func changeRootViewController(_ vc: UIViewController, animated: Bool = true) {
+        guard let window = self.window else {
+            return
+        }
+        
+        window.rootViewController = vc
+        self.window = window
+        window.makeKeyAndVisible()
+    }
     func sceneDidDisconnect(_ scene: UIScene) {
+        print("Disconnect")
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.
         // Release any resources associated with this scene that can be re-created the next time the scene connects.
