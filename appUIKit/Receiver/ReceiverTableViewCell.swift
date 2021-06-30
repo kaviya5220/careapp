@@ -13,11 +13,13 @@ class ReceiverTableViewCell: UITableViewCell {
         didSet {
             guard let Item = item else {return}
             let name = Item.item_name
-                itemimage.image = UIImage(systemName: "person")
+                itemimage.image = UIImage(named: "dnimge")
                 itemname.text = name
                 itemdescription.text = Item.item_description
                 itemquantity.text = Item.item_quantity
                 donarid.text = String(Item.Donar_ID)
+                visitedcount.text = String(Item.visited_count)
+                date.text = Item.date
             
         }
     }
@@ -79,6 +81,33 @@ class ReceiverTableViewCell: UITableViewCell {
         return label
     }()
     
+    let visitedcountlabel:CustomLabel = {
+        let label = CustomLabel(labelType: .primary)
+        label.text = "Visted Count :"
+        return label
+    }()
+    let visitedcount:CustomLabel = {
+        let label = CustomLabel(labelType: .primary)
+        
+        return label
+    }()
+    let datelabel:CustomLabel = {
+        let label = CustomLabel(labelType: .primary)
+        let attachment = NSTextAttachment()
+        attachment.image = UIImage(systemName: "calendar")
+        let attachmentString = NSAttributedString(attachment: attachment)
+        let myString = NSMutableAttributedString(string: "Date  ")
+        myString.append(attachmentString)
+        label.attributedText = myString
+        return label
+    }()
+    
+    let date:CustomLabel = {
+        let label = CustomLabel(labelType: .primary)
+       
+        return label
+    }()
+    
         
 
         override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -90,6 +119,10 @@ class ReceiverTableViewCell: UITableViewCell {
             containerView.addSubview(itemdescription)
             containerView.addSubview(itemquantitylabel)
             containerView.addSubview(itemquantity)
+            containerView.addSubview(datelabel)
+            containerView.addSubview(date)
+            containerView.addSubview(visitedcountlabel)
+            containerView.addSubview(visitedcount)
 
             
             self.customContentView.addSubview(containerView)
@@ -98,8 +131,8 @@ class ReceiverTableViewCell: UITableViewCell {
             
             itemimage.topAnchor.constraint(equalTo: self.customContentView.topAnchor, constant:20).isActive = true
             itemimage.leadingAnchor.constraint(equalTo:self.customContentView.leadingAnchor, constant:10).isActive = true
-            itemimage.widthAnchor.constraint(equalToConstant:70).isActive = true
-            itemimage.heightAnchor.constraint(equalToConstant:70).isActive = true
+            itemimage.trailingAnchor.constraint(equalTo:self.customContentView.trailingAnchor, constant:-10).isActive = true
+            itemimage.heightAnchor.constraint(equalToConstant:150).isActive = true
             
             customContentView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant:5).isActive = true
             customContentView.leadingAnchor.constraint(equalTo:self.contentView.leadingAnchor, constant:10).isActive = true
@@ -107,8 +140,8 @@ class ReceiverTableViewCell: UITableViewCell {
            // containerView.heightAnchor.constraint(equalToConstant:100).isActive = true
             customContentView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -5).isActive = true
             
-            containerView.topAnchor.constraint(equalTo: self.customContentView.topAnchor, constant:5).isActive = true
-            containerView.leadingAnchor.constraint(equalTo:self.itemimage.trailingAnchor, constant:10).isActive = true
+            containerView.topAnchor.constraint(equalTo: self.itemimage.bottomAnchor, constant:5).isActive = true
+            containerView.leadingAnchor.constraint(equalTo:self.customContentView.leadingAnchor, constant:10).isActive = true
             containerView.trailingAnchor.constraint(equalTo:self.customContentView.trailingAnchor, constant:-10).isActive = true
            // containerView.heightAnchor.constraint(equalToConstant:100).isActive = true
             containerView.bottomAnchor.constraint(equalTo: self.customContentView.bottomAnchor, constant: -5).isActive = true
@@ -125,6 +158,16 @@ class ReceiverTableViewCell: UITableViewCell {
             itemquantitylabel.leadingAnchor.constraint(equalTo:self.containerView.leadingAnchor).isActive = true
             itemquantity.topAnchor.constraint(equalTo:self.itemdescription.bottomAnchor,constant: 5).isActive = true
             itemquantity.leadingAnchor.constraint(equalTo:self.itemquantitylabel.trailingAnchor,constant: 10).isActive = true
+            
+            datelabel.topAnchor.constraint(equalTo:self.itemquantity.bottomAnchor,constant: 5).isActive = true
+            datelabel.leadingAnchor.constraint(equalTo:self.containerView.leadingAnchor).isActive = true
+            date.topAnchor.constraint(equalTo:self.itemquantity.bottomAnchor,constant: 5).isActive = true
+            date.leadingAnchor.constraint(equalTo:self.datelabel.trailingAnchor,constant: 10).isActive = true
+            
+            visitedcountlabel.topAnchor.constraint(equalTo:self.date.bottomAnchor,constant: 5).isActive = true
+            visitedcountlabel.leadingAnchor.constraint(equalTo:self.containerView.trailingAnchor,constant: -140).isActive = true
+            visitedcount.topAnchor.constraint(equalTo:self.date.bottomAnchor,constant: 5).isActive = true
+            visitedcount.leadingAnchor.constraint(equalTo:self.visitedcountlabel.trailingAnchor,constant: 10).isActive = true
             
            // donarid.topAnchor.constraint(equalTo:self.itemquantity.bottomAnchor,constant: 5).isActive = true
             //donarid.leadingAnchor.constraint(equalTo:self.containerView.leadingAnchor).isActive = true

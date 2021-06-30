@@ -21,8 +21,6 @@ class TabViewController: UITabBarController,UITabBarControllerDelegate, UINaviga
         
     override func viewDidLoad() {
             super.viewDidLoad()
-        
-            print("View will appear ca")
             let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAdd(_:)))
             self.navigationItem.rightBarButtonItem = add
             let tabOneBarItem = UITabBarItem(title: "HOME", image: UIImage(systemName: "house"), selectedImage: UIImage(named: "house"))

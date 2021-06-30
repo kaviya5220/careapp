@@ -23,14 +23,9 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(addbutton)
-       // self.navigationController?.isNavigationBarHidden = tru
         addbutton.translatesAutoresizingMaskIntoConstraints = false
         addbutton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         addbutton.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
-
-        
-
-        // Do any additional setup after loading the view.
     }
     @objc func logout(_ sender: UIButton)
     {
@@ -42,17 +37,4 @@ class ProfileViewController: UIViewController {
             userDefaults.synchronize()
             (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(nav)
             }
-        
-        
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

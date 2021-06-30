@@ -13,7 +13,7 @@ class User{
     var user_email: String
     var user_password: String
     
-    init(user_name:String, user_phone:String, user_address:String, user_email:String, user_password:String) {
+    init(user_name:String = "", user_phone:String = "", user_address:String = "", user_email:String = "", user_password:String = "") {
         self.user_name = user_name
         self.user_phone = user_phone
         self.user_address = user_address

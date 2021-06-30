@@ -13,13 +13,17 @@ class Item {
     var item_quantity: String
     var address: String
     var Donar_ID: Int
+    var visited_count : Int
+    var date: String
     
-    init(item_id: Int,item_name: String,item_description: String,item_quantity: String,address: String,Donar_ID : Int) {
+    init(item_id: Int = 0,item_name: String = "",item_description: String = "",item_quantity: String = "",address: String = "",Donar_ID : Int = 0,visited_count : Int = 0,date :String = "") {
         self.item_id = item_id
         self.item_name = item_name
         self.item_description = item_description
         self.item_quantity = item_quantity
         self.address = address
         self.Donar_ID = Donar_ID
+        self.visited_count = visited_count
+        self.date = date
     }
 }

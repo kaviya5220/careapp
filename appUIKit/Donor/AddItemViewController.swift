@@ -71,6 +71,9 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
         addressfield.placeholder = "Enter address"
         return addressfield
     }()
+    
+    
+    
     let addbutton:CustomButton = {
         let button = CustomButton(title: "UPLOAD ITEM", bgColor: .white)
         button.addTarget(self, action: #selector(insertUser(_:)), for: .touchUpInside)
@@ -110,10 +113,15 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
         self.present(actionSheet,animated: true)
     }
     @objc func insertUser(_ sender: UIButton) {
+        let date = Date()
+        let format = DateFormatter()
+        format.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let formattedDate = format.string(from: date)
+        print("date\(date)")
         let userdefaults = UserDefaults.standard
         let userid = userdefaults.integer(forKey: "userid")
         print(userid)
-        let item: Item = Item(item_id: 0, item_name: itemname.text!, item_description: itemDescription.text!, item_quantity: itemQuantity.text!, address: address.text!, Donar_ID: userid)
+        let item: Item = Item(item_id: 0, item_name: itemname.text!, item_description: itemDescription.text!, item_quantity: itemQuantity.text!, address: address.text!, Donar_ID: userid, visited_count: 0, date: formattedDate)
         var flag = false
         flag = DBHelper.insertItem(itemarg: item)
         if(flag == true){
@@ -126,6 +134,7 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
         }
         }
     func dismissinsertView(){
+        
         dismiss(animated: true, completion: nil)
         self.navigationController?.popViewController(animated: true)
 

@@ -32,7 +32,6 @@
             view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[pageController]|", options: [], metrics: nil, views: views))
             let count=0...itemid.count-1
             for i in count {
-                print("for loop")
                 let vc = DetailItemViewController()
                  vc.itemid = itemid[i]
         

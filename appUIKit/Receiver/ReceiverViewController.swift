@@ -27,10 +27,10 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
             receiverTableView.reloadData()
             
         }
+   
+       
     override func viewWillAppear(_ Animated : Bool) {
         super.viewWillAppear(Animated)
-            print("view will appear")
-        
         items = receiverInteractor.getitemdetails()
         print(items)
         filteredItems = items
@@ -63,36 +63,30 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
    
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Row\(indexPath.row)")
         let vc = PageViewController()
         itemid = items.map{$0.item_id}
         
         if let index = items.firstIndex(where: { $0 === filteredItems[indexPath.row] }){
             vc.current = index
             vc.itemid = itemid
-            print("itemid\(itemid)")
-            print(" Current\(vc.current)")
-            print(items)
             self.navigationController?.pushViewController(vc, animated: true)
         }
             
     }
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            print("ITEMCOUNT\(items.count)")
             return filteredItems.count
             
         }
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: "itemcell", for: indexPath) as! ReceiverTableViewCell
-            print("index patH \(indexPath)")
             cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
             cell.item = filteredItems[indexPath.row]
             return cell
         }
         
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            return 130
+            return 350
         }
     
 }
