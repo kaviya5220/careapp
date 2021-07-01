@@ -9,20 +9,21 @@ import UIKit
 
 class TabViewController: UITabBarController,UITabBarControllerDelegate, UINavigationControllerDelegate {
     
+    
     var tabOne = ReceiverViewController()
-    @objc func didTapAdd(_ sender: UIButton) {
-       
-        let vc = UINavigationController(rootViewController: AddItemViewController())
-        vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
-        vc.delegate = self
-        self.present(vc, animated: true, completion: nil)
-        print("Hello")
-        }
-        
+//    @objc func didTapAdd(_ sender: UIButton) {
+//        let addItem = AddItemViewController()
+//        let vc = UINavigationController(rootViewController:addItem)
+//        vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
+//        addItem.delegate = self
+//        self.present(vc, animated: true, completion: nil)
+//        print("Hello")
+//        }
+//        
     override func viewDidLoad() {
             super.viewDidLoad()
-            let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAdd(_:)))
-            self.navigationItem.rightBarButtonItem = add
+//            let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAdd(_:)))
+//            self.navigationItem.rightBarButtonItem = add
             let tabOneBarItem = UITabBarItem(title: "HOME", image: UIImage(systemName: "house"), selectedImage: UIImage(named: "house"))
             tabOne.tabBarItem = tabOneBarItem
             let tabTwo = ProfileViewController()
@@ -37,3 +38,4 @@ class TabViewController: UITabBarController,UITabBarControllerDelegate, UINaviga
         
         }
     }
+

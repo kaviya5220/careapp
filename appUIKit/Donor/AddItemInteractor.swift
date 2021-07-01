@@ -8,7 +8,7 @@
 import Foundation
 
 class AddItemInteractor{
-    func addItem(item : Item)->Bool{
+    func addItem(item : Item)->Int{
         DBHelper.db = DBHelper.openDB()
         return DBHelper.insertItem(itemarg: item)
     }

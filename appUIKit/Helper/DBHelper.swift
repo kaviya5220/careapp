@@ -137,10 +137,11 @@ class DBHelper{
       }
       sqlite3_finalize(createTableStatement)
     }
-    static func insertItem(itemarg : Item) -> Bool{
-
+    static func insertItem(itemarg : Item) -> Int
+    {
     let insertStatementString = "INSERT INTO ItemDetails (Item_Name,Item_Description,Item_Quantity,Address,Donar_ID,Date_posted) VALUES (?, ?, ?, ?, ?, ?);"
       var insertStatement: OpaquePointer?
+    var itemid:Int = 0;
       if sqlite3_prepare_v2(db, insertStatementString, -1, &insertStatement, nil) ==
           SQLITE_OK {
         let name: NSString = itemarg.item_name as NSString
@@ -155,9 +156,13 @@ class DBHelper{
         sqlite3_bind_text(insertStatement, 4, address.utf8String, -1, nil)
         sqlite3_bind_int(insertStatement, 5, Int32(donarid))
         sqlite3_bind_text(insertStatement, 6, date.utf8String, -1, nil)
+        
+        
         print(insertStatement!)
         if sqlite3_step(insertStatement) == SQLITE_DONE {
           print("\nSuccessfully inserted row.")
+            itemid = Int(sqlite3_last_insert_rowid(db))
+            print("Item id\(itemid)")
             //sqlite3_finalize(insertStatement)
             flag = true
         } else {
@@ -172,7 +177,7 @@ class DBHelper{
         if sqlite3_close(db) == SQLITE_OK {
                         print("closing database")
                     }
-        return flag
+        return itemid
     }
     static func getuserid(email : String ) -> Int {
         print(email)

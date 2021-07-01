@@ -8,7 +8,7 @@
 import UIKit
 
 
-class ReceiverViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,UITabBarControllerDelegate, UISearchBarDelegate,UISearchResultsUpdating {
+class ReceiverViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,UITabBarControllerDelegate, UISearchBarDelegate,UISearchResultsUpdating,canReceive,UINavigationControllerDelegate {
     public var itemid : [Int] = []
     public var items : [Item] = []
     public var filteredItems : [Item] = []
@@ -28,9 +28,37 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
             
         }
    
-       
-    override func viewWillAppear(_ Animated : Bool) {
-        super.viewWillAppear(Animated)
+    @objc func didTapAdd(_ sender: UIButton) {
+        let addItem = AddItemViewController()
+        let vc = UINavigationController()
+        vc.viewControllers = [addItem]
+        vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
+        addItem.delegate = self
+        self.present(vc, animated: true, completion: nil)
+        print("Hello")
+        }
+    @objc func navigateToProfile(_ sender: UIButton) {
+        //	let addItem = AddItemViewController()
+        self.navigationController?.pushViewController(ProfileViewController(), animated: true)
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        filteredItems = items
+        receiverTableView.reloadData()
+        
+    }
+        
+    
+    override func viewDidLoad() {
+        //super.viewWillAppear(Animated)
+        super.viewDidLoad()
+        
+        let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAdd(_:)))
+        navigationItem.rightBarButtonItem = add
+        let buttonIcon = UIImage(systemName: "person.circle")
+        let leftBarButton = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.done, target: self, action: #selector(navigateToProfile(_:)))
+        leftBarButton.image = buttonIcon
+        navigationItem.leftBarButtonItem = leftBarButton
         items = receiverInteractor.getitemdetails()
         print(items)
         filteredItems = items
@@ -65,9 +93,11 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = PageViewController()
         itemid = items.map{$0.item_id}
+        print(itemid)
         
         if let index = items.firstIndex(where: { $0 === filteredItems[indexPath.row] }){
             vc.current = index
+            items[index].visited_count = items[index].visited_count + 1
             vc.itemid = itemid
             self.navigationController?.pushViewController(vc, animated: true)
         }
@@ -88,5 +118,8 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
             return 350
         }
-    
+    func passData(item: Item) {
+        items.append(item)
+    }
 }
+

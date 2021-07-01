@@ -1,11 +1,11 @@
 
 import UIKit
 protocol canReceive{
-    func passData()
+    func passData(item:Item)
 }
 class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDelegate, UINavigationControllerDelegate {
 
-    var db = DBHelper()
+   // var db = DBHelper()
     var delegate:canReceive?
     let alert : UIAlertController = {
     let alert1 = UIAlertController(title: "Success", message: "Item Posted Successfully", preferredStyle: .alert)
@@ -113,6 +113,7 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
         self.present(actionSheet,animated: true)
     }
     @objc func insertUser(_ sender: UIButton) {
+        let additeminteractor = AddItemInteractor()
         let date = Date()
         let format = DateFormatter()
         format.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -122,19 +123,27 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
         let userid = userdefaults.integer(forKey: "userid")
         print(userid)
         let item: Item = Item(item_id: 0, item_name: itemname.text!, item_description: itemDescription.text!, item_quantity: itemQuantity.text!, address: address.text!, Donar_ID: userid, visited_count: 0, date: formattedDate)
-        var flag = false
-        flag = DBHelper.insertItem(itemarg: item)
-        if(flag == true){
+        var flag = 0
+        flag = additeminteractor.addItem(item: item)
+        print("Flag\(flag)")
+        if(flag != 0){
+            item.item_id = flag
+            delegate?.passData(item:item)
             presenter.showSuccessAlert()
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in self.dismissinsertView()
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in self.dismissinsertView(item: item)
                
             }))
-            delegate?.passData()
+           
             print("dismissing")
         }
         }
-    func dismissinsertView(){
-        
+    func dismissinsertView(item : Item){
+//        let presenter = navigationController?.viewControllers.first
+//        print(presenter)
+//        if let presenter = presentingViewController as? ReceiverViewController {
+//            print(presenter.items)
+//                presenter.items.append(item)
+//            }
         dismiss(animated: true, completion: nil)
         self.navigationController?.popViewController(animated: true)
 
