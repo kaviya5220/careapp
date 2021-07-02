@@ -94,7 +94,7 @@ class LoginViewController: UIViewController {
                 userid = DBHelper.getuserid(email: email.text!)
                 setsessionvariable(userid: userid)
                 self.showToast(message: "Login Successfull", font: .systemFont(ofSize: 12.0))
-                let newVc = TabViewController()
+                let newVc = ReceiverViewController()
                 let nav = UINavigationController(rootViewController: newVc)
                 (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(nav)
              

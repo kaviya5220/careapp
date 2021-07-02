@@ -13,6 +13,11 @@
 		1B52A871267DC74500B489AA /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B52A870267DC74500B489AA /* Data.swift */; };
 		1B6FF24C268369010093956C /* ReceiverInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6FF24B268369010093956C /* ReceiverInteractor.swift */; };
 		1B6FF2532685DD9B0093956C /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6FF2522685DD9B0093956C /* MapViewController.swift */; };
+		1B71D306268ED64B00B11F3B /* ToastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B71D305268ED64B00B11F3B /* ToastViewController.swift */; };
+		1B71D308268ED79800B11F3B /* DonationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B71D307268ED79800B11F3B /* DonationTableViewCell.swift */; };
+		1B71D30A268EE02100B11F3B /* DonationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B71D309268EE02100B11F3B /* DonationDetailViewController.swift */; };
+		1B71D30C268EE10C00B11F3B /* DonationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B71D30B268EE10C00B11F3B /* DonationInteractor.swift */; };
+		1B71D30E268F197700B11F3B /* Donationstatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B71D30D268F197700B11F3B /* Donationstatus.swift */; };
 		1B7EBF9C267479F000F2AED1 /* SignupPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7EBF9B267479F000F2AED1 /* SignupPresenter.swift */; };
 		1B7EBF9F26747A4700F2AED1 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7EBF9E26747A4700F2AED1 /* CustomButton.swift */; };
 		1B7EBFA126747A9200F2AED1 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7EBFA026747A9200F2AED1 /* CustomTextField.swift */; };
@@ -32,10 +37,8 @@
 		1B906EFB2670A0F50032FA81 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B906EFA2670A0F50032FA81 /* LoginViewController.swift */; };
 		1B906EFE2670A12D0032FA81 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B906EFD2670A12D0032FA81 /* SignupViewController.swift */; };
 		1B906F002670A9260032FA81 /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B906EFF2670A9260032FA81 /* DBHelper.swift */; };
-		1B906F052670F6080032FA81 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B906F042670F6080032FA81 /* TabViewController.swift */; };
 		1B906F0A2670FC260032FA81 /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B906F092670FC260032FA81 /* AddItemViewController.swift */; };
 		1B906F0D2670FC660032FA81 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B906F0C2670FC660032FA81 /* Item.swift */; };
-		1B906F0F26711B020032FA81 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B906F0E26711B020032FA81 /* HomeViewController.swift */; };
 		1B9B8F442671DFC000C5497C /* ReceiverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9B8F432671DFC000C5497C /* ReceiverTableViewCell.swift */; };
 		1B9B8F4626724E6F00C5497C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9B8F4526724E6F00C5497C /* User.swift */; };
 		1B9B8F48267256EC00C5497C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9B8F47267256EC00C5497C /* ProfileViewController.swift */; };
@@ -69,6 +72,11 @@
 		1B52A870267DC74500B489AA /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		1B6FF24B268369010093956C /* ReceiverInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverInteractor.swift; sourceTree = "<group>"; };
 		1B6FF2522685DD9B0093956C /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		1B71D305268ED64B00B11F3B /* ToastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastViewController.swift; sourceTree = "<group>"; };
+		1B71D307268ED79800B11F3B /* DonationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationTableViewCell.swift; sourceTree = "<group>"; };
+		1B71D309268EE02100B11F3B /* DonationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationDetailViewController.swift; sourceTree = "<group>"; };
+		1B71D30B268EE10C00B11F3B /* DonationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationInteractor.swift; sourceTree = "<group>"; };
+		1B71D30D268F197700B11F3B /* Donationstatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Donationstatus.swift; sourceTree = "<group>"; };
 		1B7EBF9B267479F000F2AED1 /* SignupPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPresenter.swift; sourceTree = "<group>"; };
 		1B7EBF9E26747A4700F2AED1 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		1B7EBFA026747A9200F2AED1 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
@@ -94,10 +102,8 @@
 		1B906EFA2670A0F50032FA81 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1B906EFD2670A12D0032FA81 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		1B906EFF2670A9260032FA81 /* DBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
-		1B906F042670F6080032FA81 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 		1B906F092670FC260032FA81 /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
 		1B906F0C2670FC660032FA81 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
-		1B906F0E26711B020032FA81 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		1B9B8F432671DFC000C5497C /* ReceiverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverTableViewCell.swift; sourceTree = "<group>"; };
 		1B9B8F4526724E6F00C5497C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1B9B8F47267256EC00C5497C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -143,6 +149,24 @@
 			path = Map;
 			sourceTree = "<group>";
 		};
+		1B71D30F268F27B200B11F3B /* Donation */ = {
+			isa = PBXGroup;
+			children = (
+				1B71D307268ED79800B11F3B /* DonationTableViewCell.swift */,
+				1B71D309268EE02100B11F3B /* DonationDetailViewController.swift */,
+				1B71D30B268EE10C00B11F3B /* DonationInteractor.swift */,
+			);
+			path = Donation;
+			sourceTree = "<group>";
+		};
+		1B71D310268F282D00B11F3B /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				1B9B8F47267256EC00C5497C /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		1B7EBF9D267479F900F2AED1 /* Custom  */ = {
 			isa = PBXGroup;
 			children = (
@@ -158,6 +182,7 @@
 		1B83CAD8267735BA0041C6A2 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				1B71D305268ED64B00B11F3B /* ToastViewController.swift */,
 				1B83CAD9267735D70041C6A2 /* Extension.swift */,
 			);
 			path = Extension;
@@ -189,11 +214,12 @@
 		1B906EC82670A08C0032FA81 /* appUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				1B71D310268F282D00B11F3B /* Profile */,
+				1B71D30F268F27B200B11F3B /* Donation */,
 				1B83CAD8267735BA0041C6A2 /* Extension */,
 				1B7EBF9D267479F900F2AED1 /* Custom  */,
 				1B9B8F4B2672656900C5497C /* Receiver */,
 				1B906F082670FBF50032FA81 /* Donor */,
-				1B906F032670F5E60032FA81 /* HomePage */,
 				1B906F012670A92F0032FA81 /* Helper */,
 				1B906EFC2670A10F0032FA81 /* Signup */,
 				1B906EF92670A0DA0032FA81 /* login */,
@@ -255,16 +281,6 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
-		1B906F032670F5E60032FA81 /* HomePage */ = {
-			isa = PBXGroup;
-			children = (
-				1B906F042670F6080032FA81 /* TabViewController.swift */,
-				1B906F0E26711B020032FA81 /* HomeViewController.swift */,
-				1B9B8F47267256EC00C5497C /* ProfileViewController.swift */,
-			);
-			path = HomePage;
-			sourceTree = "<group>";
-		};
 		1B906F082670FBF50032FA81 /* Donor */ = {
 			isa = PBXGroup;
 			children = (
@@ -280,6 +296,7 @@
 			children = (
 				1B906F0C2670FC660032FA81 /* Item.swift */,
 				1B9B8F4526724E6F00C5497C /* User.swift */,
+				1B71D30D268F197700B11F3B /* Donationstatus.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -496,12 +513,14 @@
 				1B52A86F267DB2A700B489AA /* CustomReceiverCard.swift in Sources */,
 				1B160856268076AD002570F2 /* PageViewController.swift in Sources */,
 				1B7EBFA32674805B00F2AED1 /* CustomLabel.swift in Sources */,
+				1B71D306268ED64B00B11F3B /* ToastViewController.swift in Sources */,
+				1B71D30E268F197700B11F3B /* Donationstatus.swift in Sources */,
 				1B7EBFAB2674946F00F2AED1 /* LoginPresenter.swift in Sources */,
 				1B906ECE2670A08C0032FA81 /* ViewController.swift in Sources */,
+				1B71D30C268EE10C00B11F3B /* DonationInteractor.swift in Sources */,
 				1B9B8F4A2672655D00C5497C /* ReceiverViewController.swift in Sources */,
 				1B906EFE2670A12D0032FA81 /* SignupViewController.swift in Sources */,
 				1B906F0A2670FC260032FA81 /* AddItemViewController.swift in Sources */,
-				1B906F0F26711B020032FA81 /* HomeViewController.swift in Sources */,
 				1B9B8F442671DFC000C5497C /* ReceiverTableViewCell.swift in Sources */,
 				1B7EBFA52674884200F2AED1 /* SignupInteractor.swift in Sources */,
 				1BC38B6026899A13002501E0 /* AddItemInteractor.swift in Sources */,
@@ -509,11 +528,12 @@
 				1B906F002670A9260032FA81 /* DBHelper.swift in Sources */,
 				1B9B8F4626724E6F00C5497C /* User.swift in Sources */,
 				1B906ECA2670A08C0032FA81 /* AppDelegate.swift in Sources */,
+				1B71D30A268EE02100B11F3B /* DonationDetailViewController.swift in Sources */,
 				1B9B8F48267256EC00C5497C /* ProfileViewController.swift in Sources */,
 				1B7EBFA726748EA300F2AED1 /* CustomField.swift in Sources */,
 				1B52A871267DC74500B489AA /* Data.swift in Sources */,
+				1B71D308268ED79800B11F3B /* DonationTableViewCell.swift in Sources */,
 				1B7EBF9F26747A4700F2AED1 /* CustomButton.swift in Sources */,
-				1B906F052670F6080032FA81 /* TabViewController.swift in Sources */,
 				1B7EBF9C267479F000F2AED1 /* SignupPresenter.swift in Sources */,
 				1B6FF2532685DD9B0093956C /* MapViewController.swift in Sources */,
 				1B906ECC2670A08C0032FA81 /* SceneDelegate.swift in Sources */,

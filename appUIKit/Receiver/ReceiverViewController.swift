@@ -8,7 +8,7 @@
 import UIKit
 
 
-class ReceiverViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,UITabBarControllerDelegate, UISearchBarDelegate,UISearchResultsUpdating,canReceive,UINavigationControllerDelegate {
+class ReceiverViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate,UISearchResultsUpdating,canReceive,UINavigationControllerDelegate {
     public var itemid : [Int] = []
     public var items : [Item] = []
     public var filteredItems : [Item] = []
@@ -32,7 +32,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         let addItem = AddItemViewController()
         let vc = UINavigationController()
         vc.viewControllers = [addItem]
-        vc.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
+        vc.modalPresentationStyle = .automatic //or .overFullScreen for transparency
         addItem.delegate = self
         self.present(vc, animated: true, completion: nil)
         print("Hello")
@@ -42,6 +42,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         self.navigationController?.pushViewController(ProfileViewController(), animated: true)
     }
     override func viewWillAppear(_ animated: Bool) {
+       print("hey")
         super.viewWillAppear(animated)
         filteredItems = items
         receiverTableView.reloadData()
@@ -59,6 +60,8 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         let leftBarButton = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.done, target: self, action: #selector(navigateToProfile(_:)))
         leftBarButton.image = buttonIcon
         navigationItem.leftBarButtonItem = leftBarButton
+        let userdefaults = UserDefaults.standard
+        let userid = userdefaults.integer(forKey: "userid")
         items = receiverInteractor.getitemdetails()
         print(items)
         filteredItems = items
@@ -120,6 +123,8 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     func passData(item: Item) {
         items.append(item)
+        filteredItems = items
+        receiverTableView.reloadData()
     }
 }
 

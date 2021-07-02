@@ -17,9 +17,8 @@
 
         override func viewDidLoad() {
             super.viewDidLoad()
-            self.navigationController?.setNavigationBarHidden(true, animated: true)
-            let request = UIBarButtonItem(title: "Request", style: .plain, target: self, action: #selector(insertUser(_:)))
-            navigationItem.rightBarButtonItem = request
+            //self.navigationController?.setNavigationBarHidden(true, animated: true)
+            
             pageController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
             pageController.dataSource = self
             pageController.delegate = self
@@ -38,8 +37,9 @@
                 
                 vc.view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
                 controllers.append(vc)
+                
             }
-            pageController.setViewControllers([controllers[current]], direction: .forward, animated: false)
+           pageController.setViewControllers([controllers[current]], direction: .forward, animated: false)
         }
         func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
                 if let index = controllers.firstIndex(of: viewController) {
@@ -64,7 +64,5 @@
 
                 return nil
             }
-        @objc func insertUser(_ sender: UIButton) {
-            print("REquest clicked")
-        }
+       
 }

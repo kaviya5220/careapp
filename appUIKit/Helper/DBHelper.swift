@@ -16,6 +16,7 @@ class DBHelper{
         DBHelper.db =  DBHelper.openDB()
         DBHelper.createTable()
         DBHelper.createItemTable()
+        DBHelper.createStatusTable()
     }
     static func aesDecrypt(endata : String) throws -> String {
             let key: String  = "secret0key000000"
@@ -207,12 +208,12 @@ class DBHelper{
         return userid
         }
     static func getitems() -> [Item] {
-        let queryStatementString = "SELECT * FROM ItemDetails;"
+        let queryStatementString = "SELECT * FROM ItemDetails ;"
         var itemlist : [Item] = []
         var queryStatement: OpaquePointer?
           if sqlite3_prepare_v2(db, queryStatementString, -1, &queryStatement, nil) ==
               SQLITE_OK {
-           // sqlite3_bind_text(queryStatement, 1, email.utf8String, -1, nil)
+           // sqlite3_bind_int(queryStatement, 1, Int32(donarid))
             while sqlite3_step(queryStatement) == SQLITE_ROW {
     
              let queryResultCol0 = sqlite3_column_int(queryStatement, 0)
@@ -274,6 +275,7 @@ class DBHelper{
         }
         return item
         }
+    
     static func getdonardetails(ID : Int) -> User {
         let queryStatementString = "SELECT * FROM UserDetails  WHERE ID = ?;"
         var user : User = User()
@@ -322,5 +324,96 @@ class DBHelper{
         print("\nUPDATE statement is not prepared")
       }
       sqlite3_finalize(updateStatement)
+    }
+    static func getitemsbydonarID(Donar_ID : Int) -> [Item] {
+        let queryStatementString = "SELECT * FROM ItemDetails  WHERE Donar_ID = ?;"
+        var items : [Item] = []
+        var queryStatement: OpaquePointer?
+          if sqlite3_prepare_v2(db, queryStatementString, -1, &queryStatement, nil) ==
+              SQLITE_OK {
+            sqlite3_bind_int(queryStatement, 1, Int32(Donar_ID))
+            while sqlite3_step(queryStatement) == SQLITE_ROW {
+    
+             let queryResultCol0 = sqlite3_column_int(queryStatement, 0)
+             let queryResultCol1 = sqlite3_column_text(queryStatement, 1)
+             let queryResultCol2 = sqlite3_column_text(queryStatement, 2)
+             let queryResultCol3 = sqlite3_column_text(queryStatement, 3)
+             let queryResultCol4 = sqlite3_column_text(queryStatement, 4)
+             let queryResultCol5 = sqlite3_column_int(queryStatement, 5)
+            let queryResultCol6 = sqlite3_column_int(queryStatement, 6)
+            let queryResultCol7 = sqlite3_column_text(queryStatement, 7)
+                
+                var item: Item = Item(item_id: Int(queryResultCol0), item_name: String(cString: queryResultCol1!), item_description: String(cString: queryResultCol2!), item_quantity: String(cString: queryResultCol3!), address: String(cString: queryResultCol4!), Donar_ID: Int(queryResultCol5), visited_count: Int(queryResultCol6), date: String(cString:queryResultCol7!))
+                items.append(item)
+               
+              
+                //return userid
+            }
+            print("\nQuery Result:")
+              print(items)
+          } else {
+            let errorMessage = String(cString: sqlite3_errmsg(db))
+            print("\nQuery is not prepared \(errorMessage)")
+          }
+          sqlite3_finalize(queryStatement)
+        if sqlite3_close(db) == SQLITE_OK {
+            print("closing database")
+        }
+        return items
+        }
+    static func createStatusTable() {
+        let createTableString = """
+        CREATE TABLE IF NOT EXISTS DonationStatus(
+        Item_ID INTEGER PRIMARY KEY,Donar_ID INTEGER ,Receiver_ID INTEGER ,Status CHAR(255));
+        """
+      var createTableStatement: OpaquePointer?
+      if sqlite3_prepare_v2(db, createTableString, -1, &createTableStatement, nil) ==
+          SQLITE_OK {
+        if sqlite3_step(createTableStatement) == SQLITE_DONE {
+          print("ItemDetails table created.")
+        } else {
+          print("ItemDetails table is not created.")
+        }
+      } else {
+        print("\nCREATE TABLE statement is not prepared.")
+      }
+      sqlite3_finalize(createTableStatement)
+    }
+    static func insertdonationstatus(donararg : Donationstatus)
+    {
+    let insertStatementString = "INSERT INTO DonationStatus (Item_ID,Donar_ID,Receiver_ID,Status) VALUES (?, ?, ?, ?);"
+      var insertStatement: OpaquePointer?
+    
+      if sqlite3_prepare_v2(db, insertStatementString, -1, &insertStatement, nil) ==
+          SQLITE_OK {
+        let itemid = donararg.item_id
+        let donarid = donararg.Donar_ID
+        let receiverid = donararg.Receiver_ID
+        let status: NSString = donararg.status as NSString
+        sqlite3_bind_int(insertStatement, 1, Int32(itemid))
+        sqlite3_bind_int(insertStatement, 2, Int32(donarid))
+        sqlite3_bind_int(insertStatement, 3, Int32(receiverid))
+        sqlite3_bind_text(insertStatement, 4, status.utf8String, -1, nil)
+        
+        
+        print(insertStatement!)
+        if sqlite3_step(insertStatement) == SQLITE_DONE {
+          print("\nSuccessfully inserted row.")
+          
+            
+        
+        } else {
+            let errmsge = String(cString: sqlite3_errmsg(db)!)
+            print("failure\(errmsge)")
+          print("\nCould not insert row.")
+        }
+      } else {
+        print("\nINSERT statement is not prepared.")
+      }
+      sqlite3_finalize(insertStatement)
+        if sqlite3_close(db) == SQLITE_OK {
+                        print("closing database")
+                    }
+      
     }
 }

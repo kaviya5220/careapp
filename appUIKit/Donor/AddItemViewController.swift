@@ -5,7 +5,6 @@ protocol canReceive{
 }
 class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDelegate, UINavigationControllerDelegate {
 
-   // var db = DBHelper()
     var delegate:canReceive?
     let alert : UIAlertController = {
     let alert1 = UIAlertController(title: "Success", message: "Item Posted Successfully", preferredStyle: .alert)
@@ -107,6 +106,7 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
                                      compactConstraints: compactConstraints,
                                      regularConstraints: regularConstraints)
         presenter.delegate = self
+        self.isModalInPresentation = true
     }
 
     @objc func cancel(_ sender: UIButton) {
@@ -130,14 +130,14 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
             item.item_id = flag
             delegate?.passData(item:item)
             presenter.showSuccessAlert()
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in self.dismissinsertView(item: item)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in self.dismissinsertView()
                
             }))
            
             print("dismissing")
         }
         }
-    func dismissinsertView(item : Item){
+    func dismissinsertView(){
 //        let presenter = navigationController?.viewControllers.first
 //        print(presenter)
 //        if let presenter = presentingViewController as? ReceiverViewController {
@@ -159,6 +159,7 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
         }
 
         func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
+            print("presentationControllerDidAttemptToDismiss")
             present(actionSheet, animated: true)
         }
 

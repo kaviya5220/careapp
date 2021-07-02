@@ -18,25 +18,7 @@ class DetailItemViewController: UIViewController,UIScrollViewDelegate {
         img.image = UIImage(named: "dnimge")
         img.contentMode = .scaleAspectFit
         img.translatesAutoresizingMaskIntoConstraints = false
-        img.layer.cornerRadius = 35
-        img.clipsToBounds = true
-        return img
-    }()
-    let backward:UIImageView = {
-        let img = UIImageView()
-        img.image = UIImage(systemName: "lessthan")
-        img.contentMode = .scaleAspectFit
-        img.translatesAutoresizingMaskIntoConstraints = false
-        img.layer.cornerRadius = 35
-        img.clipsToBounds = true
-        return img
-    }()
-    let forward:UIImageView = {
-        let img = UIImageView()
-        img.image = UIImage(systemName: "greaterthan")
-        img.contentMode = .scaleAspectFit
-        img.translatesAutoresizingMaskIntoConstraints = false
-        img.layer.cornerRadius = 35
+        img.layer.cornerRadius = 25
         img.clipsToBounds = true
         return img
     }()
@@ -49,10 +31,10 @@ class DetailItemViewController: UIViewController,UIScrollViewDelegate {
     let containerView:UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
-        stack.alignment = .fill
-        stack.distribution = .fillEqually
-        stack.spacing = 10
-        stack.backgroundColor = .cyan
+        stack.alignment = .center
+        stack.distribution = .fill
+     //   stack.spacing = -20
+        stack.backgroundColor = .white
         stack.layer.cornerRadius = 10
        // stack.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         //stack.isLayoutMarginsRelativeArrangement = true
@@ -64,27 +46,27 @@ class DetailItemViewController: UIViewController,UIScrollViewDelegate {
         stack.axis = .vertical
         stack.alignment = .fill
         stack.distribution = .fillEqually
-        stack.spacing = 20
+        //stack.spacing = 15
         stack.backgroundColor = .white
         stack.layer.cornerRadius = 10
-        stack.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-        stack.isLayoutMarginsRelativeArrangement = true
+//        stack.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+//        stack.isLayoutMarginsRelativeArrangement = true
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
-    let donarverticalstackView: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.alignment = .fill
-        stack.distribution = .fillEqually
-        stack.spacing = 20
-        stack.backgroundColor = .white
-        stack.layer.cornerRadius = 10
-        stack.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-        stack.isLayoutMarginsRelativeArrangement = true
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
+//    let donarverticalstackView: UIStackView = {
+//        let stack = UIStackView()
+//        stack.axis = .vertical
+//        stack.alignment = .top
+//        stack.distribution = .equalSpacing
+//        stack.spacing = 15
+//        stack.backgroundColor = .white
+//        stack.layer.cornerRadius = 10
+//       // stack.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+////        stack.isLayoutMarginsRelativeArrangement = true
+//        stack.translatesAutoresizingMaskIntoConstraints = false
+//        return stack
+//    }()
     
     let itemNameStackView: UIStackView = {
         let stack = UIStackView()
@@ -116,6 +98,7 @@ class DetailItemViewController: UIViewController,UIScrollViewDelegate {
     let itemlabel:CustomLabel = {
     let label = CustomLabel(labelType: .title)
     label.text = "Item Details"
+        label.textAlignment = .center
     return label
     }()
     let itemnamelabel:CustomLabel = {
@@ -179,6 +162,7 @@ class DetailItemViewController: UIViewController,UIScrollViewDelegate {
     let donarlabel:CustomLabel = {
     let label = CustomLabel(labelType: .title)
     label.text = "Donar Details"
+        label.textAlignment = .center
     return label
     }()
     let donarnamelabel:CustomLabel = {
@@ -210,17 +194,25 @@ class DetailItemViewController: UIViewController,UIScrollViewDelegate {
     label.text = "Address :"
     return label
     }()
+    let requestbutton:UIButton = {
+        let button = CustomButton(title: "REQUEST", bgColor: .black)
+        button.addTarget(self, action: #selector(requestitem(_:)), for: .touchUpInside)
+        return button
+    }()
     
     
     
 
     override func viewWillAppear(_ Animated : Bool) {
         super.viewWillAppear(Animated)
+//        let request = UIBarButtonItem(title: "Request", style: .plain, target: self, action: #selector(requestitem(_:)))
+//        navigationItem.rightBarButtonItem = request
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        let contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height + 200)
+        print(self.view.frame.height)
+        let contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
         scrollView.contentSize = contentViewSize
-        containerView.frame.size = contentViewSize
+       // containerView.frame.size = contentViewSize
         scrollView.frame = view.bounds
         scrollView.delegate = self
        
@@ -238,10 +230,12 @@ class DetailItemViewController: UIViewController,UIScrollViewDelegate {
         itemquantity.text = items.item_quantity
         setupConstraints()
         containerView.addArrangedSubview(itemimage)
-        containerView.addArrangedSubview(itemlabel)
+        verticalstackView.addArrangedSubview(itemlabel)
+//        containerView.setCustomSpacing(5, after: itemlabel)
         containerView.addArrangedSubview(verticalstackView)
-        containerView.addArrangedSubview(donarlabel)
-        containerView.addArrangedSubview(donarverticalstackView)
+//        containerView.setCustomSpacing(5, after: verticalstackView)
+        
+//        containerView.setCustomSpacing(5, after: donarlabel)
         itemNameStackView.addArrangedSubview(itemnamelabel)
         itemNameStackView.addArrangedSubview(itemname)
         
@@ -265,14 +259,14 @@ class DetailItemViewController: UIViewController,UIScrollViewDelegate {
         verticalstackView.addArrangedSubview(itemNameStackView)
         verticalstackView.addArrangedSubview(itemDescriptionStackView)
         verticalstackView.addArrangedSubview(itemQuantityStackView)
+        verticalstackView.addArrangedSubview(donarlabel)
         
        // donarverticalstackView.addArrangedSubview(donarlabel)
-        donarverticalstackView.addArrangedSubview(donarNameStackView)
-        donarverticalstackView.addArrangedSubview(donarphoneStackView)
-        donarverticalstackView.addArrangedSubview(donaraddressStackView)
+        verticalstackView.addArrangedSubview(donarNameStackView)
+        verticalstackView.addArrangedSubview(donarphoneStackView)
+        verticalstackView.addArrangedSubview(donaraddressStackView)
+        verticalstackView.addArrangedSubview(requestbutton)
        // view.addSubview(itemlabel)
-        scrollView.addSubview(backward)
-        scrollView.addSubview(forward)
        // view.addSubview(containerView)
         view.addSubview(scrollView)
         scrollView.addSubview(containerView)
@@ -281,6 +275,9 @@ class DetailItemViewController: UIViewController,UIScrollViewDelegate {
                                      sharedConstraints: sharedConstraints,
                                      compactConstraints: compactConstraints,
                                      regularConstraints: regularConstraints)
+    }
+    @objc func requestitem(_ sender: UIButton) {
+        print("REquest clicked")
     }
     
     private var sharedConstraints = [NSLayoutConstraint]()
@@ -302,43 +299,19 @@ extension DetailItemViewController {
         ])
         
         compactConstraints.append(contentsOf: [
+            containerView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
             containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             containerView.topAnchor.constraint(equalTo: view.topAnchor,constant: 100),
             containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40),
-           // containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            //containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-
-            backward.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            backward.trailingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            backward.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            backward.heightAnchor.constraint(equalToConstant: 270),
-
-            forward.leadingAnchor.constraint(equalTo: view.trailingAnchor,constant: -5),
-            forward.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            forward.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            forward.heightAnchor.constraint(equalToConstant: 270),
-
-      //      verticalstackView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-//            itemimage.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10),
-//            itemimage.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
-//            itemimage.topAnchor.constraint(equalTo: containerView.topAnchor),
-//            itemimage.heightAnchor.constraint(equalToConstant: 270),
-
-//            verticalstackView.topAnchor.constraint(equalTo: itemlabel.bottomAnchor,constant: 20),
-//            itemlabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            itemlabel.topAnchor.constraint(equalTo: itemimage.bottomAnchor,constant: 10),
-//            itemlabel.bottomAnchor.constraint(equalTo: verticalstackView.topAnchor, constant: -20),
-//            donarlabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            donarlabel.topAnchor.constraint(equalTo: verticalstackView.bottomAnchor,constant: 20),
-//            //donarlabel.bottomAnchor.constraint(equalTo: donarverticalstackView.topAnchor, constant: -20),
-//            donarverticalstackView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-//            donarverticalstackView.topAnchor.constraint(equalTo: donarlabel.bottomAnchor, constant: 30),
-//
-            
+           
+        
         ])
         
         regularConstraints.append(contentsOf: [
@@ -347,40 +320,13 @@ extension DetailItemViewController {
             scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             scrollView.widthAnchor.constraint(equalTo: view.widthAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+          //  scrollView.heightAnchor.constraint(equalTo: view.heightAnchor),
+
             containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             containerView.widthAnchor.constraint(equalTo: scrollView.widthAnchor,multiplier: 0.5),
             containerView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            containerView.heightAnchor.constraint(equalToConstant: 800),
-            
-                                       
-
-
-            backward.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            backward.trailingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            backward.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            backward.heightAnchor.constraint(equalToConstant: 50),
-
-            forward.leadingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            forward.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            forward.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            forward.heightAnchor.constraint(equalToConstant: 50),
-
-            verticalstackView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            itemimage.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10),
-            itemimage.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10),
-            itemimage.topAnchor.constraint(equalTo: containerView.topAnchor),
-            itemimage.heightAnchor.constraint(equalToConstant: 270),
-
-            verticalstackView.topAnchor.constraint(equalTo: itemlabel.bottomAnchor,constant: 20),
-            itemlabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            itemlabel.topAnchor.constraint(equalTo: itemimage.bottomAnchor,constant: 10),
-            itemlabel.bottomAnchor.constraint(equalTo: verticalstackView.topAnchor, constant: -20),
-            donarlabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            donarlabel.topAnchor.constraint(equalTo: verticalstackView.bottomAnchor,constant: 20),
-//            donarlabel.bottomAnchor.constraint(equalTo: donarverticalstackView.topAnchor, constant: -20),
-            donarverticalstackView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            donarverticalstackView.topAnchor.constraint(equalTo: donarlabel.bottomAnchor, constant: 30),
-            
-        ])
+            //containerView.heightAnchor.constraint(equalTo: scrollView.heightAnchor,multiplier: 0.5),
+            containerView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+       ])
     }
 }
