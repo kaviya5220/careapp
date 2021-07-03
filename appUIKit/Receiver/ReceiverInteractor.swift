@@ -25,4 +25,12 @@ class ReceiverInteractor{
         DBHelper.db = DBHelper.openDB()
         DBHelper.update(itemid: ID)
     }
+    func insertdonation(donation : Donationstatus){
+        DBHelper.db = DBHelper.openDB()
+        DBHelper.insertdonationstatus(donararg: donation)
+    }
+    func getdonationstatus(Receiver_ID: Int, Item_ID : Int) -> String{
+        DBHelper.db = DBHelper.openDB()
+        return DBHelper.getdonationstatus(Receiver_ID: Receiver_ID, Item_ID: Item_ID)
+    }
 }

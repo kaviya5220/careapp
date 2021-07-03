@@ -8,12 +8,21 @@
 import UIKit
 
 class ReceiverTableViewCell: UITableViewCell {
+    let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
+    let nsUserDomainMask = FileManager.SearchPathDomainMask.userDomainMask
     
     var item: Item? {
         didSet {
             guard let Item = item else {return}
             let name = Item.item_name
-                itemimage.image = UIImage(named: "dnimge")
+            let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
+            if let dirPath = paths.first{
+                let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent(Item.item_image)
+                itemimage.image = UIImage(contentsOfFile: imageURL.path)
+                
+                
+            }
+                //itemimage.image = UIImage(named: "dnimge")
                 itemname.text = name
                 itemdescription.text = Item.item_description
                 itemquantity.text = Item.item_quantity
@@ -45,7 +54,7 @@ class ReceiverTableViewCell: UITableViewCell {
             let img = UIImageView()
             img.contentMode = .scaleAspectFill
             img.translatesAutoresizingMaskIntoConstraints = false
-            img.layer.cornerRadius = 35
+            img.layer.cornerRadius = 15
             img.clipsToBounds = true
             return img
         }()

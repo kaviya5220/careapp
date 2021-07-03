@@ -14,6 +14,9 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
     public var filteredItems : [Item] = []
     let receiverInteractor = ReceiverInteractor()
     let receiverTableView = UITableView()
+    let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAdd(_:)))
+    let filter = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.done, target: self, action: nil)
+    let leftBarButton = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.done, target: self, action: #selector(navigateToProfile(_:)))
     var searchController : UISearchController!
         func updateSearchResults(for searchController: UISearchController) {
             let searchString = searchController.searchBar.text
@@ -53,15 +56,12 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         //super.viewWillAppear(Animated)
         super.viewDidLoad()
-        
-        let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAdd(_:)))
-        navigationItem.rightBarButtonItem = add
+        navigationItem.rightBarButtonItems = [add,filter]
+        let filterIcon = UIImage(systemName: "arrow.up.arrow.down")
+        filter.image = filterIcon
         let buttonIcon = UIImage(systemName: "person.circle")
-        let leftBarButton = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.done, target: self, action: #selector(navigateToProfile(_:)))
         leftBarButton.image = buttonIcon
         navigationItem.leftBarButtonItem = leftBarButton
-        let userdefaults = UserDefaults.standard
-        let userid = userdefaults.integer(forKey: "userid")
         items = receiverInteractor.getitemdetails()
         print(items)
         filteredItems = items

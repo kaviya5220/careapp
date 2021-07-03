@@ -3,8 +3,8 @@ import UIKit
 protocol canReceive{
     func passData(item:Item)
 }
-class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDelegate, UINavigationControllerDelegate {
-
+class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDelegate, UINavigationControllerDelegate,UIImagePickerControllerDelegate {
+    public var itemImageName : String = ""
     var delegate:canReceive?
     let alert : UIAlertController = {
     let alert1 = UIAlertController(title: "Success", message: "Item Posted Successfully", preferredStyle: .alert)
@@ -73,9 +73,9 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
     
     
     
-    let addbutton:CustomButton = {
-        let button = CustomButton(title: "UPLOAD ITEM", bgColor: .white)
-        button.addTarget(self, action: #selector(insertUser(_:)), for: .touchUpInside)
+    let chooseImage:CustomButton = {
+        let button = CustomButton(title: "Upload Image", bgColor: .blue)
+        button.addTarget(self, action: #selector(chooseimage(_:)), for: .touchUpInside)
         button.contentEdgeInsets = UIEdgeInsets(top: 10,left: 10,bottom: 10,right: 10)
         return button
     }()
@@ -100,7 +100,7 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
         stackView.addArrangedSubview(itemDescription)
         stackView.addArrangedSubview(itemQuantity)
         stackView.addArrangedSubview(address)
-        stackView.addArrangedSubview(addbutton)
+        stackView.addArrangedSubview(chooseImage)
         layoutTraitConstraintsUpdate(traitCollection: self.traitCollection,
                                      sharedConstraints: sharedConstraints,
                                      compactConstraints: compactConstraints,
@@ -112,6 +112,16 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
     @objc func cancel(_ sender: UIButton) {
         self.present(actionSheet,animated: true)
     }
+    @objc func chooseimage(_ sender: UIButton) {
+        let picker = UIImagePickerController()
+            picker.allowsEditing = true
+            picker.delegate = self
+            present(picker, animated: true)
+       print("hi")
+        print(itemImageName)
+        
+      
+    }
     @objc func insertUser(_ sender: UIButton) {
         let additeminteractor = AddItemInteractor()
         let date = Date()
@@ -122,7 +132,7 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
         let userdefaults = UserDefaults.standard
         let userid = userdefaults.integer(forKey: "userid")
         print(userid)
-        let item: Item = Item(item_id: 0, item_name: itemname.text!, item_description: itemDescription.text!, item_quantity: itemQuantity.text!, address: address.text!, Donar_ID: userid, visited_count: 0, date: formattedDate)
+        let item: Item = Item(item_id: 0, item_name: itemname.text!, item_description: itemDescription.text!, item_image:itemImageName ,item_quantity: itemQuantity.text!, address: address.text!, Donar_ID: userid, visited_count: 0, date: formattedDate)
         var flag = 0
         flag = additeminteractor.addItem(item: item)
         print("Flag\(flag)")
@@ -201,6 +211,25 @@ extension AddItemViewController {
             scrollView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
         ])
+    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = info[.editedImage] as? UIImage else { return }
+
+        let imageName = UUID().uuidString
+        let imagePath = getDocumentsDirectory().appendingPathComponent(imageName)
+        itemImageName = imageName
+        print(itemImageName)
+
+        if let jpegData = image.jpegData(compressionQuality: 0.8) {
+            try? jpegData.write(to: imagePath)
+        }
+
+        dismiss(animated: true)
+    }
+
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
     }
 }
 extension AddItemViewController : AddItemPresenterDelegate{

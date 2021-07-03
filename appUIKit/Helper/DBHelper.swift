@@ -123,7 +123,7 @@ class DBHelper{
         CREATE TABLE IF NOT EXISTS ItemDetails(
         Item_ID INTEGER PRIMARY KEY AUTOINCREMENT,
         Item_Name CHAR(255),Item_Description CHAR(255),Item_Quantity CHAR(255),Address CHAR(255),Donar_ID INTEGER,
-        Visited_count INTEGER DEFAULT 0, Date_posted CHAR(255));
+        Visited_count INTEGER DEFAULT 0, Date_posted CHAR(255), Item_ImageName CHAR(255));
         """
       var createTableStatement: OpaquePointer?
       if sqlite3_prepare_v2(db, createTableString, -1, &createTableStatement, nil) ==
@@ -140,7 +140,7 @@ class DBHelper{
     }
     static func insertItem(itemarg : Item) -> Int
     {
-    let insertStatementString = "INSERT INTO ItemDetails (Item_Name,Item_Description,Item_Quantity,Address,Donar_ID,Date_posted) VALUES (?, ?, ?, ?, ?, ?);"
+    let insertStatementString = "INSERT INTO ItemDetails (Item_Name,Item_Description,Item_Quantity,Address,Donar_ID,Date_posted,Item_ImageName) VALUES (?, ?, ?, ?, ?, ?,?);"
       var insertStatement: OpaquePointer?
     var itemid:Int = 0;
       if sqlite3_prepare_v2(db, insertStatementString, -1, &insertStatement, nil) ==
@@ -151,12 +151,14 @@ class DBHelper{
         let address: NSString = itemarg.address as NSString
         let donarid = itemarg.Donar_ID
         let date: NSString = itemarg.date as NSString
+        let item_image_name: NSString = itemarg.item_image as NSString
         sqlite3_bind_text(insertStatement, 1, name.utf8String, -1, nil)
         sqlite3_bind_text(insertStatement, 2, description.utf8String, -1, nil)
         sqlite3_bind_text(insertStatement, 3, quantity.utf8String, -1, nil)
         sqlite3_bind_text(insertStatement, 4, address.utf8String, -1, nil)
         sqlite3_bind_int(insertStatement, 5, Int32(donarid))
         sqlite3_bind_text(insertStatement, 6, date.utf8String, -1, nil)
+        sqlite3_bind_text(insertStatement, 7, item_image_name.utf8String, -1, nil)
         
         
         print(insertStatement!)
@@ -224,7 +226,8 @@ class DBHelper{
              let queryResultCol5 = sqlite3_column_int(queryStatement, 5)
             let queryResultCol6 = sqlite3_column_int(queryStatement, 6)
             let queryResultCol7 = sqlite3_column_text(queryStatement, 7)
-                let item : Item = Item(item_id: Int(queryResultCol0), item_name: String(cString: queryResultCol1!), item_description: String(cString: queryResultCol2!), item_quantity: String(cString: queryResultCol3!), address: String(cString: queryResultCol4!), Donar_ID: Int(queryResultCol5), visited_count: Int(queryResultCol6), date: String(cString:queryResultCol7!))
+            let queryResultCol8 = sqlite3_column_text(queryStatement, 8)
+                let item : Item = Item(item_id: Int(queryResultCol0), item_name: String(cString: queryResultCol1!), item_description: String(cString: queryResultCol2!), item_image: String(cString:queryResultCol8!), item_quantity: String(cString: queryResultCol3!), address: String(cString: queryResultCol4!), Donar_ID: Int(queryResultCol5), visited_count: Int(queryResultCol6), date: String(cString:queryResultCol7!))
                 itemlist.append(item)
               
                 //return userid
@@ -257,8 +260,9 @@ class DBHelper{
              let queryResultCol5 = sqlite3_column_int(queryStatement, 5)
             let queryResultCol6 = sqlite3_column_int(queryStatement, 6)
             let queryResultCol7 = sqlite3_column_text(queryStatement, 7)
+            let queryResultCol8 = sqlite3_column_text(queryStatement, 8)
                 
-                item = Item(item_id: Int(queryResultCol0), item_name: String(cString: queryResultCol1!), item_description: String(cString: queryResultCol2!), item_quantity: String(cString: queryResultCol3!), address: String(cString: queryResultCol4!), Donar_ID: Int(queryResultCol5), visited_count: Int(queryResultCol6), date: String(cString:queryResultCol7!))
+                item = Item(item_id: Int(queryResultCol0), item_name: String(cString: queryResultCol1!), item_description: String(cString: queryResultCol2!), item_image: String(cString:queryResultCol8!),item_quantity: String(cString: queryResultCol3!), address: String(cString: queryResultCol4!), Donar_ID: Int(queryResultCol5), visited_count: Int(queryResultCol6), date: String(cString:queryResultCol7!))
                
               
                 //return userid
@@ -342,8 +346,9 @@ class DBHelper{
              let queryResultCol5 = sqlite3_column_int(queryStatement, 5)
             let queryResultCol6 = sqlite3_column_int(queryStatement, 6)
             let queryResultCol7 = sqlite3_column_text(queryStatement, 7)
+                let queryResultCol8 = sqlite3_column_text(queryStatement, 8)
                 
-                var item: Item = Item(item_id: Int(queryResultCol0), item_name: String(cString: queryResultCol1!), item_description: String(cString: queryResultCol2!), item_quantity: String(cString: queryResultCol3!), address: String(cString: queryResultCol4!), Donar_ID: Int(queryResultCol5), visited_count: Int(queryResultCol6), date: String(cString:queryResultCol7!))
+                let item: Item = Item(item_id: Int(queryResultCol0), item_name: String(cString: queryResultCol1!), item_description: String(cString: queryResultCol2!), item_image: String(cString:queryResultCol8!), item_quantity: String(cString: queryResultCol3!), address: String(cString: queryResultCol4!), Donar_ID: Int(queryResultCol5), visited_count: Int(queryResultCol6), date: String(cString:queryResultCol7!))
                 items.append(item)
                
               
@@ -364,7 +369,7 @@ class DBHelper{
     static func createStatusTable() {
         let createTableString = """
         CREATE TABLE IF NOT EXISTS DonationStatus(
-        Item_ID INTEGER PRIMARY KEY,Donar_ID INTEGER ,Receiver_ID INTEGER ,Status CHAR(255));
+        Item_ID INTEGER ,Donar_ID INTEGER ,Receiver_ID INTEGER ,Status CHAR(255));
         """
       var createTableStatement: OpaquePointer?
       if sqlite3_prepare_v2(db, createTableString, -1, &createTableStatement, nil) ==
@@ -416,4 +421,29 @@ class DBHelper{
                     }
       
     }
+    static func getdonationstatus(Receiver_ID : Int,Item_ID : Int) -> String {
+        let queryStatementString = "SELECT Status FROM DonationStatus  WHERE Item_ID = ? AND Receiver_ID = ?;"
+        var status : String = ""
+        var queryStatement: OpaquePointer?
+          if sqlite3_prepare_v2(db, queryStatementString, -1, &queryStatement, nil) ==
+              SQLITE_OK {
+            sqlite3_bind_int(queryStatement, 1, Int32(Item_ID))
+            sqlite3_bind_int(queryStatement, 2, Int32(Receiver_ID))
+            if sqlite3_step(queryStatement) == SQLITE_ROW {
+    
+             let queryResultCol0 = sqlite3_column_text(queryStatement, 0)
+             status = String(cString:queryResultCol0!)
+            }
+            print("\nQuery Result:")
+              print(status)
+          } else {
+            let errorMessage = String(cString: sqlite3_errmsg(db))
+            print("\nQuery is not prepared \(errorMessage)")
+          }
+          sqlite3_finalize(queryStatement)
+        if sqlite3_close(db) == SQLITE_OK {
+            print("closing database")
+        }
+        return status
+        }
 }

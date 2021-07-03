@@ -13,7 +13,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     public var items : [Item] = []
     let donationInteractor = DonationInteractor()
     let testview = UITableView()
-   
+    let userdefaults = UserDefaults.standard
+    let profileInteractor = ProfileInteractor()
     
     let profileHorizantalView:UIStackView = {
         let stack = UIStackView()
@@ -52,26 +53,16 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     }()
     let name:CustomLabel = {
         let label = CustomLabel(labelType: .primary)
-        label.text = "Kaviya"
         return label
     }()
     let email:CustomLabel = {
         let label = CustomLabel(labelType: .primary)
-        label.text = "kaviya5220@gmail.com"
         return label
     }()
     let phoneno:CustomLabel = {
         let label = CustomLabel(labelType: .primary)
-        label.text = "91768679012"
         return label
     }()
-//   // let testview : UIView = {
-//        let tst = UIView()
-//        tst.backgroundColor = .blue
-//        tst.clipsToBounds = true
-//        tst.translatesAutoresizingMaskIntoConstraints = false
-//        return tst
-//    }()
     let testview1 : UIView = {
         let tst = UIView()
         tst.backgroundColor = .red
@@ -81,7 +72,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     }()
     
     let segmentedControl : UISegmentedControl = {
-        let segmentItems = ["My Donations", "Request Status"]
+        let segmentItems = ["My Donations","Request List", "Status"]
            let control = UISegmentedControl(items: segmentItems)
        
            control.addTarget(self, action: #selector(segmentControl(_:)), for: .valueChanged)
@@ -93,13 +84,14 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let userdefaults = UserDefaults.standard
+        
         let userid = userdefaults.integer(forKey: "userid")
         items = donationInteractor.getitemdetailbydonarid(userid : userid)
+        setUserDetails(userid: userid)
         print(items)
         testview.translatesAutoresizingMaskIntoConstraints = false
         testview.reloadData()
-       // segmentedControl.frame = CGRect(x: 10, y: 250, width: (self.view.frame.width - 20), height: 50)
+       
         view.addSubview(profileHorizantalView)
         view.addSubview(segmentedControl)
         view.addSubview(testview1)
@@ -126,6 +118,12 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     @objc func insertUser(_ sender: UIButton) {
         print("REquest clicked")
+    }
+    func setUserDetails(userid:Int){
+        let user:User = profileInteractor.getdonardetails(ID: userid)
+        name.text = user.user_name
+        email.text = user.user_email
+        phoneno.text = user.user_phone
     }
     
     private var sharedConstraints = [NSLayoutConstraint]()
@@ -159,19 +157,6 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
           break
        }
     }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = DonationDetailViewController()
-        itemid = items.map{$0.item_id}
-        print(itemid)
-        
-       // if let index = items.firstIndex(where: { $0 === items[indexPath.row] }){
-            print("if")
-        vc.itemid = items[indexPath.row].item_id
-            
-            self.navigationController?.pushViewController(vc, animated: true)
-     //   }
-            
-    }
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return items.count
             
@@ -180,8 +165,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: "itemcell", for: indexPath) as! DonationTableViewCell
             print("cell\(cell.item)")
-            cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
-            cell.item = items[indexPath.row]
+           cell.item = items[indexPath.row]
             return cell
         }
         

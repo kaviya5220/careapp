@@ -12,11 +12,13 @@ class DetailItemViewController: UIViewController,UIScrollViewDelegate {
     var donarid : Int = 0
     public var items : Item = Item()
     public var user: User = User()
+    let  receiverInteractor = ReceiverInteractor()
+    let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
+    let nsUserDomainMask = FileManager.SearchPathDomainMask.userDomainMask
     
     let itemimage:UIImageView = {
         let img = UIImageView()
-        img.image = UIImage(named: "dnimge")
-        img.contentMode = .scaleAspectFit
+        img.contentMode = .top
         img.translatesAutoresizingMaskIntoConstraints = false
         img.layer.cornerRadius = 25
         img.clipsToBounds = true
@@ -54,20 +56,7 @@ class DetailItemViewController: UIViewController,UIScrollViewDelegate {
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
-//    let donarverticalstackView: UIStackView = {
-//        let stack = UIStackView()
-//        stack.axis = .vertical
-//        stack.alignment = .top
-//        stack.distribution = .equalSpacing
-//        stack.spacing = 15
-//        stack.backgroundColor = .white
-//        stack.layer.cornerRadius = 10
-//       // stack.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-////        stack.isLayoutMarginsRelativeArrangement = true
-//        stack.translatesAutoresizingMaskIntoConstraints = false
-//        return stack
-//    }()
-    
+
     let itemNameStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
@@ -195,32 +184,40 @@ class DetailItemViewController: UIViewController,UIScrollViewDelegate {
     return label
     }()
     let requestbutton:UIButton = {
-        let button = CustomButton(title: "REQUEST", bgColor: .black)
+        let button = CustomButton(title: "REQUEST", bgColor: .systemBlue)
         button.addTarget(self, action: #selector(requestitem(_:)), for: .touchUpInside)
         return button
     }()
+    
+    let userdefaults = UserDefaults.standard
+   
     
     
     
 
     override func viewWillAppear(_ Animated : Bool) {
         super.viewWillAppear(Animated)
-//        let request = UIBarButtonItem(title: "Request", style: .plain, target: self, action: #selector(requestitem(_:)))
-//        navigationItem.rightBarButtonItem = request
+        
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        print(self.view.frame.height)
+       
         let contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
         scrollView.contentSize = contentViewSize
        // containerView.frame.size = contentViewSize
         scrollView.frame = view.bounds
         scrollView.delegate = self
        
-        let  receiverInteractor = ReceiverInteractor()
+        
         items = receiverInteractor.getitemByID(ID: itemid)
         donarid = items.Donar_ID
         user = receiverInteractor.getdonardetails(ID: donarid)
         receiverInteractor.updateVisitedCount(ID: itemid)
+        
+        let userid = userdefaults.integer(forKey: "userid")
+        updateRequestButton(receiverID : userid)
+        
+        var status : String = receiverInteractor.getdonationstatus(Receiver_ID: userid , Item_ID: itemid)
+        print(status)
         
         donarname.text = user.user_name
         donarphone.text = user.user_phone
@@ -228,6 +225,14 @@ class DetailItemViewController: UIViewController,UIScrollViewDelegate {
         itemname.text = items.item_name
         itemdescription.text = items.item_description
         itemquantity.text = items.item_quantity
+        
+        let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
+        if let dirPath = paths.first{
+            let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent(items.item_image)
+            itemimage.image = resizeImage(image: UIImage(contentsOfFile: imageURL.path)!, newWidth: 300)
+        }
+        
+            
         setupConstraints()
         containerView.addArrangedSubview(itemimage)
         verticalstackView.addArrangedSubview(itemlabel)
@@ -278,13 +283,48 @@ class DetailItemViewController: UIViewController,UIScrollViewDelegate {
     }
     @objc func requestitem(_ sender: UIButton) {
         print("REquest clicked")
+        let userdefaults = UserDefaults.standard
+        let userid = userdefaults.integer(forKey: "userid")
+        let donation : Donationstatus = Donationstatus(item_id: itemid , Donar_ID: donarid, Receiver_ID: userid, status: "pending")
+        let  receiverInteractor = ReceiverInteractor()
+        receiverInteractor.insertdonation(donation: donation)
+        self.navigationController?.pushViewController(ReceiverViewController(), animated: true)
+    }
+    func updateRequestButton(receiverID : Int){
+        let userid = userdefaults.integer(forKey: "userid")
+        print("\(userid),\(receiverID)")
+        if(donarid == receiverID){
+            print("\(userid),\(receiverID)")
+            requestbutton.setTitle("You are the Donar", for: .disabled)
+            requestbutton.setTitleColor(.black, for: .disabled)
+            requestbutton.backgroundColor = .systemGray
+            requestbutton.isEnabled = false
+        }
+        else if(receiverInteractor.getdonationstatus(Receiver_ID: receiverID, Item_ID: itemid) == "pending"){
+           print(receiverInteractor.getdonationstatus(Receiver_ID: receiverID, Item_ID: itemid))
+            print("\(itemid),\(receiverID)")
+            requestbutton.setTitle("Request already made", for: .disabled)
+            requestbutton.isEnabled = false
+        }
+        
     }
     
     private var sharedConstraints = [NSLayoutConstraint]()
     private var compactConstraints = [NSLayoutConstraint]()
     private var regularConstraints = [NSLayoutConstraint]()
+    func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
 
+        let scale = newWidth / image.size.width
+        let newHeight = image.size.height * scale
+        UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
+        image.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        return newImage!
+    }
 }
+
 extension DetailItemViewController {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         layoutTraitConstraintsUpdate(traitCollection: self.traitCollection,
@@ -302,14 +342,16 @@ extension DetailItemViewController {
             containerView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,constant: 20),
+            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,constant: -20),
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            containerView.topAnchor.constraint(equalTo: view.topAnchor,constant: 100),
+            containerView.topAnchor.constraint(equalTo: view.topAnchor,constant: 80),
             containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40),
+            
+            verticalstackView.topAnchor.constraint(equalTo: itemimage.bottomAnchor)
            
         
         ])
