@@ -446,4 +446,34 @@ class DBHelper{
         }
         return status
         }
+    static func fetchRequestList(Donar_ID : Int) -> [RequestList] {
+        let queryStatementString = "SELECT Name,ItemDetails.Address,Receiver_ID,ItemDetails.Item_ID,Item_Name  from UserDetails,DonationStatus,ItemDetails where ItemDetails.Item_ID = DonationStatus.Item_ID and ItemDetails.Donar_ID = DonationStatus.Donar_ID  AND DonationStatus.Donar_ID = ? AND UserDetails.ID = DonationStatus.Receiver_ID AND Status = 'pending' ORDER BY ItemDetails.Item_Name"
+        var requestlist : [RequestList] = []
+        var queryStatement: OpaquePointer?
+          if sqlite3_prepare_v2(db, queryStatementString, -1, &queryStatement, nil) ==
+              SQLITE_OK {
+            sqlite3_bind_int(queryStatement, 1, Int32(Donar_ID))
+           
+            while sqlite3_step(queryStatement) == SQLITE_ROW {
+    
+                let queryResultCol0 = sqlite3_column_text(queryStatement, 0)
+                let queryResultCol1 = sqlite3_column_text(queryStatement, 1)
+                let queryResultCol2 = sqlite3_column_int(queryStatement, 2)
+                let queryResultCol3 = sqlite3_column_int(queryStatement, 3)
+                let queryResultCol4 = sqlite3_column_text(queryStatement, 4)
+                let request: RequestList = RequestList(user_name: String(cString: queryResultCol0!), item_address: String(cString: queryResultCol1!), receiver_id: Int(queryResultCol2), item_id: Int(queryResultCol3), item_name: String(cString: queryResultCol4!))
+                requestlist.append(request)
+            }
+            print("\nQuery Result:")
+              print(requestlist)
+          } else {
+            let errorMessage = String(cString: sqlite3_errmsg(db))
+            print("\nQuery is not prepared \(errorMessage)")
+          }
+          sqlite3_finalize(queryStatement)
+        if sqlite3_close(db) == SQLITE_OK {
+            print("closing database")
+        }
+        return requestlist
+        }
 }

@@ -11,4 +11,8 @@ class ProfileInteractor {
         DBHelper.db = DBHelper.openDB()
         return DBHelper.getdonardetails(ID: ID)
     }
+    func fetchRequestList(donarID: Int) -> [RequestList]{
+        DBHelper.db = DBHelper.openDB()
+        return DBHelper.fetchRequestList(Donar_ID: donarID)
+    }
 }

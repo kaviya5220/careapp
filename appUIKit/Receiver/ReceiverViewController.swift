@@ -14,9 +14,8 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
     public var filteredItems : [Item] = []
     let receiverInteractor = ReceiverInteractor()
     let receiverTableView = UITableView()
-    let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAdd(_:)))
-    let filter = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.done, target: self, action: nil)
-    let leftBarButton = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.done, target: self, action: #selector(navigateToProfile(_:)))
+  
+   
     var searchController : UISearchController!
         func updateSearchResults(for searchController: UISearchController) {
             let searchString = searchController.searchBar.text
@@ -56,6 +55,9 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         //super.viewWillAppear(Animated)
         super.viewDidLoad()
+        let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAdd(_:)))
+        let filter = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.done, target: self, action: nil)
+        let leftBarButton = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.done, target: self, action: #selector(navigateToProfile(_:)))
         navigationItem.rightBarButtonItems = [add,filter]
         let filterIcon = UIImage(systemName: "arrow.up.arrow.down")
         filter.image = filterIcon
