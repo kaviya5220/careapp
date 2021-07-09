@@ -12,6 +12,10 @@ class ReceiverInteractor{
         DBHelper.db = DBHelper.openDB()
         return DBHelper.getitems()
     }
+    func getItemImages()->[Item_Image]{
+        DBHelper.db = DBHelper.openDB()
+        return DBHelper.getitemsImageName()
+    }
     func getitemByID(ID : Int)->Item{
         DBHelper.db = DBHelper.openDB()
         return DBHelper.getitemsbyID(ID: ID)

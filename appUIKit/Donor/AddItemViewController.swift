@@ -1,7 +1,7 @@
 
 import UIKit
 protocol canReceive{
-    func passData(item:Item)
+    func passData(item:Item,item_image:String)
 }
 class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDelegate, UINavigationControllerDelegate,UIImagePickerControllerDelegate {
     public var itemImageName : String = ""
@@ -138,7 +138,7 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
         print("Flag\(flag)")
         if(flag != 0){
             item.item_id = flag
-            delegate?.passData(item:item)
+            delegate?.passData(item:item,item_image: itemImageName)
             presenter.showSuccessAlert()
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in self.dismissinsertView()
                

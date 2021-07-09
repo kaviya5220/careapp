@@ -6,17 +6,32 @@
 //
 
 import UIKit
+import IQKeyboardManager
 
 @main 
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate,changeRootView {
+    func changeRootVIewController() {
+        print("............................")
+    }
+    
+    var window: UIWindow?
+    
 
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+       
+
         // Override point for customization after application launch.
+        //if let windowScene = scene as? UIWindowScene {
+
+           // let window = UIWindow(windowScene: windowScene)
+       
+        
+        IQKeyboardManager.shared().isEnabled = true
         return true
     }
-
+    
     // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {

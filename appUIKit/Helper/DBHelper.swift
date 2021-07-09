@@ -31,7 +31,7 @@ class DBHelper{
         
         var db : OpaquePointer? = nil
         
-        if sqlite3_open(filePath.path, &db) != SQLITE_OK {
+        if sqlite3_open_v2(filePath.path, &db,SQLITE_OPEN_CREATE | SQLITE_OPEN_READWRITE | SQLITE_OPEN_FULLMUTEX, nil) != SQLITE_OK {
             print("There is error in creating DB")
             return nil
         }else {
@@ -209,8 +209,9 @@ class DBHelper{
         }
         return userid
         }
-    static func getitems() -> [Item] {
-        let queryStatementString = "SELECT * FROM ItemDetails ;"
+    static func getitems() ->  [Item] {
+        
+        let queryStatementString = "SELECT Item_ID,Item_Name,Item_Description,Item_Quantity,Address,Donar_ID,Visited_count,Date_posted FROM ItemDetails ORDER BY Item_Name;"
         var itemlist : [Item] = []
         var queryStatement: OpaquePointer?
           if sqlite3_prepare_v2(db, queryStatementString, -1, &queryStatement, nil) ==
@@ -226,8 +227,7 @@ class DBHelper{
              let queryResultCol5 = sqlite3_column_int(queryStatement, 5)
             let queryResultCol6 = sqlite3_column_int(queryStatement, 6)
             let queryResultCol7 = sqlite3_column_text(queryStatement, 7)
-            let queryResultCol8 = sqlite3_column_text(queryStatement, 8)
-                let item : Item = Item(item_id: Int(queryResultCol0), item_name: String(cString: queryResultCol1!), item_description: String(cString: queryResultCol2!), item_image: String(cString:queryResultCol8!), item_quantity: String(cString: queryResultCol3!), address: String(cString: queryResultCol4!), Donar_ID: Int(queryResultCol5), visited_count: Int(queryResultCol6), date: String(cString:queryResultCol7!))
+                let item : Item = Item(item_id: Int(queryResultCol0), item_name: String(cString: queryResultCol1!), item_description: String(cString: queryResultCol2!), item_image: "", item_quantity: String(cString: queryResultCol3!), address: String(cString: queryResultCol4!), Donar_ID: Int(queryResultCol5), visited_count: Int(queryResultCol6), date: String(cString:queryResultCol7!))
                 itemlist.append(item)
               
                 //return userid
@@ -237,11 +237,36 @@ class DBHelper{
             let errorMessage = String(cString: sqlite3_errmsg(db))
             print("\nQuery is not prepared \(errorMessage)")
           }
-          sqlite3_finalize(queryStatement)
-        if sqlite3_close(db) == SQLITE_OK {
-            print("closing database")
-        }
+//          sqlite3_finalize(queryStatement)
+//        if sqlite3_close(db) == SQLITE_OK {
+//            print("closing database")
+//        }
         return itemlist
+        }
+    static func getitemsImageName() ->  [Item_Image] {
+        var item_image_list : [Item_Image] = []
+        let queryStatementString = "SELECT Item_ID,Item_ImageName FROM ItemDetails ORDER BY Item_Name;"
+        var queryStatement: OpaquePointer?
+          if sqlite3_prepare_v2(db, queryStatementString, -1, &queryStatement, nil) ==
+              SQLITE_OK {
+           // sqlite3_bind_int(queryStatement, 1, Int32(donarid))
+            while sqlite3_step(queryStatement) == SQLITE_ROW {
+                let queryResultCol0 = sqlite3_column_int(queryStatement, 0)
+             let queryResultCol1 = sqlite3_column_text(queryStatement, 1)
+                item_image_list.append(Item_Image(item_id: Int(queryResultCol0), item_image: String(cString: queryResultCol1!)))
+              
+                //return userid
+            }
+           // print("\nQuery Result:")
+          } else {
+            let errorMessage = String(cString: sqlite3_errmsg(db))
+            print("\nQuery is not prepared \(errorMessage)")
+          }
+//          sqlite3_finalize(queryStatement)
+//        if sqlite3_close(db) == SQLITE_OK {
+//            print("closing database")
+//        }
+        return item_image_list
         }
     static func getitemsbyID(ID : Int) -> Item {
         let queryStatementString = "SELECT * FROM ItemDetails  WHERE Item_ID = ?;"
@@ -447,7 +472,7 @@ class DBHelper{
         return status
         }
     static func fetchRequestList(Donar_ID : Int) -> [RequestList] {
-        let queryStatementString = "SELECT Name,ItemDetails.Address,Receiver_ID,ItemDetails.Item_ID,Item_Name  from UserDetails,DonationStatus,ItemDetails where ItemDetails.Item_ID = DonationStatus.Item_ID and ItemDetails.Donar_ID = DonationStatus.Donar_ID  AND DonationStatus.Donar_ID = ? AND UserDetails.ID = DonationStatus.Receiver_ID AND Status = 'pending' ORDER BY ItemDetails.Item_Name"
+        let queryStatementString = "SELECT Name,Phone,Email,UserDetails.Address,Receiver_ID,ItemDetails.Item_ID,Item_Name  from UserDetails,DonationStatus,ItemDetails where ItemDetails.Item_ID = DonationStatus.Item_ID and ItemDetails.Donar_ID = DonationStatus.Donar_ID  AND DonationStatus.Donar_ID = ? AND UserDetails.ID = DonationStatus.Receiver_ID AND Status = 'pending' ORDER BY ItemDetails.Item_Name"
         var requestlist : [RequestList] = []
         var queryStatement: OpaquePointer?
           if sqlite3_prepare_v2(db, queryStatementString, -1, &queryStatement, nil) ==
@@ -458,10 +483,12 @@ class DBHelper{
     
                 let queryResultCol0 = sqlite3_column_text(queryStatement, 0)
                 let queryResultCol1 = sqlite3_column_text(queryStatement, 1)
-                let queryResultCol2 = sqlite3_column_int(queryStatement, 2)
-                let queryResultCol3 = sqlite3_column_int(queryStatement, 3)
-                let queryResultCol4 = sqlite3_column_text(queryStatement, 4)
-                let request: RequestList = RequestList(user_name: String(cString: queryResultCol0!), item_address: String(cString: queryResultCol1!), receiver_id: Int(queryResultCol2), item_id: Int(queryResultCol3), item_name: String(cString: queryResultCol4!))
+                let queryResultCol2 = sqlite3_column_text(queryStatement, 2)
+                let queryResultCol3 = sqlite3_column_text(queryStatement, 3)
+                let queryResultCol4 = sqlite3_column_int(queryStatement, 4)
+                let queryResultCol5 = sqlite3_column_int(queryStatement, 5)
+                let queryResultCol6 = sqlite3_column_text(queryStatement, 6)
+                let request: RequestList = RequestList(receiver_name:String(cString: queryResultCol0!) , receiver_phone: String(cString: queryResultCol1!), receiver_email: String(cString: queryResultCol2!), receiver_address: String(cString: queryResultCol3!), receiver_id: Int(queryResultCol4), item_id: Int(queryResultCol5), item_name: String(cString: queryResultCol6!))
                 requestlist.append(request)
             }
             print("\nQuery Result:")

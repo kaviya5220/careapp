@@ -10,18 +10,29 @@ import UIKit
 class CustomTextField: UITextField {
 
     
-        let padding = UIEdgeInsets(top: 0, left: 5, bottom: 5, right: 5)
+        let padding = UIEdgeInsets(top: 0, left: 10, bottom: 5, right: 5)
         
         init() {
             super.init(frame: .zero)
             self.translatesAutoresizingMaskIntoConstraints = false
-            self.layer.borderWidth = 1
-            self.layer.borderColor = UIColor.white.cgColor
-            self.backgroundColor = UIColor(red: 0.89, green: 0.89, blue: 0.89, alpha: 1.00)
+            self.layer.borderWidth = 1.5
+            self.layer.borderColor = UIColor.systemGray.cgColor
+//            let shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: 5)
+//            self.layer.shadowColor = UIColor.black.cgColor
+//            self.layer.shadowOffset = CGSize(width: 0, height: 2)
+//            self.layer.shadowOpacity = 1
+//            self.layer.shadowPath = shadowPath.cgPath
+            self.backgroundColor = UIColor.white
             self.layer.cornerRadius = 5
             self.autocorrectionType = .no
         }
     override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: padding)
+    }
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: padding)
+    }
+    override func editingRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.inset(by: padding)
     }
         

@@ -7,10 +7,18 @@
 
 import UIKit
 
-
-class LoginViewController: UIViewController {
-
-       // var db = DBHelper()
+protocol changeRootView {
+    func changeRootVIewController()
+}
+class LoginViewController: UIViewController,SignUpProtocol {
+    func signUpSUccessful() {
+        print("success maaa")
+        navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
+        presenter.showSignupSuccessAlert()
+    }
+    var delegate: changeRootView?
+        let presenter = LoginPresenter()
         let loginInteractor = LoginInteractor()
         var userid : Int = 0
     
@@ -20,7 +28,14 @@ class LoginViewController: UIViewController {
         alert1.addAction(okAction)
         return alert1
         }()
-    
+        
+        let signUpSuccessAlert : UIAlertController = {
+        let alert1 = UIAlertController(title: "Succcess", message: "Sign Up Successful", preferredStyle: .alert)
+        let okAction = UIAlertAction (title: "OK", style: UIAlertAction.Style.cancel, handler: nil)
+        alert1.addAction(okAction)
+        return alert1
+        }()
+
         let stackView: UIStackView = {
             let stack = UIStackView()
             stack.axis = .vertical
@@ -61,9 +76,10 @@ class LoginViewController: UIViewController {
             return button
         }()
         
-        let presenter = LoginPresenter()
+        
         override func viewDidLoad() {
             super.viewDidLoad()
+          //  self.navigationController?.navigationBar.topItem?.title = "SignUp"
             setupConstraints()
             view.addSubview(stackView)
             stackView.addArrangedSubview(loginlabel)
@@ -78,7 +94,7 @@ class LoginViewController: UIViewController {
             
             self.title = "Login"
             view.backgroundColor = .white
-            navigationItem.title = .none
+            navigationItem.title = "LOGIN"
             presenter.delegate = self
             
         }
@@ -96,7 +112,19 @@ class LoginViewController: UIViewController {
                 self.showToast(message: "Login Successfull", font: .systemFont(ofSize: 12.0))
                 let newVc = ReceiverViewController()
                 let nav = UINavigationController(rootViewController: newVc)
-                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(nav)
+                
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                if let scene = UIApplication.shared.connectedScenes.first{
+                    guard let windowScene = (scene as? UIWindowScene) else { return }
+                    let window: UIWindow = UIWindow(frame: windowScene.coordinateSpace.bounds)
+                    window.windowScene = windowScene
+                    window.rootViewController = nav
+                    window.makeKeyAndVisible()
+                    appDelegate.window = window
+                }
+                        
+                   
+                       
              
             }
             else{
@@ -104,7 +132,15 @@ class LoginViewController: UIViewController {
                 }
             }
         if sender == signupbutton{
-            self.navigationController?.pushViewController(SignupViewController(), animated: true)
+//            let vc = SignupViewController()
+//            vc.delegate = self
+//            self.navigationController?.pushViewController(vc, animated: true)
+            let signUp = SignupViewController()
+            let nav = UINavigationController()
+            nav.viewControllers = [signUp]
+            nav.modalPresentationStyle = .automatic //or .overFullScreen for transparency
+            signUp.delegate = self
+            self.present(nav, animated: true, completion: nil)
         }
 
     }
@@ -148,5 +184,8 @@ extension LoginViewController : LoginPresenterDelegate{
     func showAlert() {
         self.present(alert, animated: true, completion: nil)
         }
+    func showSignupSuccessAlert(){
+        self.present(signUpSuccessAlert, animated: true, completion: nil)
+    }
 }
 

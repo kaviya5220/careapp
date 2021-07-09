@@ -245,9 +245,6 @@ extension ProfileViewController {
     private func setupConstraints() {
         
         sharedConstraints.append(contentsOf: [
-        ])
-        
-        compactConstraints.append(contentsOf: [
             profileHorizantalView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 15),
             profileHorizantalView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
             profileHorizantalView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
@@ -263,16 +260,14 @@ extension ProfileViewController {
             requestListTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
             requestListTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
             requestListTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            
-            
-            
-            
-
+        ])
         
+        compactConstraints.append(contentsOf: [
+           
         ])
         
         regularConstraints.append(contentsOf: [
-            
+          
        ])
     }
 }

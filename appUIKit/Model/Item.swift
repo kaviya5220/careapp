@@ -18,7 +18,7 @@ class Item {
     var date: String
     
     init(item_id: Int = 0,item_name: String = "",item_description: String = "",item_image: String = "", item_quantity: String = "",address: String = "",Donar_ID : Int = 0,visited_count : Int = 0,date :String = "")
-    //init(item_id: Int,item_name: String = "",item_description: String,item_image: String = "", item_quantity: String = "",address: String,Donar_ID : Int,visited_count : Int,date :String)
+    
     {
         self.item_id = item_id
         self.item_name = item_name

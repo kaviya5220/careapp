@@ -14,9 +14,12 @@ class RequestListTableViewCell: UITableViewCell {
         didSet {
             guard let Request = request else {return}
          
-            receiver_name.text = Request.user_name
-            receiver_Address.text = Request.item_address
-            item_name.text = Request.item_name
+            receiver_name.text = Request.receiver_name
+            receiver_Phone.text = Request.receiver_phone
+            receiver_email.text = Request.receiver_email
+            receiver_Address.text = Request.receiver_address
+           
+           
             
         }
     }
@@ -38,41 +41,60 @@ class RequestListTableViewCell: UITableViewCell {
             return view
         }()
     
-        
+    let receivername_label:CustomLabel = {
+        let label = CustomLabel(labelType: .primary)
+        label.text = "Receiver Name :"
+        return label
+    }()
         let receiver_name:CustomLabel = {
-            let label = CustomLabel(labelType: .title)
-            label.font = label.font.withSize(25)
+            let label = CustomLabel(labelType: .primary)
             return label
         }()
+    let receiveraddress_label:CustomLabel = {
+        let label = CustomLabel(labelType: .primary)
+        label.text = "Receiver Address:"
+        return label
+    }()
         
         let receiver_Address:CustomLabel = {
             let label = CustomLabel(labelType: .primary)
             return label
         }()
-//    let itemdescriptionlabel:CustomLabel = {
-//        let label = CustomLabel(labelType: .primary)
-//        label.text = "Description :"
-//        return label
-//    }()
-    
-    let item_name:CustomLabel = {
+    let receiverphone_label:CustomLabel = {
         let label = CustomLabel(labelType: .primary)
+        label.text = "Receiver Phone:"
         return label
     }()
-   
+        
+        let receiver_Phone:CustomLabel = {
+            let label = CustomLabel(labelType: .primary)
+            return label
+        }()
+    
+    let receiveremail_label:CustomLabel = {
+        let label = CustomLabel(labelType: .primary)
+        label.text = "Receiver Email:"
+        return label
+    }()
+        
+        let receiver_email:CustomLabel = {
+            let label = CustomLabel(labelType: .primary)
+            return label
+        }()
+
         
 
         override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
             
-          
+            containerView.addSubview(receivername_label)
             containerView.addSubview(receiver_name)
-           
+            containerView.addSubview(receiverphone_label)
+            containerView.addSubview(receiver_Phone)
+            containerView.addSubview(receiveremail_label)
+            containerView.addSubview(receiver_email)
+            containerView.addSubview(receiveraddress_label)
             containerView.addSubview(receiver_Address)
-            
-            containerView.addSubview(item_name)
-            
-
             self.contentView.addSubview(containerView)
             
             
@@ -82,21 +104,30 @@ class RequestListTableViewCell: UITableViewCell {
             containerView.trailingAnchor.constraint(equalTo:self.contentView.trailingAnchor, constant:-10).isActive = true
             containerView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -5).isActive = true
             
+            receivername_label.topAnchor.constraint(equalTo:self.containerView.topAnchor,constant: 5).isActive = true
+            receivername_label.leadingAnchor.constraint(equalTo:self.containerView.leadingAnchor).isActive = true
+            receiver_name.topAnchor.constraint(equalTo:self.containerView.topAnchor,constant: 5).isActive = true
+            receiver_name.leadingAnchor.constraint(equalTo:self.receivername_label.trailingAnchor,constant: 10).isActive = true
             
-            receiver_name.topAnchor.constraint(equalTo:self.containerView.topAnchor,constant: 15).isActive = true
-            receiver_name.leadingAnchor.constraint(equalTo:self.containerView.leadingAnchor).isActive = true
-            receiver_name.trailingAnchor.constraint(equalTo:self.containerView.trailingAnchor).isActive = true
-           
-            receiver_Address.topAnchor.constraint(equalTo:self.receiver_name.bottomAnchor,constant: 5).isActive = true
-            receiver_Address.leadingAnchor.constraint(equalTo:self.containerView.leadingAnchor).isActive = true
-            receiver_Address.trailingAnchor.constraint(equalTo:self.containerView.trailingAnchor).isActive = true
-           
-           
-            item_name.topAnchor.constraint(equalTo:self.receiver_Address.bottomAnchor,constant: 5).isActive = true
-            item_name.leadingAnchor.constraint(equalTo:self.containerView.leadingAnchor).isActive = true
-            item_name.trailingAnchor.constraint(equalTo:self.containerView.trailingAnchor).isActive = true
-           // item_name.leadingAnchor.constraint(equalTo:self..trailingAnchor,constant: 10).isActive = true
+            receiverphone_label.topAnchor.constraint(equalTo:self.receiver_name.bottomAnchor,constant: 5).isActive = true
+            receiverphone_label.leadingAnchor.constraint(equalTo:self.containerView.leadingAnchor).isActive = true
+            receiver_Phone.topAnchor.constraint(equalTo:self.receiver_name.bottomAnchor,constant: 5).isActive = true
+            receiver_Phone.leadingAnchor.constraint(equalTo:self.receiverphone_label.trailingAnchor,constant: 10).isActive = true
             
+            receiveremail_label.topAnchor.constraint(equalTo:self.receiver_Phone.bottomAnchor,constant: 5).isActive = true
+            receiveremail_label.leadingAnchor.constraint(equalTo:self.containerView.leadingAnchor).isActive = true
+            receiver_email.topAnchor.constraint(equalTo:self.receiver_Phone.bottomAnchor,constant: 5).isActive = true
+            receiver_email.leadingAnchor.constraint(equalTo:self.receiveremail_label.trailingAnchor,constant: 10).isActive = true
+            
+            receiveraddress_label.topAnchor.constraint(equalTo:self.receiver_email.bottomAnchor,constant: 5).isActive = true
+            receiveraddress_label.leadingAnchor.constraint(equalTo:self.containerView.leadingAnchor).isActive = true
+            receiver_Address.topAnchor.constraint(equalTo:self.receiver_email.bottomAnchor,constant: 5).isActive = true
+            receiver_Address.leadingAnchor.constraint(equalTo:self.receiveraddress_label.trailingAnchor,constant: 10).isActive = true
+           
+        
+           
+           
+          
             
             
            

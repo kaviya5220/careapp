@@ -8,24 +8,15 @@
 import UIKit
 
 class ReceiverTableViewCell: UITableViewCell {
-    let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
-    let nsUserDomainMask = FileManager.SearchPathDomainMask.userDomainMask
     
     var item: Item? {
         didSet {
             guard let Item = item else {return}
             let name = Item.item_name
-            let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
-            if let dirPath = paths.first{
-                let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent(Item.item_image)
-                itemimage.image = UIImage(contentsOfFile: imageURL.path)
-                
-                
-            }
-                //itemimage.image = UIImage(named: "dnimge")
                 itemname.text = name
                 itemdescription.text = Item.item_description
                 itemquantity.text = Item.item_quantity
+                itemlocation.text = Item.address
                 donarid.text = String(Item.Donar_ID)
                 visitedcount.text = String(Item.visited_count)
                 date.text = Item.date
@@ -76,7 +67,12 @@ class ReceiverTableViewCell: UITableViewCell {
         }()
     let itemdescriptionlabel:CustomLabel = {
         let label = CustomLabel(labelType: .primary)
-        label.text = "Description :"
+        let attachment = NSTextAttachment()
+        attachment.image = UIImage(systemName: "doc.plaintext")
+        let attachmentString = NSAttributedString(attachment: attachment)
+//        let myString = NSMutableAttributedString(string: "")
+//        myString.append(attachmentString)
+        label.attributedText = attachmentString
         return label
     }()
     
@@ -86,18 +82,46 @@ class ReceiverTableViewCell: UITableViewCell {
     }()
     let itemquantitylabel:CustomLabel = {
         let label = CustomLabel(labelType: .primary)
-        label.text = "Quantity :"
+        let attachment = NSTextAttachment()
+        attachment.image = UIImage(systemName: "bag")
+        let attachmentString = NSAttributedString(attachment: attachment)
+//        let myString = NSMutableAttributedString(string: "")
+//        myString.append(attachmentString)
+        label.attributedText = attachmentString
+        return label
+    }()
+//    let itemlocationlabel:CustomLabel = {
+//        let label = CustomLabel(labelType: .primary)
+//        label.text = "Location :"
+//        return label
+//    }()
+    let itemlocation:CustomLabel = {
+        let label = CustomLabel(labelType: .primary)
+        return label
+    }()
+    let itemlocationlabel:CustomLabel = {
+        let label = CustomLabel(labelType: .primary)
+        let attachment = NSTextAttachment()
+        attachment.image = UIImage(systemName: "location.circle")
+        let attachmentString = NSAttributedString(attachment: attachment)
+//        let myString = NSMutableAttributedString(string: "")
+//        myString.append(attachmentString)
+        label.attributedText = attachmentString
         return label
     }()
     
     let visitedcountlabel:CustomLabel = {
         let label = CustomLabel(labelType: .primary)
-        label.text = "Visted Count :"
+        let attachment = NSTextAttachment()
+        attachment.image = UIImage(systemName: "eye")
+        let attachmentString = NSAttributedString(attachment: attachment)
+//        let myString = NSMutableAttributedString(string: "")
+//        myString.append(attachmentString)
+        label.attributedText = attachmentString
         return label
     }()
     let visitedcount:CustomLabel = {
         let label = CustomLabel(labelType: .primary)
-        
         return label
     }()
     let datelabel:CustomLabel = {
@@ -105,9 +129,9 @@ class ReceiverTableViewCell: UITableViewCell {
         let attachment = NSTextAttachment()
         attachment.image = UIImage(systemName: "calendar")
         let attachmentString = NSAttributedString(attachment: attachment)
-        let myString = NSMutableAttributedString(string: "Date  ")
-        myString.append(attachmentString)
-        label.attributedText = myString
+//        let myString = NSMutableAttributedString(string: "")
+//        myString.append(attachmentString)
+        label.attributedText = attachmentString
         return label
     }()
     
@@ -128,6 +152,8 @@ class ReceiverTableViewCell: UITableViewCell {
             containerView.addSubview(itemdescription)
             containerView.addSubview(itemquantitylabel)
             containerView.addSubview(itemquantity)
+            containerView.addSubview(itemlocationlabel)
+            containerView.addSubview(itemlocation)
             containerView.addSubview(datelabel)
             containerView.addSubview(date)
             containerView.addSubview(visitedcountlabel)
@@ -168,13 +194,18 @@ class ReceiverTableViewCell: UITableViewCell {
             itemquantity.topAnchor.constraint(equalTo:self.itemdescription.bottomAnchor,constant: 5).isActive = true
             itemquantity.leadingAnchor.constraint(equalTo:self.itemquantitylabel.trailingAnchor,constant: 10).isActive = true
             
-            datelabel.topAnchor.constraint(equalTo:self.itemquantity.bottomAnchor,constant: 5).isActive = true
+            itemlocationlabel.topAnchor.constraint(equalTo:self.itemquantity.bottomAnchor,constant: 5).isActive = true
+            itemlocationlabel.leadingAnchor.constraint(equalTo:self.containerView.leadingAnchor).isActive = true
+            itemlocation.topAnchor.constraint(equalTo:self.itemquantity.bottomAnchor,constant: 5).isActive = true
+            itemlocation.leadingAnchor.constraint(equalTo:self.itemlocationlabel.trailingAnchor,constant: 10).isActive = true
+            
+            datelabel.topAnchor.constraint(equalTo:self.itemlocation.bottomAnchor,constant: 5).isActive = true
             datelabel.leadingAnchor.constraint(equalTo:self.containerView.leadingAnchor).isActive = true
-            date.topAnchor.constraint(equalTo:self.itemquantity.bottomAnchor,constant: 5).isActive = true
+            date.topAnchor.constraint(equalTo:self.itemlocation.bottomAnchor,constant: 5).isActive = true
             date.leadingAnchor.constraint(equalTo:self.datelabel.trailingAnchor,constant: 10).isActive = true
             
             visitedcountlabel.topAnchor.constraint(equalTo:self.date.bottomAnchor,constant: 5).isActive = true
-            visitedcountlabel.leadingAnchor.constraint(equalTo:self.containerView.trailingAnchor,constant: -140).isActive = true
+            visitedcountlabel.leadingAnchor.constraint(equalTo:self.containerView.trailingAnchor,constant: -60).isActive = true
             visitedcount.topAnchor.constraint(equalTo:self.date.bottomAnchor,constant: 5).isActive = true
             visitedcount.leadingAnchor.constraint(equalTo:self.visitedcountlabel.trailingAnchor,constant: 10).isActive = true
             

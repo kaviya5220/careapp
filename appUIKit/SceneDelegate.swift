@@ -17,25 +17,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
             let window = UIWindow(windowScene: windowScene)
             let navController = UINavigationController()
-            if let loggedUsername = UserDefaults.standard.string(forKey: "userid") {
+           // if let loggedUsername = UserDefaults.standard.string(forKey: "userid") {
                 let viewController = ReceiverViewController()
                 navController.viewControllers = [viewController]
                 navController.navigationBar.backgroundColor = .clear
-                let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+                let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black]
                 navController.navigationBar.titleTextAttributes = textAttributes
                 window.rootViewController = navController
                 self.window = window
                 window.makeKeyAndVisible()
-            }else{
-            let viewController = LoginViewController()
-            navController.viewControllers = [viewController]
-            navController.navigationBar.backgroundColor = .clear
-            let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
-            navController.navigationBar.titleTextAttributes = textAttributes
-            window.rootViewController = navController
-            self.window = window
-            window.makeKeyAndVisible()
-            }
+          //  }
+           // else{
+//            let viewController = LoginViewController()
+//            navController.viewControllers = [viewController]
+//            navController.navigationBar.backgroundColor = .clear
+//            let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black]
+//            navController.navigationBar.titleTextAttributes = textAttributes
+//            window.rootViewController = navController
+//            self.window = window
+//            window.makeKeyAndVisible()
+            //}
         }
     }
     func changeRootViewController(_ vc: UIViewController, animated: Bool = true) {

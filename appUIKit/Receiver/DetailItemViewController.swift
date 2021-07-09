@@ -216,8 +216,8 @@ class DetailItemViewController: UIViewController,UIScrollViewDelegate {
         let userid = userdefaults.integer(forKey: "userid")
         updateRequestButton(receiverID : userid)
         
-        var status : String = receiverInteractor.getdonationstatus(Receiver_ID: userid , Item_ID: itemid)
-        print(status)
+       // var status : String = receiverInteractor.getdonationstatus(Receiver_ID: userid , Item_ID: itemid)
+       // print(status)
         
         donarname.text = user.user_name
         donarphone.text = user.user_phone
@@ -301,8 +301,8 @@ class DetailItemViewController: UIViewController,UIScrollViewDelegate {
             requestbutton.isEnabled = false
         }
         else if(receiverInteractor.getdonationstatus(Receiver_ID: receiverID, Item_ID: itemid) == "pending"){
-           print(receiverInteractor.getdonationstatus(Receiver_ID: receiverID, Item_ID: itemid))
-            print("\(itemid),\(receiverID)")
+         //  print(receiverInteractor.getdonationstatus(Receiver_ID: receiverID, Item_ID: itemid))
+         //   print("\(itemid),\(receiverID)")
             requestbutton.setTitle("Request already made", for: .disabled)
             requestbutton.isEnabled = false
         }
