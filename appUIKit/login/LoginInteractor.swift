@@ -8,10 +8,14 @@
 import Foundation
 class LoginInteractor{
     let presenter = LoginPresenter()
-    var db = DBHelper()
+   
     func Valid(email : String , password: String) -> Bool{
+        DBHelper.db = DBHelper.openDB()
         return  DBHelper.validate(email: email, enteredpassword: password)
         
     }
-//
+    func getuserid(email : String) -> Int{
+        DBHelper.db = DBHelper.openDB()
+        return DBHelper.getuserid(email: email)
+    }
 }

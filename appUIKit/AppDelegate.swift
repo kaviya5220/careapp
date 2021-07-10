@@ -11,7 +11,6 @@ import IQKeyboardManager
 @main 
 class AppDelegate: UIResponder, UIApplicationDelegate,changeRootView {
     func changeRootVIewController() {
-        print("............................")
     }
     
     var window: UIWindow?

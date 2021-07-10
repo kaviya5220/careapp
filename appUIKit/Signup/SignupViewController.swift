@@ -23,7 +23,7 @@ class SignupViewController: UIViewController,UIScrollViewDelegate{
         stack.axis = .vertical
         stack.alignment = .fill
         stack.distribution = .fillEqually
-        stack.spacing = 5
+        stack.spacing = 10
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -32,6 +32,7 @@ class SignupViewController: UIViewController,UIScrollViewDelegate{
         scroll.translatesAutoresizingMaskIntoConstraints = false
         return scroll
     }()
+    
     let signuplabel:CustomLabel = {
         let label = CustomLabel(labelType: .title)
         label.text = "SIGN UP"
@@ -44,22 +45,11 @@ class SignupViewController: UIViewController,UIScrollViewDelegate{
         namefield.placeholder = "Enter name"
         return namefield
     }()
-//    let phone:CustomField = {
-//        let field = CustomField()
-//        field.textField.placeholder = "Enter phone"
-//        return field
-//    }()
     let address:UITextField = {
         let addressfield = CustomTextField()
         addressfield.placeholder = "Enter address"
         return addressfield
     }()
-//    let emailField:CustomField = {
-//        let field = CustomField()
-//        field.textField.placeholder = "Enter email"
-//        field.textField.keyboardType = UIKeyboardType.emailAddress
-//        return field
-//    }()
     let password:UITextField = {
         let password = CustomTextField()
         password.placeholder = "Enter password"
@@ -79,7 +69,31 @@ class SignupViewController: UIViewController,UIScrollViewDelegate{
         phone.keyboardType = UIKeyboardType.phonePad
         return phone
     }()
-    
+    let signuplabel1:CustomLabel = {
+        let label = CustomLabel(labelType: .primary)
+        label.text = "Already have an account?"
+        label.font = UIFont(name: "TimesNewRomanPSMT", size: 18)
+        label.textAlignment = .center
+        
+        return label
+    }()
+    let horizontalstackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.alignment = .fill
+        stack.distribution = .fill
+        stack.spacing = 5
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    let signuplabel2:CustomLabel = {
+        let label = CustomLabel(labelType: .primary)
+        label.text = "Sign In"
+        label.textColor = .systemBlue
+        label.textAlignment = .center
+        
+        return label
+    }()
     let submitbutton:UIButton = {
         let button = CustomButton(title: "SUBMIT", bgColor: .black)
         button.addTarget(self, action: #selector(insertUser(_:)), for: .touchUpInside)
@@ -94,44 +108,39 @@ class SignupViewController: UIViewController,UIScrollViewDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Signup"
-        navigationItem.title = "SignUp"
-//        navigationItem.
-//        navigationItem.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.red]
         view.backgroundColor = .white
         setupConstraints()
-        view.addSubview(stackView)
-       // scrollView.addSubview(stackView)
+        let contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
+                scrollView.contentSize = contentViewSize
+                scrollView.frame = view.bounds
+                scrollView.delegate = self
+        view.addSubview(scrollView)
+        scrollView.addSubview(stackView)
+        view.addSubview(horizontalstackView)
+        horizontalstackView.addArrangedSubview(signuplabel1)
+        horizontalstackView.addArrangedSubview(signuplabel2)
         stackView.addArrangedSubview(signuplabel)
         stackView.addArrangedSubview(name)
         stackView.addArrangedSubview(address)
         stackView.addArrangedSubview(password)
         stackView.addArrangedSubview(emailField)
         stackView.addArrangedSubview(phone)
-        stackView.addArrangedSubview(submitbutton)
+        view.addSubview(submitbutton)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(loginClicked(_:)))
+        signuplabel2.isUserInteractionEnabled = true
+        signuplabel2.addGestureRecognizer(tap)
         
         layoutTraitConstraintsUpdate(traitCollection: self.traitCollection,
                                      sharedConstraints: sharedConstraints,
                                      compactConstraints: compactConstraints,
                                      regularConstraints: regularConstraints)
-        //print("ajhkjae\(stackView.heightAnchor)")
-//        var bottomLine = CALayer()
-//        bottomLine.frame = CGRect(x: 0.0, y:35, width: self.name.widthAnchor, height: 1.0)
-//        bottomLine.borderColor = UIColor.black.cgColor
-//        bottomLine.backgroundColor = UIColor.black.cgColor
-//        bottomLine.borderWidth = 1
-//        name.borderStyle = UITextField.BorderStyle.none
-//        name.layer.addSublayer(bottomLine)
-////
-        
-        let contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
-                scrollView.contentSize = contentViewSize
-               // containerView.frame.size = contentViewSize
-                scrollView.frame = view.bounds
-                scrollView.delegate = self
-        
-      //  signUpPresenter.delegate = self
         self.navigationItem.setHidesBackButton(false, animated: false)
+    }
+    @objc func loginClicked(_ sender: UITapGestureRecognizer){
+        print("Clicked")
+        dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
+
     }
    
    
@@ -174,35 +183,45 @@ extension SignupViewController {
                                      regularConstraints: regularConstraints)
     }
     private func setupConstraints() {
+        let contentLayoutGuide = scrollView.contentLayoutGuide
         
         sharedConstraints.append(contentsOf: [
-            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            //stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
         
         
         compactConstraints.append(contentsOf: [
-            signuplabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-//            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-//            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-//            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-//            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
-            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-           // submitbutton.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-            //submitbutton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+//            signuplabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            submitbutton.widthAnchor.constraint(equalTo: self.view.widthAnchor,multiplier: 0.5),
+            submitbutton.topAnchor.constraint(equalTo: stackView.bottomAnchor,constant: 30),
+            submitbutton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            horizontalstackView.topAnchor.constraint(equalTo: view.bottomAnchor,constant: -50),
+            horizontalstackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+//            stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+           
         ])
         
         regularConstraints.append(contentsOf: [
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
             stackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            //signuplabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-//            scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-//            scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            scrollView.widthAnchor.constraint(equalTo: view.widthAnchor),
-//            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-           // submitbutton.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-            //submitbutton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            submitbutton.widthAnchor.constraint(equalTo: self.view.widthAnchor,multiplier: 0.5),
+            submitbutton.topAnchor.constraint(equalTo: stackView.bottomAnchor,constant: 30),
+            submitbutton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            horizontalstackView.topAnchor.constraint(equalTo: submitbutton.bottomAnchor,constant: 20),
+            horizontalstackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            signuplabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
         ])
     }
 }
