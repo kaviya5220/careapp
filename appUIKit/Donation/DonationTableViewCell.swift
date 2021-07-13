@@ -31,15 +31,6 @@ class DonationTableViewCell: UITableViewCell {
             return view
         }()
         
-        let customContentView:UIView = {
-            let view = CustomReceiverCard()
-            view.backgroundColor = UIColor.white
-            view.shadowOpacity = 0.4
-            view.cornerRadius = 0
-            view.translatesAutoresizingMaskIntoConstraints = false
-            view.clipsToBounds = true
-            return view
-        }()
     
         let itemimage:UIImageView = {
             let img = UIImageView()

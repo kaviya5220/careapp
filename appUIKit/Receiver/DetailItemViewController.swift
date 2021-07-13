@@ -282,13 +282,17 @@ class DetailItemViewController: UIViewController,UIScrollViewDelegate {
                                      regularConstraints: regularConstraints)
     }
     @objc func requestitem(_ sender: UIButton) {
-        print("REquest clicked")
+        if(receiverInteractor.isLoggedIn()){
         let userdefaults = UserDefaults.standard
         let userid = userdefaults.integer(forKey: "userid")
+       
         let donation : Donationstatus = Donationstatus(item_id: itemid , Donar_ID: donarid, Receiver_ID: userid, status: "pending")
-        let  receiverInteractor = ReceiverInteractor()
         receiverInteractor.insertdonation(donation: donation)
         self.navigationController?.pushViewController(ReceiverViewController(), animated: true)
+        }
+        else{
+            self.navigationController?.pushViewController(LoginViewController(), animated: true)
+        }
     }
     func updateRequestButton(receiverID : Int){
         let userid = userdefaults.integer(forKey: "userid")

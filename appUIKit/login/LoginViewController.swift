@@ -11,8 +11,11 @@ protocol changeRootView {
     func changeRootVIewController()
 }
 class LoginViewController: UIViewController,SignUpProtocol {
+  
+    
     func signUpSUccessful() {
-        navigationController?.popViewController(animated: true)
+        print("Signup successful")
+        //navigationController?.popViewController(animated: true)
         dismiss(animated: true, completion: nil)
         presenter.showSignupSuccessAlert()
     }
@@ -80,7 +83,9 @@ class LoginViewController: UIViewController,SignUpProtocol {
         let email:CustomLoginTextField = {
             let emailfield = CustomLoginTextField()
             emailfield.keyboardType = UIKeyboardType.emailAddress
+            emailfield.autocapitalizationType = UITextAutocapitalizationType.none
             emailfield.placeholder = "Enter email"
+            emailfield.text = "K"
             emailfield.leftViewMode = UITextField.ViewMode.always
             emailfield.leftViewMode = .always
             let outerView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20) )
@@ -95,6 +100,7 @@ class LoginViewController: UIViewController,SignUpProtocol {
             let password = CustomLoginTextField()
             password.isSecureTextEntry = true
             password.placeholder = "Enter password"
+            password.text = "K"
             password.leftViewMode = UITextField.ViewMode.always
             password.leftViewMode = .always
             let outerView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20) )
@@ -155,32 +161,40 @@ class LoginViewController: UIViewController,SignUpProtocol {
         if sender == loginbutton{
            let isvalid = loginInteractor.Valid(email: email.text!, password: password.text!)
             if(isvalid){
-                userid = DBHelper.getuserid(email: email.text!)
+                userid = loginInteractor.getuserid(email: email.text!)
                 setsessionvariable(userid: userid)
                 self.showToast(message: "Login Successfull", font: .systemFont(ofSize: 12.0))
-                let newVc = ReceiverViewController()
-                let nav = UINavigationController(rootViewController: newVc)
-                
+//                let newVc = ReceiverViewController()
+//                let nav = UINavigationController(rootViewController: newVc)
+//
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                if let scene = UIApplication.shared.connectedScenes.first{
-                    guard let windowScene = (scene as? UIWindowScene) else { return }
-                    let window: UIWindow = UIWindow(frame: windowScene.coordinateSpace.bounds)
-                    window.windowScene = windowScene
-                    window.rootViewController = nav
-                    window.makeKeyAndVisible()
-                    appDelegate.window = window
-                }
+//                if let scene = UIApplication.shared.connectedScenes.first{
+//                    guard let windowScene = (scene as? UIWindowScene) else { return }
+//                    let window: UIWindow = UIWindow(frame: windowScene.coordinateSpace.bounds)
+//                    window.windowScene = windowScene
+//                    window.rootViewController = nav
+//                    window.makeKeyAndVisible()
+//                    appDelegate.window = window
+              //  }
+               // appDelegate.changeRootVIewController()
+                delegate?.changeRootVIewController()
+                
          }
+            
             else{
                 presenter.showAlert()
                 }
             }
     }
+   
     func setsessionvariable(userid : Int){
         let userDefaults =  UserDefaults.standard
             userDefaults.set(userid, forKey: "userid")
             userDefaults.synchronize()
+        let loggedUsername = UserDefaults.standard.string(forKey: "userid")
+        print(loggedUsername)
     }
+    
    @objc func signUpClicked(_ sender: UITapGestureRecognizer){
         print("Clicked")
     let signUp = SignupViewController()
@@ -189,7 +203,8 @@ class LoginViewController: UIViewController,SignUpProtocol {
     nav.modalPresentationStyle = .automatic //or .overFullScreen for transparency
     signUp.delegate = self
     self.present(nav, animated: true, completion: nil)
-    }
+    
+   }
     
 
 }
@@ -228,6 +243,20 @@ extension LoginViewController {
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
     }
+    
+}
+struct Credentials {
+    var username: String
+    var password: String
+    init(username : String, password : String) {
+        self.username = username
+        self.password = password
+    }
+}
+enum KeychainError: Error {
+    case noPassword
+    case unexpectedPasswordData
+    case unhandledError(status: OSStatus)
 }
 extension LoginViewController : LoginPresenterDelegate{
     func showAlert() {

@@ -3,14 +3,19 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		1B14791B2679F89C003DEC63 /* DetailItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B14791A2679F89C003DEC63 /* DetailItemViewController.swift */; };
 		1B160856268076AD002570F2 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B160855268076AD002570F2 /* PageViewController.swift */; };
-		1B18D0092695BF3100BE4C96 /* DropdownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B18D0082695BF3100BE4C96 /* DropdownMenu.swift */; };
 		1B3A828A2690772B002BFADE /* ProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3A82892690772B002BFADE /* ProfileInteractor.swift */; };
+		1B448490269C0B9E00C02695 /* StatusInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44848F269C0B9E00C02695 /* StatusInteractor.swift */; };
+		1B448492269C0BD000C02695 /* StatusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B448491269C0BD000C02695 /* StatusTableViewCell.swift */; };
+		1B448494269C13DF00C02695 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B448493269C13DF00C02695 /* Status.swift */; };
+		1B448496269C442900C02695 /* DonarprofileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B448495269C442900C02695 /* DonarprofileViewController.swift */; };
+		1B448498269C44B300C02695 /* DonarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B448497269C44B300C02695 /* DonarTableViewCell.swift */; };
+		1B44849A269C4A7D00C02695 /* DonarInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B448499269C4A7D00C02695 /* DonarInteractor.swift */; };
 		1B52A86F267DB2A700B489AA /* CustomReceiverCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B52A86E267DB2A700B489AA /* CustomReceiverCard.swift */; };
 		1B52A871267DC74500B489AA /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B52A870267DC74500B489AA /* Data.swift */; };
 		1B6FF24C268369010093956C /* ReceiverInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6FF24B268369010093956C /* ReceiverInteractor.swift */; };
@@ -48,10 +53,10 @@
 		1BC38B6026899A13002501E0 /* AddItemInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC38B5F26899A13002501E0 /* AddItemInteractor.swift */; };
 		1BC38B6226899AF9002501E0 /* AddItemPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC38B6126899AF9002501E0 /* AddItemPresenter.swift */; };
 		1BC8C0E32692DA1400292240 /* RequestList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8C0E22692DA1400292240 /* RequestList.swift */; };
-		1BC8C0EB2692E5D300292240 /* RequestListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8C0EA2692E5D300292240 /* RequestListViewController.swift */; };
 		1BC8C0ED2692E5FF00292240 /* RequestListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8C0EC2692E5FF00292240 /* RequestListTableViewCell.swift */; };
 		1BC8C0EF2692E62000292240 /* RequestListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8C0EE2692E62000292240 /* RequestListInteractor.swift */; };
 		1BCFA85526997671009A48B8 /* CustomLoginTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCFA85426997671009A48B8 /* CustomLoginTextField.swift */; };
+		1BEE1D45269D6555008F3726 /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEE1D44269D6555008F3726 /* KeyChain.swift */; };
 		1E44A0637DE0090F2D371972 /* Pods_appUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6932C242F3ED69BDA171762B /* Pods_appUIKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -75,8 +80,13 @@
 /* Begin PBXFileReference section */
 		1B14791A2679F89C003DEC63 /* DetailItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailItemViewController.swift; sourceTree = "<group>"; };
 		1B160855268076AD002570F2 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
-		1B18D0082695BF3100BE4C96 /* DropdownMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownMenu.swift; sourceTree = "<group>"; };
 		1B3A82892690772B002BFADE /* ProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInteractor.swift; sourceTree = "<group>"; };
+		1B44848F269C0B9E00C02695 /* StatusInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusInteractor.swift; sourceTree = "<group>"; };
+		1B448491269C0BD000C02695 /* StatusTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTableViewCell.swift; sourceTree = "<group>"; };
+		1B448493269C13DF00C02695 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
+		1B448495269C442900C02695 /* DonarprofileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonarprofileViewController.swift; sourceTree = "<group>"; };
+		1B448497269C44B300C02695 /* DonarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonarTableViewCell.swift; sourceTree = "<group>"; };
+		1B448499269C4A7D00C02695 /* DonarInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonarInteractor.swift; sourceTree = "<group>"; };
 		1B52A86E267DB2A700B489AA /* CustomReceiverCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomReceiverCard.swift; sourceTree = "<group>"; };
 		1B52A870267DC74500B489AA /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		1B6FF24B268369010093956C /* ReceiverInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverInteractor.swift; sourceTree = "<group>"; };
@@ -120,10 +130,10 @@
 		1BC38B5F26899A13002501E0 /* AddItemInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemInteractor.swift; sourceTree = "<group>"; };
 		1BC38B6126899AF9002501E0 /* AddItemPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemPresenter.swift; sourceTree = "<group>"; };
 		1BC8C0E22692DA1400292240 /* RequestList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestList.swift; sourceTree = "<group>"; };
-		1BC8C0EA2692E5D300292240 /* RequestListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestListViewController.swift; sourceTree = "<group>"; };
 		1BC8C0EC2692E5FF00292240 /* RequestListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestListTableViewCell.swift; sourceTree = "<group>"; };
 		1BC8C0EE2692E62000292240 /* RequestListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestListInteractor.swift; sourceTree = "<group>"; };
 		1BCFA85426997671009A48B8 /* CustomLoginTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLoginTextField.swift; sourceTree = "<group>"; };
+		1BEE1D44269D6555008F3726 /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		40433AEAEDF8E26DCBCB7E50 /* Pods-appUIKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-appUIKit.release.xcconfig"; path = "Target Support Files/Pods-appUIKit/Pods-appUIKit.release.xcconfig"; sourceTree = "<group>"; };
 		6932C242F3ED69BDA171762B /* Pods_appUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_appUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9FE740E0977A69452118B8F /* Pods-appUIKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-appUIKit.debug.xcconfig"; path = "Target Support Files/Pods-appUIKit/Pods-appUIKit.debug.xcconfig"; sourceTree = "<group>"; };
@@ -155,6 +165,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B44848E269C0B7200C02695 /* Status */ = {
+			isa = PBXGroup;
+			children = (
+				1B44848F269C0B9E00C02695 /* StatusInteractor.swift */,
+				1B448491269C0BD000C02695 /* StatusTableViewCell.swift */,
+			);
+			path = Status;
+			sourceTree = "<group>";
+		};
 		1B6FF2512685DD6F0093956C /* Map */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +196,9 @@
 			children = (
 				1B9B8F47267256EC00C5497C /* ProfileViewController.swift */,
 				1B3A82892690772B002BFADE /* ProfileInteractor.swift */,
+				1B448495269C442900C02695 /* DonarprofileViewController.swift */,
+				1B448497269C44B300C02695 /* DonarTableViewCell.swift */,
+				1B448499269C4A7D00C02695 /* DonarInteractor.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -229,6 +251,7 @@
 		1B906EC82670A08C0032FA81 /* appUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				1B44848E269C0B7200C02695 /* Status */,
 				1BC8C0E92692E5AA00292240 /* RequestList */,
 				1B71D310268F282D00B11F3B /* Profile */,
 				1B71D30F268F27B200B11F3B /* Donation */,
@@ -275,6 +298,7 @@
 				1B906EFA2670A0F50032FA81 /* LoginViewController.swift */,
 				1B7EBFA82674945700F2AED1 /* LoginInteractor.swift */,
 				1B7EBFAA2674946F00F2AED1 /* LoginPresenter.swift */,
+				1BEE1D44269D6555008F3726 /* KeyChain.swift */,
 			);
 			path = login;
 			sourceTree = "<group>";
@@ -315,6 +339,7 @@
 				1B71D30D268F197700B11F3B /* Donationstatus.swift */,
 				1BC8C0E22692DA1400292240 /* RequestList.swift */,
 				1BAC4F762698474200BFC9DB /* Item_Image.swift */,
+				1B448493269C13DF00C02695 /* Status.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -327,7 +352,6 @@
 				1B14791A2679F89C003DEC63 /* DetailItemViewController.swift */,
 				1B160855268076AD002570F2 /* PageViewController.swift */,
 				1B6FF24B268369010093956C /* ReceiverInteractor.swift */,
-				1B18D0082695BF3100BE4C96 /* DropdownMenu.swift */,
 			);
 			path = Receiver;
 			sourceTree = "<group>";
@@ -335,7 +359,6 @@
 		1BC8C0E92692E5AA00292240 /* RequestList */ = {
 			isa = PBXGroup;
 			children = (
-				1BC8C0EA2692E5D300292240 /* RequestListViewController.swift */,
 				1BC8C0EC2692E5FF00292240 /* RequestListTableViewCell.swift */,
 				1BC8C0EE2692E62000292240 /* RequestListInteractor.swift */,
 			);
@@ -370,7 +393,6 @@
 				1B906EC22670A08C0032FA81 /* Sources */,
 				1B906EC32670A08C0032FA81 /* Frameworks */,
 				1B906EC42670A08C0032FA81 /* Resources */,
-				168D2AE7FA82050B930E8ECC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -486,23 +508,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		168D2AE7FA82050B930E8ECC /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-appUIKit/Pods-appUIKit-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-appUIKit/Pods-appUIKit-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-appUIKit/Pods-appUIKit-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		43957FA9BAF0D31367A1D94C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -533,12 +538,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B83CADA267735D70041C6A2 /* Extension.swift in Sources */,
+				1B448492269C0BD000C02695 /* StatusTableViewCell.swift in Sources */,
 				1BC8C0ED2692E5FF00292240 /* RequestListTableViewCell.swift in Sources */,
 				1BC38B6226899AF9002501E0 /* AddItemPresenter.swift in Sources */,
 				1BC8C0EF2692E62000292240 /* RequestListInteractor.swift in Sources */,
 				1B906EFB2670A0F50032FA81 /* LoginViewController.swift in Sources */,
+				1BEE1D45269D6555008F3726 /* KeyChain.swift in Sources */,
 				1B14791B2679F89C003DEC63 /* DetailItemViewController.swift in Sources */,
 				1B6FF24C268369010093956C /* ReceiverInteractor.swift in Sources */,
+				1B448494269C13DF00C02695 /* Status.swift in Sources */,
 				1B906F0D2670FC660032FA81 /* Item.swift in Sources */,
 				1B7EBFA92674945700F2AED1 /* LoginInteractor.swift in Sources */,
 				1B52A86F267DB2A700B489AA /* CustomReceiverCard.swift in Sources */,
@@ -547,6 +555,7 @@
 				1B71D306268ED64B00B11F3B /* ToastViewController.swift in Sources */,
 				1B71D30E268F197700B11F3B /* Donationstatus.swift in Sources */,
 				1B7EBFAB2674946F00F2AED1 /* LoginPresenter.swift in Sources */,
+				1B448490269C0B9E00C02695 /* StatusInteractor.swift in Sources */,
 				1BCFA85526997671009A48B8 /* CustomLoginTextField.swift in Sources */,
 				1B906ECE2670A08C0032FA81 /* ViewController.swift in Sources */,
 				1B71D30C268EE10C00B11F3B /* DonationInteractor.swift in Sources */,
@@ -554,11 +563,12 @@
 				1B3A828A2690772B002BFADE /* ProfileInteractor.swift in Sources */,
 				1B906EFE2670A12D0032FA81 /* SignupViewController.swift in Sources */,
 				1B906F0A2670FC260032FA81 /* AddItemViewController.swift in Sources */,
-				1B18D0092695BF3100BE4C96 /* DropdownMenu.swift in Sources */,
+				1B448496269C442900C02695 /* DonarprofileViewController.swift in Sources */,
 				1B9B8F442671DFC000C5497C /* ReceiverTableViewCell.swift in Sources */,
 				1B7EBFA52674884200F2AED1 /* SignupInteractor.swift in Sources */,
 				1BC38B6026899A13002501E0 /* AddItemInteractor.swift in Sources */,
 				1B7EBFA126747A9200F2AED1 /* CustomTextField.swift in Sources */,
+				1B44849A269C4A7D00C02695 /* DonarInteractor.swift in Sources */,
 				1B906F002670A9260032FA81 /* DBHelper.swift in Sources */,
 				1B9B8F4626724E6F00C5497C /* User.swift in Sources */,
 				1BAC4F772698474200BFC9DB /* Item_Image.swift in Sources */,
@@ -567,12 +577,12 @@
 				1B9B8F48267256EC00C5497C /* ProfileViewController.swift in Sources */,
 				1B7EBFA726748EA300F2AED1 /* CustomField.swift in Sources */,
 				1B52A871267DC74500B489AA /* Data.swift in Sources */,
-				1BC8C0EB2692E5D300292240 /* RequestListViewController.swift in Sources */,
 				1B71D308268ED79800B11F3B /* DonationTableViewCell.swift in Sources */,
 				1B7EBF9F26747A4700F2AED1 /* CustomButton.swift in Sources */,
 				1B7EBF9C267479F000F2AED1 /* SignupPresenter.swift in Sources */,
 				1B6FF2532685DD9B0093956C /* MapViewController.swift in Sources */,
 				1B906ECC2670A08C0032FA81 /* SceneDelegate.swift in Sources */,
+				1B448498269C44B300C02695 /* DonarTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

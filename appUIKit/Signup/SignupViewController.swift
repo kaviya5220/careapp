@@ -8,13 +8,10 @@
 
 
 import UIKit
-import CryptoSwift
 protocol SignUpProtocol {
     func signUpSUccessful()
 }
 class SignupViewController: UIViewController,UIScrollViewDelegate{
-    var endata : String = ""
-    var dcdata : String = ""
     var flag : Bool = true
     var delegate:SignUpProtocol?
     let signupInteractor = SignupInteractor()
@@ -105,15 +102,14 @@ class SignupViewController: UIViewController,UIScrollViewDelegate{
     
     let signUpPresenter = SignupPresenter()
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    override func viewDidLayoutSubviews() {
         view.backgroundColor = .white
         setupConstraints()
         let contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
                 scrollView.contentSize = contentViewSize
-                scrollView.frame = view.bounds
+               // scrollView.frame = view.bounds
                 scrollView.delegate = self
+        scrollView.contentInsetAdjustmentBehavior = .automatic
         view.addSubview(scrollView)
         scrollView.addSubview(stackView)
         view.addSubview(horizontalstackView)
@@ -158,20 +154,14 @@ class SignupViewController: UIViewController,UIScrollViewDelegate{
 //            flag = false
 //        }
         if(flag){
-            endata = try! aesEncrypt(password: password.text!)
-            print(endata)
-            let user: User = User(user_name: name.text!, user_phone: phone.text!, user_address: address.text!, user_email:emailField.text!, user_password: endata)
+            
+            let user: User = User(user_name: name.text!, user_phone: phone.text!, user_address: address.text!, user_email:emailField.text!, user_password: password.text!)
+            let credentials = Credentials(username: emailField.text!, password: password.text!)
+           try? signupInteractor.insertInKeychain(credentials: credentials)
             signupInteractor.insertUser(user: user)
             delegate?.signUpSUccessful()
         
         }
-    }
-    func aesEncrypt(password:String) throws -> String {
-        let key: String  = "secret0key000000"
-        let iv:  String  = "0000000000000000"
-        let data : [UInt8] = Array(password.utf8)
-        let encrypted = try AES(key: key, iv: iv, padding: .pkcs7).encrypt(data)
-        return Data(encrypted).base64EncodedString()
     }
     
 }
@@ -183,7 +173,7 @@ extension SignupViewController {
                                      regularConstraints: regularConstraints)
     }
     private func setupConstraints() {
-        let contentLayoutGuide = scrollView.contentLayoutGuide
+       // let contentLayoutGuide = scrollView.contentLayoutGuide
         
         sharedConstraints.append(contentsOf: [
             //stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
@@ -196,9 +186,11 @@ extension SignupViewController {
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            //scrollView.heightAnchor.constraint(equalToConstant: 500),
+         //   stackView.topAnchor.constraint(equalTo: view.topAnchor,constant: 100),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            stackView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
             submitbutton.widthAnchor.constraint(equalTo: self.view.widthAnchor,multiplier: 0.5),
             submitbutton.topAnchor.constraint(equalTo: stackView.bottomAnchor,constant: 30),
             submitbutton.centerXAnchor.constraint(equalTo: view.centerXAnchor),

@@ -6,11 +6,11 @@
 //
 
 import UIKit
-import IQKeyboardManager
 
 @main 
 class AppDelegate: UIResponder, UIApplicationDelegate,changeRootView {
     func changeRootVIewController() {
+        print("Hii")
     }
     
     var window: UIWindow?
@@ -20,14 +20,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate,changeRootView {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
        
-
         // Override point for customization after application launch.
         //if let windowScene = scene as? UIWindowScene {
 
            // let window = UIWindow(windowScene: windowScene)
        
         
-        IQKeyboardManager.shared().isEnabled = true
+      //  IQKeyboardManager.shared().isEnabled = true
         return true
     }
     

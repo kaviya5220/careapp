@@ -97,17 +97,25 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         }
    
     @objc func didTapAdd(_ sender: UIButton) {
+        if(receiverInteractor.isLoggedIn()){
         let addItem = AddItemViewController()
         let vc = UINavigationController()
         vc.viewControllers = [addItem]
         vc.modalPresentationStyle = .automatic //or .overFullScreen for transparency
         addItem.delegate = self
         self.present(vc, animated: true, completion: nil)
-      
+        }
+        else{
+            self.navigationController?.pushViewController(LoginViewController(), animated: true)
+        }
         }
     @objc func navigateToProfile(_ sender: UIButton) {
-        //	let addItem = AddItemViewController()
-        self.navigationController?.pushViewController(ProfileViewController(), animated: true)
+        if(receiverInteractor.isLoggedIn()){
+            self.navigationController?.pushViewController(ProfileViewController(), animated: true)
+        }
+        else{
+            self.navigationController?.pushViewController(LoginViewController(), animated: true)
+        }
     }
     @objc func didTapFilter(_ sender: UIButton) {
         print("clicked")
@@ -284,6 +292,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         item_images.append(Item_Image(item_id: item.item_id, item_image: item_image))
         filtered_item_images = item_images
         filteredItems = items
+        sortNameAscending()
         receiverTableView.reloadData()
     }
 }

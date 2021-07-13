@@ -13,12 +13,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        
         if let windowScene = scene as? UIWindowScene {
 
             let window = UIWindow(windowScene: windowScene)
             let navController = UINavigationController()
            // if let loggedUsername = UserDefaults.standard.string(forKey: "userid") {
-                let viewController = LoginViewController()
+                let viewController = ReceiverViewController()
                 navController.viewControllers = [viewController]
                 navController.navigationBar.backgroundColor = .clear
                 let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black]

@@ -13,11 +13,14 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     public var items : [Item] = []
     var requestlist : [RequestList] = []
     var newRequestList: [[RequestList]] = [[]]
+    var statuslist : [Status] = []
     var itemNames : [String] = []
     let donationInteractor = DonationInteractor()
     let requestlistInteractor = RequestListInteractor()
+    let statuslistInteractor = StatusInteractor()
     let donarTableView = UITableView()
     let requestListTableView = UITableView()
+    let statusTableView = UITableView()
     let userdefaults = UserDefaults.standard
     let profileInteractor = ProfileInteractor()
     
@@ -68,14 +71,6 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         let label = CustomLabel(labelType: .primary)
         return label
     }()
-    let testview1 : UIView = {
-        let tst = UIView()
-        tst.backgroundColor = .red
-        tst.clipsToBounds = true
-        tst.translatesAutoresizingMaskIntoConstraints = false
-        return tst
-    }()
-    
     let segmentedControl : UISegmentedControl = {
         let segmentItems = ["My Donations","Request List", "Status"]
            let control = UISegmentedControl(items: segmentItems)
@@ -95,22 +90,20 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         requestlist = requestlistInteractor.fetchRequestList(donarID: userid)
         itemNames = [String](Set(requestlist.map{$0.item_name}))
         itemNames.sort()
-//        print("Item Names\(itemNames)")
-//        print("Items COunt \(items)")
         let newlist = Dictionary(grouping: requestlist,by : \.item_name).sorted{$0.key < $1.key}
-       // print("newnwew\(newlist)")
         newRequestList = newlist.map{return $0.value}
         
         setUserDetails(userid: userid)
-        print(items)
+        statuslist = statuslistInteractor.fetchStatus(receiver_id: userid)
         donarTableView.translatesAutoresizingMaskIntoConstraints = false
         donarTableView.reloadData()
         requestListTableView.translatesAutoresizingMaskIntoConstraints = false
         requestListTableView.reloadData()
-       
+        statusTableView.translatesAutoresizingMaskIntoConstraints = false
+        statusTableView.reloadData()
         view.addSubview(profileHorizantalView)
         view.addSubview(segmentedControl)
-        //view.addSubview(testview1)
+        view.addSubview(statusTableView)
         view.addSubview(requestListTableView)
         view.addSubview(donarTableView)
         
@@ -136,6 +129,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         requestListTableView.dataSource = self
         requestListTableView.delegate = self
         requestListTableView.register(RequestListTableViewCell.self, forCellReuseIdentifier: "requestList")
+        statusTableView.dataSource = self
+        statusTableView.delegate = self
+        statusTableView.register(StatusTableViewCell.self, forCellReuseIdentifier: "statuscell")
     }
     @objc func insertUser(_ sender: UIButton) {
         print("REquest clicked")
@@ -153,26 +149,47 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
        
     @objc func logout(_ sender: UIButton)
     {
-        let login = LoginViewController()
+      //  let login = LoginViewController()
         let userDefaults =  UserDefaults.standard
-        let nav = UINavigationController(rootViewController: login)
+      //  let nav = UINavigationController(rootViewController: login)
         
         userDefaults.removeObject(forKey: "userid")
             userDefaults.synchronize()
-            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(nav)
+      
+          //  (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(nav)
+        let newVc = ReceiverViewController()
+        let nav = UINavigationController(rootViewController: newVc)
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if let scene = UIApplication.shared.connectedScenes.first{
+            guard let windowScene = (scene as? UIWindowScene) else { return }
+            let window: UIWindow = UIWindow(frame: windowScene.coordinateSpace.bounds)
+            window.windowScene = windowScene
+            window.rootViewController = nav
+            window.makeKeyAndVisible()
+            appDelegate.window = window
+        }
             }
     @objc func segmentControl(_ segmentedControl: UISegmentedControl) {
        switch (segmentedControl.selectedSegmentIndex) {
           case 0:
             print("0")
+            statusTableView.isHidden = true
             requestListTableView.isHidden = true
             donarTableView.isHidden = false
           break
           case 1:
             print("!")
-//            print(requestlist)
+            statusTableView.isHidden = true
             donarTableView.isHidden = true
             requestListTableView.isHidden = false
+       case 2 :
+        statusTableView.isHidden = false
+        requestListTableView.isHidden = true
+        donarTableView.isHidden = true
+         
+            
+            
             
           break
           default:
@@ -188,10 +205,10 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if(tableView == donarTableView){
+        if(tableView == donarTableView || tableView == statusTableView){
             return 1
         }
-        else{
+        else {
         return itemNames.count
         }
     }
@@ -199,10 +216,11 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             if(tableView == donarTableView){
             return items.count
             }
-            else {
-                //print("Item Name\(itemNames[section])")
-                //print("Section\(requestlist.map{$0.item_name==itemNames[section]}.count)")
+            else if(tableView == requestListTableView){
                 return requestlist.filter{$0.item_name == itemNames[section]}.count
+            }
+            else{
+                return statuslist.count
             }
             
         }
@@ -210,20 +228,22 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             if(tableView == donarTableView){
             let cell = tableView.dequeueReusableCell(withIdentifier: "itemcell", for: indexPath) as! DonationTableViewCell
-            print("cell\(cell.item)")
            cell.item = items[indexPath.row]
             return cell
             }
-            else {
+            
+            else if(tableView == requestListTableView){
                 let cell = tableView.dequeueReusableCell(withIdentifier: "requestList", for: indexPath) as! RequestListTableViewCell
-              //  print("IndexPath\(indexPath.section)")
-
-                //print("IN here \(newRequestList[indexPath.section][indexPath.row].item_name)")
+              
                 cell.request = newRequestList[indexPath.section][indexPath.row]
-                
-                //  cell.textLabel?.text = "hi"
                 return cell
             }
+            else{
+                let cell = tableView.dequeueReusableCell(withIdentifier: "statuscell", for: indexPath) as! StatusTableViewCell
+                cell.status = statuslist[indexPath.row]
+                return cell
+            }
+            
         }
         
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -260,6 +280,11 @@ extension ProfileViewController {
             requestListTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
             requestListTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
             requestListTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            
+            statusTableView.topAnchor.constraint(equalTo: profileHorizantalView.bottomAnchor,constant: 50),
+            statusTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            statusTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            statusTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
         
         compactConstraints.append(contentsOf: [
