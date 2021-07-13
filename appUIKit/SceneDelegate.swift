@@ -40,15 +40,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             //}
         }
     }
-    func changeRootViewController(_ vc: UIViewController, animated: Bool = true) {
-        guard let window = self.window else {
-            return
-        }
-        
-        window.rootViewController = vc
-        self.window = window
-        window.makeKeyAndVisible()
-    }
+//    func changeRootViewController(_ vc: UIViewController, animated: Bool = true) {
+//        guard let window = self.window else {
+//            return
+//        }
+//
+//        window.rootViewController = vc
+//        self.window = window
+//        window.makeKeyAndVisible()
+//    }
     func sceneDidDisconnect(_ scene: UIScene) {
         print("Disconnect")
         // Called as the scene is being released by the system.

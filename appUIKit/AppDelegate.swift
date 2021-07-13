@@ -14,11 +14,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate,changeRootView {
     }
     
     var window: UIWindow?
+        
+        var navController: UINavigationController = UINavigationController()
+
+//        private var auth: LoginViewController {
+//            return LoginViewController.shared
+//        }
+//
     
 
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+                        self.window = UIWindow(frame: UIScreen.main.bounds)
+                
+                        let viewController = ReceiverViewController()
+                        navController.viewControllers = [viewController]
+                        navController.navigationBar.backgroundColor = .clear
+                        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black]
+                        navController.navigationBar.titleTextAttributes = textAttributes
+                        self.window?.rootViewController = navController
+                        self.window?.makeKeyAndVisible()
+                        return true
+
+        
+            
        
         // Override point for customization after application launch.
         //if let windowScene = scene as? UIWindowScene {
@@ -27,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,changeRootView {
        
         
       //  IQKeyboardManager.shared().isEnabled = true
-        return true
+       
     }
     
     // MARK: UISceneSession Lifecycle

@@ -85,7 +85,6 @@ class LoginViewController: UIViewController,SignUpProtocol {
             emailfield.keyboardType = UIKeyboardType.emailAddress
             emailfield.autocapitalizationType = UITextAutocapitalizationType.none
             emailfield.placeholder = "Enter email"
-            emailfield.text = "K"
             emailfield.leftViewMode = UITextField.ViewMode.always
             emailfield.leftViewMode = .always
             let outerView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20) )
@@ -100,7 +99,6 @@ class LoginViewController: UIViewController,SignUpProtocol {
             let password = CustomLoginTextField()
             password.isSecureTextEntry = true
             password.placeholder = "Enter password"
-            password.text = "K"
             password.leftViewMode = UITextField.ViewMode.always
             password.leftViewMode = .always
             let outerView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20) )
@@ -164,10 +162,11 @@ class LoginViewController: UIViewController,SignUpProtocol {
                 userid = loginInteractor.getuserid(email: email.text!)
                 setsessionvariable(userid: userid)
                 self.showToast(message: "Login Successfull", font: .systemFont(ofSize: 12.0))
+                self.navigationController?.pushViewController(ReceiverViewController(), animated: true)
 //                let newVc = ReceiverViewController()
 //                let nav = UINavigationController(rootViewController: newVc)
 //
-                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+               // let appDelegate = UIApplication.shared.delegate as! AppDelegate
 //                if let scene = UIApplication.shared.connectedScenes.first{
 //                    guard let windowScene = (scene as? UIWindowScene) else { return }
 //                    let window: UIWindow = UIWindow(frame: windowScene.coordinateSpace.bounds)
@@ -177,7 +176,7 @@ class LoginViewController: UIViewController,SignUpProtocol {
 //                    appDelegate.window = window
               //  }
                // appDelegate.changeRootVIewController()
-                delegate?.changeRootVIewController()
+              //  delegate?.changeRootVIewController()
                 
          }
             
