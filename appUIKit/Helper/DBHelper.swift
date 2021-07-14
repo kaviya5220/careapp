@@ -27,7 +27,7 @@ class DBHelper{
             print("There is error in creating DB")
             return nil
         }else {
-            print("Database has been created with path \(filePath)")
+          //  print("Database has been created with path \(filePath)")
             return db
         }
     }
@@ -202,7 +202,7 @@ class DBHelper{
         }
     static func getitems() ->  [Item] {
         
-        let queryStatementString = "SELECT Item_ID,Item_Name,Item_Description,Item_Quantity,Address,Donar_ID,Visited_count,Date_posted FROM ItemDetails ORDER BY Item_Name;"
+        let queryStatementString = "SELECT Item_ID,Item_Name,Item_Description,Item_Quantity,Address,Donar_ID,Visited_count,Date_posted FROM ItemDetails WHERE Item_ID IN(SELECT Item_ID FROM DonationStatus WHERE Status != 'accepted')  OR Item_ID NOT IN(SELECT Item_ID FROM DonationStatus) ORDER BY Item_Name;"
         var itemlist : [Item] = []
         var queryStatement: OpaquePointer?
           if sqlite3_prepare_v2(db, queryStatementString, -1, &queryStatement, nil) ==
@@ -236,7 +236,7 @@ class DBHelper{
         }
     static func getitemsImageName() ->  [Item_Image] {
         var item_image_list : [Item_Image] = []
-        let queryStatementString = "SELECT Item_ID,Item_ImageName FROM ItemDetails ORDER BY Item_Name;"
+        let queryStatementString = "SELECT Item_ID,Item_ImageName FROM ItemDetails WHERE Item_ID IN(SELECT Item_ID FROM DonationStatus WHERE Status != 'accepted') OR Item_ID NOT IN(SELECT Item_ID FROM DonationStatus) ORDER BY Item_Name;"
         var queryStatement: OpaquePointer?
           if sqlite3_prepare_v2(db, queryStatementString, -1, &queryStatement, nil) ==
               SQLITE_OK {
@@ -391,9 +391,9 @@ class DBHelper{
       if sqlite3_prepare_v2(db, createTableString, -1, &createTableStatement, nil) ==
           SQLITE_OK {
         if sqlite3_step(createTableStatement) == SQLITE_DONE {
-          print("ItemDetails table created.")
+          print("Donation Table table created.")
         } else {
-          print("ItemDetails table is not created.")
+          print("Donation Table table is not created.")
         }
       } else {
         print("\nCREATE TABLE statement is not prepared.")
@@ -560,4 +560,38 @@ class DBHelper{
         }
         return user
         }
+    static func updatestatus(receiverid : Int,item_id:Int) {
+      var updateStatement: OpaquePointer?
+        let updateStatementString = "UPDATE DonationStatus SET Status = 'accepted' WHERE Receiver_ID = ? and Item_ID=?;"
+        if sqlite3_prepare_v2(db, updateStatementString, -1, &updateStatement, nil) ==
+          SQLITE_OK {
+            sqlite3_bind_int(updateStatement, 1, Int32(receiverid))
+            sqlite3_bind_int(updateStatement, 2, Int32(item_id))
+        if sqlite3_step(updateStatement) == SQLITE_DONE {
+          print("\nSuccessfully updated row.")
+        } else {
+          print("\nCould not update row.")
+        }
+      } else {
+        print("\nUPDATE statement is not prepared")
+      }
+        sqlite3_finalize(updateStatement);
+    }
+    static func updateOtherRequests(receiverid : Int,item_id:Int) {
+        var updateStatement: OpaquePointer?
+          let updateStatementString = "UPDATE DonationStatus SET Status = 'rejected' WHERE Receiver_ID != ? and Item_ID=?;"
+          if sqlite3_prepare_v2(db, updateStatementString, -1, &updateStatement, nil) ==
+            SQLITE_OK {
+              sqlite3_bind_int(updateStatement, 1, Int32(receiverid))
+              sqlite3_bind_int(updateStatement, 2, Int32(item_id))
+          if sqlite3_step(updateStatement) == SQLITE_DONE {
+            print("\nSuccessfully updated row.")
+          } else {
+            print("\nCould not update row.")
+          }
+        } else {
+          print("\nUPDATE statement is not prepared")
+        }
+          sqlite3_finalize(updateStatement);
+      }
 }

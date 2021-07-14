@@ -8,7 +8,10 @@
 import UIKit
 
 
-class ReceiverViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate,UISearchResultsUpdating,canReceive,UINavigationControllerDelegate,UIPopoverPresentationControllerDelegate {
+class ReceiverViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate,UISearchResultsUpdating,canReceive,UINavigationControllerDelegate,UIPopoverPresentationControllerDelegate,updateItems {
+    
+   
+    
     var db = DBHelper()
     public var itemid : [Int] = []
     public var items : [Item] = []
@@ -111,7 +114,9 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     @objc func navigateToProfile(_ sender: UIButton) {
         if(receiverInteractor.isLoggedIn()){
-            self.navigationController?.pushViewController(ProfileViewController(), animated: true)
+            let vc = ProfileViewController()
+            vc.delagate = self
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         else{
             self.navigationController?.pushViewController(LoginViewController(), animated: true)
@@ -122,7 +127,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         self.present(actionSheet,animated: true)
     }
     @objc func sortNameDescending(){
-        print(item_images)
+       
         let combined = zip(items,filtered_item_images).sorted(by: {$0.0.item_name > $1.0.item_name})
         let s1 = combined.map {$0.0}
         let s2 = combined.map {$0.1}
@@ -132,7 +137,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         receiverTableView.reloadData()
     }
     @objc func sortDateDescending(){
-        print(item_images)
+       
         let combined = zip(items,filtered_item_images).sorted(by: {$0.0.date > $1.0.date})
         let s1 = combined.map {$0.0}
         let s2 = combined.map {$0.1}
@@ -142,7 +147,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         receiverTableView.reloadData()
     }
     @objc func sortDateAscending(){
-        print(item_images)
+        
         let combined = zip(items,filtered_item_images).sorted(by: {$0.0.date < $1.0.date})
         let s1 = combined.map {$0.0}
         let s2 = combined.map {$0.1}
@@ -152,7 +157,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         receiverTableView.reloadData()
     }
     @objc func sortNameAscending(){
-        print(item_images)
+       
         let combined = zip(items,filtered_item_images).sorted(by: {$0.0.item_name < $1.0.item_name})
         let s1 = combined.map {$0.0}
         let s2 = combined.map {$0.1}
@@ -161,13 +166,13 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         filtered_item_images = s2
         receiverTableView.reloadData()
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        //print(filteredItems)
-        filteredItems = items
-        receiverTableView.reloadData()
-        
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        //print(filteredItems)
+//        filteredItems = items
+//        receiverTableView.reloadData()
+//
+//    }
         
     
     override func viewDidLoad() {
@@ -184,7 +189,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         navigationItem.leftBarButtonItem = leftBarButton
         DispatchQueue.global(qos:.background).async {
             var itemlist:[Item] = []
-                    print("asnccc")
+                  //  print("asnccc")
                     itemlist = self.receiverInteractor.getitemdetails()
 
                 DispatchQueue.main.async(execute: {
@@ -196,7 +201,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
 
         DispatchQueue.global(qos:.background).async {
             var item_images_list : [Item_Image] = []
-                    print("image  asnccc")
+                 //   print("image  asnccc")
             item_images_list = self.receiverInteractor.getItemImages()
 
             DispatchQueue.main.async(execute: {
@@ -290,6 +295,23 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
     func passData(item: Item,item_image : String) {
         items.append(item)
         item_images.append(Item_Image(item_id: item.item_id, item_image: item_image))
+        filtered_item_images = item_images
+        filteredItems = items
+        sortNameAscending()
+        receiverTableView.reloadData()
+    }
+    func updateItem(itemid : Int) {
+        print("updelegate")
+//        filteredItems.remove(at: filteredItems.firstIndex(of: 1))
+        if let idx = items.firstIndex(where: { $0.item_id == itemid }) {
+
+            items.remove(at: idx)
+            
+        }
+        if let idx = item_images.firstIndex(where: { $0.item_id == itemid }) {
+
+            item_images.remove(at: idx)
+        }
         filtered_item_images = item_images
         filteredItems = items
         sortNameAscending()

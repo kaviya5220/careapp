@@ -8,7 +8,7 @@
 import UIKit
 
 @main 
-class AppDelegate: UIResponder, UIApplicationDelegate,changeRootView {
+class AppDelegate: UIResponder, UIApplicationDelegate {
     func changeRootVIewController() {
         print("Hii")
     }
@@ -27,15 +27,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate,changeRootView {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-                        self.window = UIWindow(frame: UIScreen.main.bounds)
-                
-                        let viewController = ReceiverViewController()
-                        navController.viewControllers = [viewController]
-                        navController.navigationBar.backgroundColor = .clear
-                        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black]
-                        navController.navigationBar.titleTextAttributes = textAttributes
-                        self.window?.rootViewController = navController
-                        self.window?.makeKeyAndVisible()
+//                        self.window = UIWindow(frame: UIScreen.main.bounds)
+//
+//                        let viewController = ReceiverViewController()
+//                        navController.viewControllers = [viewController]
+//                        navController.navigationBar.backgroundColor = .clear
+//                        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black]
+//                        navController.navigationBar.titleTextAttributes = textAttributes
+//                        self.window?.rootViewController = navController
+//                        self.window?.makeKeyAndVisible()
                         return true
 
         
@@ -60,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,changeRootView {
     }
 
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        print("Discarded")
+        
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.

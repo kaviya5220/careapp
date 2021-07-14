@@ -7,9 +7,6 @@
 
 import UIKit
 
-protocol changeRootView {
-    func changeRootVIewController()
-}
 class LoginViewController: UIViewController,SignUpProtocol {
   
     
@@ -19,7 +16,6 @@ class LoginViewController: UIViewController,SignUpProtocol {
         dismiss(animated: true, completion: nil)
         presenter.showSignupSuccessAlert()
     }
-    var delegate: changeRootView?
         let presenter = LoginPresenter()
         let loginInteractor = LoginInteractor()
         var userid : Int = 0
@@ -163,20 +159,6 @@ class LoginViewController: UIViewController,SignUpProtocol {
                 setsessionvariable(userid: userid)
                 self.showToast(message: "Login Successfull", font: .systemFont(ofSize: 12.0))
                 self.navigationController?.pushViewController(ReceiverViewController(), animated: true)
-//                let newVc = ReceiverViewController()
-//                let nav = UINavigationController(rootViewController: newVc)
-//
-               // let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//                if let scene = UIApplication.shared.connectedScenes.first{
-//                    guard let windowScene = (scene as? UIWindowScene) else { return }
-//                    let window: UIWindow = UIWindow(frame: windowScene.coordinateSpace.bounds)
-//                    window.windowScene = windowScene
-//                    window.rootViewController = nav
-//                    window.makeKeyAndVisible()
-//                    appDelegate.window = window
-              //  }
-               // appDelegate.changeRootVIewController()
-              //  delegate?.changeRootVIewController()
                 
          }
             
@@ -191,7 +173,6 @@ class LoginViewController: UIViewController,SignUpProtocol {
             userDefaults.set(userid, forKey: "userid")
             userDefaults.synchronize()
         let loggedUsername = UserDefaults.standard.string(forKey: "userid")
-        print(loggedUsername)
     }
     
    @objc func signUpClicked(_ sender: UITapGestureRecognizer){
@@ -245,10 +226,10 @@ extension LoginViewController {
     
 }
 struct Credentials {
-    var username: String
+    var email: String
     var password: String
     init(username : String, password : String) {
-        self.username = username
+        self.email = username
         self.password = password
     }
 }

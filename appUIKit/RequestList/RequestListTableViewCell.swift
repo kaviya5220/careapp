@@ -40,10 +40,16 @@ class RequestListTableViewCell: UITableViewCell {
             view.clipsToBounds = true
             return view
         }()
+    let receiver_label:CustomLabel = {
+        let label = CustomLabel(labelType: .primary)
+        label.text = "Receiver"
+        label.textAlignment = .center
+        return label
+    }()
     
     let receivername_label:CustomLabel = {
         let label = CustomLabel(labelType: .primary)
-        label.text = "Receiver Name :"
+        label.text = "Name:"
         return label
     }()
         let receiver_name:CustomLabel = {
@@ -52,7 +58,7 @@ class RequestListTableViewCell: UITableViewCell {
         }()
     let receiveraddress_label:CustomLabel = {
         let label = CustomLabel(labelType: .primary)
-        label.text = "Receiver Address:"
+        label.text = "Address:"
         return label
     }()
         
@@ -62,18 +68,19 @@ class RequestListTableViewCell: UITableViewCell {
         }()
     let receiverphone_label:CustomLabel = {
         let label = CustomLabel(labelType: .primary)
-        label.text = "Receiver Phone:"
+        label.text = "Phone:"
         return label
     }()
         
         let receiver_Phone:CustomLabel = {
             let label = CustomLabel(labelType: .primary)
             return label
+         
         }()
     
     let receiveremail_label:CustomLabel = {
         let label = CustomLabel(labelType: .primary)
-        label.text = "Receiver Email:"
+        label.text = "Email:"
         return label
     }()
         
@@ -81,12 +88,15 @@ class RequestListTableViewCell: UITableViewCell {
             let label = CustomLabel(labelType: .primary)
             return label
         }()
+    
+    
+   
 
         
 
         override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
-            
+            containerView.addSubview(receiver_label)
             containerView.addSubview(receivername_label)
             containerView.addSubview(receiver_name)
             containerView.addSubview(receiverphone_label)
@@ -98,15 +108,19 @@ class RequestListTableViewCell: UITableViewCell {
             self.contentView.addSubview(containerView)
             
             
+            
 
             containerView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant:5).isActive = true
             containerView.leadingAnchor.constraint(equalTo:self.contentView.leadingAnchor, constant:10).isActive = true
             containerView.trailingAnchor.constraint(equalTo:self.contentView.trailingAnchor, constant:-10).isActive = true
-            containerView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -5).isActive = true
+            containerView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor).isActive = true
             
-            receivername_label.topAnchor.constraint(equalTo:self.containerView.topAnchor,constant: 5).isActive = true
+            receiver_label.topAnchor.constraint(equalTo:self.containerView.topAnchor).isActive = true
+            receiver_label.centerXAnchor.constraint(equalTo: self.containerView.centerXAnchor).isActive = true
+            
+            receivername_label.topAnchor.constraint(equalTo:self.receiver_label.bottomAnchor,constant: 5).isActive = true
             receivername_label.leadingAnchor.constraint(equalTo:self.containerView.leadingAnchor).isActive = true
-            receiver_name.topAnchor.constraint(equalTo:self.containerView.topAnchor,constant: 5).isActive = true
+            receiver_name.topAnchor.constraint(equalTo:self.receiver_label.bottomAnchor,constant: 5).isActive = true
             receiver_name.leadingAnchor.constraint(equalTo:self.receivername_label.trailingAnchor,constant: 10).isActive = true
             
             receiverphone_label.topAnchor.constraint(equalTo:self.receiver_name.bottomAnchor,constant: 5).isActive = true
@@ -123,15 +137,7 @@ class RequestListTableViewCell: UITableViewCell {
             receiveraddress_label.leadingAnchor.constraint(equalTo:self.containerView.leadingAnchor).isActive = true
             receiver_Address.topAnchor.constraint(equalTo:self.receiver_email.bottomAnchor,constant: 5).isActive = true
             receiver_Address.leadingAnchor.constraint(equalTo:self.receiveraddress_label.trailingAnchor,constant: 10).isActive = true
-           
-        
-           
-           
-          
             
-            
-           
-          
         }
         
         required init?(coder aDecoder: NSCoder) {

@@ -16,7 +16,7 @@ class SignupInteractor{
       //  let  account = credentials.username
          let password = credentials.password.data(using: String.Encoding.utf8)!
          let query: [String: Any] = [kSecClass as String: kSecClassGenericPassword as String,
-                                     kSecAttrAccount as String: credentials.username,
+                                     kSecAttrAccount as String: credentials.email,
                                      kSecValueData as String: password]
          print("KEY2")
          

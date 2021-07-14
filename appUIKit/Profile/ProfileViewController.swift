@@ -6,9 +6,12 @@
 //
 
 import UIKit
+protocol updateItems {
+    func updateItem(itemid : Int)
+}
 
 class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
+    var delagate : updateItems?
     public var itemid : [Int] = []
     public var items : [Item] = []
     var requestlist : [RequestList] = []
@@ -93,6 +96,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         let newlist = Dictionary(grouping: requestlist,by : \.item_name).sorted{$0.key < $1.key}
         newRequestList = newlist.map{return $0.value}
         
+        
+        
         setUserDetails(userid: userid)
         statuslist = statuslistInteractor.fetchStatus(receiver_id: userid)
         donarTableView.translatesAutoresizingMaskIntoConstraints = false
@@ -133,9 +138,23 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         statusTableView.delegate = self
         statusTableView.register(StatusTableViewCell.self, forCellReuseIdentifier: "statuscell")
     }
-    @objc func insertUser(_ sender: UIButton) {
-        print("REquest clicked")
+    
+    func receiver_accepted(receiver_id: Int,item_id:Int) {
+        print("Accept clicked")
+        //print(sender.tag)
+        delagate?.updateItem(itemid: item_id )
+        requestlistInteractor.updatestatus(receiverID: receiver_id, item_id:item_id)
+        requestlistInteractor.updateOtherRequests(receiverID: receiver_id, item_id:item_id)
+        let userid = userdefaults.integer(forKey: "userid")
+        requestlist = requestlistInteractor.fetchRequestList(donarID: userid)
+        itemNames = [String](Set(requestlist.map{$0.item_name}))
+        itemNames.sort()
+        let newlist = Dictionary(grouping: requestlist,by : \.item_name).sorted{$0.key < $1.key}
+        newRequestList = newlist.map{return $0.value}
+        requestListTableView.reloadData()
+        
     }
+    
     func setUserDetails(userid:Int){
         let user:User = profileInteractor.getdonardetails(ID: userid)
         name.text = user.user_name
@@ -234,7 +253,6 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             
             else if(tableView == requestListTableView){
                 let cell = tableView.dequeueReusableCell(withIdentifier: "requestList", for: indexPath) as! RequestListTableViewCell
-              
                 cell.request = newRequestList[indexPath.section][indexPath.row]
                 return cell
             }
@@ -245,9 +263,29 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             }
             
         }
+    func tableView(_ tableView: UITableView,
+                       trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        if(tableView == requestListTableView){
+        print("swiped")
+        let archive = UIContextualAction(style: .normal,
+                                         title: "Archive") { [weak self] (action, view, completionHandler) in
+            self?.receiver_accepted(receiver_id: self!.newRequestList[indexPath.section][indexPath.row].receiver_id, item_id: self!.newRequestList[indexPath.section][indexPath.row].item_id)
+                                            completionHandler(true)
+        }
+        archive.backgroundColor = .systemGreen
+
+        
+        let configuration = UISwipeActionsConfiguration(actions: [archive])
+
+        return configuration
+        }
+        else{
+            return .none
+        }
+    }
         
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            return 150
+            return 170
         }
     
 }
