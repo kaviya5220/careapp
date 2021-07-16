@@ -88,6 +88,12 @@ class RequestListTableViewCell: UITableViewCell {
             let label = CustomLabel(labelType: .primary)
             return label
         }()
+    let swipe_label:CustomLabel = {
+        let label = CustomLabel(labelType: .primary)
+        label.text = "Swipe to Accept >>"
+        label.textColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
+        return label
+    }()
     
     
    
@@ -105,6 +111,7 @@ class RequestListTableViewCell: UITableViewCell {
             containerView.addSubview(receiver_email)
             containerView.addSubview(receiveraddress_label)
             containerView.addSubview(receiver_Address)
+            containerView.addSubview(swipe_label)
             self.contentView.addSubview(containerView)
             
             
@@ -138,12 +145,15 @@ class RequestListTableViewCell: UITableViewCell {
             receiver_Address.topAnchor.constraint(equalTo:self.receiver_email.bottomAnchor,constant: 5).isActive = true
             receiver_Address.leadingAnchor.constraint(equalTo:self.receiveraddress_label.trailingAnchor,constant: 10).isActive = true
             
+            swipe_label.topAnchor.constraint(equalTo:self.receiver_Address.bottomAnchor,constant: 5).isActive = true
+            swipe_label.leadingAnchor.constraint(equalTo:self.contentView.trailingAnchor,constant: -160).isActive = true
+            
         }
         
         required init?(coder aDecoder: NSCoder) {
             
             super.init(coder: aDecoder)
         }
-
     }
+
 

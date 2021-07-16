@@ -20,7 +20,7 @@ class SignupViewController: UIViewController,UIScrollViewDelegate{
         stack.axis = .vertical
         stack.alignment = .fill
         stack.distribution = .fillEqually
-        stack.spacing = 10
+        stack.spacing = 20
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -96,6 +96,20 @@ class SignupViewController: UIViewController,UIScrollViewDelegate{
         button.addTarget(self, action: #selector(insertUser(_:)), for: .touchUpInside)
         return button
     }()
+    let emailerrorlabel:CustomLabel = {
+        let label = CustomLabel(labelType: .primary)
+        label.isHidden = true
+        label.textAlignment = .center
+        label.textColor = .systemRed
+        return label
+    }()
+    let phoneerrorlabel:CustomLabel = {
+        let label = CustomLabel(labelType: .primary)
+        label.textColor = .systemRed
+        label.isHidden = true
+        label.textAlignment = .center
+        return label
+    }()
     private var sharedConstraints = [NSLayoutConstraint]()
     private var compactConstraints = [NSLayoutConstraint]()
     private var regularConstraints = [NSLayoutConstraint]()
@@ -120,8 +134,15 @@ class SignupViewController: UIViewController,UIScrollViewDelegate{
         stackView.addArrangedSubview(address)
         stackView.addArrangedSubview(password)
         stackView.addArrangedSubview(emailField)
+        
         stackView.addArrangedSubview(phone)
-        view.addSubview(submitbutton)
+        stackView.addArrangedSubview(emailerrorlabel)
+        stackView.setCustomSpacing(3, after: emailerrorlabel)
+        stackView.addArrangedSubview(phoneerrorlabel)
+        
+        
+        stackView.addArrangedSubview(submitbutton)
+       // view.addSubview(submitbutton)
         let tap = UITapGestureRecognizer(target: self, action: #selector(loginClicked(_:)))
         signuplabel2.isUserInteractionEnabled = true
         signuplabel2.addGestureRecognizer(tap)
@@ -131,9 +152,9 @@ class SignupViewController: UIViewController,UIScrollViewDelegate{
                                      compactConstraints: compactConstraints,
                                      regularConstraints: regularConstraints)
         self.navigationItem.setHidesBackButton(false, animated: false)
+        signUpPresenter.delegate = self
     }
     @objc func loginClicked(_ sender: UITapGestureRecognizer){
-        print("Clicked")
         dismiss(animated: true, completion: nil)
         self.navigationController?.popViewController(animated: true)
 
@@ -145,14 +166,16 @@ class SignupViewController: UIViewController,UIScrollViewDelegate{
     
     @objc func insertUser(_ sender: UIButton) {
         flag = true
-//        if(signUpPresenter.validateEmailId(emailId: emailField.getFiledText())==false){
-//            flag = false
-//
-//
-//        }
-//        if(signUpPresenter.validateMobile(mobile: phone.getFiledText())==false){
-//            flag = false
-//        }
+    
+        
+        if(signUpPresenter.validateEmailId(emailId: emailField.text!)==false){
+            flag = false
+
+
+        }
+        if(signUpPresenter.validateMobile(mobile: phone.text!)==false){
+            flag = false
+        }
         if(flag){
             
             let user: User = User(user_name: name.text!, user_phone: phone.text!, user_address: address.text!, user_email:emailField.text!, user_password: password.text!)
@@ -188,12 +211,14 @@ extension SignupViewController {
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
             //scrollView.heightAnchor.constraint(equalToConstant: 500),
          //   stackView.topAnchor.constraint(equalTo: view.topAnchor,constant: 100),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            stackView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
-            submitbutton.widthAnchor.constraint(equalTo: self.view.widthAnchor,multiplier: 0.5),
-            submitbutton.topAnchor.constraint(equalTo: stackView.bottomAnchor,constant: 30),
-            submitbutton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+           // stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            //stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            stackView.widthAnchor.constraint(equalTo: self.view.widthAnchor,multiplier: 0.75),
+            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant: -40),
+          //  submitbutton.widthAnchor.constraint(equalTo: self.view.widthAnchor,multiplier: 0.5),
+//            submitbutton.topAnchor.constraint(equalTo: stackView.bottomAnchor,constant: 30),
+          //  submitbutton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             horizontalstackView.topAnchor.constraint(equalTo: view.bottomAnchor,constant: -50),
             horizontalstackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 //            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
@@ -208,41 +233,39 @@ extension SignupViewController {
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
             stackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            submitbutton.widthAnchor.constraint(equalTo: self.view.widthAnchor,multiplier: 0.5),
-            submitbutton.topAnchor.constraint(equalTo: stackView.bottomAnchor,constant: 30),
-            submitbutton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            submitbutton.widthAnchor.constraint(equalTo: self.view.widthAnchor,multiplier: 0.5),
+//            submitbutton.topAnchor.constraint(equalTo: stackView.bottomAnchor,constant: 30),
+//            submitbutton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             horizontalstackView.topAnchor.constraint(equalTo: submitbutton.bottomAnchor,constant: 20),
             horizontalstackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             signuplabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
         ])
     }
 }
-//extension SignupViewController : SignUpPresenterDelegate{
-//    func removeEmailError() {
-//        emailField.removeError()
-//    }
-//
-//    func removeMobileNumberError() {
-//        phone.removeError()
-//    }
-//
-//    func showEmailError(errorMessage: String?) {
-//        emailField.setError(errorMessage: "Email Format Wrong")
-//    }
-//
-//    func showMobileError(errorMessage: String?) {
-//        phone.setError(errorMessage: "Mobile Format Wrong")
-//    }
-//}
-extension UITextField {
-  func useUnderline() -> Void {
-    let border = CALayer()
-    let borderWidth = CGFloat(2.0) // Border Width
-    border.borderColor = UIColor.red.cgColor
-    
-    border.frame = CGRect(origin: CGPoint(x: 0,y :self.frame.size.height - borderWidth), size: CGSize(width: self.frame.size.width, height: self.frame.size.height))
-    border.borderWidth = borderWidth
-    self.layer.addSublayer(border)
-    self.layer.masksToBounds = true
-  }
+extension SignupViewController : SignUpPresenterDelegate{
+    func removeEmailError() {
+        emailerrorlabel.isHidden = true
+        emailField.layer.borderWidth = 1
+        emailField.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+    }
+
+    func removeMobileNumberError() {
+        phoneerrorlabel.isHidden = true
+        phone.layer.borderWidth = 1
+        phone.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+    }
+
+    func showEmailError(errorMessage: String?) {
+        emailerrorlabel.text = errorMessage
+        emailField.layer.borderColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
+        emailField.layer.borderWidth = 3
+        emailerrorlabel.isHidden = false
+    }
+
+    func showMobileError(errorMessage: String?) {
+        phoneerrorlabel.text = errorMessage
+        phone.layer.borderColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
+        phone.layer.borderWidth = 3
+        phoneerrorlabel.isHidden = false
+    }
 }

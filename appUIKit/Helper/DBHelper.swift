@@ -202,7 +202,7 @@ class DBHelper{
         }
     static func getitems() ->  [Item] {
         
-        let queryStatementString = "SELECT Item_ID,Item_Name,Item_Description,Item_Quantity,Address,Donar_ID,Visited_count,Date_posted FROM ItemDetails WHERE Item_ID IN(SELECT Item_ID FROM DonationStatus WHERE Status != 'accepted')  OR Item_ID NOT IN(SELECT Item_ID FROM DonationStatus) ORDER BY Item_Name;"
+        let queryStatementString = "SELECT Item_ID,Item_Name,Item_Description,Item_Quantity,Address,Donar_ID,Visited_count,Date_posted FROM ItemDetails WHERE Item_ID IN(SELECT Item_ID FROM DonationStatus WHERE Status = 'pending') OR Item_ID NOT IN(SELECT Item_ID FROM DonationStatus) ORDER BY Item_Name;"
         var itemlist : [Item] = []
         var queryStatement: OpaquePointer?
           if sqlite3_prepare_v2(db, queryStatementString, -1, &queryStatement, nil) ==
@@ -236,7 +236,7 @@ class DBHelper{
         }
     static func getitemsImageName() ->  [Item_Image] {
         var item_image_list : [Item_Image] = []
-        let queryStatementString = "SELECT Item_ID,Item_ImageName FROM ItemDetails WHERE Item_ID IN(SELECT Item_ID FROM DonationStatus WHERE Status != 'accepted') OR Item_ID NOT IN(SELECT Item_ID FROM DonationStatus) ORDER BY Item_Name;"
+        let queryStatementString = "SELECT Item_ID,Item_ImageName FROM ItemDetails WHERE Item_ID IN(SELECT Item_ID FROM DonationStatus WHERE Status = 'pending') OR Item_ID NOT IN(SELECT Item_ID FROM DonationStatus) ORDER BY Item_Name;"
         var queryStatement: OpaquePointer?
           if sqlite3_prepare_v2(db, queryStatementString, -1, &queryStatement, nil) ==
               SQLITE_OK {

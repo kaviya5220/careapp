@@ -16,7 +16,6 @@ class SignupPresenter {
     weak var delegate: SignUpPresenterDelegate?
 
     func validateEmailId(emailId: String?) -> Bool{
-        
         guard let emailId = emailId, emailId.count >= 5 else {
             delegate?.showEmailError(errorMessage: "Email-id is incorrect")
             return false

@@ -281,11 +281,11 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView,
                        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if(tableView == requestListTableView){
-        print("swiped")
         let archive = UIContextualAction(style: .normal,
                                          title: "Archive") { [weak self] (action, view, completionHandler) in
             self?.receiver_accepted(receiver_id: self!.newRequestList[indexPath.section][indexPath.row].receiver_id, item_id: self!.newRequestList[indexPath.section][indexPath.row].item_id)
                                             completionHandler(true)
+            
         }
         archive.backgroundColor = .systemGreen
 
@@ -302,7 +302,6 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
             return 170
         }
-    
 }
 
 

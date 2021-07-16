@@ -43,6 +43,7 @@ class ReceiverTableViewCell: UITableViewCell {
     
         let itemimage:UIImageView = {
             let img = UIImageView()
+            img.image = UIImage(named:  "loadingimage")
             img.contentMode = .scaleAspectFill
             img.translatesAutoresizingMaskIntoConstraints = false
             img.layer.cornerRadius = 15

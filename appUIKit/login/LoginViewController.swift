@@ -55,6 +55,7 @@ class LoginViewController: UIViewController,SignUpProtocol {
         let loginlabel:CustomLabel = {
             let label = CustomLabel(labelType: .title)
             label.text = "LOGIN"
+            
             label.font =  UIFont.systemFont(ofSize: 30, weight: .bold)
             label.textAlignment = .left
             label.font = UIFont(name: "TimesNewRomanPSMT", size: 35)

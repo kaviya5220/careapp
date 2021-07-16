@@ -289,7 +289,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
                 let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent(filtered_item_images[indexPath.row].item_image)
                 cell.itemimage.image = UIImage(contentsOfFile: imageURL.path)
             }
-            
+           
             }
             return cell
         }
