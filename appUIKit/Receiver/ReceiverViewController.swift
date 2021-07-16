@@ -61,7 +61,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         ))
         actionSheet.addAction(.init(
             title: "Cancel",
-            style: .destructive,
+            style: .cancel,
             handler: { _ in self.dismiss(animated: true) }
         ))
         return actionSheet
@@ -205,6 +205,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
             item_images_list = self.receiverInteractor.getItemImages()
 
             DispatchQueue.main.async(execute: {
+                print("Image")
                     self.item_images = item_images_list
                 self.filtered_item_images = item_images_list
                     self.receiverTableView.reloadData()
@@ -282,9 +283,13 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
             let cell = tableView.dequeueReusableCell(withIdentifier: "itemcell", for: indexPath) as! ReceiverTableViewCell
             cell.item = filteredItems[indexPath.row]
             let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
+            
+            if(filtered_item_images.count >= indexPath.row && filtered_item_images.count != 0) {
             if let dirPath = paths.first{
                 let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent(filtered_item_images[indexPath.row].item_image)
                 cell.itemimage.image = UIImage(contentsOfFile: imageURL.path)
+            }
+            
             }
             return cell
         }

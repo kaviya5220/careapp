@@ -38,7 +38,7 @@ class ReceiverInteractor{
         return DBHelper.getdonationstatus(Receiver_ID: Receiver_ID, Item_ID: Item_ID)
     }
     func isLoggedIn() -> Bool{
-        if let loggedUsername = UserDefaults.standard.string(forKey: "userid") {
+        if UserDefaults.standard.string(forKey: "userid") != nil {
             return true
         }
         return false

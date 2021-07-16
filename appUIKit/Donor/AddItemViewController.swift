@@ -3,7 +3,7 @@ import UIKit
 protocol canReceive{
     func passData(item:Item,item_image:String)
 }
-class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDelegate, UINavigationControllerDelegate,UIImagePickerControllerDelegate {
+class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDelegate, UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIScrollViewDelegate {
     public var itemImageName : String = ""
     var delegate:canReceive?
     let alert : UIAlertController = {
@@ -34,15 +34,26 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
         stack.axis = .vertical
         stack.alignment = .fill
         stack.distribution = .fillEqually
+
         stack.spacing = 10
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     let scrollView : UIScrollView = {
-        let scroll = UIScrollView()
+        let scroll = UIScrollView(frame: .zero)
         scroll.translatesAutoresizingMaskIntoConstraints = false
         return scroll
     }()
+//    let itemimage:UIImageView = {
+//        let img = UIImageView()
+//        img.image = UIImage(named: "dnimge")
+//        img.contentMode = .scaleAspectFit
+//        img.translatesAutoresizingMaskIntoConstraints = false
+//        //img.layer.cornerRadius = 100
+//        img.clipsToBounds = true
+//        return img
+//    }()
+    var itemimage = UIImageView()
    
     let itemlabel:CustomLabel = {
         let label = CustomLabel(labelType: .title)
@@ -82,8 +93,7 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
     
     let presenter = AddItemPresenter()
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidLayoutSubviews() {
 
         let upload = UIBarButtonItem(title: "Upload", style: .plain, target: self, action: #selector(insertUser(_:)))
         self.navigationItem.rightBarButtonItem = upload
@@ -92,7 +102,15 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
 
         self.title = "Add Item"
         view.backgroundColor = .white
+        itemimage.translatesAutoresizingMaskIntoConstraints = false
         setupConstraints()
+        
+        let contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
+                scrollView.contentSize = contentViewSize
+               // scrollView.frame = view.bounds
+                scrollView.delegate = self
+        scrollView.contentInsetAdjustmentBehavior = .automatic
+        
         view.addSubview(scrollView)
         scrollView.addSubview(stackView)
         stackView.addArrangedSubview(itemlabel)
@@ -101,6 +119,8 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
         stackView.addArrangedSubview(itemQuantity)
         stackView.addArrangedSubview(address)
         stackView.addArrangedSubview(chooseImage)
+        scrollView.addSubview(itemimage)
+        
         layoutTraitConstraintsUpdate(traitCollection: self.traitCollection,
                                      sharedConstraints: sharedConstraints,
                                      compactConstraints: compactConstraints,
@@ -184,32 +204,45 @@ extension AddItemViewController {
     private func setupConstraints() {
 
         sharedConstraints.append(contentsOf: [
-            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+          //  stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
 
 
 
         compactConstraints.append(contentsOf: [
-            itemlabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
-            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-           // addbutton.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-            //addbutton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            stackView.topAnchor.constraint(equalTo: self.scrollView.topAnchor,constant: 50),
+            stackView.bottomAnchor.constraint(equalTo: self.itemimage.topAnchor,constant: -50),
+           // stackView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor)
+            //itemimage.topAnchor.constraint(equalTo: self.stackView.bottomAnchor,constant: 30),
+            itemimage.leadingAnchor.constraint(equalTo:self.view.leadingAnchor, constant:10),
+            itemimage.trailingAnchor.constraint(equalTo:self.view.trailingAnchor, constant:-10),
+            itemimage.bottomAnchor.constraint(equalTo: self.scrollView.safeAreaLayoutGuide.bottomAnchor,constant: -10)
         ])
 
         regularConstraints.append(contentsOf: [
-            stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            itemlabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            scrollView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
-            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            stackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
+            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            itemimage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            itemimage.widthAnchor.constraint(equalTo: view.widthAnchor),
+            itemimage.topAnchor.constraint(equalTo: self.stackView.bottomAnchor,constant: 10),
+//            itemimage.leadingAnchor.constraint(equalTo:self.view.leadingAnchor, constant:10),
+//            itemimage.trailingAnchor.constraint(equalTo:self.view.trailingAnchor, constant:-10),
+            itemimage.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+           
+            
+           
         ])
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -223,8 +256,11 @@ extension AddItemViewController {
         if let jpegData = image.jpegData(compressionQuality: 0.8) {
             try? jpegData.write(to: imagePath)
         }
-
+        itemimage.contentMode = .scaleAspectFit
+        itemimage.image = image
         dismiss(animated: true)
+        print("setting image\(image)")
+//        itemimage.image = UIImage
     }
 
     func getDocumentsDirectory() -> URL {

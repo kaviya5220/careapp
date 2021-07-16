@@ -172,7 +172,7 @@ class LoginViewController: UIViewController,SignUpProtocol {
         let userDefaults =  UserDefaults.standard
             userDefaults.set(userid, forKey: "userid")
             userDefaults.synchronize()
-        let loggedUsername = UserDefaults.standard.string(forKey: "userid")
+     //   _ = UserDefaults.standard.string(forKey: "userid")
     }
     
    @objc func signUpClicked(_ sender: UITapGestureRecognizer){

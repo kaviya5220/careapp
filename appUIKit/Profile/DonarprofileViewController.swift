@@ -30,10 +30,14 @@ class DonarprofileViewController: UIViewController,UITableViewDataSource, UITabl
         donarProfileTableView.translatesAutoresizingMaskIntoConstraints = false
         setupConstraints()
         profile_details = donarInteractor.getdonarProfile(ID: donar_id)
-        
+        self.view.backgroundColor = UIColor.clear
+        let effect = UIBlurEffect(style: UIBlurEffect.Style.systemThinMaterial)
+            let blurView = UIVisualEffectView(effect: effect)
+            blurView.frame = self.view.bounds
+            self.view.addSubview(blurView)
         print("DID\(donar_id)")
         print(profile_details)
-        view.backgroundColor = .white
+       // view.backgroundColor = .white
         view.addSubview(profileLabel)
         view.addSubview(donarProfileTableView)
         view.addSubview(closeButton)
@@ -96,10 +100,10 @@ extension DonarprofileViewController {
             donarProfileTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             //donarProfileTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -20),
             
-            closeButton.topAnchor.constraint(equalTo: donarProfileTableView.bottomAnchor,constant: 10),
+            closeButton.topAnchor.constraint(equalTo: donarProfileTableView.bottomAnchor),
             closeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 30),
             closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -30),
-            closeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -20)
+            closeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -40)
             
             
         ])

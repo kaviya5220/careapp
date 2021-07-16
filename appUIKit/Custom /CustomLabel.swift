@@ -9,6 +9,7 @@ import UIKit
 
 enum LabelType {
     case title
+    case subtitle
     case primary
     case secondary
 }
@@ -20,11 +21,16 @@ class CustomLabel: UILabel {
         super.init(frame: .zero)
         self.translatesAutoresizingMaskIntoConstraints = false
         self.textAlignment = .left
+      //  self.lineBreakMode = .byWordWrapping
+       // self.adjustsFontSizeToFitWidth = true
+      //  self.numberOfLines = 0
         
         switch labelType {
         
         case .title:
             self.font = UIFont.systemFont(ofSize: 24, weight: .bold)// 24 30
+        case .subtitle :
+            self.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         case .primary:
             self.font = UIFont.systemFont(ofSize: 16, weight: .semibold)//16 17
         case .secondary:

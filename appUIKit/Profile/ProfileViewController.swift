@@ -259,10 +259,25 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             else{
                 let cell = tableView.dequeueReusableCell(withIdentifier: "statuscell", for: indexPath) as! StatusTableViewCell
                 cell.status = statuslist[indexPath.row]
+                changeColor(cell: cell)
                 return cell
             }
             
         }
+    func changeColor(cell : StatusTableViewCell)
+    {
+        switch cell.status?.status{
+        case "accepted" :
+            cell.statusvaluelabel.textColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
+        case "rejected" :
+            cell.statusvaluelabel.textColor = .red
+        case "pending" :
+            cell.statusvaluelabel.textColor = .orange
+        default :
+            cell.statusvaluelabel.textColor = .red
+        }
+        
+    }
     func tableView(_ tableView: UITableView,
                        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if(tableView == requestListTableView){

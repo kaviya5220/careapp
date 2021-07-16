@@ -29,29 +29,36 @@ class StatusTableViewCell: UITableViewCell,UIViewControllerTransitioningDelegate
         return label
     }()
     let Postedbylabel:CustomLabel = {
-        let label = CustomLabel(labelType: .primary)
+        let label = CustomLabel(labelType: .subtitle)
         label.text = "Posted By :"
         return label
     }()
     let donarnamelabel:CustomLabel = {
-        let label = CustomLabel(labelType: .primary)
+        let label = CustomLabel(labelType: .subtitle)
         return label
     }()
     let statuslabel:CustomLabel = {
-        let label = CustomLabel(labelType: .primary)
+        let label = CustomLabel(labelType: .subtitle)
         label.text = "Status :"
         return label
     }()
     let statusvaluelabel:CustomLabel = {
-        let label = CustomLabel(labelType: .primary)
+        let label = CustomLabel(labelType: .subtitle)
         return label
     }()
     let viewProfilelabel:CustomLabel = {
         let label = CustomLabel(labelType: .primary)
-        label.text = "View Profile"
-        label.textAlignment = .right
+        let attachment = NSTextAttachment()
+        attachment.image = UIImage(systemName: "person.fill")
+        attachment.image = attachment.image?.maskWithColor(color: .systemBlue)
+        let attachmentString = NSAttributedString(attachment: attachment)
+        let myString = NSMutableAttributedString(string: "View Profile  ")
+        myString.append(attachmentString)
+        label.attributedText = myString
         label.textColor = .systemBlue
+        
         return label
+        
     }()
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -94,7 +101,7 @@ class StatusTableViewCell: UITableViewCell,UIViewControllerTransitioningDelegate
         statusvaluelabel.leadingAnchor.constraint(equalTo:self.statuslabel.trailingAnchor,constant: 10).isActive = true
         
         viewProfilelabel.topAnchor.constraint(equalTo:self.statusvaluelabel.bottomAnchor,constant: 5).isActive = true
-        viewProfilelabel.leadingAnchor.constraint(equalTo:self.containerView.leadingAnchor).isActive = true
+        viewProfilelabel.leadingAnchor.constraint(equalTo:self.contentView.trailingAnchor,constant: -140).isActive = true
         
        
       
@@ -128,5 +135,29 @@ class HalfSizePresentationController: UIPresentationController {
         return CGRect(x: 0, y: bounds.height / 2, width: bounds.width, height: bounds.height / 2)
     }
 }
+extension UIImage {
 
+    func maskWithColor(color: UIColor) -> UIImage? {
+        let maskImage = cgImage!
 
+        let width = size.width
+        let height = size.height
+        let bounds = CGRect(x: 0, y: 0, width: width, height: height)
+
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
+        let context = CGContext(data: nil, width: Int(width), height: Int(height), bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace, bitmapInfo: bitmapInfo.rawValue)!
+
+        context.clip(to: bounds, mask: maskImage)
+        context.setFillColor(color.cgColor)
+        context.fill(bounds)
+
+        if let cgImage = context.makeImage() {
+            let coloredImage = UIImage(cgImage: cgImage)
+            return coloredImage
+        } else {
+            return nil
+        }
+    }
+
+}

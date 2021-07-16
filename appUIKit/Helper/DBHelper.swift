@@ -27,7 +27,7 @@ class DBHelper{
             print("There is error in creating DB")
             return nil
         }else {
-          //  print("Database has been created with path \(filePath)")
+            print("Database has been created with path \(filePath)")
             return db
         }
     }
@@ -305,7 +305,7 @@ class DBHelper{
             sqlite3_bind_int(queryStatement, 1, Int32(ID))
             if sqlite3_step(queryStatement) == SQLITE_ROW {
     
-             let queryResultCol0 = sqlite3_column_int(queryStatement, 0)
+            // let queryResultCol0 = sqlite3_column_int(queryStatement, 0)
              let queryResultCol1 = sqlite3_column_text(queryStatement, 1)
              let queryResultCol2 = sqlite3_column_text(queryStatement, 2)
              let queryResultCol3 = sqlite3_column_text(queryStatement, 3)
