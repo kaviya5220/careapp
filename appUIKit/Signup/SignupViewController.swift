@@ -141,7 +141,7 @@ class SignupViewController: UIViewController,UIScrollViewDelegate{
         stackView.addArrangedSubview(phoneerrorlabel)
         
         
-        stackView.addArrangedSubview(submitbutton)
+        scrollView.addSubview(submitbutton)
        // view.addSubview(submitbutton)
         let tap = UITapGestureRecognizer(target: self, action: #selector(loginClicked(_:)))
         signuplabel2.isUserInteractionEnabled = true
@@ -223,11 +223,14 @@ extension SignupViewController {
             horizontalstackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 //            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
 //            stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            submitbutton.widthAnchor.constraint(equalTo: self.view.widthAnchor,multiplier: 0.5),
+            submitbutton.topAnchor.constraint(equalTo: stackView.bottomAnchor,constant: 30),
+            submitbutton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
            
         ])
         
         regularConstraints.append(contentsOf: [
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: -25),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
@@ -239,6 +242,11 @@ extension SignupViewController {
             horizontalstackView.topAnchor.constraint(equalTo: submitbutton.bottomAnchor,constant: 20),
             horizontalstackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             signuplabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            submitbutton.widthAnchor.constraint(equalTo: self.view.widthAnchor,multiplier: 0.25),
+            submitbutton.topAnchor.constraint(equalTo: stackView.bottomAnchor,constant: 30),
+            submitbutton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor,constant: -40)
+
         ])
     }
 }

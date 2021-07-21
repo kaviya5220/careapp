@@ -19,11 +19,29 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
     var item_images : [Item_Image] =  []
     var filtered_item_images : [Item_Image] =  []
     var current_search : String =  ""
-    let searchArray : [String] = ["Item Name","Location"]
     let receiverInteractor = ReceiverInteractor()
     let receiverTableView = UITableView()
     let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
     let nsUserDomainMask = FileManager.SearchPathDomainMask.userDomainMask
+    let refreshControl = UIRefreshControl()
+    
+    var menuItems: [UIAction] {
+        return [
+            UIAction(title: "Name", image: UIImage(systemName: "arrow.down"), handler:  { _ in self.sortNameAscending()
+            }),
+            UIAction(title: "Name", image: UIImage(systemName: "arrow.up"), handler: { _ in  self.sortNameDescending()
+            }),
+            UIAction(title: "Date Posted", image: UIImage(systemName: "arrow.down"), handler: { _ in  self.sortDateAscending()
+            }),
+            UIAction(title: "Date Posted", image: UIImage(systemName: "arrow.up"), handler: { _ in  self.sortDateDescending()
+            })
+           
+        ]
+    }
+
+    var demoMenu: UIMenu {
+        return UIMenu(title: "My menu", image: nil, identifier: nil, options: [], children: menuItems)
+    }
     
     let noItemAvailable:CustomLabel = {
         let label = CustomLabel(labelType: .title)
@@ -32,42 +50,6 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         label.isHidden = true
         return label
     }()
-    
-    private var actionSheet: UIAlertController {
-        let actionSheet = UIAlertController(
-            title: "Sort By",
-            message: "",
-            preferredStyle: .actionSheet
-        )
-        actionSheet.addAction(.init(
-            title: "Name Ascending",
-            style: .default,
-            handler: { _ in self.sortNameAscending() }
-        ))
-        actionSheet.addAction(.init(
-            title: "Name Descending",
-            style: .default,
-            handler: { _ in  self.sortNameDescending()}
-        ))
-        actionSheet.addAction(.init(
-            title: "Date Ascending",
-            style: .default,
-            handler: { _ in self.sortDateAscending() }
-        ))
-        actionSheet.addAction(.init(
-            title: "Date Descending",
-            style: .default,
-            handler: { _ in self.sortDateDescending() }
-        ))
-        actionSheet.addAction(.init(
-            title: "Cancel",
-            style: .cancel,
-            handler: { _ in self.dismiss(animated: true) }
-        ))
-        return actionSheet
-    }
-
-   
     var searchController : UISearchController!
         func updateSearchResults(for searchController: UISearchController) {
             let searchString = searchController.searchBar.text
@@ -75,20 +57,9 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
                 filteredItems = items
                 filtered_item_images = item_images
             }
-            
-            else if(current_search == "Location"){
-                filtered_item_images = []
-            filteredItems = items.filter({$0.address.contains(searchString!)})
-                for item in item_images{
-                    if(filteredItems.map{$0.item_id}.contains(item.item_id)){
-                        filtered_item_images.append(item)
-                    }
-                }
-                print(filtered_item_images)
-            }
             else{
                 filtered_item_images = []
-            filteredItems = items.filter({$0.item_name.contains(searchString!)})
+            filteredItems = items.filter({$0.item_name.contains(searchString!) || $0.address.contains(searchString!) || $0.item_description.contains(searchString!)})
                 for item in item_images{
                     if(filteredItems.map{$0.item_id}.contains(item.item_id)){
                         filtered_item_images.append(item)
@@ -121,10 +92,6 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         else{
             self.navigationController?.pushViewController(LoginViewController(), animated: true)
         }
-    }
-    @objc func didTapFilter(_ sender: UIButton) {
-        print("clicked")
-        self.present(actionSheet,animated: true)
     }
     @objc func sortNameDescending(){
        
@@ -166,27 +133,71 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         filtered_item_images = s2
         receiverTableView.reloadData()
     }
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        //print(filteredItems)
-//        filteredItems = items
-//        receiverTableView.reloadData()
-//
-//    }
-        
     
     override func viewDidLoad() {
         //super.viewWillAppear(Animated)
         super.viewDidLoad()
-        let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAdd(_:)))
+       // let add1 = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAdd(_:)))
         let leftBarButton = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.done, target: self, action: #selector(navigateToProfile(_:)))
-        let filter = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.done, target: self, action: #selector(didTapFilter(_:)))
-        navigationItem.rightBarButtonItems = [add,filter]
+        let sorticon = UIBarButtonItem(title: "sort", image: nil, primaryAction: nil, menu: demoMenu)
+        let add = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.done, target: self, action: #selector(didTapAdd(_:)))
+        navigationItem.rightBarButtonItems = [add,sorticon]
+        let addIcon = UIImage(systemName: "plus")
+        add.image = addIcon
         let filterIcon = UIImage(systemName: "arrow.up.arrow.down")
-        filter.image = filterIcon
-        let buttonIcon = UIImage(systemName: "person.circle")
+        sorticon.image = filterIcon
+        let buttonIcon = UIImage(systemName: "person.crop.circle")
         leftBarButton.image = buttonIcon
         navigationItem.leftBarButtonItem = leftBarButton
+        loaditems()
+        
+        
+        view.backgroundColor = .white
+            searchController = UISearchController(searchResultsController: nil)
+            searchController.searchResultsUpdater = self
+            searchController.searchBar.placeholder = "Search"
+            searchController.obscuresBackgroundDuringPresentation = false
+            navigationItem.hidesSearchBarWhenScrolling = false
+//            searchController.searchBar.scopeButtonTitles = searchArray
+            searchController.searchBar.sizeToFit()
+          //  receiverTableView.tableHeaderView = searchController.searchBar
+        navigationItem.searchController = searchController
+            definesPresentationContext = true
+        searchController.searchBar.delegate = self
+            
+        
+        
+        
+        receiverTableView.dataSource = self
+        receiverTableView.delegate = self
+        receiverTableView.register(ReceiverTableViewCell.self, forCellReuseIdentifier: "itemcell")
+        receiverTableView.estimatedRowHeight = 370.0
+        receiverTableView.rowHeight = UITableView.automaticDimension
+        receiverTableView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshItem(_:)), for: .valueChanged)
+        refreshControl.tintColor = UIColor(red:0.25, green:0.72, blue:0.85, alpha:1.0)
+        refreshControl.attributedTitle = NSAttributedString(string: "Fetching Items ...", attributes: nil)
+        view.addSubview(noItemAvailable)
+        view.addSubview(receiverTableView)
+            let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black]
+            navigationController?.navigationBar.titleTextAttributes = textAttributes
+        
+        receiverTableView.translatesAutoresizingMaskIntoConstraints = false
+        noItemAvailable.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        noItemAvailable.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
+        receiverTableView.topAnchor.constraint(equalTo:view.safeAreaLayoutGuide.topAnchor,constant: 10).isActive = true
+        receiverTableView.leftAnchor.constraint(equalTo:view.safeAreaLayoutGuide.leftAnchor).isActive = true
+        receiverTableView.rightAnchor.constraint(equalTo:view.safeAreaLayoutGuide.rightAnchor).isActive = true
+        receiverTableView.bottomAnchor.constraint(equalTo:view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
+        }
+    @objc func refreshItem(_ sender : Any){
+        loaditems()
+        self.refreshControl.endRefreshing()
+        //self..stopAnimating()
+    }
+     func loaditems(){
         DispatchQueue.global(qos:.background).async {
             var itemlist:[Item] = []
                   //  print("asnccc")
@@ -213,45 +224,13 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
             
         }
         
-        
-        view.backgroundColor = .white
-        view.addSubview(noItemAvailable)
-            view.addSubview(receiverTableView)
-        noItemAvailable.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        noItemAvailable.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        
-            receiverTableView.translatesAutoresizingMaskIntoConstraints = false
-        
-            receiverTableView.topAnchor.constraint(equalTo:view.safeAreaLayoutGuide.topAnchor,constant: 10).isActive = true
-            receiverTableView.leftAnchor.constraint(equalTo:view.safeAreaLayoutGuide.leftAnchor).isActive = true
-            receiverTableView.rightAnchor.constraint(equalTo:view.safeAreaLayoutGuide.rightAnchor).isActive = true
-            receiverTableView.bottomAnchor.constraint(equalTo:view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        
-        
-            searchController = UISearchController(searchResultsController: nil)
-            searchController.searchResultsUpdater = self
-            searchController.searchBar.placeholder = "Search"
-            searchController.obscuresBackgroundDuringPresentation = false
-            navigationItem.hidesSearchBarWhenScrolling = false
-            searchController.searchBar.scopeButtonTitles = searchArray
-            searchController.searchBar.sizeToFit()
-          //  receiverTableView.tableHeaderView = searchController.searchBar
-        navigationItem.searchController = searchController
-            definesPresentationContext = true
-        searchController.searchBar.delegate = self
-            receiverTableView.dataSource = self
-            receiverTableView.delegate = self
-            receiverTableView.register(ReceiverTableViewCell.self, forCellReuseIdentifier: "itemcell")
-            let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black]
-            navigationController?.navigationBar.titleTextAttributes = textAttributes
-        
-        }
-    
-   
-    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        
-        current_search = searchArray[selectedScope]
     }
+    
+//
+//    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+//
+//        current_search = searchArray[selectedScope]
+//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = PageViewController()
@@ -297,6 +276,9 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
             return 370
         }
+//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return UITableView.automaticDimension
+//    }
     func passData(item: Item,item_image : String) {
         items.append(item)
         item_images.append(Item_Image(item_id: item.item_id, item_image: item_image))

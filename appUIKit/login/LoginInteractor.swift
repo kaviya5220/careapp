@@ -24,12 +24,14 @@ class LoginInteractor{
 
                 if status1 == noErr {
                     let returned_string : String = NSString(data: dataTypeRef as! Data, encoding: String.Encoding.utf8.rawValue)! as String
-                     print("SIGNUP\(returned_string)")
+                 //    print("SIGNUP\(returned_string)")
                     if(password == returned_string){
                         return true}
                     else{
+                        print("login failed")
                         return false}
                 } else {
+                    
                      print("Error")
                     return false
                 }

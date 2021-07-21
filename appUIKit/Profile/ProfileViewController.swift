@@ -26,6 +26,35 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     let statusTableView = UITableView()
     let userdefaults = UserDefaults.standard
     let profileInteractor = ProfileInteractor()
+    let alert : UIAlertController = {
+        let alert1 = UIAlertController(title: "Sign out?", message: "You can always access your content by signing back in", preferredStyle: UIAlertController.Style.alert)
+    let cancelAction = UIAlertAction (title: "Cancel", style: UIAlertAction.Style.default, handler: nil)
+        let signoutAction = UIAlertAction (title: "Sign out", style: UIAlertAction.Style.destructive, handler: { action in
+            let userDefaults =  UserDefaults.standard
+          //  let nav = UINavigationController(rootViewController: login)
+            
+            userDefaults.removeObject(forKey: "userid")
+                userDefaults.synchronize()
+          
+              //  (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(nav)
+            let newVc = ReceiverViewController()
+            let nav = UINavigationController(rootViewController: newVc)
+            
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            if let scene = UIApplication.shared.connectedScenes.first{
+                guard let windowScene = (scene as? UIWindowScene) else { return }
+                let window: UIWindow = UIWindow(frame: windowScene.coordinateSpace.bounds)
+                window.windowScene = windowScene
+                window.rootViewController = nav
+                window.makeKeyAndVisible()
+                appDelegate.window = window
+            }
+                                           
+                                           } )
+    alert1.addAction(cancelAction)
+    alert1.addAction(signoutAction)
+    return alert1
+    }()
     
     let profileHorizantalView:UIStackView = {
         let stack = UIStackView()
@@ -122,8 +151,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         
         setupConstraints()
         view.backgroundColor = .white
-        let upload = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(logout(_:)))
-        self.navigationItem.rightBarButtonItem = upload
+        let logout = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(signout(_:)))
+        self.navigationItem.rightBarButtonItem = logout
         layoutTraitConstraintsUpdate(traitCollection: self.traitCollection,
                                      sharedConstraints: sharedConstraints,
                                      compactConstraints: compactConstraints,
@@ -165,31 +194,11 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     private var sharedConstraints = [NSLayoutConstraint]()
     private var compactConstraints = [NSLayoutConstraint]()
     private var regularConstraints = [NSLayoutConstraint]()
-       
-    @objc func logout(_ sender: UIButton)
-    {
-      //  let login = LoginViewController()
-        let userDefaults =  UserDefaults.standard
-      //  let nav = UINavigationController(rootViewController: login)
-        
-        userDefaults.removeObject(forKey: "userid")
-            userDefaults.synchronize()
       
-          //  (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(nav)
-        let newVc = ReceiverViewController()
-        let nav = UINavigationController(rootViewController: newVc)
-        
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        if let scene = UIApplication.shared.connectedScenes.first{
-            guard let windowScene = (scene as? UIWindowScene) else { return }
-            let window: UIWindow = UIWindow(frame: windowScene.coordinateSpace.bounds)
-            window.windowScene = windowScene
-            window.rootViewController = nav
-            window.makeKeyAndVisible()
-            appDelegate.window = window
-        }
-            }
-    @objc func segmentControl(_ segmentedControl: UISegmentedControl) {
+    @objc func signout(_ sender : UIButton){
+        self.present(alert, animated: true, completion: nil)
+    }
+   @objc func segmentControl(_ segmentedControl: UISegmentedControl) {
        switch (segmentedControl.selectedSegmentIndex) {
           case 0:
             print("0")
