@@ -34,19 +34,9 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
         let stack = UIStackView()
         stack.axis = .vertical
         stack.alignment = .fill
-        stack.distribution = .fillProportionally
+        stack.distribution = .fillEqually
 
         stack.spacing = 10
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
-    let stackView1: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.alignment = .fill
-        stack.distribution = .fillProportionally
-
-        stack.spacing = 3
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -59,18 +49,30 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
-    let stack1: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.alignment = .fill
-        stack.distribution = .equalSpacing
-        stack.spacing = 10
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
+    let itemNameLabel:CustomLabel = {
+    let label = CustomLabel(labelType: .primary)
+    label.text = "Item Name"
+    return label
+    }()
+    let itemQuantityLabel:CustomLabel = {
+    let label = CustomLabel(labelType: .primary)
+    label.text = "Quantity"
+    return label
+    }()
+    let itemDescriptionLabel:CustomLabel = {
+    let label = CustomLabel(labelType: .primary)
+    label.text = "Item Description"
+    return label
+    }()
+    let itemLocation:CustomLabel = {
+    let label = CustomLabel(labelType: .primary)
+    label.text = "Address"
+    return label
     }()
     let quantity:CustomLabel = {
         let label = CustomLabel(labelType: .primary)
-        label.text = "Quantity"
+        label.text = "Selected Quantity"
+        label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         return label
     }()
     let expirey:CustomLabel = {
@@ -96,15 +98,6 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
         stepper.translatesAutoresizingMaskIntoConstraints = false
         return stepper
     }()
-//    let itemimage:UIImageView = {
-//        let img = UIImageView()
-//        img.image = UIImage(named: "dnimge")
-//        img.contentMode = .scaleAspectFit
-//        img.translatesAutoresizingMaskIntoConstraints = false
-//        //img.layer.cornerRadius = 100
-//        img.clipsToBounds = true
-//        return img
-//    }()
     var itemimage = UIImageView()
    
     
@@ -137,9 +130,8 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
     
     let presenter = AddItemPresenter()
 
-    override func viewDidLayoutSubviews() {
-        print("layout")
-        
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
 
         let upload = UIBarButtonItem(title: "Upload", style: .plain, target: self, action: #selector(upload_item(_:)))
         self.navigationItem.rightBarButtonItem = upload
@@ -149,45 +141,29 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
         self.title = "Add Item"
         view.backgroundColor = .white
         itemimage.translatesAutoresizingMaskIntoConstraints = false
+       
+        let contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
+        scrollView.contentSize = contentViewSize
+//        scrollView.frame = view.bounds
+        scrollView.delegate = self
+        scrollView.contentInsetAdjustmentBehavior = .automatic
         setupConstraints()
         
-        let contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
-                scrollView.contentSize = contentViewSize
-                //scrollView.frame = view.bounds
-                scrollView.delegate = self
-        scrollView.contentInsetAdjustmentBehavior = .automatic
-        
         view.addSubview(scrollView)
-        
        
-//        itemimage.layer.masksToBounds = true
-//        itemimage.clipsToBounds = true
-//        itemimage.layer.cornerRadius = itemimage.bounds.width/2
-        scrollView.addSubview(itemimage)
         scrollView.addSubview(stackView)
+        scrollView.addSubview(itemimage)
+        stackView.addArrangedSubview(itemNameLabel)
         stackView.addArrangedSubview(itemname)
+        stackView.addArrangedSubview(itemDescriptionLabel)
         stackView.addArrangedSubview(itemDescription)
+        stackView.addArrangedSubview(itemLocation)
         stackView.addArrangedSubview(address)
+        stackView.addArrangedSubview(itemQuantityLabel)
         stackView.addArrangedSubview(stack)
         stack.addArrangedSubview(quantity)
         stack.addArrangedSubview(quantityvalue)
         stack.addArrangedSubview(stepper)
-      
-        itemimage.image = resizeImage(image: UIImage(named:"additem")!, newWidth: 200)
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(chooseimage1(tapGestureRecognizer:)))
-            itemimage.isUserInteractionEnabled = true
-            itemimage.addGestureRecognizer(tapGestureRecognizer)
-//
-//
-        
-        // scrollView.addSubview(stackView1)
-       // stackView.addArrangedSubview(expirey)
-       
-        //stackView.addArrangedSubview(stack1)
-      //  stack1.addArrangedSubview(expirey)
-       
-       // stackView.addArrangedSubview(datePicker)
-        
         layoutTraitConstraintsUpdate(traitCollection: self.traitCollection,
                                      sharedConstraints: sharedConstraints,
                                      compactConstraints: compactConstraints,
@@ -196,27 +172,13 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
         self.isModalInPresentation = true
     }
     override func viewDidLoad() {
-    //        datePicker.datePickerMode = .dateAndTime
-    //        datePicker.preferredDatePickerStyle = .wheels
-    //        datePicker.translatesAutoresizingMaskIntoConstraints = false
-    //       // datePicker.calendar = .current
-    //        datePicker.timeZone = NSTimeZone.local
-    //        datePicker.backgroundColor = UIColor.white
-    //        datePicker.addTarget(self, action: #selector(datePickerValueChanged(_:)), for: .valueChanged)
-    //        print("Load")
+        itemimage.image = resizeImage(image: UIImage(named:"additem")!, newWidth: 200)
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(chooseimage1(tapGestureRecognizer:)))
+            itemimage.isUserInteractionEnabled = true
+            itemimage.addGestureRecognizer(tapGestureRecognizer)
+    
         }
-//    @objc func datePickerValueChanged(_ sender: UIDatePicker){
-//
-//            // Create date formatter
-//            let dateFormatter: DateFormatter = DateFormatter()
-//
-//            // Set date format
-//            dateFormatter.dateFormat = "dd/MM/yyyy hh:mm a"
-//
-//            let selectedDate: String = dateFormatter.string(from: sender.date)
-//
-//            print("Selected value \(selectedDate)")
-//        }
 
     @objc func cancel(_ sender: UIButton) {
         self.present(actionSheet,animated: true)
@@ -320,73 +282,37 @@ extension AddItemViewController {
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-//            datePicker.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            datePicker.widthAnchor.constraint(equalTo: self.view.widthAnchor,multiplier: 0.75),
-//            datePicker.topAnchor.constraint(equalTo: self.stackView.bottomAnchor,constant: 10),
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackView.widthAnchor.constraint(equalTo: self.view.widthAnchor,multiplier: 0.75),
-            stackView.topAnchor.constraint(equalTo: self.itemimage.bottomAnchor,constant: 50),
+            //stackView.topAnchor.constraint(equalTo: self.itemimage.bottomAnchor,constant: 15),
             stackView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor),
             stack.leadingAnchor.constraint(equalTo: self.stackView.leadingAnchor),
             stack.trailingAnchor.constraint(equalTo: self.stackView.trailingAnchor),
             
-//            quantity.leadingAnchor.constraint(equalTo: self.stack.leadingAnchor),
-//            quantity.trailingAnchor.constraint(equalTo: self.quantityvalue.leadingAnchor),
-//            quantityvalue.leadingAnchor.constraint(equalTo: self.quantity.leadingAnchor),
-//            quantityvalue.trailingAnchor.constraint(equalTo: self.stack.trailingAnchor),
-           
-//            stackView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor),
-//            stack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            stack.topAnchor.constraint(equalTo:address.bottomAnchor,constant: 15),
-//            stack.widthAnchor.constraint(equalTo: self.view.widthAnchor,multiplier: 0.75),
-//            stack1.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            stack1.widthAnchor.constraint(equalTo: self.view.widthAnchor,multiplier: 0.75),
-//
-//            stack1.topAnchor.constraint(equalTo:stack.bottomAnchor,constant: 15),
-            
-//            stackView1.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            stackView1.widthAnchor.constraint(equalTo: self.view.widthAnchor,multiplier: 0.75),
-//            stackView1.topAnchor.constraint(equalTo: self.stackView.bottomAnchor,constant: 10),
-            //stackView1.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor,constant: -80),
-           // stackView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor)
             itemimage.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             itemimage.topAnchor.constraint(equalTo: self.scrollView.topAnchor,constant: 30),
+            itemimage.bottomAnchor.constraint(equalTo: self.stackView.topAnchor),
             
-//            datePicker.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-//            datePicker.topAnchor.constraint(equalTo: stackView.bottomAnchor,constant: 30),
-            
-//            itemimage.leadingAnchor.constraint(equalTo:self.view.leadingAnchor, constant:10),
-//            itemimage.trailingAnchor.constraint(equalTo:self.view.trailingAnchor, constant:-10),
-            //itemimage.bottomAnchor.constraint(equalTo: self.scrollView.safeAreaLayoutGuide.bottomAnchor,constant: -10)
         ])
 
         regularConstraints.append(contentsOf: [
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: -25),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-           
-            stackView.topAnchor.constraint(equalTo: itemimage.bottomAnchor,constant:  15),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            
             stackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
-            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stackView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor),
+          //  stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stack.leadingAnchor.constraint(equalTo: self.stackView.leadingAnchor),
             stack.trailingAnchor.constraint(equalTo: self.stackView.trailingAnchor),
+            stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
            
-//            stack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            stack.widthAnchor.constraint(equalTo: self.view.widthAnchor,multiplier: 0.5),
-//            stack1.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            stack1.widthAnchor.constraint(equalTo: self.view.widthAnchor,multiplier: 0.5),
-//            stack.topAnchor.constraint(equalTo:address.bottomAnchor,constant: 15),
-//            stack1.topAnchor.constraint(equalTo:stack.bottomAnchor,constant: 15),
-//            stack1.bottomAnchor.constraint(equalTo:stackView.bottomAnchor),
-//
-            itemimage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            itemimage.widthAnchor.constraint(equalTo: view.widthAnchor),
             itemimage.topAnchor.constraint(equalTo: self.scrollView.topAnchor,constant: 20),
-//            itemimage.leadingAnchor.constraint(equalTo:self.view.leadingAnchor, constant:10),
-//            itemimage.trailingAnchor.constraint(equalTo:self.view.trailingAnchor, constant:-10),
-           // itemimage.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+            itemimage.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor,constant: -100),
+            
+            itemimage.leadingAnchor.constraint(equalTo:self.scrollView.leadingAnchor,constant: 30),
+            itemimage.trailingAnchor.constraint(equalTo:stackView.leadingAnchor,constant: -30),
            
             
            
