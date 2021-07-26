@@ -160,6 +160,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         donarTableView.dataSource = self
         donarTableView.delegate = self
         donarTableView.register(DonationTableViewCell.self, forCellReuseIdentifier: "itemcell")
+    
         requestListTableView.dataSource = self
         requestListTableView.delegate = self
         requestListTableView.register(RequestListTableViewCell.self, forCellReuseIdentifier: "requestList")

@@ -9,9 +9,9 @@ import UIKit
 
 
 class ReceiverViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate,UISearchResultsUpdating,canReceive,UINavigationControllerDelegate,UIPopoverPresentationControllerDelegate,updateItems {
-    
-   
-    
+    internal var barButton: UIBarButtonItem!
+    var someVariable = true
+   // var someVariable1 = false
     var db = DBHelper()
     public var itemid : [Int] = []
     public var items : [Item] = []
@@ -24,23 +24,26 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
     let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
     let nsUserDomainMask = FileManager.SearchPathDomainMask.userDomainMask
     let refreshControl = UIRefreshControl()
+    var nameToggle : Bool = true
+    var dateToggle : Bool = true
     
     var menuItems: [UIAction] {
         return [
-            UIAction(title: "Name", image: UIImage(systemName: "arrow.down"), handler:  { _ in self.sortNameAscending()
-            }),
-            UIAction(title: "Name", image: UIImage(systemName: "arrow.up"), handler: { _ in  self.sortNameDescending()
-            }),
-            UIAction(title: "Date Posted", image: UIImage(systemName: "arrow.down"), handler: { _ in  self.sortDateAscending()
-            }),
-            UIAction(title: "Date Posted", image: UIImage(systemName: "arrow.up"), handler: { _ in  self.sortDateDescending()
-            })
-           
+            UIAction(title: "Name", image: UIImage(systemName: "arrow.up.arrow.down"),state: self.someVariable ? .off : .on){ _ in
+                self.someVariable = false
+                self.sortName()
+                
+            },
+            UIAction(title: "Date Posted", image: UIImage(systemName: "arrow.up.arrow.down"),state: self.someVariable ? .off : .on) { _ in
+                print(self.someVariable)
+                self.someVariable = true
+                self.sortDate()
+            },
         ]
     }
 
     var demoMenu: UIMenu {
-        return UIMenu(title: "My menu", image: nil, identifier: nil, options: [], children: menuItems)
+        return UIMenu(title: "Sort", image: nil, identifier: nil, options: [], children: menuItems)
     }
     
     let noItemAvailable:CustomLabel = {
@@ -133,23 +136,52 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         filtered_item_images = s2
         receiverTableView.reloadData()
     }
+    @objc func sortName()
+    {
+        menuItems[1].image = nil
+        switch (nameToggle){
+        case true:
+            sortNameDescending()
+            nameToggle.toggle()
+        case false:
+            sortNameAscending()
+            nameToggle.toggle()
+        }
+        
+    }
+    @objc func sortDate()
+    {
+        switch (dateToggle){
+        case true:
+            sortDateDescending()
+            dateToggle.toggle()
+        case false:
+            sortDateAscending()
+            dateToggle.toggle()
+        }
+        
+    }
     override func viewDidAppear(_ animated: Bool) {
         self.receiverTableView.reloadData()
       
     }
     
-    override func viewDidLoad() {
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         //super.viewWillAppear(Animated)
-        super.viewDidLoad()
+        //super.viewDidLoad()
       //  let add1 = UIBarButtonItem(barButtonSystemItem: , target: self, action: #selector(didTapAdd(_:)))
         let leftBarButton = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.done, target: self, action: #selector(navigateToProfile(_:)))
         let sorticon = UIBarButtonItem(title: "sort", image: nil, primaryAction: nil, menu: demoMenu)
+        
+       
         let add = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.done, target: self, action: #selector(didTapAdd(_:)))
         navigationItem.rightBarButtonItems = [add,sorticon]
         let addIcon = UIImage(systemName: "plus")
         add.image = addIcon
         let filterIcon = UIImage(systemName: "arrow.up.arrow.down")
         sorticon.image = filterIcon
+        
         let buttonIcon = UIImage(systemName: "person.crop.circle")
         leftBarButton.image = buttonIcon
         navigationItem.leftBarButtonItem = leftBarButton
@@ -175,6 +207,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         receiverTableView.dataSource = self
         receiverTableView.delegate = self
         receiverTableView.register(ReceiverTableViewCell.self, forCellReuseIdentifier: "itemcell")
+        receiverTableView.register(Receiver1TableViewCell.self, forCellReuseIdentifier: "itemcell1")
         receiverTableView.estimatedRowHeight = 370.0
         receiverTableView.rowHeight = UITableView.automaticDimension
         receiverTableView.refreshControl = refreshControl
@@ -257,6 +290,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            if(indexPath.row == 0){
             let cell = tableView.dequeueReusableCell(withIdentifier: "itemcell", for: indexPath) as! ReceiverTableViewCell
             cell.item = filteredItems[indexPath.row]
             let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
@@ -273,7 +307,26 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
                 
            
             }
-            return cell
+                return cell }
+            else{let cell = tableView.dequeueReusableCell(withIdentifier: "itemcell1", for: indexPath) as! Receiver1TableViewCell
+                cell.item = filteredItems[indexPath.row]
+                let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
+                
+                if(filtered_item_images.count >= indexPath.row && filtered_item_images.count != 0) {
+                if let dirPath = paths.first{
+                    let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent(filtered_item_images[indexPath.row].item_image)
+                    if(filtered_item_images[indexPath.row].item_image != "") {
+                        cell.itemimage.image = UIImage(contentsOfFile: imageURL.path) }
+                    else {
+                        cell.itemimage.image = UIImage(named: "loadingimage")
+                    }
+                }
+                    
+               
+                }
+                    return cell
+                
+            }
         }
         
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

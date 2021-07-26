@@ -18,6 +18,7 @@
 		1B44849A269C4A7D00C02695 /* DonarInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B448499269C4A7D00C02695 /* DonarInteractor.swift */; };
 		1B52A86F267DB2A700B489AA /* CustomReceiverCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B52A86E267DB2A700B489AA /* CustomReceiverCard.swift */; };
 		1B52A871267DC74500B489AA /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B52A870267DC74500B489AA /* Data.swift */; };
+		1B5739C526AE8820009B7F95 /* Receiver1TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5739C426AE8820009B7F95 /* Receiver1TableViewCell.swift */; };
 		1B6FF24C268369010093956C /* ReceiverInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6FF24B268369010093956C /* ReceiverInteractor.swift */; };
 		1B71D306268ED64B00B11F3B /* ToastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B71D305268ED64B00B11F3B /* ToastViewController.swift */; };
 		1B71D308268ED79800B11F3B /* DonationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B71D307268ED79800B11F3B /* DonationTableViewCell.swift */; };
@@ -87,6 +88,7 @@
 		1B448499269C4A7D00C02695 /* DonarInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonarInteractor.swift; sourceTree = "<group>"; };
 		1B52A86E267DB2A700B489AA /* CustomReceiverCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomReceiverCard.swift; sourceTree = "<group>"; };
 		1B52A870267DC74500B489AA /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		1B5739C426AE8820009B7F95 /* Receiver1TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receiver1TableViewCell.swift; sourceTree = "<group>"; };
 		1B6FF24B268369010093956C /* ReceiverInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverInteractor.swift; sourceTree = "<group>"; };
 		1B71D305268ED64B00B11F3B /* ToastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastViewController.swift; sourceTree = "<group>"; };
 		1B71D307268ED79800B11F3B /* DonationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationTableViewCell.swift; sourceTree = "<group>"; };
@@ -334,6 +336,7 @@
 				1B14791A2679F89C003DEC63 /* DetailItemViewController.swift */,
 				1B160855268076AD002570F2 /* PageViewController.swift */,
 				1B6FF24B268369010093956C /* ReceiverInteractor.swift */,
+				1B5739C426AE8820009B7F95 /* Receiver1TableViewCell.swift */,
 			);
 			path = Receiver;
 			sourceTree = "<group>";
@@ -500,6 +503,7 @@
 				1B71D30C268EE10C00B11F3B /* DonationInteractor.swift in Sources */,
 				1B9B8F4A2672655D00C5497C /* ReceiverViewController.swift in Sources */,
 				1B3A828A2690772B002BFADE /* ProfileInteractor.swift in Sources */,
+				1B5739C526AE8820009B7F95 /* Receiver1TableViewCell.swift in Sources */,
 				1B906EFE2670A12D0032FA81 /* SignupViewController.swift in Sources */,
 				1B906F0A2670FC260032FA81 /* AddItemViewController.swift in Sources */,
 				1B448496269C442900C02695 /* DonarprofileViewController.swift in Sources */,

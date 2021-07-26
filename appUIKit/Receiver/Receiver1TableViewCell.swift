@@ -1,13 +1,15 @@
 //
-//  ReceiverTableViewCell.swift
+//  Receiver1TableViewCell.swift
 //  appUIKit
 //
-//  Created by sysadmin on 10/06/21.
+//  Created by sysadmin on 26/07/21.
 //
+
+
 
 import UIKit
 
-class ReceiverTableViewCell: UITableViewCell {
+class Receiver1TableViewCell: UITableViewCell {
     
     var item: Item? {
         didSet {
@@ -151,7 +153,7 @@ class ReceiverTableViewCell: UITableViewCell {
 
             containerView.addArrangedSubview(itemdescription)
 
-            containerView.addArrangedSubview(itemquantity)
+          //  containerView.addArrangedSubview(itemquantity)
 
             containerView.addArrangedSubview(itemlocation)
             containerView.addArrangedSubview(stack)

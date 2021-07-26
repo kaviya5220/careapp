@@ -3,7 +3,7 @@ import UIKit
 protocol canReceive{
     func passData(item:Item,item_image:String)
 }
-class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDelegate, UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIScrollViewDelegate {
+class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDelegate, UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIScrollViewDelegate,UITextViewDelegate {
     public var itemImageName : String = ""
     var delegate:canReceive?
     let datePicker: UIDatePicker = UIDatePicker()
@@ -34,7 +34,7 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
         let stack = UIStackView()
         stack.axis = .vertical
         stack.alignment = .fill
-        stack.distribution = .fillEqually
+        stack.distribution = .fillProportionally
 
         stack.spacing = 10
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -106,9 +106,24 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
         namefield.placeholder = "Enter Item Name"
         return namefield
     }()
-    let itemDescription:CustomTextField = {
-        let description = CustomTextField()
-        description.placeholder = "Enter Item Descrption"
+    let itemDescription:UITextView = {
+        let description = UITextView()
+        description.contentInsetAdjustmentBehavior = .automatic
+      //  textView.center = self.view.center
+        description.textAlignment = NSTextAlignment.justified
+        description.isScrollEnabled = false
+        description.font = UIFont.systemFont(ofSize: 18)
+        description.layer.borderWidth = 1.5
+        description.layer.cornerRadius = 2
+        description.layer.borderColor = UIColor.systemGray.cgColor
+        //textView.textColor = UIColor.blue
+        description.backgroundColor = UIColor.white
+        description.text = "Enter Item Description"
+        description.textColor = UIColor.lightGray
+      
+        //textView.text = "Enter your notes here"
+       // textView.frame = CGRect(x: 0, y: 0, width: 200, height: 150)
+        description.translatesAutoresizingMaskIntoConstraints = false
         return description
     }()
     let itemQuantity:CustomTextField = {
@@ -116,17 +131,80 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
         quantity.placeholder = "Enter Item Quantity"
         return quantity
     }()
-    let address:UITextField = {
-        let addressfield = CustomTextField()
-        addressfield.placeholder = "Enter address"
-        return addressfield
+    let address:UITextView = {
+        let textView = UITextView()
+        textView.contentInsetAdjustmentBehavior = .automatic
+      //  textView.center = self.view.center
+        textView.textAlignment = NSTextAlignment.justified
+        textView.isScrollEnabled = false
+        textView.font = UIFont.systemFont(ofSize: 18)
+        textView.layer.borderWidth = 1.5
+        textView.layer.cornerRadius = 2
+        textView.layer.borderColor = UIColor.systemGray.cgColor
+        //textView.textColor = UIColor.blue
+        textView.backgroundColor = UIColor.white
+        textView.text = "Placeholder"
+        textView.textColor = UIColor.lightGray
+      
+        //textView.text = "Enter your notes here"
+       // textView.frame = CGRect(x: 0, y: 0, width: 200, height: 150)
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        return textView
     }()
+        
     let chooseImage:CustomButton = {
         let button = CustomButton(title: "Upload Image", bgColor: .blue)
         button.addTarget(self, action: #selector(chooseimage(_:)), for: .touchUpInside)
         button.contentEdgeInsets = UIEdgeInsets(top: 10,left: 10,bottom: 10,right: 10)
         return button
     }()
+    func textViewDidChange(_ textView: UITextView)
+        {
+        print("1")
+            if address.contentSize.height >= 120.0
+            {
+                address.isScrollEnabled = true
+                itemDescription.isScrollEnabled = true
+            }
+            else
+            {
+                let size = CGSize(width: view.frame.width, height: .infinity)
+                let approxSize = textView.sizeThatFits(size)
+                
+                textView.constraints.forEach {(constraint) in
+                    
+                            if constraint.firstAttribute == .height{
+                                    constraint.constant = approxSize.height
+                                }
+                            }
+                address.isScrollEnabled = false
+                itemDescription.isScrollEnabled = false
+            }
+        }
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        print("2")
+        if textView.textColor == UIColor.lightGray && textView == address {
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
+        if textView.textColor == UIColor.lightGray && textView == itemDescription{
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
+    }
+    func textViewDidEndEditing(_ textView: UITextView) {
+        print("3")
+        if textView.text.isEmpty && textView == address {
+            textView.text = "Placeholder"
+            textView.textColor = UIColor.lightGray
+        }
+        if textView.text.isEmpty && textView == itemDescription {
+            textView.text = "Placeholder"
+            textView.textColor = UIColor.lightGray
+        }
+    }
+
+
     
     let presenter = AddItemPresenter()
 
@@ -137,7 +215,8 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
         self.navigationItem.rightBarButtonItem = upload
         let cancel = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancel(_:)))
         self.navigationItem.leftBarButtonItem = cancel
-
+        address.delegate = self
+        itemDescription.delegate = self
         self.title = "Add Item"
         view.backgroundColor = .white
         itemimage.translatesAutoresizingMaskIntoConstraints = false
@@ -157,13 +236,13 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
         stackView.addArrangedSubview(itemname)
         stackView.addArrangedSubview(itemDescriptionLabel)
         stackView.addArrangedSubview(itemDescription)
-        stackView.addArrangedSubview(itemLocation)
-        stackView.addArrangedSubview(address)
         stackView.addArrangedSubview(itemQuantityLabel)
         stackView.addArrangedSubview(stack)
         stack.addArrangedSubview(quantity)
         stack.addArrangedSubview(quantityvalue)
         stack.addArrangedSubview(stepper)
+        stackView.addArrangedSubview(itemLocation)
+        stackView.addArrangedSubview(address)
         layoutTraitConstraintsUpdate(traitCollection: self.traitCollection,
                                      sharedConstraints: sharedConstraints,
                                      compactConstraints: compactConstraints,
@@ -211,7 +290,7 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
         let additeminteractor = AddItemInteractor()
         let date = Date()
         let format = DateFormatter()
-        format.dateFormat = "dd-MM-yyyy HH:mm:ss"
+        format.dateFormat = "dd-MM-yyyy HH:mm"
         let formattedDate = format.string(from: date)
         print("date\(date)")
         let userdefaults = UserDefaults.standard
@@ -284,14 +363,21 @@ extension AddItemViewController {
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackView.widthAnchor.constraint(equalTo: self.view.widthAnchor,multiplier: 0.75),
-            //stackView.topAnchor.constraint(equalTo: self.itemimage.bottomAnchor,constant: 15),
-            stackView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor),
+          //  stackView.topAnchor.constraint(equalTo: self.itemimage.bottomAnchor,constant: 15),
+           // stackView.bottomAnchor.constraint(equalTo: self.address.topAnchor),
             stack.leadingAnchor.constraint(equalTo: self.stackView.leadingAnchor),
             stack.trailingAnchor.constraint(equalTo: self.stackView.trailingAnchor),
             
             itemimage.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             itemimage.topAnchor.constraint(equalTo: self.scrollView.topAnchor,constant: 30),
             itemimage.bottomAnchor.constraint(equalTo: self.stackView.topAnchor),
+            
+//            address.topAnchor.constraint(equalTo: stackView.bottomAnchor),
+//            address.widthAnchor.constraint(equalTo: self.view.widthAnchor,multiplier: 0.75),
+//            address.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+////            address.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 10),
+////            address.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -10),
+            stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             
         ])
 
