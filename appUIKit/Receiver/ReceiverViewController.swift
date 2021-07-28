@@ -29,10 +29,10 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
     
     var menuItems: [UIAction] {
         return [
-            UIAction(title: "Name", image: UIImage(systemName: "arrow.up.arrow.down"),state: self.someVariable ? .off : .on){ _ in
+            UIAction(title: "Name", image: UIImage(systemName: "arrow.up.arrow.down"),state: self.someVariable == true ? .on : .off){ _ in
                 self.someVariable = false
                 self.sortName()
-                
+                //action.image = nil
             },
             UIAction(title: "Date Posted", image: UIImage(systemName: "arrow.up.arrow.down"),state: self.someVariable ? .off : .on) { _ in
                 print(self.someVariable)
@@ -97,7 +97,6 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     @objc func sortNameDescending(){
-       
         let combined = zip(items,filtered_item_images).sorted(by: {$0.0.item_name > $1.0.item_name})
         let s1 = combined.map {$0.0}
         let s2 = combined.map {$0.1}

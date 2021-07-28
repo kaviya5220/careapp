@@ -3,10 +3,41 @@ import UIKit
 protocol canReceive{
     func passData(item:Item,item_image:String)
 }
-class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDelegate, UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIScrollViewDelegate,UITextViewDelegate {
+class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDelegate, UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIScrollViewDelegate,UITextViewDelegate,UIPickerViewDelegate, UIPickerViewDataSource,UITextFieldDelegate {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+    return 1 // number of session
+    }
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    return countryList.count // number of dropdown items
+    }
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    return countryList[row] // dropdown item
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    selectedCountry = countryList[row] // selected item
+    category.text = selectedCountry
+    }
+    let toolBar = UIToolbar(frame:CGRect(x:0, y:0, width:100, height:44))
+    func dismissPickerView() {
+      
+       toolBar.sizeToFit()
+        let button = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(self.action))
+       toolBar.setItems([button], animated: true)
+       toolBar.isUserInteractionEnabled = true
+        toolBar.translatesAutoresizingMaskIntoConstraints = false
+       category.inputAccessoryView = toolBar
+    }
+    @objc func action() {
+          view.endEditing(true)
+    }
+    var selectedCountry: String?
+    var countryList = ["BOOKS", "CLOTHES", "FOOD","ELECTRONICS"]
+    var country : String = ""
+    let dataArray = ["English", "Maths", "History", "German", "Science"]
     public var itemImageName : String = ""
     var delegate:canReceive?
     let datePicker: UIDatePicker = UIDatePicker()
+    
     let alert : UIAlertController = {
     let alert1 = UIAlertController(title: "Success", message: "Item Posted Successfully", preferredStyle: .alert)
     return alert1
@@ -40,14 +71,21 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
-    let stack: UIStackView = {
+    let stack1: UIStackView = {
         let stack = UIStackView()
-        stack.axis = .horizontal
+        stack.axis = .vertical
         stack.alignment = .center
         stack.distribution = .equalSpacing
         stack.spacing = 20
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
+    }()
+    let category:UITextField = {
+    let label = UITextField()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+    label.text = "Item Name"
+    return label
     }()
     let itemNameLabel:CustomLabel = {
     let label = CustomLabel(labelType: .primary)
@@ -75,9 +113,9 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
         label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         return label
     }()
-    let expirey:CustomLabel = {
+    let choosecategory:CustomLabel = {
         let label = CustomLabel(labelType: .primary)
-        label.text = "Expiry Date"
+        label.text = "Choose Category"
         return label
     }()
     let quantityvalue:CustomLabel = {
@@ -204,12 +242,18 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
         }
     }
 
-
-    
+    let UIPicker: UIPickerView = UIPickerView()
     let presenter = AddItemPresenter()
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+        
+             UIPicker.delegate = self as UIPickerViewDelegate
+             UIPicker.dataSource = self as UIPickerViewDataSource
+        UIPicker.translatesAutoresizingMaskIntoConstraints = false
+        category.inputView = UIPicker
+           //  UIPicker.center = self.view.center
+        dismissPickerView()
 
         let upload = UIBarButtonItem(title: "Upload", style: .plain, target: self, action: #selector(upload_item(_:)))
         self.navigationItem.rightBarButtonItem = upload
@@ -234,15 +278,18 @@ class AddItemViewController: UIViewController,UIAdaptivePresentationControllerDe
         scrollView.addSubview(itemimage)
         stackView.addArrangedSubview(itemNameLabel)
         stackView.addArrangedSubview(itemname)
-        stackView.addArrangedSubview(itemDescriptionLabel)
-        stackView.addArrangedSubview(itemDescription)
-        stackView.addArrangedSubview(itemQuantityLabel)
-        stackView.addArrangedSubview(stack)
-        stack.addArrangedSubview(quantity)
-        stack.addArrangedSubview(quantityvalue)
-        stack.addArrangedSubview(stepper)
+//        stackView.addArrangedSubview(itemDescriptionLabel)
+//        stackView.addArrangedSubview(itemDescription)
+//        stackView.addArrangedSubview(itemQuantityLabel)
+//        stackView.addArrangedSubview(stack)
+//        stack.addArrangedSubview(quantity)
+//        stack.addArrangedSubview(quantityvalue)
+//        stack.addArrangedSubview(stepper)
         stackView.addArrangedSubview(itemLocation)
         stackView.addArrangedSubview(address)
+        stackView.addArrangedSubview(choosecategory)
+        stackView.addArrangedSubview(category)
+        
         layoutTraitConstraintsUpdate(traitCollection: self.traitCollection,
                                      sharedConstraints: sharedConstraints,
                                      compactConstraints: compactConstraints,
@@ -365,8 +412,8 @@ extension AddItemViewController {
             stackView.widthAnchor.constraint(equalTo: self.view.widthAnchor,multiplier: 0.75),
           //  stackView.topAnchor.constraint(equalTo: self.itemimage.bottomAnchor,constant: 15),
            // stackView.bottomAnchor.constraint(equalTo: self.address.topAnchor),
-            stack.leadingAnchor.constraint(equalTo: self.stackView.leadingAnchor),
-            stack.trailingAnchor.constraint(equalTo: self.stackView.trailingAnchor),
+//            stack.leadingAnchor.constraint(equalTo: self.stackView.leadingAnchor),
+//            stack.trailingAnchor.constraint(equalTo: self.stackView.trailingAnchor),
             
             itemimage.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             itemimage.topAnchor.constraint(equalTo: self.scrollView.topAnchor,constant: 30),
@@ -379,6 +426,13 @@ extension AddItemViewController {
 ////            address.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -10),
             stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             
+            //toolBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,constant: -60),
+//            toolBar.centerXAnchor.constraint(equalTo: category.centerXAnchor),
+//            //toolBar.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 10),
+//           // toolBar.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -10),
+//            toolBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            
+            
         ])
 
         regularConstraints.append(contentsOf: [
@@ -389,8 +443,8 @@ extension AddItemViewController {
             
             stackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
           //  stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stack.leadingAnchor.constraint(equalTo: self.stackView.leadingAnchor),
-            stack.trailingAnchor.constraint(equalTo: self.stackView.trailingAnchor),
+          //  stack.leadingAnchor.constraint(equalTo: self.stackView.leadingAnchor),
+            //stack.trailingAnchor.constraint(equalTo: self.stackView.trailingAnchor),
             stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
            

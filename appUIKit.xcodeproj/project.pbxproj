@@ -19,6 +19,7 @@
 		1B52A86F267DB2A700B489AA /* CustomReceiverCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B52A86E267DB2A700B489AA /* CustomReceiverCard.swift */; };
 		1B52A871267DC74500B489AA /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B52A870267DC74500B489AA /* Data.swift */; };
 		1B5739C526AE8820009B7F95 /* Receiver1TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5739C426AE8820009B7F95 /* Receiver1TableViewCell.swift */; };
+		1B5739C726AEDD0B009B7F95 /* AddItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5739C626AEDD0B009B7F95 /* AddItemTableViewCell.swift */; };
 		1B6FF24C268369010093956C /* ReceiverInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6FF24B268369010093956C /* ReceiverInteractor.swift */; };
 		1B71D306268ED64B00B11F3B /* ToastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B71D305268ED64B00B11F3B /* ToastViewController.swift */; };
 		1B71D308268ED79800B11F3B /* DonationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B71D307268ED79800B11F3B /* DonationTableViewCell.swift */; };
@@ -89,6 +90,7 @@
 		1B52A86E267DB2A700B489AA /* CustomReceiverCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomReceiverCard.swift; sourceTree = "<group>"; };
 		1B52A870267DC74500B489AA /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		1B5739C426AE8820009B7F95 /* Receiver1TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receiver1TableViewCell.swift; sourceTree = "<group>"; };
+		1B5739C626AEDD0B009B7F95 /* AddItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemTableViewCell.swift; sourceTree = "<group>"; };
 		1B6FF24B268369010093956C /* ReceiverInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverInteractor.swift; sourceTree = "<group>"; };
 		1B71D305268ED64B00B11F3B /* ToastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastViewController.swift; sourceTree = "<group>"; };
 		1B71D307268ED79800B11F3B /* DonationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationTableViewCell.swift; sourceTree = "<group>"; };
@@ -311,6 +313,7 @@
 				1B906F092670FC260032FA81 /* AddItemViewController.swift */,
 				1BC38B5F26899A13002501E0 /* AddItemInteractor.swift */,
 				1BC38B6126899AF9002501E0 /* AddItemPresenter.swift */,
+				1B5739C626AEDD0B009B7F95 /* AddItemTableViewCell.swift */,
 			);
 			path = Donor;
 			sourceTree = "<group>";
@@ -491,6 +494,7 @@
 				1B448494269C13DF00C02695 /* Status.swift in Sources */,
 				1B906F0D2670FC660032FA81 /* Item.swift in Sources */,
 				1B7EBFA92674945700F2AED1 /* LoginInteractor.swift in Sources */,
+				1B5739C726AEDD0B009B7F95 /* AddItemTableViewCell.swift in Sources */,
 				1B52A86F267DB2A700B489AA /* CustomReceiverCard.swift in Sources */,
 				1B160856268076AD002570F2 /* PageViewController.swift in Sources */,
 				1B7EBFA32674805B00F2AED1 /* CustomLabel.swift in Sources */,
