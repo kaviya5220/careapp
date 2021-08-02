@@ -15,8 +15,7 @@ class DonationTableViewCell: UITableViewCell {
             let name = Item.item_name
                 itemimage.image = UIImage(named: "dnimge")
                 itemname.text = name
-                itemdescription.text = Item.item_description
-                itemquantity.text = Item.item_quantity
+                itemCategory.text = Item.category
                 donarid.text = String(Item.Donar_ID)
                 visitedcount.text = String(Item.visited_count)
                 date.text = Item.date
@@ -52,23 +51,15 @@ class DonationTableViewCell: UITableViewCell {
             return label
         }()
         
-        let itemdescription:CustomLabel = {
-            let label = CustomLabel(labelType: .primary)
-            return label
-        }()
-    let itemdescriptionlabel:CustomLabel = {
-        let label = CustomLabel(labelType: .primary)
-        label.text = "Description :"
-        return label
-    }()
+       
     
-    let itemquantity:CustomLabel = {
+    let itemCategory:CustomLabel = {
         let label = CustomLabel(labelType: .primary)
         return label
     }()
-    let itemquantitylabel:CustomLabel = {
+    let categoryLabel:CustomLabel = {
         let label = CustomLabel(labelType: .primary)
-        label.text = "Quantity :"
+        label.text = "Category:"
         return label
     }()
     
@@ -106,10 +97,8 @@ class DonationTableViewCell: UITableViewCell {
             
           
             containerView.addSubview(itemname)
-            containerView.addSubview(itemdescriptionlabel)
-            containerView.addSubview(itemdescription)
-            containerView.addSubview(itemquantitylabel)
-            containerView.addSubview(itemquantity)
+            containerView.addSubview(categoryLabel)
+            containerView.addSubview(itemCategory)
             containerView.addSubview(datelabel)
             containerView.addSubview(date)
             containerView.addSubview(visitedcountlabel)
@@ -128,19 +117,15 @@ class DonationTableViewCell: UITableViewCell {
             itemname.topAnchor.constraint(equalTo:self.containerView.topAnchor,constant: 15).isActive = true
             itemname.leadingAnchor.constraint(equalTo:self.containerView.leadingAnchor).isActive = true
             itemname.trailingAnchor.constraint(equalTo:self.containerView.trailingAnchor).isActive = true
-            itemdescriptionlabel.topAnchor.constraint(equalTo:self.itemname.bottomAnchor,constant: 5).isActive = true
-            itemdescriptionlabel.leadingAnchor.constraint(equalTo:self.containerView.leadingAnchor).isActive = true
-            itemdescription.topAnchor.constraint(equalTo:self.itemname.bottomAnchor,constant: 5).isActive = true
-            itemdescription.leadingAnchor.constraint(equalTo:self.itemdescriptionlabel.trailingAnchor,constant: 10).isActive = true
+           
+            categoryLabel.topAnchor.constraint(equalTo:self.itemname.bottomAnchor,constant: 5).isActive = true
+            categoryLabel.leadingAnchor.constraint(equalTo:self.containerView.leadingAnchor).isActive = true
+            itemCategory.topAnchor.constraint(equalTo:self.itemname.bottomAnchor,constant: 5).isActive = true
+            itemCategory.leadingAnchor.constraint(equalTo:self.categoryLabel.trailingAnchor,constant: 10).isActive = true
             
-            itemquantitylabel.topAnchor.constraint(equalTo:self.itemdescription.bottomAnchor,constant: 5).isActive = true
-            itemquantitylabel.leadingAnchor.constraint(equalTo:self.containerView.leadingAnchor).isActive = true
-            itemquantity.topAnchor.constraint(equalTo:self.itemdescription.bottomAnchor,constant: 5).isActive = true
-            itemquantity.leadingAnchor.constraint(equalTo:self.itemquantitylabel.trailingAnchor,constant: 10).isActive = true
-            
-            datelabel.topAnchor.constraint(equalTo:self.itemquantity.bottomAnchor,constant: 5).isActive = true
+            datelabel.topAnchor.constraint(equalTo:self.itemCategory.bottomAnchor,constant: 5).isActive = true
             datelabel.leadingAnchor.constraint(equalTo:self.containerView.leadingAnchor).isActive = true
-            date.topAnchor.constraint(equalTo:self.itemquantity.bottomAnchor,constant: 5).isActive = true
+            date.topAnchor.constraint(equalTo:self.itemCategory.bottomAnchor,constant: 5).isActive = true
             date.leadingAnchor.constraint(equalTo:self.datelabel.trailingAnchor,constant: 10).isActive = true
             
             visitedcountlabel.topAnchor.constraint(equalTo:self.date.bottomAnchor,constant: 5).isActive = true

@@ -12,7 +12,6 @@ protocol AddItemPresenterDelegate : AnyObject {
 class AddItemPresenter {
     weak var delegate: AddItemPresenterDelegate?
     func showSuccessAlert(){
-        print("Show alert")
         delegate?.showSuccessAlert()
     }
     

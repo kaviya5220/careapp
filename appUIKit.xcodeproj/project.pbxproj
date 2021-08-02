@@ -18,8 +18,9 @@
 		1B44849A269C4A7D00C02695 /* DonarInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B448499269C4A7D00C02695 /* DonarInteractor.swift */; };
 		1B52A86F267DB2A700B489AA /* CustomReceiverCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B52A86E267DB2A700B489AA /* CustomReceiverCard.swift */; };
 		1B52A871267DC74500B489AA /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B52A870267DC74500B489AA /* Data.swift */; };
-		1B5739C526AE8820009B7F95 /* Receiver1TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5739C426AE8820009B7F95 /* Receiver1TableViewCell.swift */; };
-		1B5739C726AEDD0B009B7F95 /* AddItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5739C626AEDD0B009B7F95 /* AddItemTableViewCell.swift */; };
+		1B5739C726AEDD0B009B7F95 /* ItemNameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5739C626AEDD0B009B7F95 /* ItemNameTableViewCell.swift */; };
+		1B5739D426B14993009B7F95 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5739D326B14993009B7F95 /* CategoryTableViewCell.swift */; };
+		1B5739D626B1B19A009B7F95 /* TextViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5739D526B1B19A009B7F95 /* TextViewTableViewCell.swift */; };
 		1B6FF24C268369010093956C /* ReceiverInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6FF24B268369010093956C /* ReceiverInteractor.swift */; };
 		1B71D306268ED64B00B11F3B /* ToastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B71D305268ED64B00B11F3B /* ToastViewController.swift */; };
 		1B71D308268ED79800B11F3B /* DonationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B71D307268ED79800B11F3B /* DonationTableViewCell.swift */; };
@@ -33,6 +34,12 @@
 		1B7EBFA726748EA300F2AED1 /* CustomField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7EBFA626748EA300F2AED1 /* CustomField.swift */; };
 		1B7EBFA92674945700F2AED1 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7EBFA82674945700F2AED1 /* LoginInteractor.swift */; };
 		1B7EBFAB2674946F00F2AED1 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7EBFAA2674946F00F2AED1 /* LoginPresenter.swift */; };
+		1B803D7726B3BB9100303DA9 /* AddItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B803D7626B3BB9100303DA9 /* AddItemTableViewController.swift */; };
+		1B803D7B26B3CB9600303DA9 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B803D7A26B3CB9600303DA9 /* CategoryViewController.swift */; };
+		1B803D7D26B4021300303DA9 /* DescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B803D7C26B4021300303DA9 /* DescriptionViewController.swift */; };
+		1B803D7F26B4200800303DA9 /* DescriptionTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B803D7E26B4200800303DA9 /* DescriptionTableViewHeader.swift */; };
+		1B803D8126B4429400303DA9 /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B803D8026B4429400303DA9 /* DescriptionTableViewCell.swift */; };
+		1B803D8326B5829B00303DA9 /* Books.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B803D8226B5829B00303DA9 /* Books.swift */; };
 		1B83CADA267735D70041C6A2 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B83CAD9267735D70041C6A2 /* Extension.swift */; };
 		1B906ECA2670A08C0032FA81 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B906EC92670A08C0032FA81 /* AppDelegate.swift */; };
 		1B906ECC2670A08C0032FA81 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B906ECB2670A08C0032FA81 /* SceneDelegate.swift */; };
@@ -44,13 +51,13 @@
 		1B906EFB2670A0F50032FA81 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B906EFA2670A0F50032FA81 /* LoginViewController.swift */; };
 		1B906EFE2670A12D0032FA81 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B906EFD2670A12D0032FA81 /* SignupViewController.swift */; };
 		1B906F002670A9260032FA81 /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B906EFF2670A9260032FA81 /* DBHelper.swift */; };
-		1B906F0A2670FC260032FA81 /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B906F092670FC260032FA81 /* AddItemViewController.swift */; };
 		1B906F0D2670FC660032FA81 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B906F0C2670FC660032FA81 /* Item.swift */; };
 		1B9B8F442671DFC000C5497C /* ReceiverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9B8F432671DFC000C5497C /* ReceiverTableViewCell.swift */; };
 		1B9B8F4626724E6F00C5497C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9B8F4526724E6F00C5497C /* User.swift */; };
 		1B9B8F48267256EC00C5497C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9B8F47267256EC00C5497C /* ProfileViewController.swift */; };
 		1B9B8F4A2672655D00C5497C /* ReceiverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9B8F492672655D00C5497C /* ReceiverViewController.swift */; };
 		1BAC4F772698474200BFC9DB /* Item_Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAC4F762698474200BFC9DB /* Item_Image.swift */; };
+		1BBC570326B7C30400F5BA0C /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBC570226B7C30400F5BA0C /* Food.swift */; };
 		1BC38B6026899A13002501E0 /* AddItemInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC38B5F26899A13002501E0 /* AddItemInteractor.swift */; };
 		1BC38B6226899AF9002501E0 /* AddItemPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC38B6126899AF9002501E0 /* AddItemPresenter.swift */; };
 		1BC8C0E32692DA1400292240 /* RequestList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8C0E22692DA1400292240 /* RequestList.swift */; };
@@ -89,8 +96,9 @@
 		1B448499269C4A7D00C02695 /* DonarInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonarInteractor.swift; sourceTree = "<group>"; };
 		1B52A86E267DB2A700B489AA /* CustomReceiverCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomReceiverCard.swift; sourceTree = "<group>"; };
 		1B52A870267DC74500B489AA /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
-		1B5739C426AE8820009B7F95 /* Receiver1TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receiver1TableViewCell.swift; sourceTree = "<group>"; };
-		1B5739C626AEDD0B009B7F95 /* AddItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemTableViewCell.swift; sourceTree = "<group>"; };
+		1B5739C626AEDD0B009B7F95 /* ItemNameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemNameTableViewCell.swift; sourceTree = "<group>"; };
+		1B5739D326B14993009B7F95 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
+		1B5739D526B1B19A009B7F95 /* TextViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewTableViewCell.swift; sourceTree = "<group>"; };
 		1B6FF24B268369010093956C /* ReceiverInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverInteractor.swift; sourceTree = "<group>"; };
 		1B71D305268ED64B00B11F3B /* ToastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastViewController.swift; sourceTree = "<group>"; };
 		1B71D307268ED79800B11F3B /* DonationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationTableViewCell.swift; sourceTree = "<group>"; };
@@ -104,6 +112,12 @@
 		1B7EBFA626748EA300F2AED1 /* CustomField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomField.swift; sourceTree = "<group>"; };
 		1B7EBFA82674945700F2AED1 /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
 		1B7EBFAA2674946F00F2AED1 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
+		1B803D7626B3BB9100303DA9 /* AddItemTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemTableViewController.swift; sourceTree = "<group>"; };
+		1B803D7A26B3CB9600303DA9 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
+		1B803D7C26B4021300303DA9 /* DescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionViewController.swift; sourceTree = "<group>"; };
+		1B803D7E26B4200800303DA9 /* DescriptionTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionTableViewHeader.swift; sourceTree = "<group>"; };
+		1B803D8026B4429400303DA9 /* DescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionTableViewCell.swift; sourceTree = "<group>"; };
+		1B803D8226B5829B00303DA9 /* Books.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Books.swift; sourceTree = "<group>"; };
 		1B83CAD9267735D70041C6A2 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		1B906EC62670A08C0032FA81 /* appUIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = appUIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B906EC92670A08C0032FA81 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -121,13 +135,13 @@
 		1B906EFA2670A0F50032FA81 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1B906EFD2670A12D0032FA81 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		1B906EFF2670A9260032FA81 /* DBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
-		1B906F092670FC260032FA81 /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
 		1B906F0C2670FC660032FA81 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		1B9B8F432671DFC000C5497C /* ReceiverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverTableViewCell.swift; sourceTree = "<group>"; };
 		1B9B8F4526724E6F00C5497C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1B9B8F47267256EC00C5497C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		1B9B8F492672655D00C5497C /* ReceiverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverViewController.swift; sourceTree = "<group>"; };
 		1BAC4F762698474200BFC9DB /* Item_Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item_Image.swift; sourceTree = "<group>"; };
+		1BBC570226B7C30400F5BA0C /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
 		1BC38B5F26899A13002501E0 /* AddItemInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemInteractor.swift; sourceTree = "<group>"; };
 		1BC38B6126899AF9002501E0 /* AddItemPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemPresenter.swift; sourceTree = "<group>"; };
 		1BC8C0E22692DA1400292240 /* RequestList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestList.swift; sourceTree = "<group>"; };
@@ -310,10 +324,16 @@
 		1B906F082670FBF50032FA81 /* Donor */ = {
 			isa = PBXGroup;
 			children = (
-				1B906F092670FC260032FA81 /* AddItemViewController.swift */,
 				1BC38B5F26899A13002501E0 /* AddItemInteractor.swift */,
 				1BC38B6126899AF9002501E0 /* AddItemPresenter.swift */,
-				1B5739C626AEDD0B009B7F95 /* AddItemTableViewCell.swift */,
+				1B5739C626AEDD0B009B7F95 /* ItemNameTableViewCell.swift */,
+				1B5739D326B14993009B7F95 /* CategoryTableViewCell.swift */,
+				1B5739D526B1B19A009B7F95 /* TextViewTableViewCell.swift */,
+				1B803D7626B3BB9100303DA9 /* AddItemTableViewController.swift */,
+				1B803D7A26B3CB9600303DA9 /* CategoryViewController.swift */,
+				1B803D7C26B4021300303DA9 /* DescriptionViewController.swift */,
+				1B803D7E26B4200800303DA9 /* DescriptionTableViewHeader.swift */,
+				1B803D8026B4429400303DA9 /* DescriptionTableViewCell.swift */,
 			);
 			path = Donor;
 			sourceTree = "<group>";
@@ -327,6 +347,8 @@
 				1BC8C0E22692DA1400292240 /* RequestList.swift */,
 				1BAC4F762698474200BFC9DB /* Item_Image.swift */,
 				1B448493269C13DF00C02695 /* Status.swift */,
+				1B803D8226B5829B00303DA9 /* Books.swift */,
+				1BBC570226B7C30400F5BA0C /* Food.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -339,7 +361,6 @@
 				1B14791A2679F89C003DEC63 /* DetailItemViewController.swift */,
 				1B160855268076AD002570F2 /* PageViewController.swift */,
 				1B6FF24B268369010093956C /* ReceiverInteractor.swift */,
-				1B5739C426AE8820009B7F95 /* Receiver1TableViewCell.swift */,
 			);
 			path = Receiver;
 			sourceTree = "<group>";
@@ -492,33 +513,40 @@
 				1B14791B2679F89C003DEC63 /* DetailItemViewController.swift in Sources */,
 				1B6FF24C268369010093956C /* ReceiverInteractor.swift in Sources */,
 				1B448494269C13DF00C02695 /* Status.swift in Sources */,
+				1B5739D626B1B19A009B7F95 /* TextViewTableViewCell.swift in Sources */,
 				1B906F0D2670FC660032FA81 /* Item.swift in Sources */,
 				1B7EBFA92674945700F2AED1 /* LoginInteractor.swift in Sources */,
-				1B5739C726AEDD0B009B7F95 /* AddItemTableViewCell.swift in Sources */,
+				1B5739C726AEDD0B009B7F95 /* ItemNameTableViewCell.swift in Sources */,
 				1B52A86F267DB2A700B489AA /* CustomReceiverCard.swift in Sources */,
 				1B160856268076AD002570F2 /* PageViewController.swift in Sources */,
 				1B7EBFA32674805B00F2AED1 /* CustomLabel.swift in Sources */,
 				1B71D306268ED64B00B11F3B /* ToastViewController.swift in Sources */,
 				1B71D30E268F197700B11F3B /* Donationstatus.swift in Sources */,
+				1B803D7B26B3CB9600303DA9 /* CategoryViewController.swift in Sources */,
 				1B7EBFAB2674946F00F2AED1 /* LoginPresenter.swift in Sources */,
 				1B448490269C0B9E00C02695 /* StatusInteractor.swift in Sources */,
 				1BCFA85526997671009A48B8 /* CustomLoginTextField.swift in Sources */,
+				1BBC570326B7C30400F5BA0C /* Food.swift in Sources */,
 				1B906ECE2670A08C0032FA81 /* ViewController.swift in Sources */,
 				1B71D30C268EE10C00B11F3B /* DonationInteractor.swift in Sources */,
+				1B5739D426B14993009B7F95 /* CategoryTableViewCell.swift in Sources */,
 				1B9B8F4A2672655D00C5497C /* ReceiverViewController.swift in Sources */,
+				1B803D7726B3BB9100303DA9 /* AddItemTableViewController.swift in Sources */,
 				1B3A828A2690772B002BFADE /* ProfileInteractor.swift in Sources */,
-				1B5739C526AE8820009B7F95 /* Receiver1TableViewCell.swift in Sources */,
 				1B906EFE2670A12D0032FA81 /* SignupViewController.swift in Sources */,
-				1B906F0A2670FC260032FA81 /* AddItemViewController.swift in Sources */,
 				1B448496269C442900C02695 /* DonarprofileViewController.swift in Sources */,
 				1B9B8F442671DFC000C5497C /* ReceiverTableViewCell.swift in Sources */,
+				1B803D8126B4429400303DA9 /* DescriptionTableViewCell.swift in Sources */,
 				1B7EBFA52674884200F2AED1 /* SignupInteractor.swift in Sources */,
 				1BC38B6026899A13002501E0 /* AddItemInteractor.swift in Sources */,
+				1B803D8326B5829B00303DA9 /* Books.swift in Sources */,
 				1B7EBFA126747A9200F2AED1 /* CustomTextField.swift in Sources */,
+				1B803D7F26B4200800303DA9 /* DescriptionTableViewHeader.swift in Sources */,
 				1B44849A269C4A7D00C02695 /* DonarInteractor.swift in Sources */,
 				1B906F002670A9260032FA81 /* DBHelper.swift in Sources */,
 				1B9B8F4626724E6F00C5497C /* User.swift in Sources */,
 				1BAC4F772698474200BFC9DB /* Item_Image.swift in Sources */,
+				1B803D7D26B4021300303DA9 /* DescriptionViewController.swift in Sources */,
 				1BC8C0E32692DA1400292240 /* RequestList.swift in Sources */,
 				1B906ECA2670A08C0032FA81 /* AppDelegate.swift in Sources */,
 				1B9B8F48267256EC00C5497C /* ProfileViewController.swift in Sources */,

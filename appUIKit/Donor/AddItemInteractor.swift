@@ -12,5 +12,13 @@ class AddItemInteractor{
         DBHelper.db = DBHelper.openDB()
         return DBHelper.insertItem(itemarg: item)
     }
+    func addBook(itemid:Int,book:Books){
+        DBHelper.db = DBHelper.openDB()
+        return DBHelper.insertBook(item_id: itemid, book: book)
+    }
+    func addFood(itemid:Int,food:Food){
+        DBHelper.db = DBHelper.openDB()
+        return DBHelper.insertFood(item_id: itemid, food: food)
+    }
 }
 

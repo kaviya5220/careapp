@@ -15,9 +15,8 @@ class ReceiverTableViewCell: UITableViewCell {
             guard let Item = item else {return}
             let name = Item.item_name
                 itemname.text = name
-            setValue(itemdescription, name: "description", value:String(Item.item_description))
             setValue(itemlocation, name: "location", value:String(Item.address))
-            setValue(itemquantity, name: "quantity", value:String(Item.item_quantity))
+            setValue(itemCategory, name: "category", value:String(Item.category))
             donarid.text = String(Item.Donar_ID)
             setValue(visitedcount, name: "visitedcount", value:String(Item.visited_count))
             setValue(date, name: "calendar", value:Item.date)
@@ -79,7 +78,7 @@ class ReceiverTableViewCell: UITableViewCell {
             return label
         }()
    
-    let itemquantity:CustomLabel = {
+    let itemCategory:CustomLabel = {
         let label = CustomLabel(labelType: .primary)
         return label
     }()
@@ -116,7 +115,7 @@ class ReceiverTableViewCell: UITableViewCell {
         return stack
     }()
     
-    var uiimage_names : [String:String] = ["description":"doc.plaintext","quantity":"bag","visitedcount":"eye","location":"location","calendar":"calendar"]
+    var uiimage_names : [String:String] = ["description":"doc.plaintext","category":"bag","visitedcount":"eye","location":"location","calendar":"calendar"]
     func setValue(_ label: UILabel,name:String,value : String){
         let attachment = NSTextAttachment()
         let imagename:String = uiimage_names[name]!
@@ -152,7 +151,7 @@ class ReceiverTableViewCell: UITableViewCell {
 
             containerView.addArrangedSubview(itemdescription)
 
-            containerView.addArrangedSubview(itemquantity)
+            containerView.addArrangedSubview(itemCategory)
 
             containerView.addArrangedSubview(itemlocation)
             containerView.addArrangedSubview(stack)

@@ -100,17 +100,7 @@ class DetailItemViewController: UIViewController,UIScrollViewDelegate {
         return label
     }()
     
-    let itemdescription:CustomLabel = {
-        let label = CustomLabel(labelType: .primary)
-        return label
-    }()
-    let itemdescriptionlabel:CustomLabel = {
-    let label = CustomLabel(labelType: .primary)
-    label.text = "Description :"
-    return label
-    }()
-
-    let itemquantity:CustomLabel = {
+    let itemCategory:CustomLabel = {
     let label = CustomLabel(labelType: .primary)
     return label
     }()
@@ -223,8 +213,7 @@ class DetailItemViewController: UIViewController,UIScrollViewDelegate {
         donarphone.text = user.user_phone
         donaraddress.text = user.user_address
         itemname.text = items.item_name
-        itemdescription.text = items.item_description
-        itemquantity.text = items.item_quantity
+        itemCategory.text = items.category
         
         let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
         if let dirPath = paths.first{
@@ -244,11 +233,9 @@ class DetailItemViewController: UIViewController,UIScrollViewDelegate {
         itemNameStackView.addArrangedSubview(itemnamelabel)
         itemNameStackView.addArrangedSubview(itemname)
         
-        itemDescriptionStackView.addArrangedSubview(itemdescriptionlabel)
-        itemDescriptionStackView.addArrangedSubview(itemdescription)
         
         itemQuantityStackView.addArrangedSubview(itemquantitylabel)
-        itemQuantityStackView.addArrangedSubview(itemquantity)
+        itemQuantityStackView.addArrangedSubview(itemCategory)
         
         donarNameStackView.addArrangedSubview(donarnamelabel)
         donarNameStackView.addArrangedSubview(donarname)

@@ -62,20 +62,19 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
             }
             else{
                 filtered_item_images = []
-            filteredItems = items.filter({$0.item_name.contains(searchString!) || $0.address.contains(searchString!) || $0.item_description.contains(searchString!)})
+            filteredItems = items.filter({$0.item_name.contains(searchString!) || $0.address.contains(searchString!) || $0.category.contains(searchString!)})
                 for item in item_images{
                     if(filteredItems.map{$0.item_id}.contains(item.item_id)){
                         filtered_item_images.append(item)
                     }
                 }
-                print(filtered_item_images)
             }
             receiverTableView.reloadData()
         }
    
     @objc func didTapAdd(_ sender: UIButton) {
         if(receiverInteractor.isLoggedIn()){
-        let addItem = AddItemViewController()
+        let addItem = AddItemTableViewController()
         let vc = UINavigationController()
         vc.viewControllers = [addItem]
         vc.modalPresentationStyle = .automatic //or .overFullScreen for transparency
@@ -165,10 +164,10 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
       
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    override func viewDidLoad() {
+        //super.viewDidLayoutSubviews()
         //super.viewWillAppear(Animated)
-        //super.viewDidLoad()
+        super.viewDidLoad()
       //  let add1 = UIBarButtonItem(barButtonSystemItem: , target: self, action: #selector(didTapAdd(_:)))
         let leftBarButton = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.done, target: self, action: #selector(navigateToProfile(_:)))
         let sorticon = UIBarButtonItem(title: "sort", image: nil, primaryAction: nil, menu: demoMenu)
@@ -206,7 +205,6 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         receiverTableView.dataSource = self
         receiverTableView.delegate = self
         receiverTableView.register(ReceiverTableViewCell.self, forCellReuseIdentifier: "itemcell")
-        receiverTableView.register(Receiver1TableViewCell.self, forCellReuseIdentifier: "itemcell1")
         receiverTableView.estimatedRowHeight = 370.0
         receiverTableView.rowHeight = UITableView.automaticDimension
         receiverTableView.refreshControl = refreshControl
@@ -289,7 +287,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            if(indexPath.row == 0){
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "itemcell", for: indexPath) as! ReceiverTableViewCell
             cell.item = filteredItems[indexPath.row]
             let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
@@ -303,29 +301,11 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
                     cell.itemimage.image = UIImage(named: "loadingimage") 
                 }
             }
-                
+            }
            
-            }
-                return cell }
-            else{let cell = tableView.dequeueReusableCell(withIdentifier: "itemcell1", for: indexPath) as! Receiver1TableViewCell
-                cell.item = filteredItems[indexPath.row]
-                let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
-                
-                if(filtered_item_images.count >= indexPath.row && filtered_item_images.count != 0) {
-                if let dirPath = paths.first{
-                    let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent(filtered_item_images[indexPath.row].item_image)
-                    if(filtered_item_images[indexPath.row].item_image != "") {
-                        cell.itemimage.image = UIImage(contentsOfFile: imageURL.path) }
-                    else {
-                        cell.itemimage.image = UIImage(named: "loadingimage")
-                    }
-                }
-                    
-               
-                }
-                    return cell
-                
-            }
+            
+                return cell
+            
         }
         
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
