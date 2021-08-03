@@ -14,11 +14,12 @@
         var controllers = [UIViewController]()
         public var itemid : [Int] = []
         public var current : Int = 0
-
+        public var current_Name : String = ""
+        var item_names_for_title : [String] = []
         override func viewDidLoad() {
             super.viewDidLoad()
-            //self.navigationController?.setNavigationBarHidden(true, animated: true)
-            
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+            self.navigationItem.title = item_names_for_title[current]
             pageController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
             pageController.dataSource = self
             pageController.delegate = self
@@ -31,9 +32,8 @@
             view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[pageController]|", options: [], metrics: nil, views: views))
             let count=0...itemid.count-1
             for i in count {
-                let vc = DetailItemViewController()
+                let vc = DetailItemTableViewController()
                  vc.itemid = itemid[i]
-        
                 
                 vc.view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
                 controllers.append(vc)
@@ -44,6 +44,7 @@
         func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
                 if let index = controllers.firstIndex(of: viewController) {
                     if index > 0 {
+                        self.navigationItem.title = item_names_for_title[index-1]
                         return controllers[index - 1]
                     } else {
                         return nil
@@ -56,6 +57,7 @@
             func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
                 if let index = controllers.firstIndex(of: viewController) {
                     if index < controllers.count - 1 {
+                        self.navigationItem.title = item_names_for_title[index+1]
                         return controllers[index + 1]
                     } else {
                         return nil

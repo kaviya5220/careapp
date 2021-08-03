@@ -198,7 +198,7 @@ class DetailItemViewController: UIViewController,UIScrollViewDelegate {
         scrollView.delegate = self
        
         
-        items = receiverInteractor.getitemByID(ID: itemid)
+       //**** items = receiverInteractor.getitemByID(ID: itemid)
         donarid = items.Donar_ID
         user = receiverInteractor.getdonardetails(ID: donarid)
         receiverInteractor.updateVisitedCount(ID: itemid)

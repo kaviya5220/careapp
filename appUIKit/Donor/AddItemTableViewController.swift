@@ -304,6 +304,22 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
                                      regularConstraints: regularConstraints)
         presenter.delegate = self
         self.isModalInPresentation = true
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(AddItemTableViewController.keyboardWillShow), name: UIResponder.keyboardDidShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AddItemTableViewController.keyboardWillHide), name: UIResponder.keyboardDidHideNotification, object: nil)
+       // NSNotificationCenter.default.addObserver(self, selector: "keyboardWillBeHidden:", name: UIKeyboardWillHideNotification, object: nil)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    @objc func keyboardWillHide(notification: Notification) {
+        addItemTableView.setBottomInset(to: 0.0)
+    }
+    @objc func keyboardWillShow(notification: Notification) {
+        if let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height {
+            addItemTableView.setBottomInset(to: keyboardHeight)
+        }
     }
     @objc func cancel(_ sender: UIButton) {
         self.present(actionSheet,animated: true)
@@ -461,6 +477,15 @@ class CategorySizePresentationController: UIPresentationController {
     override var frameOfPresentedViewInContainerView: CGRect {
         guard let bounds = containerView?.bounds else { return .zero }
         return CGRect(x: 0, y: bounds.height / 1.5, width: bounds.width, height: bounds.height)
+    }
+}
+extension UITableView {
+
+    func setBottomInset(to value: CGFloat) {
+        let edgeInset = UIEdgeInsets(top: 0, left: 0, bottom: value, right: 0)
+
+        self.contentInset = edgeInset
+        self.scrollIndicatorInsets = edgeInset
     }
 }
 

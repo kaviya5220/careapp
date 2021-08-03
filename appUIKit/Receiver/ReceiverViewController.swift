@@ -261,17 +261,24 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = PageViewController()
+//        let vc = DetailItemTableViewController()
+//        self.navigationController?.pushViewController(vc, animated: true)
+        let vc = DetailItemTableViewController()
         itemid = items.map{$0.item_id}
-        print(itemid)
-        
+
         if let index = items.firstIndex(where: { $0 === filteredItems[indexPath.row] }){
-            vc.current = index
+//            vc.current = index
             items[index].visited_count = items[index].visited_count + 1
-            vc.itemid = itemid
+            vc.itemid = items[index].item_id
+            vc.itemDetailValues[0] = items[index].item_name
+            vc.itemDetailValues[1] = items[index].category
+            vc.itemDetailValues[2] = items[index].address
+            vc.itemDetailValues[3] = String(items[index].Donar_ID)
+            vc.item_image = item_images.map{$0.item_image}[index]
             self.navigationController?.pushViewController(vc, animated: true)
+            self.navigationController?.navigationItem.title = "hi"
         }
-            
+//
     }
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             if(filteredItems.count == 0){

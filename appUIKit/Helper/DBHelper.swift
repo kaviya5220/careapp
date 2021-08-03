@@ -294,6 +294,76 @@ class DBHelper{
         }
         return userid
         }
+    static func getbookDetails(itemid : Int ) -> [String] {
+        let queryStatementString = "SELECT * FROM Books WHERE Item_ID = ?;"
+        var book = [String]()
+        var queryStatement: OpaquePointer?
+          if sqlite3_prepare_v2(db, queryStatementString, -1, &queryStatement, nil) ==
+              SQLITE_OK {
+            sqlite3_bind_int(queryStatement, 1, Int32(itemid))
+            if sqlite3_step(queryStatement) == SQLITE_ROW {
+             let queryResultCol0 = sqlite3_column_int(queryStatement, 0)
+                let queryResultCol1 = sqlite3_column_text(queryStatement, 1)
+                let queryResultCol2 = sqlite3_column_text(queryStatement, 2)
+                let queryResultCol3 = sqlite3_column_text(queryStatement, 3)
+                let queryResultCol4 = sqlite3_column_int(queryStatement, 4)
+                let queryResultCol5 = sqlite3_column_text(queryStatement, 5)
+                book.append(String(cString: queryResultCol1!))
+                book.append(String(cString: queryResultCol2!))
+                book.append(String(cString: queryResultCol3!))
+                book.append(String(Int((queryResultCol4))))
+                book.append(String(cString: queryResultCol5!))
+                
+                            
+               
+          } else {
+              print("\nQuery returned no results.")
+          }
+          } else {
+            let errorMessage = String(cString: sqlite3_errmsg(db))
+            print("\nQuery is not prepared \(errorMessage)")
+          }
+          sqlite3_finalize(queryStatement)
+        if sqlite3_close(db) == SQLITE_OK {
+            print("closing database")
+        }
+        return book
+        }
+    static func getFoodDetails(itemid : Int ) -> [String] {
+        let queryStatementString = "SELECT * FROM Food WHERE Item_ID = ?;"
+        var food = [String]()
+        var queryStatement: OpaquePointer?
+          if sqlite3_prepare_v2(db, queryStatementString, -1, &queryStatement, nil) ==
+              SQLITE_OK {
+            sqlite3_bind_int(queryStatement, 1, Int32(itemid))
+            if sqlite3_step(queryStatement) == SQLITE_ROW {
+             let queryResultCol0 = sqlite3_column_int(queryStatement, 0)
+                let queryResultCol1 = sqlite3_column_text(queryStatement, 1)
+                let queryResultCol2 = sqlite3_column_text(queryStatement, 2)
+                let queryResultCol3 = sqlite3_column_text(queryStatement, 3)
+                let queryResultCol4 = sqlite3_column_int(queryStatement, 4)
+                let queryResultCol5 = sqlite3_column_text(queryStatement, 5)
+                food.append(String(cString: queryResultCol1!))
+                food.append(String(cString: queryResultCol2!))
+                food.append(String(cString: queryResultCol3!))
+                food.append(String(Int((queryResultCol4))))
+                food.append(String(cString: queryResultCol5!))
+                
+                            
+               
+          } else {
+              print("\nQuery returned no results.")
+          }
+          } else {
+            let errorMessage = String(cString: sqlite3_errmsg(db))
+            print("\nQuery is not prepared \(errorMessage)")
+          }
+          sqlite3_finalize(queryStatement)
+        if sqlite3_close(db) == SQLITE_OK {
+            print("closing database")
+        }
+        return food
+        }
     static func getitems() ->  [Item] {
         
         let queryStatementString = "SELECT Item_ID,Item_Name,Category,Address,Donar_ID,Visited_count,Date_posted FROM ItemDetails WHERE Item_ID IN(SELECT Item_ID FROM DonationStatus WHERE Status = 'pending') OR Item_ID NOT IN(SELECT Item_ID FROM DonationStatus) ORDER BY Item_Name;"
@@ -352,25 +422,26 @@ class DBHelper{
 //        }
         return item_image_list
         }
-    static func getitemsbyID(ID : Int) -> Item {
-        let queryStatementString = "SELECT * FROM ItemDetails  WHERE Item_ID = ?;"
-        var item : Item = Item()
+    static func getitemsbyID(ID : Int) -> [String] {
+        let queryStatementString = "SELECT Item_Name,Category,Address,Donar_ID,Item_ImageName FROM ItemDetails  WHERE Item_ID = ?;"
+        var item = [String]()
         var queryStatement: OpaquePointer?
           if sqlite3_prepare_v2(db, queryStatementString, -1, &queryStatement, nil) ==
               SQLITE_OK {
             sqlite3_bind_int(queryStatement, 1, Int32(ID))
             if sqlite3_step(queryStatement) == SQLITE_ROW {
     
-             let queryResultCol0 = sqlite3_column_int(queryStatement, 0)
-             let queryResultCol1 = sqlite3_column_text(queryStatement, 1)
-             let queryResultCol2 = sqlite3_column_text(queryStatement, 2)
-             let queryResultCol3 = sqlite3_column_text(queryStatement, 3)
-             let queryResultCol4 = sqlite3_column_int(queryStatement, 4)
-            let queryResultCol5 = sqlite3_column_int(queryStatement, 5)
-            let queryResultCol6 = sqlite3_column_text(queryStatement, 6)
-            let queryResultCol7 = sqlite3_column_text(queryStatement, 7)
-                
-                item = Item(item_id: Int(queryResultCol0), item_name: String(cString: queryResultCol1!), item_image: String(cString:queryResultCol7!),category: String(cString: queryResultCol2!), address: String(cString: queryResultCol3!), Donar_ID: Int(queryResultCol4), visited_count: Int(queryResultCol5), date: String(cString:queryResultCol6!))
+             
+             let queryResultCol1 = sqlite3_column_text(queryStatement, 0)
+             let queryResultCol2 = sqlite3_column_text(queryStatement, 1)
+             let queryResultCol3 = sqlite3_column_text(queryStatement, 2)
+            let queryResultCol4 = sqlite3_column_text(queryStatement, 3)
+                let queryResultCol5 = sqlite3_column_text(queryStatement, 4)
+                item.append(String(cString: queryResultCol1!))
+                item.append(String(cString: queryResultCol2!))
+                item.append(String(cString: queryResultCol3!))
+                item.append(String(cString: queryResultCol4!))
+                item.append(String(cString: queryResultCol5!))
                
               
                 //return userid

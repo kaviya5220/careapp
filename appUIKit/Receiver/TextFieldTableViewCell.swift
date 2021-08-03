@@ -1,44 +1,42 @@
 //
-//  AddItemTableViewCell.swift
+//  TextFieldTableViewCell.swift
 //  appUIKit
 //
-//  Created by sysadmin on 26/07/21.
+//  Created by sysadmin on 03/08/21.
 //
 
 import UIKit
 
-class ItemNameTableViewCell: UITableViewCell {
+class TextFieldTableViewCell: UITableViewCell {
     
-    var selectedCountry : String = ""
-
     let containerView: UIStackView = {
         let stack = UIStackView()
-        stack.axis = .vertical
+        stack.axis = .horizontal
         stack.alignment = .fill
-        stack.distribution = .fillEqually
+        stack.distribution = .fill
         stack.spacing = 10
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
-    let itemNameLabel:CustomLabel = {
+    let label:CustomLabel = {
         let label = CustomLabel(labelType: .primary)
-        label.text = "Item Name"
+        label.textColor = .black
+       // label.text = "Item Name"
         return label
     }()
-    let itemname:UITextField = {
-        let namefield = UITextField()
-        namefield.placeholder = "Enter Item Name"
-        namefield.borderStyle = .none
-        namefield.translatesAutoresizingMaskIntoConstraints = false
-        return namefield
+    let label1:CustomLabel = {
+        let label = CustomLabel(labelType: .primary)
+        label.textColor = .systemBlue
+       // label.text = "Item Name"
+        return label
     }()
-  
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
        
         self.contentView.addSubview(containerView)
-        containerView.addArrangedSubview(itemNameLabel)
-        containerView.addArrangedSubview(itemname)
+        containerView.addArrangedSubview(label)
+        containerView.addArrangedSubview(label1)
         
         containerView.topAnchor.constraint(equalTo: self.contentView.topAnchor).isActive = true
         containerView.leadingAnchor.constraint(equalTo:self.contentView.leadingAnchor, constant:10).isActive = true
@@ -49,4 +47,7 @@ class ItemNameTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+   
+
 }

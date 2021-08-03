@@ -16,7 +16,7 @@ class ReceiverInteractor{
         DBHelper.db = DBHelper.openDB()
         return DBHelper.getitemsImageName()
     }
-    func getitemByID(ID : Int)->Item{
+    func getitemByID(ID : Int)->[String]{
         DBHelper.db = DBHelper.openDB()
         return DBHelper.getitemsbyID(ID: ID)
         
@@ -42,5 +42,13 @@ class ReceiverInteractor{
             return true
         }
         return false
+    }
+    func getBookDetails(itemid : Int) -> [String]{
+        DBHelper.db = DBHelper.openDB()
+        return DBHelper.getbookDetails(itemid: itemid)
+    }
+    func getFoodDetails(itemid : Int) -> [String]{
+        DBHelper.db = DBHelper.openDB()
+        return DBHelper.getFoodDetails(itemid: itemid)
     }
 }
