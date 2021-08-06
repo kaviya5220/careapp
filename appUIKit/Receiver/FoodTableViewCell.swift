@@ -13,17 +13,26 @@ class FoodTableViewCell: UITableViewCell {
 
         
         
-        var item: Item? {
+        var item: ItemDetails? {
             didSet {
+                
                 guard let Item = item else {return}
                 let name = Item.item_name
                     itemname.text = name
+                print(Item.description[2])
                 setValue(itemlocation, name: "location", value:String(Item.address))
                 setValue(visitedcount, name: "visitedcount", value:String(Item.visited_count))
                 setValue(date, name: "calendar", value:Item.date)
+                setValue(cuisine, name: Item.description[2], value:Item.description[1])
+                setValue(expiryDate, name: "expiry_date", value:Item.description[0])
                 
             }
         }
+    var descriptionArr:[String]?{
+        didSet{
+            
+        }
+    }
     var food: Food? {
         didSet {
             guard let Food = food else {return}

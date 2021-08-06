@@ -9,7 +9,7 @@ import UIKit
 
 class BookTableViewCell: UITableViewCell {
 
-    var item: Item? {
+    var item: ItemDetails? {
         didSet {
             guard let Item = item else {return}
             let name = Item.item_name
@@ -17,6 +17,9 @@ class BookTableViewCell: UITableViewCell {
             setValue(itemlocation, name: "location", value:String(Item.address))
             setValue(visitedcount, name: "visitedcount", value:String(Item.visited_count))
             setValue(date, name: "calendar", value:Item.date)
+            setValue(publication, name: "publication", value:Item.description[1])
+            setValue(year_of_publish, name: "year_of_publish", value:Item.description[2])
+            setValue(author, name: "author", value:Item.description[0])
             
         }
     }
@@ -26,8 +29,14 @@ var book: Books? {
         setValue(publication, name: "publication", value:String(Books.publisher))
         setValue(year_of_publish, name: "year_of_publish", value:String(Books.year_of_publish))
         setValue(author, name: "author", value:String(Books.author))
+        
     }
 }
+    var descriptionArr:[String]?{
+        didSet{
+            
+        }
+    }
 
     
     

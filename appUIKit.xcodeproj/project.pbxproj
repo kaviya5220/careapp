@@ -70,6 +70,9 @@
 		1BEE1D45269D6555008F3726 /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEE1D44269D6555008F3726 /* KeyChain.swift */; };
 		1BF5A32226BC0F7600648CD2 /* FoodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5A32126BC0F7600648CD2 /* FoodTableViewCell.swift */; };
 		1BF5A32426BD00F700648CD2 /* BookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5A32326BD00F700648CD2 /* BookTableViewCell.swift */; };
+		1BF5A32626BD3E5D00648CD2 /* BookDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5A32526BD3E5D00648CD2 /* BookDetails.swift */; };
+		1BF5A32826BD426500648CD2 /* FoodDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5A32726BD426500648CD2 /* FoodDetails.swift */; };
+		1BF5A32A26BD584500648CD2 /* ItemDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5A32926BD584400648CD2 /* ItemDetails.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -159,6 +162,9 @@
 		1BEE1D44269D6555008F3726 /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		1BF5A32126BC0F7600648CD2 /* FoodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTableViewCell.swift; sourceTree = "<group>"; };
 		1BF5A32326BD00F700648CD2 /* BookTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTableViewCell.swift; sourceTree = "<group>"; };
+		1BF5A32526BD3E5D00648CD2 /* BookDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetails.swift; sourceTree = "<group>"; };
+		1BF5A32726BD426500648CD2 /* FoodDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetails.swift; sourceTree = "<group>"; };
+		1BF5A32926BD584400648CD2 /* ItemDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetails.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -359,6 +365,9 @@
 				1B448493269C13DF00C02695 /* Status.swift */,
 				1B803D8226B5829B00303DA9 /* Books.swift */,
 				1BBC570226B7C30400F5BA0C /* Food.swift */,
+				1BF5A32526BD3E5D00648CD2 /* BookDetails.swift */,
+				1BF5A32726BD426500648CD2 /* FoodDetails.swift */,
+				1BF5A32926BD584400648CD2 /* ItemDetails.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -547,7 +556,9 @@
 				1BF5A32426BD00F700648CD2 /* BookTableViewCell.swift in Sources */,
 				1B71D30C268EE10C00B11F3B /* DonationInteractor.swift in Sources */,
 				1B5739D426B14993009B7F95 /* CategoryTableViewCell.swift in Sources */,
+				1BF5A32626BD3E5D00648CD2 /* BookDetails.swift in Sources */,
 				1B9B8F4A2672655D00C5497C /* ReceiverViewController.swift in Sources */,
+				1BF5A32826BD426500648CD2 /* FoodDetails.swift in Sources */,
 				1BBC570526B903BA00F5BA0C /* DetailItemTableViewController.swift in Sources */,
 				1B803D7726B3BB9100303DA9 /* AddItemTableViewController.swift in Sources */,
 				1B3A828A2690772B002BFADE /* ProfileInteractor.swift in Sources */,
@@ -577,6 +588,7 @@
 				1BF5A32226BC0F7600648CD2 /* FoodTableViewCell.swift in Sources */,
 				1B906ECC2670A08C0032FA81 /* SceneDelegate.swift in Sources */,
 				1B448498269C44B300C02695 /* DonarTableViewCell.swift in Sources */,
+				1BF5A32A26BD584500648CD2 /* ItemDetails.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

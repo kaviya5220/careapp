@@ -1,12 +1,12 @@
 //
-//  Item.swift
+//  ItemDetails.swift
 //  appUIKit
 //
-//  Created by sysadmin on 09/06/21.
+//  Created by sysadmin on 06/08/21.
 //
 
 import Foundation
-class Item {
+class ItemDetails{
     var item_id: Int
     var item_name: String
     var item_image : String
@@ -15,8 +15,9 @@ class Item {
     var Donar_ID: Int
     var visited_count : Int
     var date: String
+    var description: [String]
     
-    init(item_id: Int = 0,item_name: String = "",item_image: String = "", category: String = "",address: String = "",Donar_ID : Int = 0,visited_count : Int = 0,date :String = "")
+    init(item_id: Int = 0,item_name: String = "",item_image: String = "", category: String = "",address: String = "",Donar_ID : Int = 0,visited_count : Int = 0,date :String = "",description : [String] = ["","","","",""])
     
     {
         self.item_id = item_id
@@ -27,7 +28,6 @@ class Item {
         self.Donar_ID = Donar_ID
         self.visited_count = visited_count
         self.date = date
+        self.description = description
     }
 }
-
-
