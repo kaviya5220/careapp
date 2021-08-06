@@ -108,19 +108,19 @@ class DBHelper{
       sqlite3_finalize(insertStatement)
     }
     static func insertFood(item_id:Int,food : Food){
-    let insertStatementString = "INSERT INTO Food (Item_ID,Accompaniments,Cusine,VegNonVeg,Quantity,Others) VALUES (?, ?, ?, ?, ?, ?);"
+    let insertStatementString = "INSERT INTO Food (Item_ID,expiry_date,Cusine,VegNonVeg,Quantity,Others) VALUES (?, ?, ?, ?, ?, ?);"
       var insertStatement: OpaquePointer?
       if sqlite3_prepare_v2(db, insertStatementString, -1, &insertStatement, nil) ==
           SQLITE_OK {
         let item_id: Int = item_id
-        let accompaniments: NSString = food.accompaniments as NSString
+        let expiry_date: NSString = food.expiry_date as NSString
         let cusine: NSString = food.cusine as NSString
         let vegnonveg: NSString = food.vegnonveg as NSString
         let quantity : Int = food.quantity
         let others:NSString = food.others as NSString
         
         sqlite3_bind_int(insertStatement, 1, Int32(item_id))
-        sqlite3_bind_text(insertStatement, 2, accompaniments.utf8String, -1, nil)
+        sqlite3_bind_text(insertStatement, 2, expiry_date.utf8String, -1, nil)
         sqlite3_bind_text(insertStatement, 3, cusine.utf8String, -1, nil)
         sqlite3_bind_text(insertStatement, 4, vegnonveg.utf8String, -1, nil)
         sqlite3_bind_int(insertStatement, 5, Int32(quantity))
@@ -210,7 +210,7 @@ class DBHelper{
         let createTableString = """
         CREATE TABLE IF NOT EXISTS Food(
         Item_ID INTEGER PRIMARY KEY AUTOINCREMENT,
-        Accompaniments CHAR(255),Cusine CHAR(255),VegNonVeg CHAR(255),Quantity INTEGER,Others CHAR(255));
+        expiry_date CHAR(255),Cusine CHAR(255),VegNonVeg CHAR(255),Quantity INTEGER,Others CHAR(255));
         """
       var createTableStatement: OpaquePointer?
       if sqlite3_prepare_v2(db, createTableString, -1, &createTableStatement, nil) ==
@@ -756,4 +756,68 @@ class DBHelper{
         }
           sqlite3_finalize(updateStatement);
       }
+    static func getFoodItems() ->  [Food] {
+        
+        let queryStatementString = "SELECT Food.Item_ID,expiry_date,Cusine,VegNonVeg,Quantity,Others FROM ItemDetails,Food  WHERE Food.Item_ID IN(SELECT Item_ID FROM DonationStatus WHERE Status = 'pending') OR Food.Item_ID NOT IN(SELECT Item_ID FROM DonationStatus)  and Food.Item_ID = ItemDetails.Item_ID ORDER BY ItemDetails.Item_Name;"
+        var foodList : [Food] = []
+        var queryStatement: OpaquePointer?
+          if sqlite3_prepare_v2(db, queryStatementString, -1, &queryStatement, nil) ==
+              SQLITE_OK {
+           // sqlite3_bind_int(queryStatement, 1, Int32(donarid))
+            while sqlite3_step(queryStatement) == SQLITE_ROW {
+    
+             let queryResultCol0 = sqlite3_column_int(queryStatement, 0)
+             let queryResultCol1 = sqlite3_column_text(queryStatement, 1)
+             let queryResultCol2 = sqlite3_column_text(queryStatement, 2)
+             let queryResultCol3 = sqlite3_column_text(queryStatement, 3)
+             let queryResultCol4 = sqlite3_column_int(queryStatement, 4)
+            let queryResultCol5 = sqlite3_column_text(queryStatement, 5)
+                let food : Food = Food(expiry_date: String(cString: queryResultCol1!), cusine: String(cString: queryResultCol2!), vegnonveg: String(cString: queryResultCol3!), quantity: Int(queryResultCol4), others: String(cString: queryResultCol5!), item_id:Int(queryResultCol0))
+               
+                foodList.append(food)
+              
+                //return userid
+            }
+          } else {
+            let errorMessage = String(cString: sqlite3_errmsg(db))
+            print("\nQuery is not prepared \(errorMessage)")
+          }
+//          sqlite3_finalize(queryStatement)
+//        if sqlite3_close(db) == SQLITE_OK {
+//            print("closing database")
+//        }
+        return foodList
+        }
+    static func getBookItems() ->  [Books] {
+        
+        let queryStatementString = "SELECT Books.Item_ID,Author,Publisher,year_of_publish,Quantity,Others FROM ItemDetails,Books  WHERE Books.Item_ID IN(SELECT Item_ID FROM DonationStatus WHERE Status = 'pending') OR Books.Item_ID NOT IN(SELECT Item_ID FROM DonationStatus)  and Books.Item_ID = ItemDetails.Item_ID ORDER BY ItemDetails.Item_Name;"
+        var bookList : [Books] = []
+        var queryStatement: OpaquePointer?
+          if sqlite3_prepare_v2(db, queryStatementString, -1, &queryStatement, nil) ==
+              SQLITE_OK {
+           // sqlite3_bind_int(queryStatement, 1, Int32(donarid))
+            while sqlite3_step(queryStatement) == SQLITE_ROW {
+    
+             let queryResultCol0 = sqlite3_column_int(queryStatement, 0)
+             let queryResultCol1 = sqlite3_column_text(queryStatement, 1)
+             let queryResultCol2 = sqlite3_column_text(queryStatement, 2)
+             let queryResultCol3 = sqlite3_column_text(queryStatement, 3)
+             let queryResultCol4 = sqlite3_column_int(queryStatement, 4)
+            let queryResultCol5 = sqlite3_column_text(queryStatement, 5)
+                let book : Books = Books(author: String(cString: queryResultCol1!), publisher: String(cString: queryResultCol2!), year_of_publish: String(cString: queryResultCol3!), quantity: Int(queryResultCol4), others: String(cString: queryResultCol5!), item_id:Int(queryResultCol0))
+               
+                bookList.append(book)
+              
+                //return userid
+            }
+          } else {
+            let errorMessage = String(cString: sqlite3_errmsg(db))
+            print("\nQuery is not prepared \(errorMessage)")
+          }
+//          sqlite3_finalize(queryStatement)
+//        if sqlite3_close(db) == SQLITE_OK {
+//            print("closing database")
+//        }
+        return bookList
+        }
 }

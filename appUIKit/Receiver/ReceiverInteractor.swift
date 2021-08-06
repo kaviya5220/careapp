@@ -51,4 +51,12 @@ class ReceiverInteractor{
         DBHelper.db = DBHelper.openDB()
         return DBHelper.getFoodDetails(itemid: itemid)
     }
+    func getFood() -> [Food]{
+        DBHelper.db = DBHelper.openDB()
+        return DBHelper.getFoodItems()
+    }
+    func getBooks() -> [Books]{
+        DBHelper.db = DBHelper.openDB()
+        return DBHelper.getBookItems()
+    }
 }

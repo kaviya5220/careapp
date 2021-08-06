@@ -68,6 +68,8 @@
 		1BC8C0EF2692E62000292240 /* RequestListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8C0EE2692E62000292240 /* RequestListInteractor.swift */; };
 		1BCFA85526997671009A48B8 /* CustomLoginTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCFA85426997671009A48B8 /* CustomLoginTextField.swift */; };
 		1BEE1D45269D6555008F3726 /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEE1D44269D6555008F3726 /* KeyChain.swift */; };
+		1BF5A32226BC0F7600648CD2 /* FoodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5A32126BC0F7600648CD2 /* FoodTableViewCell.swift */; };
+		1BF5A32426BD00F700648CD2 /* BookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5A32326BD00F700648CD2 /* BookTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -155,6 +157,8 @@
 		1BC8C0EE2692E62000292240 /* RequestListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestListInteractor.swift; sourceTree = "<group>"; };
 		1BCFA85426997671009A48B8 /* CustomLoginTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLoginTextField.swift; sourceTree = "<group>"; };
 		1BEE1D44269D6555008F3726 /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
+		1BF5A32126BC0F7600648CD2 /* FoodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTableViewCell.swift; sourceTree = "<group>"; };
+		1BF5A32326BD00F700648CD2 /* BookTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -370,6 +374,8 @@
 				1BBC570426B903BA00F5BA0C /* DetailItemTableViewController.swift */,
 				1BBC570626B9084100F5BA0C /* TextFieldTableViewCell.swift */,
 				1BBC570826B9435A00F5BA0C /* ImageTableViewCell.swift */,
+				1BF5A32126BC0F7600648CD2 /* FoodTableViewCell.swift */,
+				1BF5A32326BD00F700648CD2 /* BookTableViewCell.swift */,
 			);
 			path = Receiver;
 			sourceTree = "<group>";
@@ -538,6 +544,7 @@
 				1BCFA85526997671009A48B8 /* CustomLoginTextField.swift in Sources */,
 				1BBC570326B7C30400F5BA0C /* Food.swift in Sources */,
 				1B906ECE2670A08C0032FA81 /* ViewController.swift in Sources */,
+				1BF5A32426BD00F700648CD2 /* BookTableViewCell.swift in Sources */,
 				1B71D30C268EE10C00B11F3B /* DonationInteractor.swift in Sources */,
 				1B5739D426B14993009B7F95 /* CategoryTableViewCell.swift in Sources */,
 				1B9B8F4A2672655D00C5497C /* ReceiverViewController.swift in Sources */,
@@ -567,6 +574,7 @@
 				1BBC570726B9084100F5BA0C /* TextFieldTableViewCell.swift in Sources */,
 				1B7EBF9F26747A4700F2AED1 /* CustomButton.swift in Sources */,
 				1B7EBF9C267479F000F2AED1 /* SignupPresenter.swift in Sources */,
+				1BF5A32226BC0F7600648CD2 /* FoodTableViewCell.swift in Sources */,
 				1B906ECC2670A08C0032FA81 /* SceneDelegate.swift in Sources */,
 				1B448498269C44B300C02695 /* DonarTableViewCell.swift in Sources */,
 			);

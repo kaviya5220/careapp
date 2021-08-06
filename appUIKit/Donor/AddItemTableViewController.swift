@@ -1,7 +1,7 @@
 
 import UIKit
 protocol canReceive{
-    func passData(item:Item,item_image:String)
+    func passData(item:Item,item_image:String,description:[String])
 }
 
 
@@ -354,7 +354,7 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
         }
         if(flag != 0){
             item.item_id = flag
-            delegate?.passData(item:item,item_image: itemImageName)
+            delegate?.passData(item:item,item_image: itemImageName,description: descriptionValue)
             presenter.showSuccessAlert()
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in self.dismissinsertView()
             }))
@@ -366,7 +366,7 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
         
     }
     func insertFood(item_id : Int,value : [String]){
-        let food : Food = Food(accompaniments: value[0], cusine: value[1], vegnonveg: value[2], quantity: Int(value[3])!, others: value[4])
+        let food : Food = Food(expiry_date: value[0], cusine: value[1], vegnonveg: value[2], quantity: Int(value[3])!, others: value[4])
         additeminteractor.addFood(itemid: item_id, food: food)
         
     }
