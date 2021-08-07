@@ -158,7 +158,7 @@ class FoodTableViewCell: UITableViewCell {
         return newImage!
     }
     
-    var uiimage_names : [String:String] = ["veg":"veg","visitedcount":"eye","location":"location","calendar":"calendar","nonveg":"nonveg","expiry_date":"clock.fill"]
+    var uiimage_names : [String:String] = ["veg":"veg","visitedcount":"eye","location":"location","calendar":"calendar","nonveg":"nonveg","expiry_date":"clock.fill","non veg":"nonveg"]
         func setValue(_ label: UILabel,name:String,value : String){
             let attachment = NSTextAttachment()
             var imagename:String = ""

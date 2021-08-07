@@ -10,21 +10,13 @@ import UIKit
 
 class ReceiverViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate,UISearchResultsUpdating,canReceive,UINavigationControllerDelegate,UIPopoverPresentationControllerDelegate,updateItems {
     internal var barButton: UIBarButtonItem!
-    var someVariable = true
-   // var someVariable1 = false
+    var someVariable : Bool = false
     var db = DBHelper()
     public var itemid : [Int] = []
     public var totalDetails : [ItemDetails] = []
-//    public var filteredTotalDetails : [Item] = []
-//    var filtered_foodItems : [Food] = []
-//    var foodItems : [Food] = []
-//    var filtered_bookItems : [Books] = []
-//    var bookItems : [Books] = []
     var item_images : [Item_Image] =  []
-//    var totalDetails
     var filteredTotalDetails : [ItemDetails] = []
     var filtered_item_images : [Item_Image] =  []
-    var current_search : String =  ""
     let receiverInteractor = ReceiverInteractor()
     let receiverTableView = UITableView()
     let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
@@ -32,15 +24,12 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
     let refreshControl = UIRefreshControl()
     var nameToggle : Bool = true
     var dateToggle : Bool = true
-    var foodIterator : Int = 0
-    var bookIterator : Int = 0
     
     var menuItems: [UIAction] {
         return [
             UIAction(title: "Name", image: UIImage(systemName: "arrow.up.arrow.down"),state: self.someVariable == true ? .on : .off){ _ in
                 self.someVariable = false
                 self.sortName()
-                //action.image = nil
             },
             UIAction(title: "Date Posted", image: UIImage(systemName: "arrow.up.arrow.down"),state: self.someVariable ? .off : .on) { _ in
                 print(self.someVariable)
@@ -70,7 +59,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
             }
             else{
                 filtered_item_images = []
-            filteredTotalDetails = totalDetails.filter({$0.item_name.contains(searchString!) || $0.address.contains(searchString!) || $0.category.contains(searchString!)})
+                filteredTotalDetails = totalDetails.filter({$0.item_name.lowercased().contains(searchString!.lowercased()) || $0.address.contains(searchString!.lowercased()) || $0.category.contains(searchString!.lowercased())})
                 for item in item_images{
                     if(filteredTotalDetails.map{$0.item_id}.contains(item.item_id)){
                         filtered_item_images.append(item)
@@ -94,7 +83,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         else{
             self.navigationController?.pushViewController(LoginViewController(), animated: true)
         }
-        }
+    }
     @objc func navigateToProfile(_ sender: UIButton) {
         if(receiverInteractor.isLoggedIn()){
             let vc = ProfileViewController()
@@ -111,6 +100,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         let s2 = combined.map {$0.1}
         totalDetails = s1
         filteredTotalDetails = s1
+        item_images = s2
         filtered_item_images = s2
         receiverTableView.reloadData()
     }
@@ -121,6 +111,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         let s2 = combined.map {$0.1}
         totalDetails = s1
         filteredTotalDetails = s1
+        item_images = s2
         filtered_item_images = s2
         receiverTableView.reloadData()
     }
@@ -131,6 +122,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         let s2 = combined.map {$0.1}
         totalDetails = s1
         filteredTotalDetails = s1
+        item_images = s2
         filtered_item_images = s2
         receiverTableView.reloadData()
     }
@@ -141,6 +133,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         let s2 = combined.map {$0.1}
         totalDetails = s1
         filteredTotalDetails = s1
+        item_images = s2
         filtered_item_images = s2
        
         receiverTableView.reloadData()
@@ -169,6 +162,10 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
             dateToggle.toggle()
         }
         
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        receiverTableView.reloadData()
     }
 
     override func viewDidLoad() {
@@ -235,14 +232,16 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         
         }
     @objc func refreshItem(_ sender : Any){
+        i = 0
+        j = 0
         loaditems()
         self.refreshControl.endRefreshing()
+        receiverTableView.reloadData()
         //self..stopAnimating()
     }
     var i : Int = 0
     var j : Int = 0
      func loaditems(){
-        DispatchQueue.global(qos:.background).async {
         DispatchQueue.global(qos:.background).async {
             var itemlist:[Item] = []
                   //  print("asnccc")
@@ -298,7 +297,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
                 })
             
         }
-        }
+        
      
         
     }

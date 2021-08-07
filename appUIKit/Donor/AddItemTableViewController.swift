@@ -16,7 +16,7 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
     var collapse : Bool = false
     let additeminteractor = AddItemInteractor()
     var categoryLabelDict:[String:[String]] = ["Books":["Author","Publisher","Year","Quantity"],
-                                               "Food":["Accompaniments","Cuisine","Veg/Non Veg","Quantity"],
+                                               "Food":["Expiry Date","Cuisine","Veg/Non Veg","Quantity"],
                                                "Cloth":["Size","Material","Gender","Quantity"]]
 
     public var itemImageName : String = ""
