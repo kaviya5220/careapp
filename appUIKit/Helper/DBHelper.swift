@@ -18,6 +18,7 @@ class DBHelper{
         DBHelper.createStatusTable()
         DBHelper.createBookTable()
         DBHelper.createFoodTable()
+        DBHelper.createClothTable()
     }
     
     static func openDB() -> OpaquePointer? {
@@ -135,6 +136,35 @@ class DBHelper{
       }
       sqlite3_finalize(insertStatement)
     }
+    
+    static func insertCloth(item_id:Int,cloth : Cloth){
+    let insertStatementString = "INSERT INTO Cloth (Item_ID,Size,clothCategory,Gender,Quantity,Others) VALUES (?, ?, ?, ?, ?, ?);"
+      var insertStatement: OpaquePointer?
+      if sqlite3_prepare_v2(db, insertStatementString, -1, &insertStatement, nil) ==
+          SQLITE_OK {
+        let item_id: Int = item_id
+        let Size: NSString = cloth.size as NSString
+        let clothCategory: NSString = cloth.clothCategory as NSString
+        let Gender: NSString = cloth.gender as NSString
+        let quantity : Int = cloth.quantity
+        let others:NSString = cloth.others as NSString
+        
+        sqlite3_bind_int(insertStatement, 1, Int32(item_id))
+        sqlite3_bind_text(insertStatement, 2, Size.utf8String, -1, nil)
+        sqlite3_bind_text(insertStatement, 3, clothCategory.utf8String, -1, nil)
+        sqlite3_bind_text(insertStatement, 4, Gender.utf8String, -1, nil)
+        sqlite3_bind_int(insertStatement, 5, Int32(quantity))
+        sqlite3_bind_text(insertStatement, 6, others.utf8String, -1, nil)
+        if sqlite3_step(insertStatement) == SQLITE_DONE {
+          print("\nSuccessfully inserted row.")
+        } else {
+          print("\nCould not insert row.")
+        }
+      } else {
+        print("\nINSERT statement is not prepared.")
+      }
+      sqlite3_finalize(insertStatement)
+    }
     static func validate(email : String , enteredpassword : String) -> Bool {
         let queryStatementString = "SELECT Password FROM UserDetails WHERE Email = ?;"
         var valid : Bool = false
@@ -219,6 +249,25 @@ class DBHelper{
           print("Food table created.")
         } else {
           print("Food table is not created.")
+        }
+      } else {
+        print("\nCREATE TABLE statement is not prepared.")
+      }
+      sqlite3_finalize(createTableStatement)
+    }
+    static func createClothTable() {
+        let createTableString = """
+        CREATE TABLE IF NOT EXISTS Cloth(
+        Item_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+        Size CHAR(255),clothCategory CHAR(255),Gender CHAR(255),Quantity INTEGER,Others CHAR(255));
+        """
+      var createTableStatement: OpaquePointer?
+      if sqlite3_prepare_v2(db, createTableString, -1, &createTableStatement, nil) ==
+          SQLITE_OK {
+        if sqlite3_step(createTableStatement) == SQLITE_DONE {
+          print("Cloth table created.")
+        } else {
+          print("Cloth table is not created.")
         }
       } else {
         print("\nCREATE TABLE statement is not prepared.")
@@ -363,6 +412,41 @@ class DBHelper{
             print("closing database")
         }
         return food
+        }
+    static func getClothDetails(itemid : Int ) -> [String] {
+        let queryStatementString = "SELECT * FROM Cloth WHERE Item_ID = ?;"
+        var cloth = [String]()
+        var queryStatement: OpaquePointer?
+          if sqlite3_prepare_v2(db, queryStatementString, -1, &queryStatement, nil) ==
+              SQLITE_OK {
+            sqlite3_bind_int(queryStatement, 1, Int32(itemid))
+            if sqlite3_step(queryStatement) == SQLITE_ROW {
+             let queryResultCol0 = sqlite3_column_int(queryStatement, 0)
+                let queryResultCol1 = sqlite3_column_text(queryStatement, 1)
+                let queryResultCol2 = sqlite3_column_text(queryStatement, 2)
+                let queryResultCol3 = sqlite3_column_text(queryStatement, 3)
+                let queryResultCol4 = sqlite3_column_int(queryStatement, 4)
+                let queryResultCol5 = sqlite3_column_text(queryStatement, 5)
+                cloth.append(String(cString: queryResultCol1!))
+                cloth.append(String(cString: queryResultCol2!))
+                cloth.append(String(cString: queryResultCol3!))
+                cloth.append(String(Int((queryResultCol4))))
+                cloth.append(String(cString: queryResultCol5!))
+                
+                            
+               
+          } else {
+              print("\nQuery returned no results.")
+          }
+          } else {
+            let errorMessage = String(cString: sqlite3_errmsg(db))
+            print("\nQuery is not prepared \(errorMessage)")
+          }
+          sqlite3_finalize(queryStatement)
+        if sqlite3_close(db) == SQLITE_OK {
+            print("closing database")
+        }
+        return cloth
         }
     static func getitems() ->  [Item] {
         
@@ -819,5 +903,37 @@ class DBHelper{
 //            print("closing database")
 //        }
         return bookList
+        }
+    static func getClothItems() ->  [Cloth] {
+        
+        let queryStatementString = "SELECT Cloth.Item_ID,Size,clothCategory,Gender,Quantity,Others FROM ItemDetails,Cloth  WHERE Cloth.Item_ID IN(SELECT Item_ID FROM DonationStatus WHERE Status = 'pending') OR Cloth.Item_ID NOT IN(SELECT Item_ID FROM DonationStatus)  and Cloth.Item_ID = ItemDetails.Item_ID ORDER BY ItemDetails.Item_Name;"
+        var clothList : [Cloth] = []
+        var queryStatement: OpaquePointer?
+          if sqlite3_prepare_v2(db, queryStatementString, -1, &queryStatement, nil) ==
+              SQLITE_OK {
+           // sqlite3_bind_int(queryStatement, 1, Int32(donarid))
+            while sqlite3_step(queryStatement) == SQLITE_ROW {
+    
+             let queryResultCol0 = sqlite3_column_int(queryStatement, 0)
+             let queryResultCol1 = sqlite3_column_text(queryStatement, 1)
+             let queryResultCol2 = sqlite3_column_text(queryStatement, 2)
+             let queryResultCol3 = sqlite3_column_text(queryStatement, 3)
+             let queryResultCol4 = sqlite3_column_int(queryStatement, 4)
+            let queryResultCol5 = sqlite3_column_text(queryStatement, 5)
+                let cloth : Cloth = Cloth(size: String(cString: queryResultCol1!), clothCategory: String(cString: queryResultCol2!), gender: String(cString: queryResultCol3!), quantity: Int(queryResultCol4), others: String(cString: queryResultCol5!), item_id:Int(queryResultCol0))
+               
+                clothList.append(cloth)
+              
+                //return userid
+            }
+          } else {
+            let errorMessage = String(cString: sqlite3_errmsg(db))
+            print("\nQuery is not prepared \(errorMessage)")
+          }
+//          sqlite3_finalize(queryStatement)
+//        if sqlite3_close(db) == SQLITE_OK {
+//            print("closing database")
+//        }
+        return clothList
         }
 }

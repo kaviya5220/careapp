@@ -28,19 +28,8 @@ class FoodTableViewCell: UITableViewCell {
                 
             }
         }
-    var descriptionArr:[String]?{
-        didSet{
-            
-        }
-    }
-    var food: Food? {
-        didSet {
-            guard let Food = food else {return}
-            setValue(cuisine, name: String(Food.vegnonveg), value:String(Food.cusine))
-            setValue(expiryDate, name: "expiry_date", value:String(Food.expiry_date))
-//            setValue(expiryDate, name: "expiry", value:"North Indian")
-        }
-    }
+    
+
     
         
         
@@ -77,7 +66,6 @@ class FoodTableViewCell: UITableViewCell {
         
             let cuisine:UILabel = {
                 let label = UILabel()
-//                label.text = "North Indian"
                 label.font = label.font.withSize(18)
                 label.lineBreakMode = .byCharWrapping
                   label.numberOfLines = 0
@@ -95,7 +83,6 @@ class FoodTableViewCell: UITableViewCell {
             
             let expiryDate:CustomLabel = {
                 let label = CustomLabel(labelType: .primary)
-                label.text = "05/08/2021"
                 label.textAlignment = .right
                 return label
             }()

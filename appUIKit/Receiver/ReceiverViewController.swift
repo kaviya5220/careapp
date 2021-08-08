@@ -208,8 +208,9 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         
         receiverTableView.dataSource = self
         receiverTableView.delegate = self
-        receiverTableView.register(FoodTableViewCell.self, forCellReuseIdentifier: "itemcell")
+        receiverTableView.register(FoodTableViewCell.self, forCellReuseIdentifier: "foodCell")
         receiverTableView.register(BookTableViewCell.self, forCellReuseIdentifier: "bookCell")
+        receiverTableView.register(ClothTableViewCell.self, forCellReuseIdentifier: "clothCell")
         receiverTableView.estimatedRowHeight = 370.0
         receiverTableView.rowHeight = UITableView.automaticDimension
         receiverTableView.refreshControl = refreshControl
@@ -234,6 +235,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
     @objc func refreshItem(_ sender : Any){
         i = 0
         j = 0
+        k = 0
         loaditems()
         self.refreshControl.endRefreshing()
         receiverTableView.reloadData()
@@ -241,6 +243,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     var i : Int = 0
     var j : Int = 0
+    var k : Int = 0
      func loaditems(){
         DispatchQueue.global(qos:.background).async {
             var itemlist:[Item] = []
@@ -250,7 +253,9 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
             foodItems = self.receiverInteractor.getFood()
             var bookItems : [Books] = []
             bookItems = self.receiverInteractor.getBooks()
-            
+            var clothItems : [Cloth] = []
+            clothItems = self.receiverInteractor.getCloth()
+           
                 DispatchQueue.main.async(execute: {
 //                    self.totalDetails = itemlist
 //                    self.filteredTotalDetails = itemlist
@@ -276,10 +281,18 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
                             self.totalDetails.append(ItemDetails(item_id: item.item_id, item_name: item.item_name, item_image: "", category: item.category, address: item.address, Donar_ID: item.Donar_ID, visited_count: item.visited_count, date: item.date, description: bookDesc))
                             self.j = self.j + 1
                         }
+                        else if(item.category == "Cloth"){
+                            var clothDesc : [String] = ["","","","",""]
+                            clothDesc[0] = clothItems[self.k].size
+                            clothDesc[1] = clothItems[self.k].clothCategory
+                            clothDesc[2] = clothItems[self.k].gender
+                            clothDesc[3] = String(clothItems[self.k].quantity)
+                            clothDesc[4] = clothItems[self.k].others
+                            self.totalDetails.append(ItemDetails(item_id: item.item_id, item_name: item.item_name, item_image: "", category: item.category, address: item.address, Donar_ID: item.Donar_ID, visited_count: item.visited_count, date: item.date, description: clothDesc))
+                            self.k = self.k + 1
+                        }
                     }
                     self.filteredTotalDetails =  self.totalDetails
-//                    print(self.filtered_foodItems)
-//                               print(self.filtered_bookItems)
                    self.receiverTableView.reloadData()
                 })
             }
@@ -316,6 +329,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
             vc.itemDetailValues[1] = totalDetails[index].category
             vc.itemDetailValues[2] = totalDetails[index].address
             vc.itemDetailValues[3] = String(totalDetails[index].Donar_ID)
+            vc.descValues = totalDetails[index].description
             print(item_images.map{$0.item_image}[index])
             vc.item_image = item_images.map{$0.item_image}[index]
             self.navigationController?.pushViewController(vc, animated: true)
@@ -342,7 +356,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
             if(filteredTotalDetails[indexPath.row].category == "Food"){
                 
 //                print("ss\(filtered_foodItems[foodIterator].item_id)")
-            let cell = tableView.dequeueReusableCell(withIdentifier: "itemcell", for: indexPath) as! FoodTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "foodCell", for: indexPath) as! FoodTableViewCell
                 cell.item = filteredTotalDetails[indexPath.row]
             
             let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
@@ -357,22 +371,11 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
                 }
             }
             }
-//            if(filtered_foodItems.count > foodIterator && filtered_foodItems.count != 0){
-////                print(foodIterator)
-////                print(filtered_foodItems)
-//                cell.food = filtered_foodItems[foodIterator]
-//                print(filtered_foodItems[foodIterator].cusine)
-//                print("desc item id\(fidsdltered_foodItems[foodIterator].item_id)")
-//                foodIterator = foodIterator+1
-//            }
-                
-            
-           
             
                 return cell
             
         }
-    else{
+    else  if(filteredTotalDetails[indexPath.row].category == "Book"){
     let cell = tableView.dequeueReusableCell(withIdentifier: "bookCell", for: indexPath) as! BookTableViewCell
         cell.item = filteredTotalDetails[indexPath.row]
     
@@ -388,14 +391,27 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     }
-        
-    
-//    print(filteredItems)
-   
-    
         return cell
+    }
+    else{
+        let cell = tableView.dequeueReusableCell(withIdentifier: "clothCell", for: indexPath) as! ClothTableViewCell
+            cell.item = filteredTotalDetails[indexPath.row]
+        
+        let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
+        
+        if(filtered_item_images.count >= indexPath.row && filtered_item_images.count != 0) {
+        if let dirPath = paths.first{
+            let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent(filtered_item_images[indexPath.row].item_image)
+            if(filtered_item_images[indexPath.row].item_image != "") {
+                cell.itemimage.image = UIImage(contentsOfFile: imageURL.path) }
+            else {
+                cell.itemimage.image = UIImage(named: "loadingimage")
+            }
+        }
+    }
+        return cell
+    }
     
-}
     }
         
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

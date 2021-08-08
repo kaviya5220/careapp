@@ -6,12 +6,8 @@
 //
 
 import UIKit
-protocol passCategory{
-    func passCategory(category : String)
-}
 class CategoryTableViewCell: UITableViewCell {
     var selectedCategory = ""
-    var delegate : passCategory?
     let containerView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
@@ -21,16 +17,9 @@ class CategoryTableViewCell: UITableViewCell {
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        categoryButton.isHidden = false
-        let cell = tableView.cellForRow(at: indexPath)
-        categoryButton.setTitle(cell?.textLabel?.text, for: .normal)
-        delegate?.passCategory(category: (cell?.textLabel?.text)!)
-        tableExpanded = false
-    }
+   
     
    
-    var tableExpanded : Bool = false
     
     let itemCategoryLabel:UILabel = {
         let label = CustomLabel(labelType: .primary)
@@ -39,7 +28,6 @@ class CategoryTableViewCell: UITableViewCell {
         label.text = "Category"
         return label
     }()
-    var countryList = ["BOOKS", "CLOTHES", "FOOD","ELECTRONICS"]
     
     let categoryButton:UIButton = {
         let button = CustomButton(title: "Select a Category", bgColor: .white)
@@ -57,21 +45,7 @@ class CategoryTableViewCell: UITableViewCell {
         self.containerView.addArrangedSubview(itemCategoryLabel)
        
         self.containerView.addArrangedSubview(categoryButton)
-//        containerView.addArrangedSubview(itemCategoryLabel)
-//        containerView.addArrangedSubview(category)
-    
-        
-        
-//        categoryTableView.topAnchor.constraint(equalTo:self.contentView.topAnchor,constant: <#T##CGFloat#>).isActive = true
-//        categoryTableView.leftAnchor.constraint(equalTo:self.contentView.leftAnchor).isActive = true
-//        categoryTableView.rightAnchor.constraint(equalTo:self.contentView.rightAnchor).isActive = true
-//        categoryTableView.bottomAnchor.constraint(equalTo:self.contentView.bottomAnchor).isActive = true
-//
-//
-//        categoryButton.topAnchor.constraint(equalTo:self.contentView.topAnchor).isActive = true
-//        categoryButton.leftAnchor.constraint(equalTo:self.contentView.leftAnchor).isActive = true
-//        categoryButton.rightAnchor.constraint(equalTo:self.contentView.rightAnchor).isActive = true
-//        categoryButton.bottomAnchor.constraint(equalTo:self.contentView.bottomAnchor).isActive = true
+
         
         containerView.topAnchor.constraint(equalTo: self.contentView.topAnchor).isActive = true
         containerView.leadingAnchor.constraint(equalTo:self.contentView.leadingAnchor, constant:10).isActive = true

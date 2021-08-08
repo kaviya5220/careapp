@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1B14791B2679F89C003DEC63 /* DetailItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B14791A2679F89C003DEC63 /* DetailItemViewController.swift */; };
-		1B160856268076AD002570F2 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B160855268076AD002570F2 /* PageViewController.swift */; };
 		1B3A828A2690772B002BFADE /* ProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3A82892690772B002BFADE /* ProfileInteractor.swift */; };
 		1B448490269C0B9E00C02695 /* StatusInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44848F269C0B9E00C02695 /* StatusInteractor.swift */; };
 		1B448492269C0BD000C02695 /* StatusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B448491269C0BD000C02695 /* StatusTableViewCell.swift */; };
@@ -70,9 +68,9 @@
 		1BEE1D45269D6555008F3726 /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEE1D44269D6555008F3726 /* KeyChain.swift */; };
 		1BF5A32226BC0F7600648CD2 /* FoodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5A32126BC0F7600648CD2 /* FoodTableViewCell.swift */; };
 		1BF5A32426BD00F700648CD2 /* BookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5A32326BD00F700648CD2 /* BookTableViewCell.swift */; };
-		1BF5A32626BD3E5D00648CD2 /* BookDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5A32526BD3E5D00648CD2 /* BookDetails.swift */; };
-		1BF5A32826BD426500648CD2 /* FoodDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5A32726BD426500648CD2 /* FoodDetails.swift */; };
 		1BF5A32A26BD584500648CD2 /* ItemDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5A32926BD584400648CD2 /* ItemDetails.swift */; };
+		1BF5A32C26BE593500648CD2 /* Cloth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5A32B26BE593500648CD2 /* Cloth.swift */; };
+		1BF5A32E26BE5DFF00648CD2 /* ClothTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5A32D26BE5DFF00648CD2 /* ClothTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,8 +91,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1B14791A2679F89C003DEC63 /* DetailItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailItemViewController.swift; sourceTree = "<group>"; };
-		1B160855268076AD002570F2 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		1B3A82892690772B002BFADE /* ProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInteractor.swift; sourceTree = "<group>"; };
 		1B44848F269C0B9E00C02695 /* StatusInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusInteractor.swift; sourceTree = "<group>"; };
 		1B448491269C0BD000C02695 /* StatusTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusTableViewCell.swift; sourceTree = "<group>"; };
@@ -162,9 +158,9 @@
 		1BEE1D44269D6555008F3726 /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		1BF5A32126BC0F7600648CD2 /* FoodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTableViewCell.swift; sourceTree = "<group>"; };
 		1BF5A32326BD00F700648CD2 /* BookTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTableViewCell.swift; sourceTree = "<group>"; };
-		1BF5A32526BD3E5D00648CD2 /* BookDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetails.swift; sourceTree = "<group>"; };
-		1BF5A32726BD426500648CD2 /* FoodDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetails.swift; sourceTree = "<group>"; };
 		1BF5A32926BD584400648CD2 /* ItemDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetails.swift; sourceTree = "<group>"; };
+		1BF5A32B26BE593500648CD2 /* Cloth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cloth.swift; sourceTree = "<group>"; };
+		1BF5A32D26BE5DFF00648CD2 /* ClothTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -365,9 +361,8 @@
 				1B448493269C13DF00C02695 /* Status.swift */,
 				1B803D8226B5829B00303DA9 /* Books.swift */,
 				1BBC570226B7C30400F5BA0C /* Food.swift */,
-				1BF5A32526BD3E5D00648CD2 /* BookDetails.swift */,
-				1BF5A32726BD426500648CD2 /* FoodDetails.swift */,
 				1BF5A32926BD584400648CD2 /* ItemDetails.swift */,
+				1BF5A32B26BE593500648CD2 /* Cloth.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -377,14 +372,13 @@
 			children = (
 				1B9B8F432671DFC000C5497C /* ReceiverTableViewCell.swift */,
 				1B9B8F492672655D00C5497C /* ReceiverViewController.swift */,
-				1B14791A2679F89C003DEC63 /* DetailItemViewController.swift */,
-				1B160855268076AD002570F2 /* PageViewController.swift */,
 				1B6FF24B268369010093956C /* ReceiverInteractor.swift */,
 				1BBC570426B903BA00F5BA0C /* DetailItemTableViewController.swift */,
 				1BBC570626B9084100F5BA0C /* TextFieldTableViewCell.swift */,
 				1BBC570826B9435A00F5BA0C /* ImageTableViewCell.swift */,
 				1BF5A32126BC0F7600648CD2 /* FoodTableViewCell.swift */,
 				1BF5A32326BD00F700648CD2 /* BookTableViewCell.swift */,
+				1BF5A32D26BE5DFF00648CD2 /* ClothTableViewCell.swift */,
 			);
 			path = Receiver;
 			sourceTree = "<group>";
@@ -531,10 +525,10 @@
 				1B448492269C0BD000C02695 /* StatusTableViewCell.swift in Sources */,
 				1BC8C0ED2692E5FF00292240 /* RequestListTableViewCell.swift in Sources */,
 				1BC38B6226899AF9002501E0 /* AddItemPresenter.swift in Sources */,
+				1BF5A32E26BE5DFF00648CD2 /* ClothTableViewCell.swift in Sources */,
 				1BC8C0EF2692E62000292240 /* RequestListInteractor.swift in Sources */,
 				1B906EFB2670A0F50032FA81 /* LoginViewController.swift in Sources */,
 				1BEE1D45269D6555008F3726 /* KeyChain.swift in Sources */,
-				1B14791B2679F89C003DEC63 /* DetailItemViewController.swift in Sources */,
 				1B6FF24C268369010093956C /* ReceiverInteractor.swift in Sources */,
 				1B448494269C13DF00C02695 /* Status.swift in Sources */,
 				1B5739D626B1B19A009B7F95 /* TextViewTableViewCell.swift in Sources */,
@@ -543,7 +537,6 @@
 				1B7EBFA92674945700F2AED1 /* LoginInteractor.swift in Sources */,
 				1B5739C726AEDD0B009B7F95 /* ItemNameTableViewCell.swift in Sources */,
 				1B52A86F267DB2A700B489AA /* CustomReceiverCard.swift in Sources */,
-				1B160856268076AD002570F2 /* PageViewController.swift in Sources */,
 				1B7EBFA32674805B00F2AED1 /* CustomLabel.swift in Sources */,
 				1B71D306268ED64B00B11F3B /* ToastViewController.swift in Sources */,
 				1B71D30E268F197700B11F3B /* Donationstatus.swift in Sources */,
@@ -556,9 +549,7 @@
 				1BF5A32426BD00F700648CD2 /* BookTableViewCell.swift in Sources */,
 				1B71D30C268EE10C00B11F3B /* DonationInteractor.swift in Sources */,
 				1B5739D426B14993009B7F95 /* CategoryTableViewCell.swift in Sources */,
-				1BF5A32626BD3E5D00648CD2 /* BookDetails.swift in Sources */,
 				1B9B8F4A2672655D00C5497C /* ReceiverViewController.swift in Sources */,
-				1BF5A32826BD426500648CD2 /* FoodDetails.swift in Sources */,
 				1BBC570526B903BA00F5BA0C /* DetailItemTableViewController.swift in Sources */,
 				1B803D7726B3BB9100303DA9 /* AddItemTableViewController.swift in Sources */,
 				1B3A828A2690772B002BFADE /* ProfileInteractor.swift in Sources */,
@@ -571,6 +562,7 @@
 				1B803D8326B5829B00303DA9 /* Books.swift in Sources */,
 				1B7EBFA126747A9200F2AED1 /* CustomTextField.swift in Sources */,
 				1B803D7F26B4200800303DA9 /* DescriptionTableViewHeader.swift in Sources */,
+				1BF5A32C26BE593500648CD2 /* Cloth.swift in Sources */,
 				1B44849A269C4A7D00C02695 /* DonarInteractor.swift in Sources */,
 				1B906F002670A9260032FA81 /* DBHelper.swift in Sources */,
 				1B9B8F4626724E6F00C5497C /* User.swift in Sources */,

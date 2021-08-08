@@ -11,6 +11,7 @@ class ImageTableViewCell: UITableViewCell {
     let itemimage:UIImageView = {
         let img = UIImageView()
         img.contentMode = .top
+        img.image = UIImage(named: "default_product")
         img.translatesAutoresizingMaskIntoConstraints = false
         img.layer.cornerRadius = 25
         img.clipsToBounds = true

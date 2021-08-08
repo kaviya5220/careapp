@@ -13,7 +13,7 @@ protocol  chooseCategory {
 class CategoryViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
       let tableView = UITableView()
     var safeArea: UILayoutGuide!
-    var category = ["Book", "Food", "Cloth", "Furniture", "Others"]
+    var category = ["Book", "Food", "Cloth"]
     var delegate : chooseCategory?
 
       override func loadView() {

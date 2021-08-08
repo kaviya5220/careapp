@@ -23,22 +23,7 @@ class BookTableViewCell: UITableViewCell {
             
         }
     }
-var book: Books? {
-    didSet {
-        guard let Books = book else {return}
-        setValue(publication, name: "publication", value:String(Books.publisher))
-        setValue(year_of_publish, name: "year_of_publish", value:String(Books.year_of_publish))
-        setValue(author, name: "author", value:String(Books.author))
-        
-    }
-}
-    var descriptionArr:[String]?{
-        didSet{
-            
-        }
-    }
 
-    
     
     
     let containerView: UIStackView = {
@@ -91,7 +76,6 @@ var book: Books? {
         
         let year_of_publish:CustomLabel = {
             let label = CustomLabel(labelType: .primary)
-//            label.text = "05/08/2021"
             label.textAlignment = .right
             return label
         }()

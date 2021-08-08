@@ -17,7 +17,7 @@ class ItemDetails{
     var date: String
     var description: [String]
     
-    init(item_id: Int = 0,item_name: String = "",item_image: String = "", category: String = "",address: String = "",Donar_ID : Int = 0,visited_count : Int = 0,date :String = "",description : [String] = ["","","","",""])
+    init(item_id: Int = 0,item_name: String = "",item_image: String = "", category: String = "",address: String = "",Donar_ID : Int = 0,visited_count : Int = 0,date :String = "",description: [String] )
     
     {
         self.item_id = item_id

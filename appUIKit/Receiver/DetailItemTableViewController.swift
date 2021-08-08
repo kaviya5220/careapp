@@ -41,7 +41,7 @@ class DetailItemTableViewController: UIViewController,UITableViewDataSource,UITa
         detailTableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(detailTableView)
         view.backgroundColor = .white
-        loadItemByCategory(category: itemDetailValues[1])
+        receiverInteractor.updateVisitedCount(ID: itemid)
         loadDonorDetails(donor_id: Int(itemDetailValues[3])!)
         self.navigationItem.title = itemDetailValues[0]
         self.navigationItem.rightBarButtonItem = request
@@ -77,40 +77,24 @@ class DetailItemTableViewController: UIViewController,UITableViewDataSource,UITa
             self.navigationController?.pushViewController(LoginViewController(), animated: true)
         }
     }
-    func loadItemByCategory(category:String){
-       
-            var itemdesc = [String]()
-            switch category{
-            case "Book":
-                itemdesc = self.receiverInteractor.getBookDetails(itemid: self.itemid)
-            case "Food":
-                itemdesc = self.receiverInteractor.getFoodDetails(itemid: self.itemid)
-            default:
-                break
-            }
-         self.descValues = itemdesc
-         self.detailTableView.reloadData()
-    
-    }
 //    func loadItemByCategory(category:String){
-//        DispatchQueue.global(qos:.background).async {
+//       
 //            var itemdesc = [String]()
 //            switch category{
 //            case "Book":
 //                itemdesc = self.receiverInteractor.getBookDetails(itemid: self.itemid)
 //            case "Food":
 //                itemdesc = self.receiverInteractor.getFoodDetails(itemid: self.itemid)
+//            case "Cloth":
+//                itemdesc = self.receiverInteractor.getClothDetails(itemid: self.itemid)
 //            default:
 //                break
 //            }
-//         DispatchQueue.main.async(execute: { [self] in
-//            self.descValues = itemdesc
-//            print(itemdesc)
-//             self.detailTableView.reloadData()
-//                })
-//            }
-//
+//         self.descValues = itemdesc
+//         self.detailTableView.reloadData()
+//    
 //    }
+
     func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
 
         UIGraphicsBeginImageContext(CGSize(width: newWidth, height: 150))

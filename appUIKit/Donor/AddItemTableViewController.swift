@@ -17,7 +17,7 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
     let additeminteractor = AddItemInteractor()
     var categoryLabelDict:[String:[String]] = ["Books":["Author","Publisher","Year","Quantity"],
                                                "Food":["Expiry Date","Cuisine","Veg/Non Veg","Quantity"],
-                                               "Cloth":["Size","Material","Gender","Quantity"]]
+                                               "Cloth":["Size","Cloth Category","Gender","Quantity"]]
 
     public var itemImageName : String = ""
     var categorychosen : String = ""
@@ -349,6 +349,8 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
             insertBook(item_id: flag, value: descriptionValue)
         case "Food":
             insertFood(item_id: flag, value: descriptionValue)
+        case "Cloth":
+            insertCloth(item_id: flag, value: descriptionValue)
         default :
             break
         }
@@ -368,6 +370,11 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
     func insertFood(item_id : Int,value : [String]){
         let food : Food = Food(expiry_date: value[0], cusine: value[1], vegnonveg: value[2], quantity: Int(value[3])!, others: value[4])
         additeminteractor.addFood(itemid: item_id, food: food)
+        
+    }
+    func insertCloth(item_id : Int,value : [String]){
+        let cloth : Cloth = Cloth(size: value[0], clothCategory: value[1], gender: value[2], quantity: Int(value[3])!, others: value[4])
+        additeminteractor.addCloth(itemid: item_id, cloth: cloth)
         
     }
     func dismissinsertView(){
