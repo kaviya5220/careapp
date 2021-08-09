@@ -35,12 +35,14 @@ class CategoryTableViewCell: UITableViewCell {
         button.setTitleColor(.systemBlue, for: .normal)
         button.layer.cornerRadius = 10
         button.contentHorizontalAlignment = .left
+        
        return button
     }()
-   
+    
+  
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-     
+        
         self.contentView.addSubview(containerView)
         self.containerView.addArrangedSubview(itemCategoryLabel)
        

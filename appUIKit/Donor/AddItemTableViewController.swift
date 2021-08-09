@@ -104,7 +104,17 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
         }
         return 3
     }
-
+//    var menuItems: [UIAction] {
+//        var menu:[UIAction] = []
+//        
+//            menu.append(UIAction(title: "Name", image: UIImage(systemName: "arrow.up")){ _ in
+//               
+//            })
+//        
+//        
+//      return menu
+//
+//    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if(indexPath.section == 0){
@@ -118,6 +128,8 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
         else if(indexPath.row == 1){
             let cell = tableView.dequeueReusableCell(withIdentifier: "itemcategory", for: indexPath) as! CategoryTableViewCell
             cell.categoryButton.addTarget(self, action: #selector(selectCategory(_:)), for: .touchUpInside)
+//            cell.categoryButton.showsMenuAsPrimaryAction = true
+//            cell.categoryButton.menu = UIMenu(title: "Sort", image: nil, identifier: nil, options: .destructive, children: menuItems)
             if(categorychosen != ""){
                 cell.categoryButton.setTitle(categorychosen, for: .normal)
                 cell.categoryButton.setTitleColor(.black, for: .normal)

@@ -24,25 +24,67 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
     let refreshControl = UIRefreshControl()
     var nameToggle : Bool = true
     var dateToggle : Bool = true
-    
+    var someVariable1 : Bool = true
     var menuItems: [UIAction] {
-        return [
-            UIAction(title: "Name", image: UIImage(systemName: "arrow.up.arrow.down"),state: self.someVariable == true ? .on : .off){ _ in
-                self.someVariable = false
+        var menu:[UIAction] = []
+        
+        if(nameToggle == true){
+            menu.append(UIAction(title: "Name", image: UIImage(systemName: "arrow.up"),state: self.someVariable1 ? .on : .off){ _ in
+                if(self.someVariable1 == false){
+                    self.someVariable1 = true
+                }
+                if(self.someVariable == true){
+                    self.someVariable = false
+                }
                 self.sortName()
-            },
-            UIAction(title: "Date Posted", image: UIImage(systemName: "arrow.up.arrow.down"),state: self.someVariable ? .off : .on) { _ in
-                print(self.someVariable)
-                self.someVariable = true
+                self.sorticon.menu = self.generateMenu()
+            })
+        }
+        else{
+            menu.append(UIAction(title: "Name", image: UIImage(systemName: "arrow.down"),state: self.someVariable1 ? .on : .off){ _ in
+                if(self.someVariable1 == false){
+                    self.someVariable1 = true
+                }
+                if(self.someVariable == true){
+                    self.someVariable = false
+                }
+                self.sortName()
+                self.sorticon.menu = self.generateMenu()
+            })
+        }
+        if(dateToggle == true){
+            menu.append(UIAction(title: "Date", image: UIImage(systemName: "arrow.up"),state: self.someVariable ? .on : .off){ _ in
+                if(self.someVariable == false){
+                    self.someVariable = true
+                }
+                if(self.someVariable1 == true){
+                    self.someVariable1 = false
+                }
                 self.sortDate()
-            },
-        ]
-    }
+                self.sorticon.menu = self.generateMenu()
+            })
+        }
+        else{
+            menu.append(UIAction(title: "Date", image: UIImage(systemName: "arrow.down"),state: self.someVariable ? .on: .off){ _ in
+//                self.someVariable.toggle()
+                if(self.someVariable == false){
+                    self.someVariable = true
+                }
+                if(self.someVariable1 == true){
+                    self.someVariable1 = false
+                }
+                self.sortDate()
+                self.sorticon.menu = self.generateMenu()
+            })
+        }
+        return menu
 
-    var demoMenu: UIMenu {
-        return UIMenu(title: "Sort", image: nil, identifier: nil, options: [], children: menuItems)
     }
-    
+    func generateMenu() -> UIMenu {
+   
+        return UIMenu(title: "Sort", image: nil, identifier: nil, options: [], children: menuItems)
+//    }
+    }
     let noItemAvailable:CustomLabel = {
         let label = CustomLabel(labelType: .title)
         label.text = "No Items Available"
@@ -138,7 +180,6 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     @objc func sortName()
     {
-        menuItems[1].image = nil
         switch (nameToggle){
         case true:
             sortNameDescending()
@@ -165,13 +206,11 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewWillAppear(animated)
         receiverTableView.reloadData()
     }
-
+    var sorticon : UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
         let leftBarButton = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.done, target: self, action: #selector(navigateToProfile(_:)))
-        let sorticon = UIBarButtonItem(title: "sort", image: nil, primaryAction: nil, menu: demoMenu)
-        
-       
+        sorticon = UIBarButtonItem(title: "sort", image: nil, primaryAction: nil, menu: generateMenu())
         let add = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.done, target: self, action: #selector(didTapAdd(_:)))
         navigationItem.rightBarButtonItems = [add,sorticon]
         let addIcon = UIImage(systemName: "plus")
