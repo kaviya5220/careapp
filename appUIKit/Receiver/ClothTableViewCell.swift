@@ -15,7 +15,6 @@ class ClothTableViewCell: UITableViewCell {
                     guard let Item = item else {return}
                     let name = Item.item_name
                         itemname.text = name
-                    print(Item.description[2])
                     setValue(itemlocation, name: "location", value:String(Item.address))
                     setValue(visitedcount, name: "visitedcount", value:String(Item.visited_count))
                     setValue(date, name: "calendar", value:Item.date)
@@ -62,6 +61,7 @@ class ClothTableViewCell: UITableViewCell {
             
                 let clothCategory:CustomLabel = {
                     let label = CustomLabel(labelType: .primary)
+                    label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
                     return label
                 }()
                 

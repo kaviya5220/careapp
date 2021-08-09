@@ -119,7 +119,7 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
             let cell = tableView.dequeueReusableCell(withIdentifier: "itemcategory", for: indexPath) as! CategoryTableViewCell
             cell.categoryButton.addTarget(self, action: #selector(selectCategory(_:)), for: .touchUpInside)
             if(categorychosen != ""){
-            cell.categoryButton.setTitle(categorychosen, for: .normal)
+                cell.categoryButton.setTitle(categorychosen, for: .normal)
                 cell.categoryButton.setTitleColor(.black, for: .normal)
             }
             else{
@@ -409,7 +409,7 @@ extension AddItemTableViewController {
 
 
         compactConstraints.append(contentsOf: [
-            addItemTableView.topAnchor.constraint(equalTo:itemimage.bottomAnchor,constant: 10),
+            addItemTableView.topAnchor.constraint(equalTo:itemimage.bottomAnchor,constant: 5),
             addItemTableView.leftAnchor.constraint(equalTo:view.safeAreaLayoutGuide.leftAnchor),
             addItemTableView.rightAnchor.constraint(equalTo:view.safeAreaLayoutGuide.rightAnchor),
             addItemTableView.bottomAnchor.constraint(equalTo:view.safeAreaLayoutGuide.bottomAnchor),
@@ -483,7 +483,7 @@ extension AddItemTableViewController: CollapsibleTableViewHeaderDelegate {
 class CategorySizePresentationController: UIPresentationController {
     override var frameOfPresentedViewInContainerView: CGRect {
         guard let bounds = containerView?.bounds else { return .zero }
-        return CGRect(x: 0, y: bounds.height / 1.5, width: bounds.width, height: bounds.height)
+        return CGRect(x: 0, y: bounds.height / 1.75, width: bounds.width, height: 170)
     }
 }
 extension UITableView {

@@ -65,8 +65,6 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
                         filtered_item_images.append(item)
                     }
                 }
-                
-               
             }
             receiverTableView.reloadData()
         }
@@ -169,10 +167,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
     }
 
     override func viewDidLoad() {
-        //super.viewDidLayoutSubviews()
-        //super.viewWillAppear(Animated)
         super.viewDidLoad()
-      //  let add1 = UIBarButtonItem(barButtonSystemItem: , target: self, action: #selector(didTapAdd(_:)))
         let leftBarButton = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.done, target: self, action: #selector(navigateToProfile(_:)))
         let sorticon = UIBarButtonItem(title: "sort", image: nil, primaryAction: nil, menu: demoMenu)
         
@@ -239,7 +234,6 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         loaditems()
         self.refreshControl.endRefreshing()
         receiverTableView.reloadData()
-        //self..stopAnimating()
     }
     var i : Int = 0
     var j : Int = 0
@@ -257,8 +251,6 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
             clothItems = self.receiverInteractor.getCloth()
            
                 DispatchQueue.main.async(execute: {
-//                    self.totalDetails = itemlist
-//                    self.filteredTotalDetails = itemlist
                    
                     for item in itemlist{
                         if(item.category == "Food"){
@@ -330,7 +322,6 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
             vc.itemDetailValues[2] = totalDetails[index].address
             vc.itemDetailValues[3] = String(totalDetails[index].Donar_ID)
             vc.descValues = totalDetails[index].description
-            print(item_images.map{$0.item_image}[index])
             vc.item_image = item_images.map{$0.item_image}[index]
             self.navigationController?.pushViewController(vc, animated: true)
         }
@@ -350,12 +341,9 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            print("item det item id\(filteredTotalDetails[indexPath.row].item_id)")
             
-//            print(filteredItems[indexPath.row].category)
             if(filteredTotalDetails[indexPath.row].category == "Food"){
                 
-//                print("ss\(filtered_foodItems[foodIterator].item_id)")
             let cell = tableView.dequeueReusableCell(withIdentifier: "foodCell", for: indexPath) as! FoodTableViewCell
                 cell.item = filteredTotalDetails[indexPath.row]
             
@@ -424,16 +412,6 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
 //        totalDetails.append(item)
         totalDetails.append(ItemDetails(item_id: item.item_id, item_name: item.item_name, item_image: item_image, category: item.category, address: item.address, Donar_ID: item.Donar_ID, visited_count: item.visited_count, date: item.date, description: description))
         item_images.append(Item_Image(item_id: item.item_id, item_image: item_image))
-//        if(item.category == "Food") {
-//        let food:Food = Food(expiry_date: description[0], cusine: description[1], vegnonveg: description[2], quantity: Int(description[3])!, others: description[4])
-//        foodItems.append(food)
-//            filtered_foodItems = foodItems
-//        }
-//        else if(item.category == "Book") {
-//        let book:Books = Books(author: description[0], publisher: description[1], year_of_publish : description[2], quantity: Int(description[3])!, others: description[4])
-//        bookItems.append(book)
-//            filtered_bookItems = bookItems
-//        }
         filtered_item_images = item_images
         filteredTotalDetails = totalDetails
 //        print(fi)
@@ -441,8 +419,6 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         receiverTableView.reloadData()
     }
     func updateItem(itemid : Int) {
-//        print("updelegate")
-//        filteredItems.remove(at: filteredItems.firstIndex(of: 1))
         if let idx = totalDetails.firstIndex(where: { $0.item_id == itemid }) {
 
             totalDetails.remove(at: idx)

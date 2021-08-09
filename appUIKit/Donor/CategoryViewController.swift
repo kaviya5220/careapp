@@ -21,6 +21,8 @@ class CategoryViewController: UIViewController,UITableViewDelegate, UITableViewD
         view.backgroundColor = .white
         safeArea = view.layoutMarginsGuide
         setupTableView()
+//        let cancel = UIBarButtonItem(title: "Upload", style: .plain, target: self, action: #selector(cancel(_:)))
+//        self.navigationItem.rightBarButtonItem = cancel
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.dataSource = self
         tableView.delegate = self
@@ -36,9 +38,12 @@ class CategoryViewController: UIViewController,UITableViewDelegate, UITableViewD
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         
       }
+   // @objc func cancel(_ sender: UIButton) {
+        //self.present(actionSheet,animated: true)
+  //  }
   func tableView(_ tableView: UITableView, titleForHeaderInSection
                                 section: Int) -> String? {
-    let section = "Category"
+    let section = "Select a Category"
        return "\(section)"
     }
 
