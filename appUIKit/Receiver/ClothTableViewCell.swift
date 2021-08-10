@@ -187,8 +187,8 @@ class ClothTableViewCell: UITableViewCell {
                     customContentView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -5).isActive = true
                     
                     containerView.topAnchor.constraint(equalTo: self.itemimage.bottomAnchor, constant:5).isActive = true
-                    containerView.leadingAnchor.constraint(equalTo:self.customContentView.leadingAnchor, constant:10).isActive = true
-                    containerView.trailingAnchor.constraint(equalTo:self.customContentView.trailingAnchor, constant:-10).isActive = true
+                    containerView.leadingAnchor.constraint(equalTo:self.customContentView.leadingAnchor, constant:15).isActive = true
+                    containerView.trailingAnchor.constraint(equalTo:self.customContentView.trailingAnchor, constant:-15).isActive = true
                     containerView.bottomAnchor.constraint(equalTo: self.customContentView.bottomAnchor, constant: -15).isActive = true
                     
                 

@@ -142,7 +142,7 @@ func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
     return newImage!
 }
 
-    var uiimage_names : [String:String] = ["visitedcount":"eye","location":"location","year_of_publish":"calendar","publication":"book","author":"square.and.pencil","calendar":"calendar"]
+    var uiimage_names : [String:String] = ["visitedcount":"eye","location":"location","year_of_publish":"doc.plaintext","publication":"book","author":"square.and.pencil","calendar":"calendar"]
     func setValue(_ label: UILabel,name:String,value : String){
         let attachment = NSTextAttachment()
         var imagename:String = ""
@@ -194,35 +194,12 @@ func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
             customContentView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -5).isActive = true
             
             containerView.topAnchor.constraint(equalTo: self.itemimage.bottomAnchor, constant:5).isActive = true
-            containerView.leadingAnchor.constraint(equalTo:self.customContentView.leadingAnchor, constant:10).isActive = true
-            containerView.trailingAnchor.constraint(equalTo:self.customContentView.trailingAnchor, constant:-10).isActive = true
+            containerView.leadingAnchor.constraint(equalTo:self.customContentView.leadingAnchor, constant:15).isActive = true
+            containerView.trailingAnchor.constraint(equalTo:self.customContentView.trailingAnchor, constant:-15).isActive = true
             containerView.bottomAnchor.constraint(equalTo: self.customContentView.bottomAnchor, constant: -15).isActive = true
             
             
-          //  stack.leadingAnchor
-            
-        //    stack.topAnchor.constraint(equalTo: self.itemlocation.bottomAnchor, constant:-10).isActive = true
-//            stack.leadingAnchor.constraint(equalTo:self.containerView.leadingAnchor, constant:10).isActive = true
-//            stack.trailingAnchor.constraint(equalTo:self.containerView.trailingAnchor, constant:-10).isActive = true
-//            stack.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor, constant: -5).isActive = true
-            
-            
-//            itemname.topAnchor.constraint(equalTo:self.containerView.topAnchor,constant: 15).isActive = true
-//            itemname.leadingAnchor.constraint(equalTo:self.containerView.leadingAnchor).isActive = true
-//            itemname.trailingAnchor.constraint(equalTo:self.containerView.trailingAnchor).isActive = true
-//            itemdescription.topAnchor.constraint(equalTo:self.itemname.bottomAnchor,constant: 10).isActive = true
-//            itemdescription.leadingAnchor.constraint(equalTo:self.containerView.leadingAnchor,constant: 10).isActive = true
-//
-//
-//            itemquantity.topAnchor.constraint(equalTo:self.itemdescription.bottomAnchor,constant: 10).isActive = true
-//            itemquantity.leadingAnchor.constraint(equalTo:self.containerView.leadingAnchor,constant: 10).isActive = true
-//
-////            itemlocationlabel.topAnchor.constraint(equalTo:self.itemquantity.bottomAnchor,constant: 5).isActive = true
-//            itemlocation.trailingAnchor.constraint(equalTo:self.containerView.trailingAnchor).isActive = true
-//            itemlocation.topAnchor.constraint(equalTo:self.itemquantity.bottomAnchor,constant: 10).isActive = true
-//            itemlocation.leadingAnchor.constraint(equalTo:self.containerView.leadingAnchor,constant: 10).isActive = true
-//            itemlocation.bottomAnchor.constraint(equalTo:self.stack.topAnchor).isActive = true
-            
+         
             
         
           

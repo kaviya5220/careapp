@@ -11,6 +11,7 @@ protocol SignUpPresenterDelegate : AnyObject {
     func showMobileError(errorMessage: String?)
     func removeEmailError()
     func removeMobileNumberError()
+    func showAccountExists()
 }
 class SignupPresenter {
     weak var delegate: SignUpPresenterDelegate?
@@ -32,5 +33,25 @@ class SignupPresenter {
         delegate?.removeMobileNumberError()
         return true
     }
-    
+    func accountExists(email:String) -> Bool
+    {
+            let getquery = [
+                        kSecClass as String       : kSecClassGenericPassword,
+                        kSecAttrAccount as String : email,
+                        kSecReturnData as String  : kCFBooleanTrue,
+                kSecMatchLimit as String  : kSecMatchLimitOne ] as [String : Any]
+
+            var dataTypeRef : AnyObject? = nil
+
+            let status1 : OSStatus = SecItemCopyMatching(getquery as CFDictionary , &dataTypeRef)
+
+                    if status1 == noErr {
+                        delegate?.showAccountExists()
+                        return true
+                        
+                    }
+                    else{
+                        return false
+                    }
+    }
 }

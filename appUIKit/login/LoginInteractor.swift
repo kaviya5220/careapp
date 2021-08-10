@@ -10,8 +10,7 @@ class LoginInteractor{
     let presenter = LoginPresenter()
    
     func Valid(email : String , password: String) -> Bool{
-//        DBHelper.db = DBHelper.openDB()
-//        return  DBHelper.validate(email: email, enteredpassword: password)
+
         let getquery = [
                     kSecClass as String       : kSecClassGenericPassword,
                     kSecAttrAccount as String : email,

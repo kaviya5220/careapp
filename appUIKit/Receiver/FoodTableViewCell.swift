@@ -23,7 +23,7 @@ class FoodTableViewCell: UITableViewCell {
                 setValue(visitedcount, name: "visitedcount", value:String(Item.visited_count))
                 setValue(date, name: "calendar", value:Item.date)
                 setValue(cuisine, name: Item.description[2], value:Item.description[1])
-                setValue(expiryDate, name: "expiry_date", value:Item.description[0])
+                setValue(quantity, name: "quantity", value:Item.description[3])
                 
             }
         }
@@ -82,7 +82,7 @@ class FoodTableViewCell: UITableViewCell {
                 return label
             }()
             
-            let expiryDate:CustomLabel = {
+            let quantity:CustomLabel = {
                 let label = CustomLabel(labelType: .primary)
                 label.textAlignment = .right
                 return label
@@ -146,7 +146,7 @@ class FoodTableViewCell: UITableViewCell {
         return newImage!
     }
     
-    var uiimage_names : [String:String] = ["veg":"veg","visitedcount":"eye","location":"location","calendar":"calendar","nonveg":"nonveg","expiry_date":"clock.fill","non veg":"nonveg"]
+    var uiimage_names : [String:String] = ["veg":"veg","visitedcount":"eye","location":"location","calendar":"calendar","nonveg":"nonveg","quantity":"person.3","non veg":"nonveg"]
         func setValue(_ label: UILabel,name:String,value : String){
             let attachment = NSTextAttachment()
             var imagename:String = ""
@@ -184,7 +184,7 @@ class FoodTableViewCell: UITableViewCell {
                 stack.addArrangedSubview(visitedcount)
                 
                 firstStack.addArrangedSubview(cuisine)
-                firstStack.addArrangedSubview(expiryDate)
+                firstStack.addArrangedSubview(quantity)
 
                 
                 self.customContentView.addSubview(containerView)
@@ -202,8 +202,8 @@ class FoodTableViewCell: UITableViewCell {
                 customContentView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -5).isActive = true
                 
                 containerView.topAnchor.constraint(equalTo: self.itemimage.bottomAnchor, constant:5).isActive = true
-                containerView.leadingAnchor.constraint(equalTo:self.customContentView.leadingAnchor, constant:10).isActive = true
-                containerView.trailingAnchor.constraint(equalTo:self.customContentView.trailingAnchor, constant:-10).isActive = true
+                containerView.leadingAnchor.constraint(equalTo:self.customContentView.leadingAnchor, constant:15).isActive = true
+                containerView.trailingAnchor.constraint(equalTo:self.customContentView.trailingAnchor, constant:-15).isActive = true
                 containerView.bottomAnchor.constraint(equalTo: self.customContentView.bottomAnchor, constant: -15).isActive = true
                 
                 

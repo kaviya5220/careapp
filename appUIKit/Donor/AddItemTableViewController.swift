@@ -10,6 +10,7 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
         categorychosen = category
         addItemTableView.reloadData()
         addItemTableView.reloadSections(NSIndexSet(index: 1) as IndexSet, with: .automatic)
+        removeBlurEffect()
     }
     let item :Item = Item()
     var descriptionValue : [String] = ["","","","",""]
@@ -229,12 +230,26 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
             return
         }
     }
+    let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+    var blurEffectView = UIVisualEffectView()
+    func addBlurEffect(){
+        blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(blurEffectView)
+    }
+    func removeBlurEffect(){
+        blurEffectView.removeFromSuperview()
+//        for subview in blurEffect.s
+    }
     @objc func selectCategory(_ sender: UIButton) {
         let vc = CategoryViewController()
         vc.delegate = self
+        
         vc.modalPresentationStyle = .custom
         vc.transitioningDelegate = self
         self.present(vc, animated: true, completion: nil)
+        addBlurEffect()
         
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -495,7 +510,7 @@ extension AddItemTableViewController: CollapsibleTableViewHeaderDelegate {
 class CategorySizePresentationController: UIPresentationController {
     override var frameOfPresentedViewInContainerView: CGRect {
         guard let bounds = containerView?.bounds else { return .zero }
-        return CGRect(x: 0, y: bounds.height / 1.75, width: bounds.width, height: 170)
+        return CGRect(x: 0, y: bounds.height / 2, width: bounds.width, height: 170)
     }
 }
 extension UITableView {

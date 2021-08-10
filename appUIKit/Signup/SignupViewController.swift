@@ -15,6 +15,12 @@ class SignupViewController: UIViewController,UIScrollViewDelegate{
     var flag : Bool = true
     var delegate:SignUpProtocol?
     let signupInteractor = SignupInteractor()
+    let alert : UIAlertController = {
+    let alert1 = UIAlertController(title: "Cannot Create Account", message: "Account Already Exists with that Email", preferredStyle: .alert)
+    let okAction = UIAlertAction (title: "OK", style: UIAlertAction.Style.cancel, handler: nil)
+    alert1.addAction(okAction)
+    return alert1
+    }()
     let stackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
@@ -160,6 +166,11 @@ class SignupViewController: UIViewController,UIScrollViewDelegate{
         self.navigationController?.popViewController(animated: true)
 
     }
+    func signinclicked(){
+        dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
+
+    }
    
    
 
@@ -171,10 +182,11 @@ class SignupViewController: UIViewController,UIScrollViewDelegate{
         
         if(signUpPresenter.validateEmailId(emailId: emailField.text!)==false){
             flag = false
-
-
         }
         if(signUpPresenter.validateMobile(mobile: phone.text!)==false){
+            flag = false
+        }
+        if(signUpPresenter.accountExists(email: emailField.text!)==true){
             flag = false
         }
         if(flag){
@@ -278,4 +290,7 @@ extension SignupViewController : SignUpPresenterDelegate{
         phone.layer.borderWidth = 3
         phoneerrorlabel.isHidden = false
     }
+    func showAccountExists() {
+        self.present(alert, animated: true, completion: nil)
+        }
 }

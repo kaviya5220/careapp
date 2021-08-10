@@ -101,7 +101,9 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
             }
             else{
                 filtered_item_images = []
-                filteredTotalDetails = totalDetails.filter({$0.item_name.lowercased().contains(searchString!.lowercased()) || $0.address.contains(searchString!.lowercased()) || $0.category.contains(searchString!.lowercased())})
+                
+                filteredTotalDetails = totalDetails.filter({$0.item_name.lowercased().contains(searchString!.lowercased()) || $0.address.lowercased().contains(searchString!.lowercased()) || $0.category.lowercased().contains(searchString!.lowercased())})
+               
                 for item in item_images{
                     if(filteredTotalDetails.map{$0.item_id}.contains(item.item_id)){
                         filtered_item_images.append(item)
@@ -270,6 +272,15 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         i = 0
         j = 0
         k = 0
+        totalDetails = []
+        filteredTotalDetails = []
+        item_images = []
+        filtered_item_images = []
+        nameToggle = true
+        dateToggle  = true
+        someVariable = false
+        someVariable1  = true
+        self.sorticon.menu = self.generateMenu()
         loaditems()
         self.refreshControl.endRefreshing()
         receiverTableView.reloadData()
@@ -337,6 +348,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
 //                print("Image")
                     self.item_images = item_images_list
                 self.filtered_item_images = item_images_list
+                print(self.filtered_item_images)
                     self.receiverTableView.reloadData()
                 })
             
@@ -397,6 +409,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
                     cell.itemimage.image = UIImage(named: "loadingimage") 
                 }
             }
+                
             }
             
                 return cell

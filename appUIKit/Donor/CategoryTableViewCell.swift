@@ -21,19 +21,19 @@ class CategoryTableViewCell: UITableViewCell {
     
    
     
-    let itemCategoryLabel:UILabel = {
+    let itemCategoryLabel:CustomLabel = {
         let label = CustomLabel(labelType: .primary)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .left
+//        label.textAlignment = .left
         label.text = "Category"
         return label
     }()
     
     let categoryButton:UIButton = {
-        let button = CustomButton(title: "Select a Category", bgColor: .white)
+        let button = UIButton()
+        button.setTitle("Select a category", for: .normal)
         button.backgroundColor = .white
         button.setTitleColor(.systemBlue, for: .normal)
-        button.layer.cornerRadius = 10
         button.contentHorizontalAlignment = .left
         
        return button
@@ -50,8 +50,8 @@ class CategoryTableViewCell: UITableViewCell {
 
         
         containerView.topAnchor.constraint(equalTo: self.contentView.topAnchor).isActive = true
-        containerView.leadingAnchor.constraint(equalTo:self.contentView.leadingAnchor, constant:10).isActive = true
-        containerView.trailingAnchor.constraint(equalTo:self.contentView.trailingAnchor, constant:-10).isActive = true
+        containerView.leadingAnchor.constraint(equalTo:self.contentView.leadingAnchor,constant: 10).isActive = true
+        containerView.trailingAnchor.constraint(equalTo:self.contentView.trailingAnchor).isActive = true
         containerView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor).isActive = true
         }
     
