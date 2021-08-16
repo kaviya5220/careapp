@@ -138,7 +138,6 @@ func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
     image.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
     let newImage = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
-
     return newImage!
 }
 
@@ -186,7 +185,7 @@ func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
             itemimage.topAnchor.constraint(equalTo: self.customContentView.topAnchor, constant:15).isActive = true
             itemimage.leadingAnchor.constraint(equalTo:self.customContentView.leadingAnchor, constant:15).isActive = true
             itemimage.trailingAnchor.constraint(equalTo:self.customContentView.trailingAnchor, constant:-15).isActive = true
-            itemimage.heightAnchor.constraint(equalToConstant:150).isActive = true
+            itemimage.heightAnchor.constraint(equalToConstant:300).isActive = true
             
             customContentView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant:5).isActive = true
             customContentView.leadingAnchor.constraint(equalTo:self.contentView.leadingAnchor, constant:10).isActive = true

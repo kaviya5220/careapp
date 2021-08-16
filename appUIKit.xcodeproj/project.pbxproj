@@ -69,6 +69,7 @@
 		1BF5A32A26BD584500648CD2 /* ItemDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5A32926BD584400648CD2 /* ItemDetails.swift */; };
 		1BF5A32C26BE593500648CD2 /* Cloth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5A32B26BE593500648CD2 /* Cloth.swift */; };
 		1BF5A32E26BE5DFF00648CD2 /* ClothTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5A32D26BE5DFF00648CD2 /* ClothTableViewCell.swift */; };
+		B0F8B7FA26C658D900925A04 /* AddBookTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F8B7F926C658D900925A04 /* AddBookTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -157,6 +158,7 @@
 		1BF5A32926BD584400648CD2 /* ItemDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetails.swift; sourceTree = "<group>"; };
 		1BF5A32B26BE593500648CD2 /* Cloth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cloth.swift; sourceTree = "<group>"; };
 		1BF5A32D26BE5DFF00648CD2 /* ClothTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothTableViewCell.swift; sourceTree = "<group>"; };
+		B0F8B7F926C658D900925A04 /* AddBookTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -373,6 +375,7 @@
 				1BF5A32126BC0F7600648CD2 /* FoodTableViewCell.swift */,
 				1BF5A32326BD00F700648CD2 /* BookTableViewCell.swift */,
 				1BF5A32D26BE5DFF00648CD2 /* ClothTableViewCell.swift */,
+				B0F8B7F926C658D900925A04 /* AddBookTableViewController.swift */,
 			);
 			path = Receiver;
 			sourceTree = "<group>";
@@ -516,6 +519,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B83CADA267735D70041C6A2 /* Extension.swift in Sources */,
+				B0F8B7FA26C658D900925A04 /* AddBookTableViewController.swift in Sources */,
 				1B448492269C0BD000C02695 /* StatusTableViewCell.swift in Sources */,
 				1BC8C0ED2692E5FF00292240 /* RequestListTableViewCell.swift in Sources */,
 				1BC38B6226899AF9002501E0 /* AddItemPresenter.swift in Sources */,

@@ -5,13 +5,8 @@ protocol canReceive{
 }
 
 
-class AddItemTableViewController: UIViewController,UIAdaptivePresentationControllerDelegate, UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIScrollViewDelegate,UITextViewDelegate,UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate,chooseCategory,UIViewControllerTransitioningDelegate {
-    func chooseCategory(category: String) {
-        categorychosen = category
-        addItemTableView.reloadData()
-        addItemTableView.reloadSections(NSIndexSet(index: 1) as IndexSet, with: .automatic)
-        removeBlurEffect()
-    }
+class AddItemTableViewController: UIViewController,UIAdaptivePresentationControllerDelegate, UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIScrollViewDelegate,UITextViewDelegate,UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate,UIViewControllerTransitioningDelegate {
+   
     let item :Item = Item()
     var descriptionValue : [String] = ["","","","",""]
     var collapse : Bool = false
@@ -19,11 +14,9 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
     var categoryLabelDict:[String:[String]] = ["Books":["Author","Publisher","Year","Quantity"],
                                                "Food":["Expiry Date","Cuisine","Veg/Non Veg","Quantity"],
                                                "Cloth":["Size","Cloth Category","Gender","Quantity"]]
-
     public var itemImageName : String = ""
     var categorychosen : String = ""
     var delegate:canReceive?
-    
     var itemimage = UIImageView()
     let addItemTableView = UITableView()
 
@@ -53,14 +46,16 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
 
     func textViewDidChange(_ textView: UITextView)
         {
-        if(textView.tag == 14){
+        
+        if(textView.tag == 16){
             descriptionValue[4] = textView.text!
         }
-        else if(textView.tag == 2){
+        else if(textView.tag == 15){
             item.address = textView.text!
         }
             if textView.contentSize.height >= 120.0
             {
+                print("Hii")
                 textView.isScrollEnabled = true
             }
             else
@@ -78,69 +73,41 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
             }
         }
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == UIColor.lightGray && textView.tag == 2 {
+        if textView.textColor == UIColor.lightGray && textView.tag == 15 {
             textView.text = nil
 
             textView.textColor = UIColor.black
         }
-        else if textView.textColor == UIColor.lightGray && textView.tag == 14{
+        else if textView.textColor == UIColor.lightGray && textView.tag == 16{
             
             textView.text = nil
             textView.textColor = UIColor.black
         }
   }
     func textViewDidEndEditing(_ textView: UITextView) {
-        if item.address.isEmpty && textView.tag == 2 {
+        if item.address.isEmpty && textView.tag == 15 {
             textView.text = "Enter the Adddress"
             textView.textColor = UIColor.lightGray
         }
-        else if descriptionValue[4].isEmpty && textView.tag == 14 {
+        else if descriptionValue[4].isEmpty && textView.tag == 16 {
             textView.text = "Enter Other description"
             textView.textColor = UIColor.lightGray
         }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(section == 1){
-            return  collapse && categorychosen != "" ? 5 : 0
+//        if(section == 1){
+//            return  collapse && categorychosen != "" ? 5 : 0
+//        }
+        if(section == 0){
+            return 1
         }
-        return 3
+        return 7
     }
-//    var menuItems: [UIAction] {
-//        var menu:[UIAction] = []
-//        
-//            menu.append(UIAction(title: "Name", image: UIImage(systemName: "arrow.up")){ _ in
-//               
-//            })
-//        
-//        
-//      return menu
-//
-//    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if(indexPath.section == 0){
-            if(indexPath.row == 0){
-        let cell = tableView.dequeueReusableCell(withIdentifier: "itemname", for: indexPath) as! ItemNameTableViewCell
-        cell.itemname.tag = Int(String(indexPath.section)+String(indexPath.row))!
-        cell.itemname.addTarget(self, action: #selector(textChanged(_:)), for: .editingChanged)
-        return cell;
-        }
-
-        else if(indexPath.row == 1){
-            let cell = tableView.dequeueReusableCell(withIdentifier: "itemcategory", for: indexPath) as! CategoryTableViewCell
-            cell.categoryButton.addTarget(self, action: #selector(selectCategory(_:)), for: .touchUpInside)
-//            cell.categoryButton.showsMenuAsPrimaryAction = true
-//            cell.categoryButton.menu = UIMenu(title: "Sort", image: nil, identifier: nil, options: .destructive, children: menuItems)
-            if(categorychosen != ""){
-                cell.categoryButton.setTitle(categorychosen, for: .normal)
-                cell.categoryButton.setTitleColor(.black, for: .normal)
-            }
-            else{
-                cell.categoryButton.setTitle("choose a category", for: .normal)
-            }
-            return cell;
-            }
-        else {
+        if(indexPath.section == 1){
+          
+            if(indexPath.row == 5) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "itemaddress", for: indexPath) as! TextViewTableViewCell
             cell.textView.delegate = self
             cell.textView.tag = Int(String(indexPath.section)+String(indexPath.row))!
@@ -157,10 +124,7 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
           
             return cell;
         }
-        }
-        
-        else {
-            if(indexPath.row == 4){
+           else if(indexPath.row == 6){
                 let cell : TextViewTableViewCell = tableView.dequeueReusableCell(withIdentifier: "itemdescription5", for: indexPath) as! TextViewTableViewCell
                 cell.textView.delegate = self
                 cell.textView.tag = Int(String(indexPath.section)+String(indexPath.row))!
@@ -175,6 +139,12 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
                     cell.textView.textColor = UIColor.black
                 }
                 return cell
+            }
+            else if(indexPath.row == 0){
+            let cell = tableView.dequeueReusableCell(withIdentifier: "itemname", for: indexPath) as! ItemNameTableViewCell
+            cell.itemname.tag = Int(String(indexPath.section)+String(indexPath.row))!
+            cell.itemname.addTarget(self, action: #selector(textChanged(_:)), for: .editingChanged)
+            return cell
             }
             else{
             let cell : DescriptionTableViewCell
@@ -198,80 +168,63 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
             switch categorychosen
             {
             case "Book":
-                cell.categoryClicked = categoryLabelDict["Books"]![indexPath.row]
-                cell.textField.placeholder = "Enter "+categoryLabelDict["Books"]![indexPath.row]
+                cell.categoryClicked = categoryLabelDict["Books"]![indexPath.row - 1]
+                cell.textField.placeholder = "Enter "+categoryLabelDict["Books"]![indexPath.row - 1]
             case "Food":
-                cell.categoryClicked = categoryLabelDict["Food"]![indexPath.row]
-                cell.textField.placeholder = "Enter "+categoryLabelDict["Food"]![indexPath.row]
+                cell.categoryClicked = categoryLabelDict["Food"]![indexPath.row - 1]
+                cell.textField.placeholder = "Enter "+categoryLabelDict["Food"]![indexPath.row - 1]
             case "Cloth":
-                cell.categoryClicked = categoryLabelDict["Cloth"]![indexPath.row]
-                cell.textField.placeholder = "Enter "+categoryLabelDict["Cloth"]![indexPath.row]
+                cell.categoryClicked = categoryLabelDict["Cloth"]![indexPath.row - 1]
+                cell.textField.placeholder = "Enter "+categoryLabelDict["Cloth"]![indexPath.row - 1]
             default:
                 cell.categoryClicked = ""
             }
             return cell;
         }
         }
+        else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "itemimage", for: indexPath) as! ImageTableViewCell
+            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(chooseimage1(tapGestureRecognizer:)))
+            cell.itemimage.isUserInteractionEnabled = true
+            cell.itemimage.addGestureRecognizer(tapGestureRecognizer)
+            cell.itemimage.image = resizeImage(image: UIImage(named:"additem")!, newWidth: 200)
+            return cell
+        }
     }
     @objc func textChanged(_ textField : UITextField){
         let tableRow = textField.tag
         switch tableRow{
-        case 0:
-            item.item_name = textField.text!
         case 10:
-            descriptionValue[0] = textField.text!
+            item.item_name = textField.text!
         case 11:
-            descriptionValue[1] = textField.text!
+            descriptionValue[0] = textField.text!
         case 12:
-            descriptionValue[2] = textField.text!
+            descriptionValue[1] = textField.text!
         case 13:
+            descriptionValue[2] = textField.text!
+        case 14:
             descriptionValue[3] = textField.text!
         default:
             return
         }
     }
-    let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
-    var blurEffectView = UIVisualEffectView()
-    func addBlurEffect(){
-        blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = view.bounds
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.addSubview(blurEffectView)
-    }
-    func removeBlurEffect(){
-        blurEffectView.removeFromSuperview()
-//        for subview in blurEffect.s
-    }
-    @objc func selectCategory(_ sender: UIButton) {
-        let vc = CategoryViewController()
-        vc.delegate = self
-        
-        vc.modalPresentationStyle = .custom
-        vc.transitioningDelegate = self
-        self.present(vc, animated: true, completion: nil)
-        addBlurEffect()
-        
-    }
+    
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if(indexPath.section == 0){
-        if(indexPath.row == 1){
-            return 80
-        }
-        else if(indexPath.row == 0){
-            return 70
-        }
-        
-        else{
+        if(indexPath.section == 1){
+            if(indexPath.row == 5 || indexPath.row == 6){
             return 120
         }
-        }
         else{
             return 80
         }
+        }
+        return 220
+        
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if(section == 1){
-        return "Description"
+        return "Details"
         }
         else{
             return ""
@@ -281,22 +234,6 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    if(section == 1){
-            let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as? DescriptionTableViewHeader ?? DescriptionTableViewHeader(reuseIdentifier: "header")
-        let attachment = NSTextAttachment()
-        attachment.image = UIImage(systemName: "arrowtriangle.right.fill")
-        let attachmentString = NSMutableAttributedString(attachment: attachment)
-        header.arrowLabel.attributedText = attachmentString
-        header.setCollapsed(!collapse)
-        header.section = section
-        header.delegate = self
-        return header
-    }
-    else{
-        return UIView()
-    }
-        }
     let presenter = AddItemPresenter()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -309,6 +246,7 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
         itemimage.translatesAutoresizingMaskIntoConstraints = false
         addItemTableView.dataSource = self
         addItemTableView.delegate = self
+        addItemTableView.register(ImageTableViewCell.self, forCellReuseIdentifier: "itemimage")
         addItemTableView.register(ItemNameTableViewCell.self, forCellReuseIdentifier: "itemname")
         addItemTableView.register(CategoryTableViewCell.self, forCellReuseIdentifier: "itemcategory")
         addItemTableView.register(TextViewTableViewCell.self, forCellReuseIdentifier: "itemaddress")
@@ -320,11 +258,9 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
         addItemTableView.translatesAutoresizingMaskIntoConstraints = false
         setupConstraints()
         view.addSubview(addItemTableView)
-        view.addSubview(itemimage)
-        itemimage.image = resizeImage(image: UIImage(named:"additem")!, newWidth: 200)
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(chooseimage1(tapGestureRecognizer:)))
-            itemimage.isUserInteractionEnabled = true
-            itemimage.addGestureRecognizer(tapGestureRecognizer)
+       // view.addSubview(itemimage)
+        
+        
         layoutTraitConstraintsUpdate(traitCollection: self.traitCollection,
                                      sharedConstraints: sharedConstraints,
                                      compactConstraints: compactConstraints,
@@ -349,7 +285,27 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
         }
     }
     @objc func cancel(_ sender: UIButton) {
+        if(valuesChanged()){
         self.present(actionSheet,animated: true)
+        }
+        else{
+            self.dismiss(animated: true)
+        }
+    }
+    func valuesChanged() -> Bool{
+        var valueEntered : Bool = false
+        for i in 0...4{
+            if(descriptionValue[i] != ""){
+                valueEntered = true
+                break
+            }
+        }
+        if(item.item_name == "" && item.address == "" && valueEntered == false){
+            return false
+        }
+        else{
+            return true
+        }
     }
     @objc func chooseimage1(tapGestureRecognizer: UITapGestureRecognizer) {
         let picker = UIImagePickerController()
@@ -436,26 +392,22 @@ extension AddItemTableViewController {
 
 
         compactConstraints.append(contentsOf: [
-            addItemTableView.topAnchor.constraint(equalTo:itemimage.bottomAnchor,constant: 5),
+            addItemTableView.topAnchor.constraint(equalTo:view.safeAreaLayoutGuide.topAnchor,constant: 20),
             addItemTableView.leftAnchor.constraint(equalTo:view.safeAreaLayoutGuide.leftAnchor),
             addItemTableView.rightAnchor.constraint(equalTo:view.safeAreaLayoutGuide.rightAnchor),
             addItemTableView.bottomAnchor.constraint(equalTo:view.safeAreaLayoutGuide.bottomAnchor),
             
-            itemimage.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            itemimage.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor,constant: 30),
+//            itemimage.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+//            itemimage.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor,constant: 30),
 
         ])
 
         regularConstraints.append(contentsOf: [
-            addItemTableView.topAnchor.constraint(equalTo:itemimage.bottomAnchor,constant: 10),
+            addItemTableView.topAnchor.constraint(equalTo:view.safeAreaLayoutGuide.topAnchor,constant: 10),
             addItemTableView.leftAnchor.constraint(equalTo:view.safeAreaLayoutGuide.leftAnchor),
             addItemTableView.rightAnchor.constraint(equalTo:view.safeAreaLayoutGuide.rightAnchor),
             addItemTableView.bottomAnchor.constraint(equalTo:view.safeAreaLayoutGuide.bottomAnchor),
             
-            itemimage.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            itemimage.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor,constant: 10),
-            itemimage.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.5),
-            itemimage.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.25)
 
         ])
     }
@@ -469,7 +421,9 @@ extension AddItemTableViewController {
             try? jpegData.write(to: imagePath)
         }
         DispatchQueue.main.async {
-            self.itemimage.image = self.resizeImage(image: image, newWidth: 200)
+            let cell = self.addItemTableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ImageTableViewCell
+            cell.itemimage.image = self.resizeImage(image: image, newWidth: 200)
+           // self.itemimage.image = self.resizeImage(image: image, newWidth: 200)
                  }
         dismiss(animated: true)
     }
@@ -488,36 +442,18 @@ extension AddItemTableViewController {
 
         return newImage!
     }
-    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-        return CategorySizePresentationController(presentedViewController: presented, presenting: presenting)
-    }
 }
 extension AddItemTableViewController : AddItemPresenterDelegate{
     func showSuccessAlert() {
         self.present(alert, animated: true, completion: nil)
         }
 }
-extension AddItemTableViewController: CollapsibleTableViewHeaderDelegate {
 
-    func toggleSection(_ header: DescriptionTableViewHeader, section: Int) {
-        let collapsed = !collapse
-        collapse.toggle()
-        header.setCollapsed(collapsed)
-        addItemTableView.reloadSections(NSIndexSet(index: section) as IndexSet, with: .automatic)
-        
-    }
-}
-class CategorySizePresentationController: UIPresentationController {
-    override var frameOfPresentedViewInContainerView: CGRect {
-        guard let bounds = containerView?.bounds else { return .zero }
-        return CGRect(x: 0, y: bounds.height / 2, width: bounds.width, height: 170)
-    }
-}
+
 extension UITableView {
 
     func setBottomInset(to value: CGFloat) {
         let edgeInset = UIEdgeInsets(top: 0, left: 0, bottom: value, right: 0)
-
         self.contentInset = edgeInset
         self.scrollIndicatorInsets = edgeInset
     }

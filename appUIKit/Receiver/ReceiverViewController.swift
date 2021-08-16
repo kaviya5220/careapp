@@ -6,12 +6,15 @@
 //
 
 import UIKit
-
+//protocol  category {
+//    func category(category : String)
+//}
 
 class ReceiverViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate,UISearchResultsUpdating,canReceive,UINavigationControllerDelegate,UIPopoverPresentationControllerDelegate,updateItems {
     internal var barButton: UIBarButtonItem!
     var someVariable : Bool = false
     var db = DBHelper()
+    //var delegate : category?
     public var itemid : [Int] = []
     public var totalDetails : [ItemDetails] = []
     var item_images : [Item_Image] =  []
@@ -25,6 +28,13 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
     var nameToggle : Bool = true
     var dateToggle : Bool = true
     var someVariable1 : Bool = true
+    var addItems : [UIAction] {
+        var add : [UIAction] = []
+        add.append(UIAction(title: "Add Book", image: UIImage(systemName: "book"), handler: { _ in self.didTapAdd(category: "Book")}))
+        add.append(UIAction(title: "Add Cloth", image: UIImage(systemName: "book"), handler: { _ in self.didTapAdd(category: "Cloth")}))
+        add.append(UIAction(title: "Add Food", image: UIImage(systemName: "book"), handler: { _ in self.didTapAdd(category: "Food")}))
+        return add
+    }
     var menuItems: [UIAction] {
         var menu:[UIAction] = []
         
@@ -81,9 +91,10 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
 
     }
     func generateMenu() -> UIMenu {
-   
         return UIMenu(title: "Sort", image: nil, identifier: nil, options: [], children: menuItems)
-//    }
+    }
+    func generateMenu1() -> UIMenu {
+        return UIMenu(title: "Add", image: nil, identifier: nil, options: [], children: addItems)
     }
     let noItemAvailable:CustomLabel = {
         let label = CustomLabel(labelType: .title)
@@ -113,13 +124,14 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
             receiverTableView.reloadData()
         }
    
-    @objc func didTapAdd(_ sender: UIButton) {
+    @objc func didTapAdd(category : String) {
         if(receiverInteractor.isLoggedIn()){
         let addItem = AddItemTableViewController()
         let vc = UINavigationController()
         vc.viewControllers = [addItem]
         vc.modalPresentationStyle = .automatic //or .overFullScreen for transparency
         addItem.delegate = self
+            addItem.categorychosen = category
         self.present(vc, animated: true, completion: nil)
         }
         else{
@@ -209,14 +221,16 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         receiverTableView.reloadData()
     }
     var sorticon : UIBarButtonItem!
+    var addicon : UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
         let leftBarButton = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.done, target: self, action: #selector(navigateToProfile(_:)))
         sorticon = UIBarButtonItem(title: "sort", image: nil, primaryAction: nil, menu: generateMenu())
-        let add = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.done, target: self, action: #selector(didTapAdd(_:)))
-        navigationItem.rightBarButtonItems = [add,sorticon]
+        addicon = UIBarButtonItem(title: "Add", image: nil, primaryAction: nil, menu: generateMenu1())
+        //let add = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.done, target: self, action: #selector(didTapAdd(_:)))
+        navigationItem.rightBarButtonItems = [addicon,sorticon]
         let addIcon = UIImage(systemName: "plus")
-        add.image = addIcon
+        addicon.image = addIcon
         let filterIcon = UIImage(systemName: "arrow.up.arrow.down")
         sorticon.image = filterIcon
         
