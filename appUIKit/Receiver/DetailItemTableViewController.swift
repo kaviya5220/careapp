@@ -107,11 +107,10 @@ class DetailItemTableViewController: UIViewController,UITableViewDataSource,UITa
     func loadDonorDetails(donor_id:Int){
         var donorVal : User = User()
             donorVal = self.receiverInteractor.getdonardetails(ID: donor_id)
-       
+
             donorValues[0] = donorVal.user_name
             donorValues[1] = donorVal.user_email
             donorValues[2] = donorVal.user_phone
-            print(donorValues)
              self.detailTableView.reloadData()
         }
 

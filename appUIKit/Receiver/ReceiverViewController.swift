@@ -30,9 +30,9 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
     var someVariable1 : Bool = true
     var addItems : [UIAction] {
         var add : [UIAction] = []
-        add.append(UIAction(title: "Add Book", image: UIImage(systemName: "book"), handler: { _ in self.didTapAdd(category: "Book")}))
-        add.append(UIAction(title: "Add Cloth", image: UIImage(systemName: "book"), handler: { _ in self.didTapAdd(category: "Cloth")}))
-        add.append(UIAction(title: "Add Food", image: UIImage(systemName: "book"), handler: { _ in self.didTapAdd(category: "Food")}))
+        add.append(UIAction(title: "Book", image: UIImage(systemName: "book"), handler: { _ in self.didTapAdd(category: "Book")}))
+        add.append(UIAction(title: "Cloth", image: UIImage(systemName: "book"), handler: { _ in self.didTapAdd(category: "Cloth")}))
+        add.append(UIAction(title: "Food", image: UIImage(systemName: "book"), handler: { _ in self.didTapAdd(category: "Food")}))
         return add
     }
     var menuItems: [UIAction] {
@@ -94,7 +94,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         return UIMenu(title: "Sort", image: nil, identifier: nil, options: [], children: menuItems)
     }
     func generateMenu1() -> UIMenu {
-        return UIMenu(title: "Add", image: nil, identifier: nil, options: [], children: addItems)
+        return UIMenu(title: "Add Item", image: nil, identifier: nil, options: [], children: addItems)
     }
     let noItemAvailable:CustomLabel = {
         let label = CustomLabel(labelType: .title)
@@ -112,7 +112,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
             }
             else{
                 filtered_item_images = []
-                
+    
                 filteredTotalDetails = totalDetails.filter({$0.item_name.lowercased().contains(searchString!.lowercased()) || $0.address.lowercased().contains(searchString!.lowercased()) || $0.category.lowercased().contains(searchString!.lowercased())})
                
                 for item in item_images{
@@ -315,7 +315,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
             clothItems = self.receiverInteractor.getCloth()
            
                 DispatchQueue.main.async(execute: {
-                   
+                 //   print(itemlist.map{$0.item_name})
                     for item in itemlist{
                         if(item.category == "Food"){
                             var foodDesc : [String] = ["","","","",""]
@@ -362,7 +362,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
 //                print("Image")
                     self.item_images = item_images_list
                 self.filtered_item_images = item_images_list
-                print(self.filtered_item_images)
+               // print(self.filtered_item_images)
                     self.receiverTableView.reloadData()
                 })
             

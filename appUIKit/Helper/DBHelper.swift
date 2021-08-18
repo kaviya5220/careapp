@@ -311,9 +311,9 @@ class DBHelper{
         print("\nINSERT statement is not prepared.")
       }
       sqlite3_finalize(insertStatement)
-        if sqlite3_close(db) == SQLITE_OK {
-                        print("closing database")
-                    }
+//        if sqlite3_close(db) == SQLITE_OK {
+//                        print("closing database")
+//                    }
         return itemid
     }
     static func getuserid(email : String ) -> Int {
@@ -537,9 +537,9 @@ class DBHelper{
             print("\nQuery is not prepared \(errorMessage)")
           }
           sqlite3_finalize(queryStatement)
-        if sqlite3_close(db) == SQLITE_OK {
-            print("closing database")
-        }
+//        if sqlite3_close(db) == SQLITE_OK {
+//            print("closing database")
+//        }
         return item
         }
     
@@ -564,16 +564,14 @@ class DBHelper{
               
                 //return userid
             }
-            print("\nQuery Result:")
-              print(user)
           } else {
             let errorMessage = String(cString: sqlite3_errmsg(db))
             print("\nQuery is not prepared \(errorMessage)")
           }
           sqlite3_finalize(queryStatement)
-        if sqlite3_close(db) == SQLITE_OK {
-            print("closing database")
-        }
+//        if sqlite3_close(db) == SQLITE_OK {
+//            print("closing database")
+//        }
         return user
         }
     static func update(itemid : Int) {
@@ -591,6 +589,9 @@ class DBHelper{
         print("\nUPDATE statement is not prepared")
       }
       sqlite3_finalize(updateStatement)
+//        if sqlite3_close(db) == SQLITE_OK {
+//            print("closing database")
+//        }
     }
     static func getitemsbydonarID(Donar_ID : Int) -> [Item] {
         let queryStatementString = "SELECT * FROM ItemDetails  WHERE Donar_ID = ?;"
@@ -678,9 +679,9 @@ class DBHelper{
         print("\nINSERT statement is not prepared.")
       }
       sqlite3_finalize(insertStatement)
-        if sqlite3_close(db) == SQLITE_OK {
-                        print("closing database")
-                    }
+//        if sqlite3_close(db) == SQLITE_OK {
+//                        print("closing database")
+//                    }
       
     }
     static func getdonationstatus(Receiver_ID : Int,Item_ID : Int) -> String {

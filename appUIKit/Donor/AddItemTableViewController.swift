@@ -5,13 +5,82 @@ protocol canReceive{
 }
 
 
-class AddItemTableViewController: UIViewController,UIAdaptivePresentationControllerDelegate, UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIScrollViewDelegate,UITextViewDelegate,UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate,UIViewControllerTransitioningDelegate {
+class AddItemTableViewController: UIViewController,UIAdaptivePresentationControllerDelegate, UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIScrollViewDelegate,UITextViewDelegate,UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource{
+    var pickerData : [Int] = [Int]()
+    var myPickerView = UIPickerView()
+    var toolBar = UIToolbar()
+    
+    func createToolBar() {
+        toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 40))
+
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonPressed(sender:)))
+
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width/3, height: 40))
+     label.text = "Choose the year"
+        let labelButton = UIBarButtonItem(customView:label)
+
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+
+        toolBar.setItems([flexibleSpace,labelButton,flexibleSpace,doneButton], animated: true)
+
+    }
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return String(pickerData[row])
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        let cell = self.addItemTableView.cellForRow(at: IndexPath(row: 3, section: 1)) as! DescriptionTableViewCell
+        cell.textField.text = String(pickerData[row])
+        descriptionValue[2] = String(pickerData[row])
+    }
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.pickUp(textField)
+
+    }
+    @objc func doneButtonPressed(sender: UIBarButtonItem) {
+        
+        let cell = self.addItemTableView.cellForRow(at: IndexPath(row: 3, section: 1)) as! DescriptionTableViewCell
+        if(cell.textField.text == ""){
+            cell.textField.text = String(pickerData[0])
+        }
+        cell.textField.resignFirstResponder()
+        
+    }
+    @objc func pickUp(_ textField : UITextField){
+
+         // UIPickerView
+         self.myPickerView = UIPickerView(frame:CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 216))
+         self.myPickerView.delegate = self
+         self.myPickerView.dataSource = self
+         self.myPickerView.backgroundColor = UIColor.white
+         textField.inputView = self.myPickerView
+
+         // ToolBar
+         //let toolBar = UIToolbar()
+         toolBar.barStyle = .default
+         toolBar.isTranslucent = true
+      toolBar.tintColor = UIColor(red: 92/255, green: 216/255, blue: 255/255, alpha: 1)
+         toolBar.sizeToFit()
+
+         // Adding Button ToolBar
+     
+ //       toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+ //       toolBar.isUserInteractionEnabled = true
+ //   textField.inputAccessoryView = toolBar
+
+     }
+    
    
     let item :Item = Item()
     var descriptionValue : [String] = ["","","","",""]
     var collapse : Bool = false
     let additeminteractor = AddItemInteractor()
-    var categoryLabelDict:[String:[String]] = ["Books":["Author","Publisher","Year","Quantity"],
+    var categoryLabelDict:[String:[String]] = ["Books":["Author","Publisher","Published Year","Quantity"],
                                                "Food":["Expiry Date","Cuisine","Veg/Non Veg","Quantity"],
                                                "Cloth":["Size","Cloth Category","Gender","Quantity"]]
     public var itemImageName : String = ""
@@ -19,7 +88,7 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
     var delegate:canReceive?
     var itemimage = UIImageView()
     let addItemTableView = UITableView()
-
+    let datepicker = UIDatePicker()
 
     let alert : UIAlertController = {
     let alert1 = UIAlertController(title: "Success", message: "Item Posted Successfully", preferredStyle: .alert)
@@ -73,12 +142,12 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
             }
         }
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == UIColor.lightGray && textView.tag == 15 {
+        if textView.textColor == UIColor(red: 0, green: 0, blue: 0.0980392, alpha: 0.22) && textView.tag == 15 {
             textView.text = nil
 
             textView.textColor = UIColor.black
         }
-        else if textView.textColor == UIColor.lightGray && textView.tag == 16{
+        else if textView.textColor == UIColor(red: 0, green: 0, blue: 0.0980392, alpha: 0.22) && textView.tag == 16{
             
             textView.text = nil
             textView.textColor = UIColor.black
@@ -86,12 +155,12 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
   }
     func textViewDidEndEditing(_ textView: UITextView) {
         if item.address.isEmpty && textView.tag == 15 {
-            textView.text = "Enter the Adddress"
-            textView.textColor = UIColor.lightGray
+            textView.text = "Enter Address"
+            textView.textColor = UIColor(red: 0, green: 0, blue: 0.0980392, alpha: 0.22)
         }
         else if descriptionValue[4].isEmpty && textView.tag == 16 {
             textView.text = "Enter Other description"
-            textView.textColor = UIColor.lightGray
+            textView.textColor = UIColor(red: 0, green: 0, blue: 0.0980392, alpha: 0.22)
         }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -115,7 +184,7 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
             if(item.address == ""){
                 
             cell.textView.text = "Enter Address"
-                cell.textView.textColor = UIColor.lightGray
+                cell.textView.textColor = UIColor(red: 0, green: 0, blue: 0.0980392, alpha: 0.22)
             }
             else{
                 cell.textView.text = item.address
@@ -132,7 +201,7 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
                 if(descriptionValue[4] == ""){
                     
                 cell.textView.text = "Enter other description"
-                cell.textView.textColor = UIColor.lightGray
+                cell.textView.textColor = UIColor(red: 0, green: 0, blue: 0.0980392, alpha: 0.22)
                 }
                 else{
                     cell.textView.text = descriptionValue[4]
@@ -146,28 +215,60 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
             cell.itemname.addTarget(self, action: #selector(textChanged(_:)), for: .editingChanged)
             return cell
             }
-            else{
-            let cell : DescriptionTableViewCell
+            else if(indexPath.row == 4){
+            let cell : QuantityTableViewCell
+        
             
-            switch indexPath.row{
-            case 0:
-                cell = tableView.dequeueReusableCell(withIdentifier: "itemdescription1", for: indexPath) as! DescriptionTableViewCell
-            case 1:
-                cell = tableView.dequeueReusableCell(withIdentifier: "itemdescription2", for: indexPath) as! DescriptionTableViewCell
-            case 2:
-                cell = tableView.dequeueReusableCell(withIdentifier: "itemdescription3", for: indexPath) as! DescriptionTableViewCell
-                
-            default:
-                cell = tableView.dequeueReusableCell(withIdentifier: "itemdescription4", for: indexPath) as! DescriptionTableViewCell
-            
-            
-            }
+                cell = tableView.dequeueReusableCell(withIdentifier: "itemquantity", for: indexPath) as! QuantityTableViewCell
             cell.textField.addTarget(self, action: #selector(textChanged(_:)), for: .editingChanged)
-            cell.textField.delegate = self
+          //  cell.textField.delegate = self
             cell.textField.tag = Int(String(indexPath.section)+String(indexPath.row))!
+//                if(indexPath.row == 4){
+                    cell.myUIStepper.addTarget(self, action: #selector(stepperValueChanged(_:)), for: .valueChanged)
+//                }
             switch categorychosen
             {
             case "Book":
+                if(indexPath.row == 3){
+                    cell.textField.delegate = self
+                    cell.textField.inputAccessoryView = toolBar
+                    cell.stackView.axis = .horizontal
+                }
+                cell.categoryClicked = categoryLabelDict["Books"]![indexPath.row - 1]
+                cell.textField.placeholder = "Enter "+categoryLabelDict["Books"]![indexPath.row - 1]
+            case "Food":
+                cell.categoryClicked = categoryLabelDict["Food"]![indexPath.row - 1]
+                cell.textField.placeholder = "Enter "+categoryLabelDict["Food"]![indexPath.row - 1]
+            case "Cloth":
+                cell.categoryClicked = categoryLabelDict["Cloth"]![indexPath.row - 1]
+                cell.textField.placeholder = "Enter "+categoryLabelDict["Cloth"]![indexPath.row - 1]
+            default:
+                cell.categoryClicked = ""
+            }
+            return cell;
+        }
+            else{
+            let cell : DescriptionTableViewCell
+        
+            
+                cell = tableView.dequeueReusableCell(withIdentifier: "itemdescription", for: indexPath) as! DescriptionTableViewCell
+            cell.textField.addTarget(self, action: #selector(textChanged(_:)), for: .editingChanged)
+          //  cell.textField.delegate = self
+            cell.textField.tag = Int(String(indexPath.section)+String(indexPath.row))!
+//                if(indexPath.row == 4){
+//                    cell.myUIStepper.addTarget(self, action: #selector(stepperValueChanged(_:)), for: .valueChanged)
+//                }
+            switch categorychosen
+            {
+            case "Book":
+                if(indexPath.row == 3){
+                    cell.textField.delegate = self
+                    cell.textField.inputAccessoryView = toolBar
+                    cell.stackView.axis = .horizontal
+                    cell.stackView.spacing = 15
+                    cell.stackView.distribution = .fillEqually
+                    cell.textField.textAlignment = .right
+                }
                 cell.categoryClicked = categoryLabelDict["Books"]![indexPath.row - 1]
                 cell.textField.placeholder = "Enter "+categoryLabelDict["Books"]![indexPath.row - 1]
             case "Food":
@@ -204,10 +305,21 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
             descriptionValue[2] = textField.text!
         case 14:
             descriptionValue[3] = textField.text!
+            if Double(textField.text!) != nil {
+                let cell = self.addItemTableView.cellForRow(at: IndexPath(row: 4, section: 1)) as! QuantityTableViewCell
+                cell.myUIStepper.value = Double(textField.text!)!
+                   }
         default:
             return
         }
     }
+    @objc func stepperValueChanged(_ sender:UIStepper!)
+        {
+            let cell = self.addItemTableView.cellForRow(at: IndexPath(row: 4, section: 1)) as! QuantityTableViewCell
+            cell.textField.text = String(Int(sender.value))
+        descriptionValue[3] = String(Int(sender.value))
+            print("UIStepper is now \(Int(sender.value))")
+        }
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -216,6 +328,9 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
             return 120
         }
         else{
+            if((categorychosen == "Book" && indexPath.row == 3) || indexPath.row == 4){
+                return 50
+            }
             return 80
         }
         }
@@ -234,10 +349,21 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+            return nil
+        }
     let presenter = AddItemPresenter()
     override func viewDidLoad() {
         super.viewDidLoad()
-        let upload = UIBarButtonItem(title: "Upload", style: .plain, target: self, action: #selector(upload_item(_:)))
+        for i in 1950 ... 2021{
+            pickerData.append(i)
+        }
+        
+      //  self.navigationController?.navigationBar.topItem?.title = "SignUp"
+        toolBar.translatesAutoresizingMaskIntoConstraints = false
+        setupConstraints()
+        createToolBar()
+        let upload = UIBarButtonItem(title: "Post", style: .plain, target: self, action: #selector(upload_item(_:)))
         self.navigationItem.rightBarButtonItem = upload
         let cancel = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancel(_:)))
         self.navigationItem.leftBarButtonItem = cancel
@@ -250,11 +376,9 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
         addItemTableView.register(ItemNameTableViewCell.self, forCellReuseIdentifier: "itemname")
         addItemTableView.register(CategoryTableViewCell.self, forCellReuseIdentifier: "itemcategory")
         addItemTableView.register(TextViewTableViewCell.self, forCellReuseIdentifier: "itemaddress")
-        addItemTableView.register(DescriptionTableViewCell.self, forCellReuseIdentifier: "itemdescription1")
-        addItemTableView.register(DescriptionTableViewCell.self, forCellReuseIdentifier: "itemdescription2")
-        addItemTableView.register(DescriptionTableViewCell.self, forCellReuseIdentifier: "itemdescription3")
-        addItemTableView.register(DescriptionTableViewCell.self, forCellReuseIdentifier: "itemdescription4")
+        addItemTableView.register(DescriptionTableViewCell.self, forCellReuseIdentifier: "itemdescription")
         addItemTableView.register(TextViewTableViewCell.self, forCellReuseIdentifier: "itemdescription5")
+        addItemTableView.register(QuantityTableViewCell.self, forCellReuseIdentifier: "itemquantity")
         addItemTableView.translatesAutoresizingMaskIntoConstraints = false
         setupConstraints()
         view.addSubview(addItemTableView)
