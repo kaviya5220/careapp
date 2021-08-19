@@ -337,14 +337,39 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
         return 220
         
     }
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if(section == 1){
-        return "Details"
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if(section == 1 ){
+        return 40.0
         }
         else{
-            return ""
+            return 0
         }
     }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if(section == 1){
+
+        let tview = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 25))
+            let label = UILabel(frame: CGRect(x: 10, y: -6.25, width: 100, height: 50))
+        label.text = "Details"
+            label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textColor = UIColor.black
+            label.baselineAdjustment = .alignCenters
+            tview.backgroundColor = #colorLiteral(red: 0.9076080322, green: 0.9077602029, blue: 0.9075879455, alpha: 1)
+        self.view.addSubview(tview)
+        tview.addSubview(label)
+
+        return tview
+        }
+        return nil
+    }
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        if(section == 1){
+//        return "Details"
+//        }
+//        else{
+//            return ""
+//        }
+//    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -358,6 +383,9 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
         for i in 1950 ... 2021{
             pickerData.append(i)
         }
+        self.addItemTableView.sectionHeaderHeight = 40
+      //  view.addSubview(tview)
+       
         
       //  self.navigationController?.navigationBar.topItem?.title = "SignUp"
         toolBar.translatesAutoresizingMaskIntoConstraints = false
