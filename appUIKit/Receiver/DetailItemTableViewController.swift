@@ -182,10 +182,10 @@ class DetailItemTableViewController: UIViewController,UITableViewDataSource,UITa
             cell.label1.textAlignment = .right
             cell.label1.numberOfLines = 0
             cell.label1.lineBreakMode = .byWordWrapping
-            
             cell.label1.text = donorValues[indexPath.row]
             
         }
+        
         
         return cell
         }

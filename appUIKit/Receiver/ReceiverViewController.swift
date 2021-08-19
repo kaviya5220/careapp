@@ -30,9 +30,9 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
     var someVariable1 : Bool = true
     var addItems : [UIAction] {
         var add : [UIAction] = []
-        add.append(UIAction(title: "Book", image: UIImage(systemName: "book"), handler: { _ in self.didTapAdd(category: "Book")}))
-        add.append(UIAction(title: "Cloth", image: UIImage(systemName: "book"), handler: { _ in self.didTapAdd(category: "Cloth")}))
-        add.append(UIAction(title: "Food", image: UIImage(systemName: "book"), handler: { _ in self.didTapAdd(category: "Food")}))
+        add.append(UIAction(title: "Book", image: UIImage(named: "book"), handler: { _ in self.didTapAdd(category: "Book")}))
+        add.append(UIAction(title: "Cloth", image: UIImage(named: "cloth"), handler: { _ in self.didTapAdd(category: "Cloth")}))
+        add.append(UIAction(title: "Food", image: UIImage(named: "food"), handler: { _ in self.didTapAdd(category: "Food")}))
         return add
     }
     var menuItems: [UIAction] {
