@@ -70,6 +70,7 @@
 		1BF5A32E26BE5DFF00648CD2 /* ClothTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5A32D26BE5DFF00648CD2 /* ClothTableViewCell.swift */; };
 		B0249E8926CBB314007E53AD /* sampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0249E8826CBB314007E53AD /* sampleViewController.swift */; };
 		B0249E8B26CCE0C6007E53AD /* QuantityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0249E8A26CCE0C6007E53AD /* QuantityTableViewCell.swift */; };
+		B0249F0E26D0DBD3007E53AD /* DonorImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0249F0D26D0DBD3007E53AD /* DonorImageTableViewCell.swift */; };
 		B0F8B7FA26C658D900925A04 /* AddBookTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F8B7F926C658D900925A04 /* AddBookTableViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -160,6 +161,7 @@
 		1BF5A32D26BE5DFF00648CD2 /* ClothTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothTableViewCell.swift; sourceTree = "<group>"; };
 		B0249E8826CBB314007E53AD /* sampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sampleViewController.swift; sourceTree = "<group>"; };
 		B0249E8A26CCE0C6007E53AD /* QuantityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityTableViewCell.swift; sourceTree = "<group>"; };
+		B0249F0D26D0DBD3007E53AD /* DonorImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonorImageTableViewCell.swift; sourceTree = "<group>"; };
 		B0F8B7F926C658D900925A04 /* AddBookTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -346,6 +348,7 @@
 				1B803D7A26B3CB9600303DA9 /* CategoryViewController.swift */,
 				1B803D8026B4429400303DA9 /* DescriptionTableViewCell.swift */,
 				B0249E8A26CCE0C6007E53AD /* QuantityTableViewCell.swift */,
+				B0249F0D26D0DBD3007E53AD /* DonorImageTableViewCell.swift */,
 			);
 			path = Donor;
 			sourceTree = "<group>";
@@ -573,6 +576,7 @@
 				1B9B8F48267256EC00C5497C /* ProfileViewController.swift in Sources */,
 				1B7EBFA726748EA300F2AED1 /* CustomField.swift in Sources */,
 				1B52A871267DC74500B489AA /* Data.swift in Sources */,
+				B0249F0E26D0DBD3007E53AD /* DonorImageTableViewCell.swift in Sources */,
 				1B71D308268ED79800B11F3B /* DonationTableViewCell.swift in Sources */,
 				1BBC570726B9084100F5BA0C /* TextFieldTableViewCell.swift in Sources */,
 				1B7EBF9F26747A4700F2AED1 /* CustomButton.swift in Sources */,

@@ -28,13 +28,13 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
     var nameToggle : Bool = true
     var dateToggle : Bool = true
     var someVariable1 : Bool = true
-    var addItems : [UIAction] {
-        var add : [UIAction] = []
-        add.append(UIAction(title: "Book", image: UIImage(named: "book"), handler: { _ in self.didTapAdd(category: "Book")}))
-        add.append(UIAction(title: "Cloth", image: UIImage(named: "cloth"), handler: { _ in self.didTapAdd(category: "Cloth")}))
-        add.append(UIAction(title: "Food", image: UIImage(named: "food"), handler: { _ in self.didTapAdd(category: "Food")}))
-        return add
-    }
+//    var addItems : [UIAction] {
+//        var add : [UIAction] = []
+//        add.append(UIAction(title: "Book", image: UIImage(named: "book"), handler: { _ in self.didTapAdd(category: "Book")}))
+//        add.append(UIAction(title: "Cloth", image: UIImage(named: "cloth"), handler: { _ in self.didTapAdd(category: "Cloth")}))
+//        add.append(UIAction(title: "Food", image: UIImage(named: "food"), handler: { _ in self.didTapAdd(category: "Food")}))
+//        return add
+//    }
     var menuItems: [UIAction] {
         var menu:[UIAction] = []
         
@@ -93,9 +93,9 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
     func generateMenu() -> UIMenu {
         return UIMenu(title: "Sort", image: nil, identifier: nil, options: [], children: menuItems)
     }
-    func generateMenu1() -> UIMenu {
-        return UIMenu(title: "Add Item", image: nil, identifier: nil, options: [], children: addItems)
-    }
+//    func generateMenu1() -> UIMenu {
+//        return UIMenu(title: "Add Item", image: nil, identifier: nil, options: [], children: addItems)
+//    }
     let noItemAvailable:CustomLabel = {
         let label = CustomLabel(labelType: .title)
         label.text = "No Items Available"
@@ -124,14 +124,15 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
             receiverTableView.reloadData()
         }
    
-    @objc func didTapAdd(category : String) {
+    @objc func didTapAdd(_ sender: UIButton) {
         if(receiverInteractor.isLoggedIn()){
         let addItem = AddItemTableViewController()
         let vc = UINavigationController()
         vc.viewControllers = [addItem]
         vc.modalPresentationStyle = .automatic //or .overFullScreen for transparency
         addItem.delegate = self
-            addItem.categorychosen = category
+            //
+      //  addItem.categorychosen = category
         self.present(vc, animated: true, completion: nil)
         }
         else{
@@ -221,16 +222,17 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         receiverTableView.reloadData()
     }
     var sorticon : UIBarButtonItem!
-    var addicon : UIBarButtonItem!
+   // var addicon : UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
         let leftBarButton = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.done, target: self, action: #selector(navigateToProfile(_:)))
+        
         sorticon = UIBarButtonItem(title: "sort", image: nil, primaryAction: nil, menu: generateMenu())
-        addicon = UIBarButtonItem(title: "Add", image: nil, primaryAction: nil, menu: generateMenu1())
-        //let add = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.done, target: self, action: #selector(didTapAdd(_:)))
-        navigationItem.rightBarButtonItems = [addicon,sorticon]
+       // addicon = UIBarButtonItem(title: "Add", image: nil, primaryAction: nil, menu: generateMenu1())
+        let add = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.done, target: self, action: #selector(didTapAdd(_:)))
+        navigationItem.rightBarButtonItems = [add,sorticon]
         let addIcon = UIImage(systemName: "plus")
-        addicon.image = addIcon
+        add.image = addIcon
         let filterIcon = UIImage(systemName: "arrow.up.arrow.down")
         sorticon.image = filterIcon
         

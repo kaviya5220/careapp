@@ -9,7 +9,31 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
     var pickerData : [Int] = [Int]()
     var myPickerView = UIPickerView()
     var toolBar = UIToolbar()
+   
     
+            
+            @objc func segmentedValueChanged(_ sender:UISegmentedControl!)
+            {
+                switch sender.selectedSegmentIndex{
+                
+                case 1:
+                    categorychosen = "Food"
+                    break
+                case 2:
+                    categorychosen = "Cloth"
+                    break
+                default:
+                    categorychosen = "Book"
+                    
+                
+                }
+                item.item_name = ""
+                item.address = ""
+                descriptionValue = ["","","","",""]
+                addItemTableView.reloadData()
+                print("Selected Segment Index is : \(sender.selectedSegmentIndex)")
+            }
+            
     func createToolBar() {
         toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 40))
 
@@ -39,7 +63,12 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
         descriptionValue[2] = String(pickerData[row])
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        self.pickUp(textField)
+        if(categorychosen == "Book"){
+            print("\(categorychosen)")
+            self.pickUp(textField)
+        }
+        
+        
 
     }
     @objc func doneButtonPressed(sender: UIBarButtonItem) {
@@ -84,7 +113,7 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
                                                "Food":["Expiry Date","Cuisine","Veg/Non Veg","Quantity"],
                                                "Cloth":["Size","Cloth Category","Gender","Quantity"]]
     public var itemImageName : String = ""
-    var categorychosen : String = ""
+    var categorychosen : String = "Book"
     var delegate:canReceive?
     var itemimage = UIImageView()
     let addItemTableView = UITableView()
@@ -181,6 +210,7 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
             cell.textView.delegate = self
             cell.textView.tag = Int(String(indexPath.section)+String(indexPath.row))!
             cell.label.text = "Address"
+                cell.textView.text = item.address
             if(item.address == ""){
                 
             cell.textView.text = "Enter Address"
@@ -198,6 +228,7 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
                 cell.textView.delegate = self
                 cell.textView.tag = Int(String(indexPath.section)+String(indexPath.row))!
                 cell.label.text = "Other Description"
+            cell.textView.text = descriptionValue[4]
                 if(descriptionValue[4] == ""){
                     
                 cell.textView.text = "Enter other description"
@@ -212,6 +243,7 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
             else if(indexPath.row == 0){
             let cell = tableView.dequeueReusableCell(withIdentifier: "itemname", for: indexPath) as! ItemNameTableViewCell
             cell.itemname.tag = Int(String(indexPath.section)+String(indexPath.row))!
+                cell.itemname.text = item.item_name
             cell.itemname.addTarget(self, action: #selector(textChanged(_:)), for: .editingChanged)
             return cell
             }
@@ -221,6 +253,7 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
             
                 cell = tableView.dequeueReusableCell(withIdentifier: "itemquantity", for: indexPath) as! QuantityTableViewCell
             cell.textField.addTarget(self, action: #selector(textChanged(_:)), for: .editingChanged)
+                cell.textField.text = descriptionValue[3]
           //  cell.textField.delegate = self
             cell.textField.tag = Int(String(indexPath.section)+String(indexPath.row))!
 //                if(indexPath.row == 4){
@@ -253,15 +286,13 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
             
                 cell = tableView.dequeueReusableCell(withIdentifier: "itemdescription", for: indexPath) as! DescriptionTableViewCell
             cell.textField.addTarget(self, action: #selector(textChanged(_:)), for: .editingChanged)
+                cell.textField.text = descriptionValue[indexPath.row-1]
           //  cell.textField.delegate = self
             cell.textField.tag = Int(String(indexPath.section)+String(indexPath.row))!
 //                if(indexPath.row == 4){
 //                    cell.myUIStepper.addTarget(self, action: #selector(stepperValueChanged(_:)), for: .valueChanged)
 //                }
-            switch categorychosen
-            {
-            case "Book":
-                if(indexPath.row == 3){
+                if(indexPath.row == 3 && categorychosen == "Book"){
                     cell.textField.delegate = self
                     cell.textField.inputAccessoryView = toolBar
                     cell.stackView.axis = .horizontal
@@ -269,6 +300,15 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
                     cell.stackView.distribution = .fillEqually
                     cell.textField.textAlignment = .right
                 }
+                else{
+                    cell.stackView.axis = .vertical
+                    cell.textField.textAlignment = .left
+                    cell.textField.inputAccessoryView = .none
+                }
+            switch categorychosen
+            {
+            case "Book":
+               
                 cell.categoryClicked = categoryLabelDict["Books"]![indexPath.row - 1]
                 cell.textField.placeholder = "Enter "+categoryLabelDict["Books"]![indexPath.row - 1]
             case "Food":
@@ -284,8 +324,9 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
         }
         }
         else{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "itemimage", for: indexPath) as! ImageTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "itemimage", for: indexPath) as! DonorImageTableViewCell
             let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(chooseimage1(tapGestureRecognizer:)))
+            cell.mySegmentedControl.addTarget(self, action: #selector(self.segmentedValueChanged(_:)), for: .valueChanged)
             cell.itemimage.isUserInteractionEnabled = true
             cell.itemimage.addGestureRecognizer(tapGestureRecognizer)
             cell.itemimage.image = resizeImage(image: UIImage(named:"additem")!, newWidth: 200)
@@ -334,7 +375,7 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
             return 80
         }
         }
-        return 220
+        return 250
         
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -400,7 +441,7 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
         itemimage.translatesAutoresizingMaskIntoConstraints = false
         addItemTableView.dataSource = self
         addItemTableView.delegate = self
-        addItemTableView.register(ImageTableViewCell.self, forCellReuseIdentifier: "itemimage")
+        addItemTableView.register(DonorImageTableViewCell.self, forCellReuseIdentifier: "itemimage")
         addItemTableView.register(ItemNameTableViewCell.self, forCellReuseIdentifier: "itemname")
         addItemTableView.register(CategoryTableViewCell.self, forCellReuseIdentifier: "itemcategory")
         addItemTableView.register(TextViewTableViewCell.self, forCellReuseIdentifier: "itemaddress")
@@ -573,7 +614,7 @@ extension AddItemTableViewController {
             try? jpegData.write(to: imagePath)
         }
         DispatchQueue.main.async {
-            let cell = self.addItemTableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ImageTableViewCell
+            let cell = self.addItemTableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! DonorImageTableViewCell
             cell.itemimage.image = self.resizeImage(image: image, newWidth: 200)
            // self.itemimage.image = self.resizeImage(image: image, newWidth: 200)
                  }
