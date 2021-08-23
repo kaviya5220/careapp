@@ -31,7 +31,6 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
                 item.address = ""
                 descriptionValue = ["","","","",""]
                 addItemTableView.reloadData()
-                print("Selected Segment Index is : \(sender.selectedSegmentIndex)")
             }
             
     func createToolBar() {
@@ -359,7 +358,7 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
             let cell = self.addItemTableView.cellForRow(at: IndexPath(row: 4, section: 1)) as! QuantityTableViewCell
             cell.textField.text = String(Int(sender.value))
         descriptionValue[3] = String(Int(sender.value))
-            print("UIStepper is now \(Int(sender.value))")
+           // print("UIStepper is now \(Int(sender.value))")
         }
     
     

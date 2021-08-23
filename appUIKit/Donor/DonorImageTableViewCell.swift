@@ -37,7 +37,7 @@ class DonorImageTableViewCell: UITableViewCell {
         self.contentView.addSubview(itemimage)
         itemimage.centerXAnchor.constraint(equalTo:self.contentView.centerXAnchor).isActive = true
         self.contentView.addSubview(mySegmentedControl)
-        mySegmentedControl.topAnchor.constraint(equalTo: itemimage.bottomAnchor,constant: 10).isActive = true
+        mySegmentedControl.topAnchor.constraint(equalTo: itemimage.bottomAnchor,constant: 8).isActive = true
         mySegmentedControl.centerXAnchor.constraint(equalTo:self.contentView.centerXAnchor).isActive = true
         
         }
