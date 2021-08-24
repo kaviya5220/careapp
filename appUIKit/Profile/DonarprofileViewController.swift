@@ -35,8 +35,8 @@ class DonarprofileViewController: UIViewController,UITableViewDataSource, UITabl
             let blurView = UIVisualEffectView(effect: effect)
             blurView.frame = self.view.bounds
             self.view.addSubview(blurView)
-        print("DID\(donar_id)")
-        print(profile_details)
+//        print("DID\(donar_id)")
+//        print(profile_details)
        // view.backgroundColor = .white
         view.addSubview(profileLabel)
         view.addSubview(donarProfileTableView)

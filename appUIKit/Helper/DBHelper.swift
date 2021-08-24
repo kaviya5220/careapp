@@ -338,9 +338,9 @@ class DBHelper{
             print("\nQuery is not prepared \(errorMessage)")
           }
           sqlite3_finalize(queryStatement)
-        if sqlite3_close(db) == SQLITE_OK {
-            print("closing database")
-        }
+//        if sqlite3_close(db) == SQLITE_OK {
+//            print("closing database")
+//        }
         return userid
         }
     static func getbookDetails(itemid : Int ) -> [String] {
@@ -373,9 +373,9 @@ class DBHelper{
             print("\nQuery is not prepared \(errorMessage)")
           }
           sqlite3_finalize(queryStatement)
-        if sqlite3_close(db) == SQLITE_OK {
-            print("closing database")
-        }
+//        if sqlite3_close(db) == SQLITE_OK {
+//            print("closing database")
+//        }
         return book
         }
     static func getFoodDetails(itemid : Int ) -> [String] {
@@ -408,9 +408,9 @@ class DBHelper{
             print("\nQuery is not prepared \(errorMessage)")
           }
           sqlite3_finalize(queryStatement)
-        if sqlite3_close(db) == SQLITE_OK {
-            print("closing database")
-        }
+//        if sqlite3_close(db) == SQLITE_OK {
+//            print("closing database")
+//        }
         return food
         }
     static func getClothDetails(itemid : Int ) -> [String] {
@@ -443,9 +443,9 @@ class DBHelper{
             print("\nQuery is not prepared \(errorMessage)")
           }
           sqlite3_finalize(queryStatement)
-        if sqlite3_close(db) == SQLITE_OK {
-            print("closing database")
-        }
+//        if sqlite3_close(db) == SQLITE_OK {
+//            print("closing database")
+//        }
         return cloth
         }
     static func getitems() ->  [Item] {
@@ -530,8 +530,6 @@ class DBHelper{
               
                 //return userid
             }
-            print("\nQuery Result:")
-              print(item)
           } else {
             let errorMessage = String(cString: sqlite3_errmsg(db))
             print("\nQuery is not prepared \(errorMessage)")
@@ -617,16 +615,14 @@ class DBHelper{
               
                 //return userid
             }
-            print("\nQuery Result:")
-              print(items)
           } else {
             let errorMessage = String(cString: sqlite3_errmsg(db))
             print("\nQuery is not prepared \(errorMessage)")
           }
           sqlite3_finalize(queryStatement)
-        if sqlite3_close(db) == SQLITE_OK {
-            print("closing database")
-        }
+//        if sqlite3_close(db) == SQLITE_OK {
+//            print("closing database")
+//        }
         return items
         }
     static func createStatusTable() {
@@ -697,16 +693,14 @@ class DBHelper{
              let queryResultCol0 = sqlite3_column_text(queryStatement, 0)
              status = String(cString:queryResultCol0!)
             }
-            print("\nQuery Result:")
-              print(status)
           } else {
             let errorMessage = String(cString: sqlite3_errmsg(db))
             print("\nQuery is not prepared \(errorMessage)")
           }
           sqlite3_finalize(queryStatement)
-        if sqlite3_close(db) == SQLITE_OK {
-            print("closing database")
-        }
+//        if sqlite3_close(db) == SQLITE_OK {
+//            print("closing database")
+//        }
         return status
         }
     static func fetchRequestList(Donar_ID : Int) -> [RequestList] {
@@ -729,16 +723,14 @@ class DBHelper{
                 let request: RequestList = RequestList(receiver_name:String(cString: queryResultCol0!) , receiver_phone: String(cString: queryResultCol1!), receiver_email: String(cString: queryResultCol2!), receiver_address: String(cString: queryResultCol3!), receiver_id: Int(queryResultCol4), item_id: Int(queryResultCol5), item_name: String(cString: queryResultCol6!))
                 requestlist.append(request)
             }
-            print("\nQuery Result:")
-              print(requestlist)
           } else {
             let errorMessage = String(cString: sqlite3_errmsg(db))
             print("\nQuery is not prepared \(errorMessage)")
           }
           sqlite3_finalize(queryStatement)
-        if sqlite3_close(db) == SQLITE_OK {
-            print("closing database")
-        }
+//        if sqlite3_close(db) == SQLITE_OK {
+//            print("closing database")
+//        }
         return requestlist
         }
     static func fetchStatus(receiver_id : Int) -> [Status]{
@@ -761,16 +753,14 @@ class DBHelper{
                    
                 statuslist.append(status)
             }
-            print("\nQuery Result:")
-              print("Statuslist\(statuslist)")
           } else {
             let errorMessage = String(cString: sqlite3_errmsg(db))
             print("\nQuery is not prepared \(errorMessage)")
           }
           sqlite3_finalize(queryStatement)
-        if sqlite3_close(db) == SQLITE_OK {
-            print("closing database")
-        }
+//        if sqlite3_close(db) == SQLITE_OK {
+//            print("closing database")
+//        }
         return statuslist
         }
     static func getdonarprofile(ID : Int) -> [String] {
@@ -795,16 +785,14 @@ class DBHelper{
               
                 //return userid
             }
-            print("\nQuery Result:")
-              print(user)
           } else {
             let errorMessage = String(cString: sqlite3_errmsg(db))
             print("\nQuery is not prepared \(errorMessage)")
           }
           sqlite3_finalize(queryStatement)
-        if sqlite3_close(db) == SQLITE_OK {
-            print("closing database")
-        }
+//        if sqlite3_close(db) == SQLITE_OK {
+//            print("closing database")
+//        }
         return user
         }
     static func updatestatus(receiverid : Int,item_id:Int) {

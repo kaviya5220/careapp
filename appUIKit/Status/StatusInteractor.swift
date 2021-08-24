@@ -8,7 +8,7 @@
 import Foundation
 class StatusInteractor{
     func fetchStatus(receiver_id : Int)->[Status]{
-        DBHelper.db = DBHelper.openDB()
+       // DBHelper.db = DBHelper.openDB()
         return DBHelper.fetchStatus(receiver_id: receiver_id)
     }
 }

@@ -30,7 +30,7 @@ class QuantityTableViewCell: UITableViewCell {
     }()
     let textField:UITextField = {
         let namefield = UITextField()
-        namefield.placeholder = "Enter Item Name"
+        namefield.keyboardType = .numberPad
         namefield.borderStyle = .none
         namefield.translatesAutoresizingMaskIntoConstraints = false
         return namefield

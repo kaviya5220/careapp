@@ -38,18 +38,21 @@ class SignupViewController: UIViewController,UIScrollViewDelegate{
     
     let signuplabel:CustomLabel = {
         let label = CustomLabel(labelType: .title)
-        label.text = "SIGN UP"
+        label.text = "SIGNUP"
+        
+        label.font =  UIFont.systemFont(ofSize: 30, weight: .bold)
         label.textAlignment = .center
+        label.font = UIFont(name: "TimesNewRomanPSMT", size: 30)
         return label
     }()
     let name:UITextField = {
         let namefield = CustomTextField()
-        
         namefield.placeholder = "Enter name"
         return namefield
     }()
     let address:UITextField = {
         let addressfield = CustomTextField()
+        
         addressfield.placeholder = "Enter address"
         return addressfield
     }()
@@ -124,8 +127,14 @@ class SignupViewController: UIViewController,UIScrollViewDelegate{
 
     override func viewDidLayoutSubviews() {
         view.backgroundColor = .white
+        let cancel = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.done, target: self, action: #selector(cancel(_:)))
+        navigationItem.rightBarButtonItems = [cancel]
+        let addIcon = UIImage(systemName: "multiply")
+        cancel.image = addIcon
+     //   let cancel = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancel(_:)))
+       // self.navigationItem.rightBarButtonItem = cancel
         setupConstraints()
-        let contentViewSize = CGSize(width: self.view.frame.width, height: 450)
+        let contentViewSize = CGSize(width: self.view.frame.width, height: 500)
                 scrollView.contentSize = contentViewSize
                // scrollView.frame = view.bounds
                 scrollView.delegate = self
@@ -136,6 +145,7 @@ class SignupViewController: UIViewController,UIScrollViewDelegate{
         horizontalstackView.addArrangedSubview(signuplabel1)
         horizontalstackView.addArrangedSubview(signuplabel2)
         stackView.addArrangedSubview(signuplabel)
+        stackView.setCustomSpacing(30, after: signuplabel)
         stackView.addArrangedSubview(name)
         stackView.addArrangedSubview(address)
         stackView.addArrangedSubview(password)
@@ -160,6 +170,9 @@ class SignupViewController: UIViewController,UIScrollViewDelegate{
                                      regularConstraints: regularConstraints)
         self.navigationItem.setHidesBackButton(false, animated: false)
         signUpPresenter.delegate = self
+    }
+    @objc func cancel(_ sender: UIButton) {
+            self.dismiss(animated: true)
     }
     @objc func loginClicked(_ sender: UITapGestureRecognizer){
         dismiss(animated: true, completion: nil)
@@ -228,7 +241,7 @@ extension SignupViewController {
             //stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             stackView.widthAnchor.constraint(equalTo: self.view.widthAnchor,multiplier: 0.75),
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant: -40),
+            
           //  submitbutton.widthAnchor.constraint(equalTo: self.view.widthAnchor,multiplier: 0.5),
 //            submitbutton.topAnchor.constraint(equalTo: stackView.bottomAnchor,constant: 30),
           //  submitbutton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -237,8 +250,9 @@ extension SignupViewController {
 //            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
 //            stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             submitbutton.widthAnchor.constraint(equalTo: self.view.widthAnchor,multiplier: 0.5),
-            submitbutton.topAnchor.constraint(equalTo: stackView.bottomAnchor,constant: 30),
+            submitbutton.topAnchor.constraint(equalTo: stackView.bottomAnchor,constant: 70),
             submitbutton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor,constant: -40),
            
         ])
         
@@ -249,13 +263,11 @@ extension SignupViewController {
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             stackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            submitbutton.widthAnchor.constraint(equalTo: self.view.widthAnchor,multiplier: 0.5),
-//            submitbutton.topAnchor.constraint(equalTo: stackView.bottomAnchor,constant: 30),
-//            submitbutton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//
             horizontalstackView.topAnchor.constraint(equalTo: submitbutton.bottomAnchor,constant: 20),
             horizontalstackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             horizontalstackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            signuplabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+           // signuplabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             submitbutton.widthAnchor.constraint(equalTo: self.view.widthAnchor,multiplier: 0.25),
             submitbutton.topAnchor.constraint(equalTo: stackView.bottomAnchor,constant: 20),
             submitbutton.centerXAnchor.constraint(equalTo: view.centerXAnchor),

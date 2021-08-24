@@ -202,13 +202,11 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
    @objc func segmentControl(_ segmentedControl: UISegmentedControl) {
        switch (segmentedControl.selectedSegmentIndex) {
           case 0:
-            print("0")
             statusTableView.isHidden = true
             requestListTableView.isHidden = true
             donarTableView.isHidden = false
           break
           case 1:
-            print("!")
             statusTableView.isHidden = true
             donarTableView.isHidden = true
             requestListTableView.isHidden = false

@@ -8,7 +8,7 @@
 import Foundation
 class DonationInteractor{
     func getitemdetailbydonarid(userid : Int)->[Item]{
-        DBHelper.db = DBHelper.openDB()
+     //   DBHelper.db = DBHelper.openDB()
         return DBHelper.getitemsbydonarID(Donar_ID: userid)
     }
 

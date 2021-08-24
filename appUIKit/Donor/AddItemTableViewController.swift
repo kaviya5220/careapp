@@ -325,7 +325,7 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
         else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "itemimage", for: indexPath) as! DonorImageTableViewCell
             let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(chooseimage1(tapGestureRecognizer:)))
-            cell.mySegmentedControl.addTarget(self, action: #selector(self.segmentedValueChanged(_:)), for: .valueChanged)
+           // cell.mySegmentedControl.addTarget(self, action: #selector(self.segmentedValueChanged(_:)), for: .valueChanged)
             cell.itemimage.isUserInteractionEnabled = true
             cell.itemimage.addGestureRecognizer(tapGestureRecognizer)
             cell.itemimage.image = resizeImage(image: UIImage(named:"additem")!, newWidth: 200)
@@ -374,7 +374,7 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
             return 80
         }
         }
-        return 250
+        return 220
         
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -388,20 +388,45 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if(section == 1){
 
-        let tview = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 25))
-            let label = UILabel(frame: CGRect(x: 10, y: -6.25, width: 100, height: 50))
-        label.text = "Details"
-            label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.textColor = UIColor.black
-            label.baselineAdjustment = .alignCenters
-            tview.backgroundColor = #colorLiteral(red: 0.9076080322, green: 0.9077602029, blue: 0.9075879455, alpha: 1)
+            let tview = UIView()
+
+           // mySegmentedControl.frame = CGRect(x: 10, y: -6.25, width: 100, height: 50)
+          //  let label = UILabel(frame: CGRect(x: 10, y: -6.25, width: 100, height: 50))
+      //  label.text = "Details"
+         //   label.font = UIFont.boldSystemFont(ofSize: 20)
+       // label.textColor = UIColor.black
+           // label.baselineAdjustment = .alignCenters
+        tview.backgroundColor = #colorLiteral(red: 0.939409256, green: 0.9395665526, blue: 0.9393885136, alpha: 1)
         self.view.addSubview(tview)
-        tview.addSubview(label)
+       // tview.addSubview(label)
+        tview.addSubview(mySegmentedControl)
+            mySegmentedControl.centerXAnchor.constraint(equalTo: tview.centerXAnchor).isActive = true
+            mySegmentedControl.centerYAnchor.constraint(equalTo: tview.centerYAnchor).isActive = true
+
 
         return tview
         }
         return nil
     }
+    let mySegmentedControl = UISegmentedControl (items: ["Books","Food","Cloth"])
+    
+    func createSegmentedControl(){
+        mySegmentedControl.selectedSegmentIndex = 0
+        mySegmentedControl.addTarget(self, action: #selector(self.segmentedValueChanged(_:)), for: .valueChanged)
+        mySegmentedControl.translatesAutoresizingMaskIntoConstraints = false
+                //Change text color of UISegmentedControl
+       // mySegmentedControl.tintColor = .black
+        mySegmentedControl.selectedSegmentTintColor = .white
+        mySegmentedControl.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        mySegmentedControl.layer.borderWidth = 1
+                
+                //Change UISegmentedControl background colour
+                mySegmentedControl.backgroundColor = UIColor.white
+                
+                // Add function to handle Value Changed events
+              
+               
+            }
 //    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 //        if(section == 1){
 //        return "Details"
@@ -431,6 +456,7 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
         toolBar.translatesAutoresizingMaskIntoConstraints = false
         setupConstraints()
         createToolBar()
+        createSegmentedControl()
         let upload = UIBarButtonItem(title: "Post", style: .plain, target: self, action: #selector(upload_item(_:)))
         self.navigationItem.rightBarButtonItem = upload
         let cancel = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancel(_:)))
@@ -462,7 +488,6 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
         
         NotificationCenter.default.addObserver(self, selector: #selector(AddItemTableViewController.keyboardWillShow), name: UIResponder.keyboardDidShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(AddItemTableViewController.keyboardWillHide), name: UIResponder.keyboardDidHideNotification, object: nil)
-       // NSNotificationCenter.default.addObserver(self, selector: "keyboardWillBeHidden:", name: UIKeyboardWillHideNotification, object: nil)
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
