@@ -16,7 +16,7 @@ class ItemNameTableViewCell: UITableViewCell {
         stack.axis = .vertical
         stack.alignment = .fill
         stack.distribution = .fillEqually
-        stack.spacing = 5
+        stack.spacing = 0
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -40,7 +40,7 @@ class ItemNameTableViewCell: UITableViewCell {
         containerView.addArrangedSubview(itemNameLabel)
         containerView.addArrangedSubview(itemname)
         
-        containerView.topAnchor.constraint(equalTo: self.contentView.topAnchor,constant: 10).isActive = true
+        containerView.topAnchor.constraint(equalTo: self.contentView.topAnchor).isActive = true
         containerView.leadingAnchor.constraint(equalTo:self.contentView.leadingAnchor, constant:10).isActive = true
         containerView.trailingAnchor.constraint(equalTo:self.contentView.trailingAnchor, constant:-10).isActive = true
         containerView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor).isActive = true

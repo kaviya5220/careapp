@@ -11,7 +11,7 @@ class DonorImageTableViewCell: UITableViewCell {
    // let mySegmentedControl = UISegmentedControl (items: ["Books","Food","Cloth"])
     let itemimage:UIImageView = {
         let img = UIImageView()
-        img.contentMode = .top
+        img.contentMode = .center
         img.image = UIImage(named: "default_product")
         img.translatesAutoresizingMaskIntoConstraints = false
         img.layer.cornerRadius = 25
@@ -36,6 +36,7 @@ class DonorImageTableViewCell: UITableViewCell {
        // createSegmentedControl()
         self.contentView.addSubview(itemimage)
         itemimage.centerXAnchor.constraint(equalTo:self.contentView.centerXAnchor).isActive = true
+        itemimage.centerYAnchor.constraint(equalTo:self.contentView.centerYAnchor).isActive = true
 //        self.contentView.addSubview(mySegmentedControl)
 //        mySegmentedControl.topAnchor.constraint(equalTo: itemimage.bottomAnchor,constant: 8).isActive = true
 //        mySegmentedControl.centerXAnchor.constraint(equalTo:self.contentView.centerXAnchor).isActive = true

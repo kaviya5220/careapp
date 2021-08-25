@@ -374,7 +374,7 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
             return 80
         }
         }
-        return 220
+        return 210
         
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -388,19 +388,13 @@ class AddItemTableViewController: UIViewController,UIAdaptivePresentationControl
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if(section == 1){
 
-            let tview = UIView()
-
-           // mySegmentedControl.frame = CGRect(x: 10, y: -6.25, width: 100, height: 50)
-          //  let label = UILabel(frame: CGRect(x: 10, y: -6.25, width: 100, height: 50))
-      //  label.text = "Details"
-         //   label.font = UIFont.boldSystemFont(ofSize: 20)
-       // label.textColor = UIColor.black
-           // label.baselineAdjustment = .alignCenters
+        let tview = UIView()
         tview.backgroundColor = #colorLiteral(red: 0.939409256, green: 0.9395665526, blue: 0.9393885136, alpha: 1)
         self.view.addSubview(tview)
        // tview.addSubview(label)
         tview.addSubview(mySegmentedControl)
             mySegmentedControl.centerXAnchor.constraint(equalTo: tview.centerXAnchor).isActive = true
+           // mySegmentedControl.topAnchor.constraint(equalTo: tview.topAnchor).isActive = true
             mySegmentedControl.centerYAnchor.constraint(equalTo: tview.centerYAnchor).isActive = true
 
 
@@ -609,7 +603,7 @@ extension AddItemTableViewController {
 
 
         compactConstraints.append(contentsOf: [
-            addItemTableView.topAnchor.constraint(equalTo:view.safeAreaLayoutGuide.topAnchor,constant: 20),
+            addItemTableView.topAnchor.constraint(equalTo:view.safeAreaLayoutGuide.topAnchor,constant: 5),
             addItemTableView.leftAnchor.constraint(equalTo:view.safeAreaLayoutGuide.leftAnchor),
             addItemTableView.rightAnchor.constraint(equalTo:view.safeAreaLayoutGuide.rightAnchor),
             addItemTableView.bottomAnchor.constraint(equalTo:view.safeAreaLayoutGuide.bottomAnchor),
@@ -620,7 +614,7 @@ extension AddItemTableViewController {
         ])
 
         regularConstraints.append(contentsOf: [
-            addItemTableView.topAnchor.constraint(equalTo:view.safeAreaLayoutGuide.topAnchor,constant: 10),
+            addItemTableView.topAnchor.constraint(equalTo:view.safeAreaLayoutGuide.topAnchor),
             addItemTableView.leftAnchor.constraint(equalTo:view.safeAreaLayoutGuide.leftAnchor),
             addItemTableView.rightAnchor.constraint(equalTo:view.safeAreaLayoutGuide.rightAnchor),
             addItemTableView.bottomAnchor.constraint(equalTo:view.safeAreaLayoutGuide.bottomAnchor),

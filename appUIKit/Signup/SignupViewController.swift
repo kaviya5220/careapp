@@ -134,8 +134,8 @@ class SignupViewController: UIViewController,UIScrollViewDelegate{
      //   let cancel = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancel(_:)))
        // self.navigationItem.rightBarButtonItem = cancel
         setupConstraints()
-        let contentViewSize = CGSize(width: self.view.frame.width, height: 500)
-                scrollView.contentSize = contentViewSize
+      //  let contentViewSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
+             //   scrollView.contentSize = contentViewSize
                // scrollView.frame = view.bounds
                 scrollView.delegate = self
         scrollView.contentInsetAdjustmentBehavior = .automatic
@@ -170,6 +170,24 @@ class SignupViewController: UIViewController,UIScrollViewDelegate{
                                      regularConstraints: regularConstraints)
         self.navigationItem.setHidesBackButton(false, animated: false)
         signUpPresenter.delegate = self
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    @objc func keyboardWillShow(notification:NSNotification) {
+
+        guard let userInfo = notification.userInfo else { return }
+        var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+
+        var contentInset:UIEdgeInsets = self.scrollView.contentInset
+        contentInset.bottom = keyboardFrame.size.height + 20
+        scrollView.contentInset = contentInset
+    }
+
+    @objc func keyboardWillHide(notification:NSNotification) {
+
+        let contentInset:UIEdgeInsets = UIEdgeInsets.zero
+        scrollView.contentInset = contentInset
     }
     @objc func cancel(_ sender: UIButton) {
             self.dismiss(animated: true)
