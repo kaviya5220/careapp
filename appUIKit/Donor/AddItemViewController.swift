@@ -406,7 +406,9 @@ class AddItemViewController: UIViewController,UIScrollViewDelegate,UIPickerViewD
         if(flag != 0){
             item.item_id = flag
             delegate?.passData(item:item,item_image: itemImageName,description: descriptionValue)
+            if(valuesCheck()){
             presenter.showSuccessAlert()
+            }
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in self.dismissinsertView()
             }))
         }
@@ -439,12 +441,22 @@ class AddItemViewController: UIViewController,UIScrollViewDelegate,UIPickerViewD
     }
     func valuesChanged() -> Bool{
        
-        if(itemname.text! == "" && addresstextView.text! == "" && textField1.text! == "" && textField2.text! == "" &&
-            textField3.text! == "" && textField4.text! == ""){
-            return true
+        if(itemname.text! == ""  && textField1.text! == "" && textField2.text! == "" &&
+            textField3.text! == "" && textField4.text! == "1" && addresstextView.text! == "Enter address"){
+            return false
         }
         else{
+            return true
+        }
+    }
+    func valuesCheck() -> Bool{
+       
+        if(itemname.text! == ""  || textField1.text! == "" || textField2.text! == "" ||
+            textField3.text! == "" || textField4.text! == "1" || addresstextView.text! == "Enter address"){
             return false
+        }
+        else{
+            return true
         }
     }
     @objc func chooseimage1(tapGestureRecognizer: UITapGestureRecognizer) {
@@ -463,8 +475,6 @@ class AddItemViewController: UIViewController,UIScrollViewDelegate,UIPickerViewD
         let contentViewSize = CGSize(width: self.view.frame.width, height: self.stackView.frame.height)
         scrollView.contentSize = contentViewSize
         scrollView.delegate = self
-       // scrollView.frame = view.bounds
-        //scrollView.contentInsetAdjustmentBehavior = .automatic
         quantityStepper.translatesAutoresizingMaskIntoConstraints = false
         setupConstraints()
         
