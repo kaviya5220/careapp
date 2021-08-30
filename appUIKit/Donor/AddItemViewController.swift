@@ -472,7 +472,7 @@ class AddItemViewController: UIViewController,UIScrollViewDelegate,UIPickerViewD
         }
         //super.viewDidLoad()
         view.backgroundColor = .white
-        let contentViewSize = CGSize(width: self.view.frame.width, height: self.stackView.frame.height)
+        let contentViewSize = CGSize(width: self.view.frame.width, height: self.stackView.frame.height + 30)
         scrollView.contentSize = contentViewSize
         scrollView.delegate = self
         quantityStepper.translatesAutoresizingMaskIntoConstraints = false
