@@ -16,9 +16,6 @@
 		1B44849A269C4A7D00C02695 /* DonarInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B448499269C4A7D00C02695 /* DonarInteractor.swift */; };
 		1B52A86F267DB2A700B489AA /* CustomReceiverCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B52A86E267DB2A700B489AA /* CustomReceiverCard.swift */; };
 		1B52A871267DC74500B489AA /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B52A870267DC74500B489AA /* Data.swift */; };
-		1B5739C726AEDD0B009B7F95 /* ItemNameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5739C626AEDD0B009B7F95 /* ItemNameTableViewCell.swift */; };
-		1B5739D426B14993009B7F95 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5739D326B14993009B7F95 /* CategoryTableViewCell.swift */; };
-		1B5739D626B1B19A009B7F95 /* TextViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5739D526B1B19A009B7F95 /* TextViewTableViewCell.swift */; };
 		1B6FF24C268369010093956C /* ReceiverInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6FF24B268369010093956C /* ReceiverInteractor.swift */; };
 		1B71D306268ED64B00B11F3B /* ToastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B71D305268ED64B00B11F3B /* ToastViewController.swift */; };
 		1B71D308268ED79800B11F3B /* DonationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B71D307268ED79800B11F3B /* DonationTableViewCell.swift */; };
@@ -32,9 +29,6 @@
 		1B7EBFA726748EA300F2AED1 /* CustomField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7EBFA626748EA300F2AED1 /* CustomField.swift */; };
 		1B7EBFA92674945700F2AED1 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7EBFA82674945700F2AED1 /* LoginInteractor.swift */; };
 		1B7EBFAB2674946F00F2AED1 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7EBFAA2674946F00F2AED1 /* LoginPresenter.swift */; };
-		1B803D7726B3BB9100303DA9 /* AddItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B803D7626B3BB9100303DA9 /* AddItemTableViewController.swift */; };
-		1B803D7B26B3CB9600303DA9 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B803D7A26B3CB9600303DA9 /* CategoryViewController.swift */; };
-		1B803D8126B4429400303DA9 /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B803D8026B4429400303DA9 /* DescriptionTableViewCell.swift */; };
 		1B803D8326B5829B00303DA9 /* Books.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B803D8226B5829B00303DA9 /* Books.swift */; };
 		1B83CADA267735D70041C6A2 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B83CAD9267735D70041C6A2 /* Extension.swift */; };
 		1B906ECA2670A08C0032FA81 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B906EC92670A08C0032FA81 /* AppDelegate.swift */; };
@@ -69,8 +63,7 @@
 		1BF5A32C26BE593500648CD2 /* Cloth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5A32B26BE593500648CD2 /* Cloth.swift */; };
 		1BF5A32E26BE5DFF00648CD2 /* ClothTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5A32D26BE5DFF00648CD2 /* ClothTableViewCell.swift */; };
 		B0249E8926CBB314007E53AD /* sampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0249E8826CBB314007E53AD /* sampleViewController.swift */; };
-		B0249E8B26CCE0C6007E53AD /* QuantityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0249E8A26CCE0C6007E53AD /* QuantityTableViewCell.swift */; };
-		B0249F0E26D0DBD3007E53AD /* DonorImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0249F0D26D0DBD3007E53AD /* DonorImageTableViewCell.swift */; };
+		B0249F1B26D66CCE007E53AD /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0249F1A26D66CCE007E53AD /* AddItemViewController.swift */; };
 		B0F8B7FA26C658D900925A04 /* AddBookTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F8B7F926C658D900925A04 /* AddBookTableViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -101,9 +94,6 @@
 		1B448499269C4A7D00C02695 /* DonarInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonarInteractor.swift; sourceTree = "<group>"; };
 		1B52A86E267DB2A700B489AA /* CustomReceiverCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomReceiverCard.swift; sourceTree = "<group>"; };
 		1B52A870267DC74500B489AA /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
-		1B5739C626AEDD0B009B7F95 /* ItemNameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemNameTableViewCell.swift; sourceTree = "<group>"; };
-		1B5739D326B14993009B7F95 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
-		1B5739D526B1B19A009B7F95 /* TextViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewTableViewCell.swift; sourceTree = "<group>"; };
 		1B6FF24B268369010093956C /* ReceiverInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverInteractor.swift; sourceTree = "<group>"; };
 		1B71D305268ED64B00B11F3B /* ToastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastViewController.swift; sourceTree = "<group>"; };
 		1B71D307268ED79800B11F3B /* DonationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationTableViewCell.swift; sourceTree = "<group>"; };
@@ -117,9 +107,6 @@
 		1B7EBFA626748EA300F2AED1 /* CustomField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomField.swift; sourceTree = "<group>"; };
 		1B7EBFA82674945700F2AED1 /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
 		1B7EBFAA2674946F00F2AED1 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
-		1B803D7626B3BB9100303DA9 /* AddItemTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemTableViewController.swift; sourceTree = "<group>"; };
-		1B803D7A26B3CB9600303DA9 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
-		1B803D8026B4429400303DA9 /* DescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionTableViewCell.swift; sourceTree = "<group>"; };
 		1B803D8226B5829B00303DA9 /* Books.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Books.swift; sourceTree = "<group>"; };
 		1B83CAD9267735D70041C6A2 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		1B906EC62670A08C0032FA81 /* appUIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = appUIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,8 +147,7 @@
 		1BF5A32B26BE593500648CD2 /* Cloth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cloth.swift; sourceTree = "<group>"; };
 		1BF5A32D26BE5DFF00648CD2 /* ClothTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothTableViewCell.swift; sourceTree = "<group>"; };
 		B0249E8826CBB314007E53AD /* sampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sampleViewController.swift; sourceTree = "<group>"; };
-		B0249E8A26CCE0C6007E53AD /* QuantityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityTableViewCell.swift; sourceTree = "<group>"; };
-		B0249F0D26D0DBD3007E53AD /* DonorImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonorImageTableViewCell.swift; sourceTree = "<group>"; };
+		B0249F1A26D66CCE007E53AD /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
 		B0F8B7F926C658D900925A04 /* AddBookTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -341,14 +327,7 @@
 			children = (
 				1BC38B5F26899A13002501E0 /* AddItemInteractor.swift */,
 				1BC38B6126899AF9002501E0 /* AddItemPresenter.swift */,
-				1B5739C626AEDD0B009B7F95 /* ItemNameTableViewCell.swift */,
-				1B5739D326B14993009B7F95 /* CategoryTableViewCell.swift */,
-				1B5739D526B1B19A009B7F95 /* TextViewTableViewCell.swift */,
-				1B803D7626B3BB9100303DA9 /* AddItemTableViewController.swift */,
-				1B803D7A26B3CB9600303DA9 /* CategoryViewController.swift */,
-				1B803D8026B4429400303DA9 /* DescriptionTableViewCell.swift */,
-				B0249E8A26CCE0C6007E53AD /* QuantityTableViewCell.swift */,
-				B0249F0D26D0DBD3007E53AD /* DonorImageTableViewCell.swift */,
+				B0249F1A26D66CCE007E53AD /* AddItemViewController.swift */,
 			);
 			path = Donor;
 			sourceTree = "<group>";
@@ -536,16 +515,13 @@
 				B0249E8926CBB314007E53AD /* sampleViewController.swift in Sources */,
 				1B6FF24C268369010093956C /* ReceiverInteractor.swift in Sources */,
 				1B448494269C13DF00C02695 /* Status.swift in Sources */,
-				1B5739D626B1B19A009B7F95 /* TextViewTableViewCell.swift in Sources */,
 				1B906F0D2670FC660032FA81 /* Item.swift in Sources */,
 				1BBC570926B9435A00F5BA0C /* ImageTableViewCell.swift in Sources */,
 				1B7EBFA92674945700F2AED1 /* LoginInteractor.swift in Sources */,
-				1B5739C726AEDD0B009B7F95 /* ItemNameTableViewCell.swift in Sources */,
 				1B52A86F267DB2A700B489AA /* CustomReceiverCard.swift in Sources */,
 				1B7EBFA32674805B00F2AED1 /* CustomLabel.swift in Sources */,
 				1B71D306268ED64B00B11F3B /* ToastViewController.swift in Sources */,
 				1B71D30E268F197700B11F3B /* Donationstatus.swift in Sources */,
-				1B803D7B26B3CB9600303DA9 /* CategoryViewController.swift in Sources */,
 				1B7EBFAB2674946F00F2AED1 /* LoginPresenter.swift in Sources */,
 				1B448490269C0B9E00C02695 /* StatusInteractor.swift in Sources */,
 				1BCFA85526997671009A48B8 /* CustomLoginTextField.swift in Sources */,
@@ -553,16 +529,13 @@
 				1B906ECE2670A08C0032FA81 /* ViewController.swift in Sources */,
 				1BF5A32426BD00F700648CD2 /* BookTableViewCell.swift in Sources */,
 				1B71D30C268EE10C00B11F3B /* DonationInteractor.swift in Sources */,
-				1B5739D426B14993009B7F95 /* CategoryTableViewCell.swift in Sources */,
 				1B9B8F4A2672655D00C5497C /* ReceiverViewController.swift in Sources */,
 				1BBC570526B903BA00F5BA0C /* DetailItemTableViewController.swift in Sources */,
-				1B803D7726B3BB9100303DA9 /* AddItemTableViewController.swift in Sources */,
 				1B3A828A2690772B002BFADE /* ProfileInteractor.swift in Sources */,
 				1B906EFE2670A12D0032FA81 /* SignupViewController.swift in Sources */,
 				1B448496269C442900C02695 /* DonarprofileViewController.swift in Sources */,
-				1B803D8126B4429400303DA9 /* DescriptionTableViewCell.swift in Sources */,
+				B0249F1B26D66CCE007E53AD /* AddItemViewController.swift in Sources */,
 				1B7EBFA52674884200F2AED1 /* SignupInteractor.swift in Sources */,
-				B0249E8B26CCE0C6007E53AD /* QuantityTableViewCell.swift in Sources */,
 				1BC38B6026899A13002501E0 /* AddItemInteractor.swift in Sources */,
 				1B803D8326B5829B00303DA9 /* Books.swift in Sources */,
 				1B7EBFA126747A9200F2AED1 /* CustomTextField.swift in Sources */,
@@ -576,7 +549,6 @@
 				1B9B8F48267256EC00C5497C /* ProfileViewController.swift in Sources */,
 				1B7EBFA726748EA300F2AED1 /* CustomField.swift in Sources */,
 				1B52A871267DC74500B489AA /* Data.swift in Sources */,
-				B0249F0E26D0DBD3007E53AD /* DonorImageTableViewCell.swift in Sources */,
 				1B71D308268ED79800B11F3B /* DonationTableViewCell.swift in Sources */,
 				1BBC570726B9084100F5BA0C /* TextFieldTableViewCell.swift in Sources */,
 				1B7EBF9F26747A4700F2AED1 /* CustomButton.swift in Sources */,

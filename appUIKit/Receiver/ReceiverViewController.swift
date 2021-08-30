@@ -126,7 +126,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
    
     @objc func didTapAdd(_ sender: UIButton) {
         if(receiverInteractor.isLoggedIn()){
-        let addItem = AddItemTableViewController()
+        let addItem = AddItemViewController()
         let vc = UINavigationController()
         vc.viewControllers = [addItem]
         vc.modalPresentationStyle = .automatic //or .overFullScreen for transparency
@@ -260,6 +260,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
         
         receiverTableView.dataSource = self
         receiverTableView.delegate = self
+        receiverTableView.separatorStyle = .none
         receiverTableView.register(FoodTableViewCell.self, forCellReuseIdentifier: "foodCell")
         receiverTableView.register(BookTableViewCell.self, forCellReuseIdentifier: "bookCell")
         receiverTableView.register(ClothTableViewCell.self, forCellReuseIdentifier: "clothCell")
