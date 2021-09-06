@@ -118,6 +118,7 @@ class StatusTableViewCell: UITableViewCell,UIViewControllerTransitioningDelegate
 
     }
     
+   
     required init?(coder aDecoder: NSCoder) {
         
         super.init(coder: aDecoder)

@@ -376,21 +376,19 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let vc = DetailItemTableViewController()
-//        self.navigationController?.pushViewController(vc, animated: true)
-        let vc = DetailItemTableViewController()
+        let vc = DetailViewController()
         itemid = totalDetails.map{$0.item_id}
-
         if let index = totalDetails.firstIndex(where: { $0 === filteredTotalDetails[indexPath.row] }){
-//            vc.current = index
             totalDetails[index].visited_count = totalDetails[index].visited_count + 1
-            vc.itemid = totalDetails[index].item_id
-            vc.itemDetailValues[0] = totalDetails[index].item_name
-            vc.itemDetailValues[1] = totalDetails[index].category
-            vc.itemDetailValues[2] = totalDetails[index].address
-            vc.itemDetailValues[3] = String(totalDetails[index].Donar_ID)
-            vc.descValues = totalDetails[index].description
-            vc.item_image = item_images.map{$0.item_image}[index]
+          //  vc.itemid = totalDetails[index].item_id
+            vc.item = totalDetails[index]
+            vc.item.item_image = filtered_item_images[index].item_image
+//            vc.itemDetailValues[0] = totalDetails[index].item_name
+//            vc.itemDetailValues[1] = totalDetails[index].category
+//            vc.itemDetailValues[2] = totalDetails[index].address
+//            vc.itemDetailValues[3] = String(totalDetails[index].Donar_ID)
+//            vc.descValues = totalDetails[index].description
+//            vc.item_image = item_images.map{$0.item_image}[index]
             self.navigationController?.pushViewController(vc, animated: true)
         }
 //

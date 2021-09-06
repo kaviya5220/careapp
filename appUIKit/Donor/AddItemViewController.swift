@@ -15,8 +15,8 @@ class AddItemViewController: UIViewController,UIScrollViewDelegate,UIPickerViewD
     let additeminteractor = AddItemInteractor()
     let presenter = AddItemPresenter()
     var categoryLabelDict:[String:[String]] = ["Books":["Author","Publisher","Published Year","Quantity"],
-                                               "Food":["Expiry Date","Cuisine","Veg/Non Veg","Quantity"],
-                                               "Cloth":["Size","Cloth Category","Gender","Quantity"]]
+                                               "Food":["Cuisine","Expiry Date","Veg/Non Veg","Quantity"],
+                                               "Cloth":["Cloth Category","Size","Gender","Quantity"]]
     let quantityStepper = UIStepper()
     let stackView: UIStackView = {
         let stack = UIStackView()
@@ -342,7 +342,7 @@ class AddItemViewController: UIViewController,UIScrollViewDelegate,UIPickerViewD
         }
         
         
-        print("\(categoryLabelDict["Books"]![0])")
+       // print("\(categoryLabelDict["Books"]![0])")
     }
     private var sharedConstraints = [NSLayoutConstraint]()
     private var compactConstraints = [NSLayoutConstraint]()

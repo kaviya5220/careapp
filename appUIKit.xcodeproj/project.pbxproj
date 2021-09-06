@@ -47,24 +47,26 @@
 		1B9B8F4A2672655D00C5497C /* ReceiverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9B8F492672655D00C5497C /* ReceiverViewController.swift */; };
 		1BAC4F772698474200BFC9DB /* Item_Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAC4F762698474200BFC9DB /* Item_Image.swift */; };
 		1BBC570326B7C30400F5BA0C /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBC570226B7C30400F5BA0C /* Food.swift */; };
-		1BBC570526B903BA00F5BA0C /* DetailItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBC570426B903BA00F5BA0C /* DetailItemTableViewController.swift */; };
-		1BBC570726B9084100F5BA0C /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBC570626B9084100F5BA0C /* TextFieldTableViewCell.swift */; };
-		1BBC570926B9435A00F5BA0C /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBC570826B9435A00F5BA0C /* ImageTableViewCell.swift */; };
 		1BC38B6026899A13002501E0 /* AddItemInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC38B5F26899A13002501E0 /* AddItemInteractor.swift */; };
 		1BC38B6226899AF9002501E0 /* AddItemPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC38B6126899AF9002501E0 /* AddItemPresenter.swift */; };
 		1BC8C0E32692DA1400292240 /* RequestList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8C0E22692DA1400292240 /* RequestList.swift */; };
 		1BC8C0ED2692E5FF00292240 /* RequestListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8C0EC2692E5FF00292240 /* RequestListTableViewCell.swift */; };
 		1BC8C0EF2692E62000292240 /* RequestListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8C0EE2692E62000292240 /* RequestListInteractor.swift */; };
 		1BCFA85526997671009A48B8 /* CustomLoginTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCFA85426997671009A48B8 /* CustomLoginTextField.swift */; };
-		1BEE1D45269D6555008F3726 /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEE1D44269D6555008F3726 /* KeyChain.swift */; };
 		1BF5A32226BC0F7600648CD2 /* FoodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5A32126BC0F7600648CD2 /* FoodTableViewCell.swift */; };
 		1BF5A32426BD00F700648CD2 /* BookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5A32326BD00F700648CD2 /* BookTableViewCell.swift */; };
 		1BF5A32A26BD584500648CD2 /* ItemDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5A32926BD584400648CD2 /* ItemDetails.swift */; };
 		1BF5A32C26BE593500648CD2 /* Cloth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5A32B26BE593500648CD2 /* Cloth.swift */; };
 		1BF5A32E26BE5DFF00648CD2 /* ClothTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5A32D26BE5DFF00648CD2 /* ClothTableViewCell.swift */; };
-		B0249E8926CBB314007E53AD /* sampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0249E8826CBB314007E53AD /* sampleViewController.swift */; };
 		B0249F1B26D66CCE007E53AD /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0249F1A26D66CCE007E53AD /* AddItemViewController.swift */; };
-		B0F8B7FA26C658D900925A04 /* AddBookTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F8B7F926C658D900925A04 /* AddBookTableViewController.swift */; };
+		B02BF76F26DE371C004E57B4 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02BF76E26DE371C004E57B4 /* DetailViewController.swift */; };
+		B02BF77126DE3827004E57B4 /* ProductImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02BF77026DE3827004E57B4 /* ProductImageTableViewCell.swift */; };
+		B02BF77326DE3CC1004E57B4 /* NameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02BF77226DE3CC1004E57B4 /* NameTableViewCell.swift */; };
+		B02BF77526DE4DE3004E57B4 /* PublisherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02BF77426DE4DE3004E57B4 /* PublisherTableViewCell.swift */; };
+		B02BF77726DE5474004E57B4 /* AboutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02BF77626DE5474004E57B4 /* AboutTableViewCell.swift */; };
+		B02BF77926DF4665004E57B4 /* profileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02BF77826DF4665004E57B4 /* profileTableViewCell.swift */; };
+		B02BF77B26DF9BC9004E57B4 /* quantityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02BF77A26DF9BC9004E57B4 /* quantityTableViewCell.swift */; };
+		B050988B26E101EF00E05059 /* sizeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B050988A26E101EF00E05059 /* sizeTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,24 +133,26 @@
 		1B9B8F492672655D00C5497C /* ReceiverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverViewController.swift; sourceTree = "<group>"; };
 		1BAC4F762698474200BFC9DB /* Item_Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item_Image.swift; sourceTree = "<group>"; };
 		1BBC570226B7C30400F5BA0C /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
-		1BBC570426B903BA00F5BA0C /* DetailItemTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailItemTableViewController.swift; sourceTree = "<group>"; };
-		1BBC570626B9084100F5BA0C /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
-		1BBC570826B9435A00F5BA0C /* ImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
 		1BC38B5F26899A13002501E0 /* AddItemInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemInteractor.swift; sourceTree = "<group>"; };
 		1BC38B6126899AF9002501E0 /* AddItemPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemPresenter.swift; sourceTree = "<group>"; };
 		1BC8C0E22692DA1400292240 /* RequestList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestList.swift; sourceTree = "<group>"; };
 		1BC8C0EC2692E5FF00292240 /* RequestListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestListTableViewCell.swift; sourceTree = "<group>"; };
 		1BC8C0EE2692E62000292240 /* RequestListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestListInteractor.swift; sourceTree = "<group>"; };
 		1BCFA85426997671009A48B8 /* CustomLoginTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLoginTextField.swift; sourceTree = "<group>"; };
-		1BEE1D44269D6555008F3726 /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		1BF5A32126BC0F7600648CD2 /* FoodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTableViewCell.swift; sourceTree = "<group>"; };
 		1BF5A32326BD00F700648CD2 /* BookTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTableViewCell.swift; sourceTree = "<group>"; };
 		1BF5A32926BD584400648CD2 /* ItemDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetails.swift; sourceTree = "<group>"; };
 		1BF5A32B26BE593500648CD2 /* Cloth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cloth.swift; sourceTree = "<group>"; };
 		1BF5A32D26BE5DFF00648CD2 /* ClothTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothTableViewCell.swift; sourceTree = "<group>"; };
-		B0249E8826CBB314007E53AD /* sampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sampleViewController.swift; sourceTree = "<group>"; };
 		B0249F1A26D66CCE007E53AD /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
-		B0F8B7F926C658D900925A04 /* AddBookTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookTableViewController.swift; sourceTree = "<group>"; };
+		B02BF76E26DE371C004E57B4 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		B02BF77026DE3827004E57B4 /* ProductImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductImageTableViewCell.swift; sourceTree = "<group>"; };
+		B02BF77226DE3CC1004E57B4 /* NameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameTableViewCell.swift; sourceTree = "<group>"; };
+		B02BF77426DE4DE3004E57B4 /* PublisherTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherTableViewCell.swift; sourceTree = "<group>"; };
+		B02BF77626DE5474004E57B4 /* AboutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTableViewCell.swift; sourceTree = "<group>"; };
+		B02BF77826DF4665004E57B4 /* profileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileTableViewCell.swift; sourceTree = "<group>"; };
+		B02BF77A26DF9BC9004E57B4 /* quantityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = quantityTableViewCell.swift; sourceTree = "<group>"; };
+		B050988A26E101EF00E05059 /* sizeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sizeTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,8 +302,6 @@
 				1B906EFA2670A0F50032FA81 /* LoginViewController.swift */,
 				1B7EBFA82674945700F2AED1 /* LoginInteractor.swift */,
 				1B7EBFAA2674946F00F2AED1 /* LoginPresenter.swift */,
-				1BEE1D44269D6555008F3726 /* KeyChain.swift */,
-				B0249E8826CBB314007E53AD /* sampleViewController.swift */,
 			);
 			path = login;
 			sourceTree = "<group>";
@@ -354,13 +356,17 @@
 			children = (
 				1B9B8F492672655D00C5497C /* ReceiverViewController.swift */,
 				1B6FF24B268369010093956C /* ReceiverInteractor.swift */,
-				1BBC570426B903BA00F5BA0C /* DetailItemTableViewController.swift */,
-				1BBC570626B9084100F5BA0C /* TextFieldTableViewCell.swift */,
-				1BBC570826B9435A00F5BA0C /* ImageTableViewCell.swift */,
 				1BF5A32126BC0F7600648CD2 /* FoodTableViewCell.swift */,
 				1BF5A32326BD00F700648CD2 /* BookTableViewCell.swift */,
 				1BF5A32D26BE5DFF00648CD2 /* ClothTableViewCell.swift */,
-				B0F8B7F926C658D900925A04 /* AddBookTableViewController.swift */,
+				B02BF76E26DE371C004E57B4 /* DetailViewController.swift */,
+				B02BF77026DE3827004E57B4 /* ProductImageTableViewCell.swift */,
+				B02BF77226DE3CC1004E57B4 /* NameTableViewCell.swift */,
+				B02BF77426DE4DE3004E57B4 /* PublisherTableViewCell.swift */,
+				B02BF77626DE5474004E57B4 /* AboutTableViewCell.swift */,
+				B02BF77826DF4665004E57B4 /* profileTableViewCell.swift */,
+				B02BF77A26DF9BC9004E57B4 /* quantityTableViewCell.swift */,
+				B050988A26E101EF00E05059 /* sizeTableViewCell.swift */,
 			);
 			path = Receiver;
 			sourceTree = "<group>";
@@ -504,19 +510,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B83CADA267735D70041C6A2 /* Extension.swift in Sources */,
-				B0F8B7FA26C658D900925A04 /* AddBookTableViewController.swift in Sources */,
+				B02BF77526DE4DE3004E57B4 /* PublisherTableViewCell.swift in Sources */,
 				1B448492269C0BD000C02695 /* StatusTableViewCell.swift in Sources */,
 				1BC8C0ED2692E5FF00292240 /* RequestListTableViewCell.swift in Sources */,
 				1BC38B6226899AF9002501E0 /* AddItemPresenter.swift in Sources */,
 				1BF5A32E26BE5DFF00648CD2 /* ClothTableViewCell.swift in Sources */,
 				1BC8C0EF2692E62000292240 /* RequestListInteractor.swift in Sources */,
 				1B906EFB2670A0F50032FA81 /* LoginViewController.swift in Sources */,
-				1BEE1D45269D6555008F3726 /* KeyChain.swift in Sources */,
-				B0249E8926CBB314007E53AD /* sampleViewController.swift in Sources */,
+				B02BF76F26DE371C004E57B4 /* DetailViewController.swift in Sources */,
 				1B6FF24C268369010093956C /* ReceiverInteractor.swift in Sources */,
 				1B448494269C13DF00C02695 /* Status.swift in Sources */,
 				1B906F0D2670FC660032FA81 /* Item.swift in Sources */,
-				1BBC570926B9435A00F5BA0C /* ImageTableViewCell.swift in Sources */,
+				B050988B26E101EF00E05059 /* sizeTableViewCell.swift in Sources */,
 				1B7EBFA92674945700F2AED1 /* LoginInteractor.swift in Sources */,
 				1B52A86F267DB2A700B489AA /* CustomReceiverCard.swift in Sources */,
 				1B7EBFA32674805B00F2AED1 /* CustomLabel.swift in Sources */,
@@ -530,13 +535,14 @@
 				1BF5A32426BD00F700648CD2 /* BookTableViewCell.swift in Sources */,
 				1B71D30C268EE10C00B11F3B /* DonationInteractor.swift in Sources */,
 				1B9B8F4A2672655D00C5497C /* ReceiverViewController.swift in Sources */,
-				1BBC570526B903BA00F5BA0C /* DetailItemTableViewController.swift in Sources */,
 				1B3A828A2690772B002BFADE /* ProfileInteractor.swift in Sources */,
 				1B906EFE2670A12D0032FA81 /* SignupViewController.swift in Sources */,
+				B02BF77326DE3CC1004E57B4 /* NameTableViewCell.swift in Sources */,
 				1B448496269C442900C02695 /* DonarprofileViewController.swift in Sources */,
 				B0249F1B26D66CCE007E53AD /* AddItemViewController.swift in Sources */,
 				1B7EBFA52674884200F2AED1 /* SignupInteractor.swift in Sources */,
 				1BC38B6026899A13002501E0 /* AddItemInteractor.swift in Sources */,
+				B02BF77926DF4665004E57B4 /* profileTableViewCell.swift in Sources */,
 				1B803D8326B5829B00303DA9 /* Books.swift in Sources */,
 				1B7EBFA126747A9200F2AED1 /* CustomTextField.swift in Sources */,
 				1BF5A32C26BE593500648CD2 /* Cloth.swift in Sources */,
@@ -544,13 +550,15 @@
 				1B906F002670A9260032FA81 /* DBHelper.swift in Sources */,
 				1B9B8F4626724E6F00C5497C /* User.swift in Sources */,
 				1BAC4F772698474200BFC9DB /* Item_Image.swift in Sources */,
+				B02BF77126DE3827004E57B4 /* ProductImageTableViewCell.swift in Sources */,
 				1BC8C0E32692DA1400292240 /* RequestList.swift in Sources */,
 				1B906ECA2670A08C0032FA81 /* AppDelegate.swift in Sources */,
 				1B9B8F48267256EC00C5497C /* ProfileViewController.swift in Sources */,
+				B02BF77B26DF9BC9004E57B4 /* quantityTableViewCell.swift in Sources */,
 				1B7EBFA726748EA300F2AED1 /* CustomField.swift in Sources */,
 				1B52A871267DC74500B489AA /* Data.swift in Sources */,
 				1B71D308268ED79800B11F3B /* DonationTableViewCell.swift in Sources */,
-				1BBC570726B9084100F5BA0C /* TextFieldTableViewCell.swift in Sources */,
+				B02BF77726DE5474004E57B4 /* AboutTableViewCell.swift in Sources */,
 				1B7EBF9F26747A4700F2AED1 /* CustomButton.swift in Sources */,
 				1B7EBF9C267479F000F2AED1 /* SignupPresenter.swift in Sources */,
 				1BF5A32226BC0F7600648CD2 /* FoodTableViewCell.swift in Sources */,

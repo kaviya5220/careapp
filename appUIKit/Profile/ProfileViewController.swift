@@ -10,7 +10,7 @@ protocol updateItems {
     func updateItem(itemid : Int)
 }
 
-class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,UIViewControllerTransitioningDelegate  {
     var delagate : updateItems?
     public var itemid : [Int] = []
     public var items : [Item] = []
@@ -169,6 +169,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         statusTableView.register(StatusTableViewCell.self, forCellReuseIdentifier: "statuscell")
     }
     
+    
+    
     func receiver_accepted(receiver_id: Int,item_id:Int) {
         print("Accept clicked")
         //print(sender.tag)
@@ -268,6 +270,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 let cell = tableView.dequeueReusableCell(withIdentifier: "statuscell", for: indexPath) as! StatusTableViewCell
                 cell.status = statuslist[indexPath.row]
                 changeColor(cell: cell)
+                
                 return cell
             }
             
@@ -310,9 +313,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
             return 170
         }
+    
 }
-
-
 
 extension ProfileViewController {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

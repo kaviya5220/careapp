@@ -8,6 +8,7 @@
 import UIKit
 
 enum LabelType {
+    case Title
     case title
     case subtitle
     case primary
@@ -26,7 +27,8 @@ class CustomLabel: UILabel {
       //  self.numberOfLines = 0
         
         switch labelType {
-        
+        case .Title:
+            self.font = UIFont.systemFont(ofSize: 28, weight: .bold)
         case .title:
             self.font = UIFont.systemFont(ofSize: 24, weight: .bold)// 24 30
         case .subtitle :

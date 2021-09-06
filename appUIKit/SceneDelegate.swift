@@ -19,8 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let window = UIWindow(windowScene: windowScene)
             let navController = UINavigationController()
            // if let loggedUsername = UserDefaults.standard.string(forKey: "userid") {
-                let viewController = ReceiverViewController()
-         //   let viewController = ViewController()
+               let viewController = ReceiverViewController()
+           // let viewController = DetailViewController()
                 navController.viewControllers = [viewController]
                 navController.navigationBar.backgroundColor = .clear
                 let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black]
