@@ -467,12 +467,13 @@ class AddItemViewController: UIViewController,UIScrollViewDelegate,UIPickerViewD
     }
 
     override func viewDidLayoutSubviews() {
+        print("hii")
         for i in 1950 ... 2021{
             pickerData.append(i)
         }
         //super.viewDidLoad()
         view.backgroundColor = .white
-        let contentViewSize = CGSize(width: self.view.frame.width, height: self.stackView.frame.height + 30)
+        let contentViewSize = CGSize(width: self.view.frame.width, height: self.stackView.frame.height + 200)
         scrollView.contentSize = contentViewSize
         scrollView.delegate = self
         quantityStepper.translatesAutoresizingMaskIntoConstraints = false

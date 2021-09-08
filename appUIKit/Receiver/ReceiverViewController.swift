@@ -11,7 +11,8 @@ import UIKit
 //}
 
 class ReceiverViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate,UISearchResultsUpdating,canReceive,UINavigationControllerDelegate,UIPopoverPresentationControllerDelegate,updateItems {
-    internal var barButton: UIBarButtonItem!
+    //internal var barButton: UIBarButtonItem!
+    lazy var slideInTransitioningDelegate = SlideInPresentationManager()
     var someVariable : Bool = false
     var db = DBHelper()
     //var delegate : category?
@@ -126,14 +127,23 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
    
     @objc func didTapAdd(_ sender: UIButton) {
         if(receiverInteractor.isLoggedIn()){
-        let addItem = AddItemViewController()
-        let vc = UINavigationController()
-        vc.viewControllers = [addItem]
-        vc.modalPresentationStyle = .automatic //or .overFullScreen for transparency
-        addItem.delegate = self
-            //
-      //  addItem.categorychosen = category
-        self.present(vc, animated: true, completion: nil)
+            let vc = UINavigationController()
+            let controller = AddItemViewController()
+            vc.viewControllers = [controller]
+            controller.delegate = self
+            slideInTransitioningDelegate.direction = .right
+            slideInTransitioningDelegate.origin = Int(self.navigationController!.navigationBar.frame.height)
+            vc.transitioningDelegate = slideInTransitioningDelegate
+            vc.modalPresentationStyle = .custom
+            self.present(vc, animated: true, completion: nil)
+//        let addItem = AddItemViewController()
+//        let vc = UINavigationController()
+//        vc.viewControllers = [addItem]
+//        vc.modalPresentationStyle = .automatic //or .overFullScreen for transparency
+//        addItem.delegate = self
+//            //
+//      //  addItem.categorychosen = category
+//        self.present(vc, animated: true, completion: nil)
         }
         else{
             self.navigationController?.pushViewController(LoginViewController(), animated: true)
@@ -382,16 +392,16 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
             totalDetails[index].visited_count = totalDetails[index].visited_count + 1
           //  vc.itemid = totalDetails[index].item_id
             vc.item = totalDetails[index]
-            vc.item.item_image = filtered_item_images[index].item_image
+            vc.item.item_image = filtered_item_images[indexPath.row].item_image
 //            vc.itemDetailValues[0] = totalDetails[index].item_name
 //            vc.itemDetailValues[1] = totalDetails[index].category
 //            vc.itemDetailValues[2] = totalDetails[index].address
 //            vc.itemDetailValues[3] = String(totalDetails[index].Donar_ID)
 //            vc.descValues = totalDetails[index].description
-//            vc.item_image = item_images.map{$0.item_image}[index]
+            //vc.item_image = item_images.map{$0.item_image}[index]
+          //  vc.item.item_image = filtered_item_images.map{$0.item_image}[index]
             self.navigationController?.pushViewController(vc, animated: true)
         }
-//
     }
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             if(filteredTotalDetails.count == 0){

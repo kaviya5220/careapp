@@ -351,7 +351,7 @@ class DBHelper{
               SQLITE_OK {
             sqlite3_bind_int(queryStatement, 1, Int32(itemid))
             if sqlite3_step(queryStatement) == SQLITE_ROW {
-             let queryResultCol0 = sqlite3_column_int(queryStatement, 0)
+             //let queryResultCol0 = sqlite3_column_int(queryStatement, 0)
                 let queryResultCol1 = sqlite3_column_text(queryStatement, 1)
                 let queryResultCol2 = sqlite3_column_text(queryStatement, 2)
                 let queryResultCol3 = sqlite3_column_text(queryStatement, 3)
@@ -386,7 +386,7 @@ class DBHelper{
               SQLITE_OK {
             sqlite3_bind_int(queryStatement, 1, Int32(itemid))
             if sqlite3_step(queryStatement) == SQLITE_ROW {
-             let queryResultCol0 = sqlite3_column_int(queryStatement, 0)
+            // let queryResultCol0 = sqlite3_column_int(queryStatement, 0)
                 let queryResultCol1 = sqlite3_column_text(queryStatement, 1)
                 let queryResultCol2 = sqlite3_column_text(queryStatement, 2)
                 let queryResultCol3 = sqlite3_column_text(queryStatement, 3)
@@ -421,7 +421,7 @@ class DBHelper{
               SQLITE_OK {
             sqlite3_bind_int(queryStatement, 1, Int32(itemid))
             if sqlite3_step(queryStatement) == SQLITE_ROW {
-             let queryResultCol0 = sqlite3_column_int(queryStatement, 0)
+            // let queryResultCol0 = sqlite3_column_int(queryStatement, 0)
                 let queryResultCol1 = sqlite3_column_text(queryStatement, 1)
                 let queryResultCol2 = sqlite3_column_text(queryStatement, 2)
                 let queryResultCol3 = sqlite3_column_text(queryStatement, 3)

@@ -67,6 +67,9 @@
 		B02BF77926DF4665004E57B4 /* profileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02BF77826DF4665004E57B4 /* profileTableViewCell.swift */; };
 		B02BF77B26DF9BC9004E57B4 /* quantityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02BF77A26DF9BC9004E57B4 /* quantityTableViewCell.swift */; };
 		B050988B26E101EF00E05059 /* sizeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B050988A26E101EF00E05059 /* sizeTableViewCell.swift */; };
+		B050989426E7703B00E05059 /* SlideInPresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B050989326E7703B00E05059 /* SlideInPresentationManager.swift */; };
+		B050989626E7705B00E05059 /* SlideInPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B050989526E7705B00E05059 /* SlideInPresentationController.swift */; };
+		B050989826E770A300E05059 /* SlideInPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B050989726E770A300E05059 /* SlideInPresentationAnimator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -153,6 +156,9 @@
 		B02BF77826DF4665004E57B4 /* profileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileTableViewCell.swift; sourceTree = "<group>"; };
 		B02BF77A26DF9BC9004E57B4 /* quantityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = quantityTableViewCell.swift; sourceTree = "<group>"; };
 		B050988A26E101EF00E05059 /* sizeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sizeTableViewCell.swift; sourceTree = "<group>"; };
+		B050989326E7703B00E05059 /* SlideInPresentationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideInPresentationManager.swift; sourceTree = "<group>"; };
+		B050989526E7705B00E05059 /* SlideInPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideInPresentationController.swift; sourceTree = "<group>"; };
+		B050989726E770A300E05059 /* SlideInPresentationAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideInPresentationAnimator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -255,6 +261,7 @@
 		1B906EC82670A08C0032FA81 /* appUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				B050989226E7701D00E05059 /* slide */,
 				1B44848E269C0B7200C02695 /* Status */,
 				1BC8C0E92692E5AA00292240 /* RequestList */,
 				1B71D310268F282D00B11F3B /* Profile */,
@@ -378,6 +385,16 @@
 				1BC8C0EE2692E62000292240 /* RequestListInteractor.swift */,
 			);
 			path = RequestList;
+			sourceTree = "<group>";
+		};
+		B050989226E7701D00E05059 /* slide */ = {
+			isa = PBXGroup;
+			children = (
+				B050989326E7703B00E05059 /* SlideInPresentationManager.swift */,
+				B050989526E7705B00E05059 /* SlideInPresentationController.swift */,
+				B050989726E770A300E05059 /* SlideInPresentationAnimator.swift */,
+			);
+			path = slide;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -516,6 +533,7 @@
 				1BC38B6226899AF9002501E0 /* AddItemPresenter.swift in Sources */,
 				1BF5A32E26BE5DFF00648CD2 /* ClothTableViewCell.swift in Sources */,
 				1BC8C0EF2692E62000292240 /* RequestListInteractor.swift in Sources */,
+				B050989426E7703B00E05059 /* SlideInPresentationManager.swift in Sources */,
 				1B906EFB2670A0F50032FA81 /* LoginViewController.swift in Sources */,
 				B02BF76F26DE371C004E57B4 /* DetailViewController.swift in Sources */,
 				1B6FF24C268369010093956C /* ReceiverInteractor.swift in Sources */,
@@ -546,6 +564,7 @@
 				1B803D8326B5829B00303DA9 /* Books.swift in Sources */,
 				1B7EBFA126747A9200F2AED1 /* CustomTextField.swift in Sources */,
 				1BF5A32C26BE593500648CD2 /* Cloth.swift in Sources */,
+				B050989626E7705B00E05059 /* SlideInPresentationController.swift in Sources */,
 				1B44849A269C4A7D00C02695 /* DonarInteractor.swift in Sources */,
 				1B906F002670A9260032FA81 /* DBHelper.swift in Sources */,
 				1B9B8F4626724E6F00C5497C /* User.swift in Sources */,
@@ -564,6 +583,7 @@
 				1BF5A32226BC0F7600648CD2 /* FoodTableViewCell.swift in Sources */,
 				1B906ECC2670A08C0032FA81 /* SceneDelegate.swift in Sources */,
 				1B448498269C44B300C02695 /* DonarTableViewCell.swift in Sources */,
+				B050989826E770A300E05059 /* SlideInPresentationAnimator.swift in Sources */,
 				1BF5A32A26BD584500648CD2 /* ItemDetails.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
