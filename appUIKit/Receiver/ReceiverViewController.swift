@@ -135,6 +135,7 @@ class ReceiverViewController: UIViewController, UITableViewDataSource, UITableVi
             slideInTransitioningDelegate.origin = Int(self.navigationController!.navigationBar.frame.height)
             vc.transitioningDelegate = slideInTransitioningDelegate
             vc.modalPresentationStyle = .custom
+           // vc.modalPresentationStyle = .automatic
             self.present(vc, animated: true, completion: nil)
 //        let addItem = AddItemViewController()
 //        let vc = UINavigationController()

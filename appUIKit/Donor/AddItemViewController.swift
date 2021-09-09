@@ -256,7 +256,6 @@ class AddItemViewController: UIViewController,UIScrollViewDelegate,UIPickerViewD
          toolBar.sizeToFit()
      }
     
-   
     var collapse : Bool = false
     public var itemImageName : String = ""
     var categorychosen : String = "Book"
@@ -467,7 +466,6 @@ class AddItemViewController: UIViewController,UIScrollViewDelegate,UIPickerViewD
     }
 
     override func viewDidLayoutSubviews() {
-        print("hii")
         for i in 1950 ... 2021{
             pickerData.append(i)
         }

@@ -82,10 +82,10 @@ class SlideInPresentationController: UIPresentationController {
       var frame: CGRect = .zero
       frame.size = size(forChildContentContainer: presentedViewController,
                         withParentContainerSize: containerView!.bounds.size)
-
       switch direction {
+      
       case .right:
-        frame.origin.x = containerView!.frame.width*(1.0/4.0)
+        frame.origin.x = containerView!.frame.width*(0.95/4.0)
         //print(origin)
         let topBarHeight = UIApplication.shared.statusBarFrame.size.height + CGFloat(origin)
         frame.origin.y = topBarHeight
